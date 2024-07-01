@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="iosanita.contenttypes"
+    >
+
+  <include
+      package="plone.behavior"
+      file="meta.zcml"
+      />
+  
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.argomenti"
+      title="Argomenti"
+      description="Tassonomia argomenti"
+      factory=".argomenti.Argomenti"
+      provides=".argomenti.IArgomenti"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".argomenti.IArgomenti"
+      />
+  
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.additional_help_infos"
+      title="Ulteriori campi aiuto testuali"
+      description=""
+      factory=".additional_help_infos.AdditionalHelpInfos"
+      provides=".additional_help_infos.IAdditionalHelpInfos"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".additional_help_infos.IAdditionalHelpInfos"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.descrizione_estesa"
+      title="Descrizione estesa"
+      description=""
+      factory=".descrizione_estesa.DescrizioneEstesa"
+      provides=".descrizione_estesa.IDescrizioneEstesa"
+      marker=".descrizione_estesa.IDescrizioneEstesa"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_step"
+      title="Contatti"
+      description="Behavior contatti per Step."
+      factory=".contatti.ContattiStep"
+      provides=".contatti.IContattiStep"
+      marker=".contatti.IContattiStep"
+      />
+</configure>

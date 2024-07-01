@@ -57,6 +57,8 @@ setup(
         "z3c.jbot",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
+        "redturtle.volto>=5.0.0",
+        "collective.volto.blocksfield",
     ],
     extras_require={
         "test": [

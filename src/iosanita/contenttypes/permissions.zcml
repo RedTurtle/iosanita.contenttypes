@@ -5,8 +5,18 @@
     >
 
   <configure zcml:condition="installed AccessControl.security">
-    <!-- -*- extra stuff goes here -*- -->
-
+    <include
+        package="Products.CMFCore"
+        file="permissions.zcml"
+        />
+    <permission
+        id="iosanita.contenttypes.AddComeFarePer"
+        title="iosanita.contenttypes: Add ComeFarePer"
+        />
+     <permission
+        id="iosanita.contenttypes.AddStep"
+        title="iosanita.contenttypes: Add Step"
+        />
 
   </configure>
 
