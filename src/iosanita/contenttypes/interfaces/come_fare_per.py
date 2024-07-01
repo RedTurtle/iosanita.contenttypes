@@ -125,4 +125,10 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
     #         "selectableTypes": ["UnitaOrganizzativa"],
     #     },
     # )
+    # form.widget(
+    #     "altri_documenti",
+    #     RelatedItemsFieldWidget,
+    #     vocabulary="plone.app.vocabularies.Catalog",
+    #     pattern_options={"selectableTypes": ["Documento"]},
+    # )
 

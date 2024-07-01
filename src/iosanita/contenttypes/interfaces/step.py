@@ -20,7 +20,7 @@ class IStep(model.Schema, IIosanitaContenttypes):
         title=_("testo_label", default="Testo"),
         description=_(
             "testo_help",
-            default="Testo.",
+            default="Descrizione del passo della procedura.",
         ),
         required=False,
     )
@@ -32,7 +32,7 @@ class IStep(model.Schema, IIosanitaContenttypes):
         required=True,
         description=_(
             "dove_help",
-            default="Seleziona una lista delle sedi e dei luoghi",
+            default="Seleziona una struttura o punto di contatto.",
         ),
     )
 
@@ -57,5 +57,11 @@ class IStep(model.Schema, IIosanitaContenttypes):
     #     pattern_options={
     #         "selectableTypes": ["UnitaOrganizzativa"],
     #     },
+    # )
+    # form.widget(
+    #     "documenti",
+    #     RelatedItemsFieldWidget,
+    #     vocabulary="plone.app.vocabularies.Catalog",
+    #     pattern_options={"selectableTypes": ["Documento"]},
     # )
 
