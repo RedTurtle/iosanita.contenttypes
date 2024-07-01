@@ -30,14 +30,14 @@ class IContattiStep(model.Schema):
             vocabulary="plone.app.vocabularies.Catalog",
         ),
     )
-    # form.widget(
-    #     "contact_info",
-    #     RelatedItemsFieldWidget,
-    #     vocabulary="plone.app.vocabularies.Catalog",
-    #     pattern_options={
-    #         "selectableTypes": ["PuntoDiContatto"],
-    #     },
-    # )
+    form.widget(
+        "contact_info",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["PuntoDiContatto"],
+        },
+    )
     model.fieldset(
         "contatti",
         label=_("contatti_label", default="Contatti"),

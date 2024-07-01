@@ -2,7 +2,6 @@
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
-from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.namedfile import field
@@ -116,17 +115,17 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    # form.widget(
-    #     "dove_rivolgersi",
-    #     RelatedItemsFieldWidget,
-    #     vocabulary="plone.app.vocabularies.Catalog",
-    #     pattern_options={
-    #         "selectableTypes": ["UnitaOrganizzativa"],
-    #     },
-    # )
-    # form.widget(
-    #     "altri_documenti",
-    #     RelatedItemsFieldWidget,
-    #     vocabulary="plone.app.vocabularies.Catalog",
-    #     pattern_options={"selectableTypes": ["Documento"]},
-    # )
+    form.widget(
+        "dove_rivolgersi",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["UnitaOrganizzativa"],
+        },
+    )
+    form.widget(
+        "altri_documenti",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Documento"]},
+    )
