@@ -31,7 +31,6 @@ class IDescrizioneEstesa(IDescrizioneEstesaSchema):
     form.order_after(descrizione_estesa="IBasic.description")
 
 
-
 @implementer(IDescrizioneEstesa)
 @adapter(IDexterityContent)
 class DescrizioneEstesa(object):
@@ -39,4 +38,3 @@ class DescrizioneEstesa(object):
 
     def __init__(self, context):
         self.context = context
-

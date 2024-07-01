@@ -10,6 +10,5 @@ class IIosanitaContenttypesLayer(IRedturtleVoltoLayer):
 
 class IIosanitaContenttypes(Interface):
     """
-    Marker interface 
+    Marker interface
     """
-

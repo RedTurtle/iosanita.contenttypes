@@ -12,7 +12,6 @@ from zope.interface import implementer
 from zope.interface import provider
 
 
-
 @provider(IFormFieldProvider)
 class IContattiStep(model.Schema):
     contact_info = RelationList(

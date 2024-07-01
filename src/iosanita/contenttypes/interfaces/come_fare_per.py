@@ -116,7 +116,6 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    
     # form.widget(
     #     "dove_rivolgersi",
     #     RelatedItemsFieldWidget,
@@ -131,4 +130,3 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
     #     vocabulary="plone.app.vocabularies.Catalog",
     #     pattern_options={"selectableTypes": ["Documento"]},
     # )
-

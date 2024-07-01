@@ -13,7 +13,7 @@
         id="iosanita.contenttypes.AddComeFarePer"
         title="iosanita.contenttypes: Add ComeFarePer"
         />
-     <permission
+    <permission
         id="iosanita.contenttypes.AddStep"
         title="iosanita.contenttypes: Add Step"
         />

@@ -8,7 +8,7 @@
       package="plone.behavior"
       file="meta.zcml"
       />
-  
+
   <plone:behavior
       name="iosanita.contenttypes.behavior.argomenti"
       title="Argomenti"
@@ -18,7 +18,7 @@
       for="plone.dexterity.interfaces.IDexterityContent"
       marker=".argomenti.IArgomenti"
       />
-  
+
   <plone:behavior
       name="iosanita.contenttypes.behavior.additional_help_infos"
       title="Ulteriori campi aiuto testuali"

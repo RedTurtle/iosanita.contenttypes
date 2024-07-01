@@ -15,7 +15,6 @@ from zope import schema
 class IStep(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type Servizio"""
 
-
     testo = BlocksField(
         title=_("testo_label", default="Testo"),
         description=_(
@@ -49,7 +48,6 @@ class IStep(model.Schema, IIosanitaContenttypes):
         required=False,
     )
 
-    
     # form.widget(
     #     "dove",
     #     RelatedItemsFieldWidget,
@@ -64,4 +62,3 @@ class IStep(model.Schema, IIosanitaContenttypes):
     #     vocabulary="plone.app.vocabularies.Catalog",
     #     pattern_options={"selectableTypes": ["Documento"]},
     # )
-
