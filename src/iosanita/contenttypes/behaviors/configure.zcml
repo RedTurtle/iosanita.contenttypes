@@ -1,0 +1,106 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="iosanita.contenttypes"
+    >
+
+  <include
+      package="plone.behavior"
+      file="meta.zcml"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.evento"
+      title="Metadati evento"
+      description="Adds fields."
+      factory=".evento.Evento"
+      provides=".evento.IEvento"
+      for="plone.event.interfaces.IEvent"
+      marker=".evento.IEvento"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.argomenti"
+      title="Argomenti"
+      description="Tassonomia argomenti"
+      factory=".argomenti.Argomenti"
+      provides=".argomenti.IArgomenti"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".argomenti.IArgomenti"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.argomenti_evento"
+      title="Argomenti"
+      description="Tassonomia argomenti evento"
+      factory=".argomenti.ArgomentiEvento"
+      provides=".argomenti.IArgomentiEvento"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".argomenti.IArgomentiEvento"
+      />
+
+  <!-- <plone:behavior
+      name="iosanita.contenttypes.behavior.luoghi_correlati"
+      title="Luoghi correlati"
+      description=""
+      factory=".luoghi_correlati.LuoghiCorrelati"
+      provides=".luoghi_correlati.ILuoghiCorrelati"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".luoghi_correlati.ILuoghiCorrelati"
+      /> -->
+
+  <!-- <plone:behavior
+      name="iosanita.contenttypes.behavior.luoghi_correlati_evento"
+      title="Luoghi correlati"
+      description=""
+      factory=".luoghi_correlati.LuoghiCorrelatiEvento"
+      provides=".luoghi_correlati.ILuoghiCorrelatiEvento"
+      for="plone.app.contenttypes.interfaces.IEvent"
+      marker=".luoghi_correlati.ILuoghiCorrelatiEvento"
+      /> -->
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.strutture_correlate"
+      title="Strutture correlate"
+      description=""
+      factory=".strutture_correlate.StruttureCorrelate"
+      provides=".strutture_correlate.IStruttureCorrelate"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".strutture_correlate.IStruttureCorrelate"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.additional_help_infos"
+      title="Ulteriori campi aiuto testuali"
+      description=""
+      factory=".additional_help_infos.AdditionalHelpInfos"
+      provides=".additional_help_infos.IAdditionalHelpInfos"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".additional_help_infos.IAdditionalHelpInfos"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.address_event"
+      title="Address Event"
+      description="Behavior address per Event."
+      factory=".address.AddressEvent"
+      provides=".address.IAddressEvent"
+      marker=".address.IAddressEvent"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_event"
+      title="Contatti"
+      description="Behavior contatti per Event."
+      factory=".contatti.ContattiEvent"
+      provides=".contatti.IContattiEvent"
+      marker=".contatti.IContattiEvent"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.geolocation_event"
+      title="Geolocatable"
+      description="Behavior geolocatable per Event."
+      factory=".geolocation.GeolocatableEvent"
+      provides=".geolocation.IGeolocatableEvent"
+      marker=".geolocation.IGeolocatableEvent"
+      />
+
+</configure>

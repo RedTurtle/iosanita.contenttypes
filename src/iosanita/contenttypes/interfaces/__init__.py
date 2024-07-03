@@ -4,11 +4,11 @@ from redturtle.volto.interfaces import IRedturtleVoltoLayer
 from zope.interface import Interface
 
 
-class ISanitaContenttypesLayer(IRedturtleVoltoLayer):
+class IIosanitaContenttypesLayer(IRedturtleVoltoLayer):
     """Marker interface that defines a browser layer."""
 
 
-class ISanitaContentType(Interface):
+class IIosanitaContenttypes(Interface):
     """
-    Marker interface for all Design Italia content-types
+    Marker interface
     """

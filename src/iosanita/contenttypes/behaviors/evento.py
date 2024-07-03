@@ -89,16 +89,6 @@ class IEvento(model.Schema):
             " indicare il nome del contatto.",
         ),
     )
-    supportato_da = RelationList(
-        title=_("supportato_da_label", default="Evento supportato da"),
-        required=False,
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        description=_(
-            "supportato_da_help",
-            default="Indicare gli uffici/enti che supportano l'evento.",
-        ),
-    )
 
     #  campi aggiunti con il pnrr
     patrocinato_da = BlocksField(
@@ -121,15 +111,90 @@ class IEvento(model.Schema):
         ),
     )
 
-    # custom widgets
-    form.widget(
-        "supportato_da",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["UnitaOrganizzativa"],
-        },
+    chi_partecipa = BlocksField(
+        title=_("chi_partecipa_label", default="Parteciperanno"),
+        required=True,
+        description=_(
+            "chi_partecipa_help",
+            default="Descrizione testuale dei principali partecipanti.",
+        ),
     )
+
+    evento_genitore = RelationList(
+        title="Evento genitore",
+        default=[],
+        description=_(
+            "evento_genitore_help",
+            default='Un evento può essere parte di un altro evento definito come "genitore"',
+        ),
+        value_type=RelationChoice(
+            title=_("Event"), vocabulary="plone.app.vocabularies.Catalog"
+        ),
+        required=False,
+    )
+
+    appuntamenti = RelationList(
+        title="Appuntamenti",
+        default=[],
+        description=_(
+            "appuntamenti_help",
+            default="Link agli eventi figlio (solo se l'evento in questione è evento genitore).",
+        ),
+        value_type=RelationChoice(
+            title=_("Event"), vocabulary="plone.app.vocabularies.Catalog"
+        ),
+        required=False,
+    )
+
+    dove_rivolgersi = RelationList(
+        title="Dove rivolgersi",
+        default=[],
+        required=True,
+        description=_(
+            "dove_rivolgersi_help",
+            default="Link all'eventuale scheda della struttura dell'ASL in cui si svolge l'evento.",
+        ),
+        value_type=RelationChoice(
+            title=_("Struttura"), vocabulary="plone.app.vocabularies.Catalog"
+        ),
+    )
+
+    a_chi_si_rivolge = BlocksField(
+        title=_("a_chi_si_rivolge_label", default="A chi è rivolto"),
+        required=True,
+        description=_(
+            "a_chi_si_rivolge_help",
+            default="A chi si rivolge questo servizio.",
+        ),
+    )
+
+    documenti_correlati = RelationList(
+        title="Documenti correlati",
+        default=[],
+        required=True,
+        description=_(
+            "documenti_correlati_help",
+            default="Link alle schede documenti e allegati di supporto all'evento. Per poter scaricare direttamente un file occorre inserirlo all'interno della cartella 'Allegati'.",
+        ),
+        value_type=RelationChoice(
+            title=_("Documento"), vocabulary="plone.app.vocabularies.Catalog"
+        ),
+    )
+
+    eventi_correlati = RelationList(
+        title="Eventi correlati",
+        default=[],
+        required=True,
+        description=_(
+            "eventi_correlati_help", default="Seleziona gli eventi correlati."
+        ),
+        value_type=RelationChoice(
+            title=_("Event"), vocabulary="plone.app.vocabularies.Catalog"
+        ),
+    )
+
+    # custom widgets
+
     form.widget(
         "organizzato_da_interno",
         RelatedItemsFieldWidget,
@@ -171,9 +236,23 @@ class IEvento(model.Schema):
         fields=[
             "organizzato_da_interno",
             "organizzato_da_esterno",
-            "supportato_da",
             "patrocinato_da",
         ],
+    )
+    model.fieldset(
+        "partecipanti",
+        label=_("partecipanti_label", default="Chi partecipa"),
+        fields=["chi_partecipa"],
+    )
+    model.fieldset(
+        "categorization",
+        label=_("evento_genitore_label", default="Categorizzazione"),
+        fields=["evento_genitore"],
+    )
+    model.fieldset(
+        "categorization",
+        label=_("appuntamenti_label", default="Categorizzazione"),
+        fields=["appuntamenti"],
     )
 
     textindexer.searchable("descrizione_estesa")

@@ -57,6 +57,11 @@ setup(
         "z3c.jbot",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
+        "collective.venue[geolocation]",
+        "collective.volto.blocksfield",
+        "redturtle.volto>=5.0.0",
+        "plone.restapi",
+        "collective.taxonomy",
     ],
     extras_require={
         "test": [
