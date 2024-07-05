@@ -45,6 +45,7 @@
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="collective.taxonomy.generated.tipologia_evento" />
+    <element value="collective.taxonomy.generated.tipologia_target" />
     <!-- remove unused behaviors -->
     <element remove="True"
              value="plone.eventlocation"
