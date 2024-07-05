@@ -8,7 +8,6 @@ from plone.supermodel import model
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
-from zope import schema
 
 
 @provider(IFormFieldProvider)

@@ -22,7 +22,7 @@ class IContattiStep(model.Schema):
         description=_(
             "contact_info_help",
             default="I contatti per questo step.",
-        )
+        ),
     )
 
 
@@ -39,7 +39,6 @@ class IContattiEvent(model.Schema):
         required=True,
         default=[],
         value_type=RelationChoice(
-            title=_("Contatti"),
             title=_("Punti di contatto"),
             vocabulary="plone.app.vocabularies.Catalog",
         ),
@@ -65,7 +64,7 @@ class ContattiStep(object):
     def __init__(self, context):
         self.context = context
 
-        
+
 @implementer(IContattiEvent)
 @adapter(IContattiEvent)
 class ContattiEvent(object):

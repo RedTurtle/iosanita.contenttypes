@@ -12,7 +12,6 @@ from z3c.relationfield.schema import RelationList
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
-from plone.dexterity.interfaces import IDexterityContent
 
 
 class IArgomentiSchema(model.Schema):
