@@ -25,7 +25,9 @@ def post_install(context):
 
 
 def post_install_taxonomy(context):
-    import pdb;pdb.set_trace()
+    import pdb
+
+    pdb.set_trace()
     context.runImportStepFromProfile(
         "profile-iosanita.contenttypes:default", "typeinfo", True
     )
@@ -33,6 +35,7 @@ def post_install_taxonomy(context):
     # settato correttamente.
     for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
         utility.updateBehavior(**{"field_prefix": ""})
+
 
 def uninstall(context):
     """Uninstall script"""

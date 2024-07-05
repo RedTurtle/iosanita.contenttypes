@@ -22,7 +22,7 @@
       directory="profiles/default"
       post_handler=".setuphandlers.post_install"
       />
-    
+
   <genericsetup:registerProfile
       name="taxonomy"
       title="Io sanita: Content-types (behaviors)"
