@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes import _
+from iosanita.contenttypes.interfaces.step import IStep
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
@@ -12,6 +13,19 @@ from zope.interface import provider
 
 
 @provider(IFormFieldProvider)
+class IContattiStep(model.Schema):
+    contact_info = RelationList(
+        title=_(
+            "contact_info_label",
+            default="Contatti",
+        ),
+        description=_(
+            "contact_info_help",
+            default="I contatti per questo step.",
+        )
+    )
+
+
 class IContattiEvent(model.Schema):
     contact_info = RelationList(
         title=_(
@@ -25,6 +39,7 @@ class IContattiEvent(model.Schema):
         required=True,
         default=[],
         value_type=RelationChoice(
+            title=_("Contatti"),
             title=_("Punti di contatto"),
             vocabulary="plone.app.vocabularies.Catalog",
         ),
@@ -44,6 +59,13 @@ class IContattiEvent(model.Schema):
     )
 
 
+@implementer(IContattiStep)
+@adapter(IStep)
+class ContattiStep(object):
+    def __init__(self, context):
+        self.context = context
+
+        
 @implementer(IContattiEvent)
 @adapter(IContattiEvent)
 class ContattiEvent(object):

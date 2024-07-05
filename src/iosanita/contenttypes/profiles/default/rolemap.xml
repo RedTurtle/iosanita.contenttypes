@@ -3,9 +3,26 @@
   <permissions>
   <!-- -*- extra stuff goes here -*- -->
     <permission acquire="True"
-                name="iosanita.contenttypes: Add Evento"
+                name="iosanita.contenttypes: Add ComeFarePer"
     >
       <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Contributor" />
+    </permission>
+    <permission acquire="True"
+                name="iosanita.contenttypes: Add Step"
+                
+    >
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Contributor" />
+    </permission>
+    <permission acquire="True"
+               name="iosanita.contenttypes: Add Evento"
+   >
+   <role name="Manager" />
       <role name="Site Administrator" />
       <role name="Owner" />
       <role name="Contributor" />

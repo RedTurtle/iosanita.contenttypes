@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
+from collective.volto.blocksfield.field import BlocksField
 from plone.app.dexterity import textindexer
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
@@ -8,10 +8,9 @@ from plone.supermodel import model
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
+from zope import schema
 
 
-# TODO: valutare se aggiungere 'box_aiuto', in alcuni CT e' obbligatorio
-# e bisognerebbe metterlo unifrme per tutti in barba alle linee guida
 @provider(IFormFieldProvider)
 class IAdditionalHelpInfos(model.Schema):
     ulteriori_informazioni = BlocksField(

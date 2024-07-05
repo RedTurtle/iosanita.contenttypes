@@ -39,26 +39,6 @@
       marker=".argomenti.IArgomentiEvento"
       />
 
-  <!-- <plone:behavior
-      name="iosanita.contenttypes.behavior.luoghi_correlati"
-      title="Luoghi correlati"
-      description=""
-      factory=".luoghi_correlati.LuoghiCorrelati"
-      provides=".luoghi_correlati.ILuoghiCorrelati"
-      for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".luoghi_correlati.ILuoghiCorrelati"
-      /> -->
-
-  <!-- <plone:behavior
-      name="iosanita.contenttypes.behavior.luoghi_correlati_evento"
-      title="Luoghi correlati"
-      description=""
-      factory=".luoghi_correlati.LuoghiCorrelatiEvento"
-      provides=".luoghi_correlati.ILuoghiCorrelatiEvento"
-      for="plone.app.contenttypes.interfaces.IEvent"
-      marker=".luoghi_correlati.ILuoghiCorrelatiEvento"
-      /> -->
-
   <plone:behavior
       name="iosanita.contenttypes.behavior.strutture_correlate"
       title="Strutture correlate"
@@ -77,6 +57,24 @@
       provides=".additional_help_infos.IAdditionalHelpInfos"
       for="plone.dexterity.interfaces.IDexterityContent"
       marker=".additional_help_infos.IAdditionalHelpInfos"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.descrizione_estesa"
+      title="Descrizione estesa"
+      description=""
+      factory=".descrizione_estesa.DescrizioneEstesa"
+      provides=".descrizione_estesa.IDescrizioneEstesa"
+      marker=".descrizione_estesa.IDescrizioneEstesa"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_step"
+      title="Contatti"
+      description="Behavior contatti per Step."
+      factory=".contatti.ContattiStep"
+      provides=".contatti.IContattiStep"
+      marker=".contatti.IContattiStep"
       />
   <plone:behavior
       name="iosanita.contenttypes.behavior.address_event"
