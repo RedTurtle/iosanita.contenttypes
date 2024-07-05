@@ -23,7 +23,10 @@
         id="iosanita.contenttypes.AddEvento"
         title="iosanita.contenttypes: Add Evento"
         />
-
+    <permission
+        id="iosanita.contenttypes.AddNotizieEComunicatiStampa"
+        title="iosanita.contenttypes: Add NotizieEComunicatiStampa"
+        />
   </configure>
 
 </configure>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes import _
-from plone.app.contenttypes.interfaces import IEvent
+from plone.app.contenttypes.interfaces import IEvent, INewsItem
 from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
@@ -69,6 +69,26 @@ class IArgomentiEvento(IArgomentiSchema):
     )
 
 
+@provider(IFormFieldProvider)
+class IArgomentiNews(IArgomentiSchema):
+    """ """
+
+    tassonomia_argomenti = RelationList(
+        title=_("tassonomia_argomenti_label", default="Argomenti"),
+        description=_(
+            "tassonomia_argomenti_help",
+            default="Seleziona una lista di argomenti d'interesse per questo"
+            " contenuto.",
+        ),
+        value_type=RelationChoice(
+            title=_("Argomenti correlati"),
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+        required=True,
+        default=[],
+    )
+
+
 @implementer(IArgomenti)
 @adapter(IDexterityContent)
 class Argomenti(object):
@@ -81,6 +101,15 @@ class Argomenti(object):
 @implementer(IArgomentiEvento)
 @adapter(IEvent)
 class ArgomentiEvento(object):
+    """"""
+
+    def __init__(self, context):
+        self.context = context
+
+
+@implementer(IArgomentiNews)
+@adapter(INewsItem)
+class ArgomentiNews(object):
     """"""
 
     def __init__(self, context):

@@ -22,6 +22,15 @@
       directory="profiles/default"
       post_handler=".setuphandlers.post_install"
       />
+    
+  <genericsetup:registerProfile
+      name="taxonomy"
+      title="Io sanita: Content-types (behaviors)"
+      description="Registers taxonomies."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/behaviors"
+      post_handler=".setuphandlers.post_install_taxonomy"
+      />
 
   <genericsetup:registerProfile
       name="uninstall"

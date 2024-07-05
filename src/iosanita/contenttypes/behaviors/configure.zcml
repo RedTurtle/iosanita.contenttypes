@@ -40,6 +40,16 @@
       />
 
   <plone:behavior
+      name="iosanita.contenttypes.behavior.argomenti_news"
+      title="Argomenti"
+      description="Tassonomia argomenti news"
+      factory=".argomenti.ArgomentiNews"
+      provides=".argomenti.IArgomentiNews"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".argomenti.IArgomentiNews"
+      />
+
+  <plone:behavior
       name="iosanita.contenttypes.behavior.strutture_correlate"
       title="Strutture correlate"
       description=""
@@ -99,6 +109,15 @@
       factory=".geolocation.GeolocatableEvent"
       provides=".geolocation.IGeolocatableEvent"
       marker=".geolocation.IGeolocatableEvent"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.news"
+      title="Metadati news"
+      description="Adds fields."
+      factory=".news_additional_fields.NewsAdditionalFields"
+      provides=".news_additional_fields.INewsAdditionalFields"
+      for="plone.app.contenttypes.interfaces.INewsItem"
+      marker=".news_additional_fields.INewsAdditionalFields"
       />
 
 </configure>

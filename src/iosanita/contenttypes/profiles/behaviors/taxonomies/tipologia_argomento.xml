@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<vdex xmlns="http://www.imsglobal.org/xsd/imsvdex_v1p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsvdex_v1p0 imsvdex_v1p0.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd" orderSignificant="false" profileType="hierarchicalTokenTerms" language="it">
+  <vocabName>
+    <langstring language="it">Tipo di argomento</langstring>
+  </vocabName>
+  <vocabIdentifier>tipologia_argomento</vocabIdentifier>
+  <term>
+    <termIdentifier>Alcol e dipendenza</termIdentifier>
+    <caption>
+      <langstring language="it">Alcol e dipendenza</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Alimentazione</termIdentifier>
+    <caption>
+      <langstring language="it">Alimentazione</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Allattamento</termIdentifier>
+    <caption>
+      <langstring language="it">Allattamento</langstring>
+    </caption>
+  </term>
+</vdex>
