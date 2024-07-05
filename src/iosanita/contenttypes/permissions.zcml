@@ -5,6 +5,8 @@
     >
 
   <configure zcml:condition="installed AccessControl.security">
+    <!-- -*- extra stuff goes here -*- -->
+
     <include
         package="Products.CMFCore"
         file="permissions.zcml"
@@ -16,6 +18,10 @@
     <permission
         id="iosanita.contenttypes.AddStep"
         title="iosanita.contenttypes: Add Step"
+        />
+    <permission
+        id="iosanita.contenttypes.AddEvento"
+        title="iosanita.contenttypes: Add Evento"
         />
 
   </configure>

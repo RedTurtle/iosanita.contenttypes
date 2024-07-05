@@ -10,6 +10,16 @@
       />
 
   <plone:behavior
+      name="iosanita.contenttypes.behavior.evento"
+      title="Metadati evento"
+      description="Adds fields."
+      factory=".evento.Evento"
+      provides=".evento.IEvento"
+      for="plone.event.interfaces.IEvent"
+      marker=".evento.IEvento"
+      />
+
+  <plone:behavior
       name="iosanita.contenttypes.behavior.argomenti"
       title="Argomenti"
       description="Tassonomia argomenti"
@@ -17,6 +27,26 @@
       provides=".argomenti.IArgomenti"
       for="plone.dexterity.interfaces.IDexterityContent"
       marker=".argomenti.IArgomenti"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.argomenti_evento"
+      title="Argomenti"
+      description="Tassonomia argomenti evento"
+      factory=".argomenti.ArgomentiEvento"
+      provides=".argomenti.IArgomentiEvento"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".argomenti.IArgomentiEvento"
+      />
+
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.strutture_correlate"
+      title="Strutture correlate"
+      description=""
+      factory=".strutture_correlate.StruttureCorrelate"
+      provides=".strutture_correlate.IStruttureCorrelate"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".strutture_correlate.IStruttureCorrelate"
       />
 
   <plone:behavior
@@ -46,4 +76,29 @@
       provides=".contatti.IContattiStep"
       marker=".contatti.IContattiStep"
       />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.address_event"
+      title="Address Event"
+      description="Behavior address per Event."
+      factory=".address.AddressEvent"
+      provides=".address.IAddressEvent"
+      marker=".address.IAddressEvent"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_event"
+      title="Contatti"
+      description="Behavior contatti per Event."
+      factory=".contatti.ContattiEvent"
+      provides=".contatti.IContattiEvent"
+      marker=".contatti.IContattiEvent"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.geolocation_event"
+      title="Geolocatable"
+      description="Behavior geolocatable per Event."
+      factory=".geolocation.GeolocatableEvent"
+      provides=".geolocation.IGeolocatableEvent"
+      marker=".geolocation.IGeolocatableEvent"
+      />
+
 </configure>

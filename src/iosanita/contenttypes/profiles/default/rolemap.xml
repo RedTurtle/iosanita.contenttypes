@@ -12,8 +12,17 @@
     </permission>
     <permission acquire="True"
                 name="iosanita.contenttypes: Add Step"
+                
     >
       <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Contributor" />
+    </permission>
+    <permission acquire="True"
+               name="iosanita.contenttypes: Add Evento"
+   >
+   <role name="Manager" />
       <role name="Site Administrator" />
       <role name="Owner" />
       <role name="Contributor" />
