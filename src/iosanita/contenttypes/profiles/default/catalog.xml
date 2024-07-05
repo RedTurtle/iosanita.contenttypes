@@ -1,4 +1,29 @@
-<?xml version="1.0"?>
-<object name="portal_catalog">
-  <!--<column value="my_meta_column"/>-->
+<?xml version="1.0" encoding="utf-8"?>
+
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+ <index name="event_location" meta_type="KeywordIndex">
+  <indexed_attr value="event_location"/>
+ </index>
+ <index name="rassegna" meta_type="BooleanIndex">
+    <indexed_attr value="rassegna"/>
+ </index>
+
+  <!-- metadata -->
+  <column value="event_location" />
+  <column value="rassegna" />
+
+  <!-- cleanup -->
+  <index name="argomenti_correlati"
+         remove="True"
+  />
+  <column remove="True"
+          value="argomenti_correlati"
+  />
+  <index name="argomenti"
+         remove="True"
+  />
+  <column remove="True"
+          value="argomenti"
+  />
+
 </object>

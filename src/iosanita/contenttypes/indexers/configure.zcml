@@ -1,0 +1,34 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <adapter
+      factory=".events.event_location"
+      name="event_location"
+      />
+  <adapter
+      factory=".common.tassonomia_argomenti"
+      name="tassonomia_argomenti"
+      />
+  <adapter
+      factory=".common.tassonomia_argomenti_uid"
+      name="tassonomia_argomenti_uid"
+      />
+  <adapter
+      factory=".common.ufficio_responsabile"
+      name="ufficio_responsabile"
+      />
+  <adapter
+      factory=".common.parent"
+      name="parent"
+      />
+  <adapter
+      factory=".common.exclude_from_search"
+      name="exclude_from_search"
+      />
+  <adapter
+      factory=".events.rassegna"
+      name="rassegna"
+      />
+
+  <!-- only metadata -->
+
+</configure>

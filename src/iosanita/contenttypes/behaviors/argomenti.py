@@ -31,20 +31,6 @@ class IArgomentiSchema(model.Schema):
         required=False,
         default=[],
     )
-    correlato_in_evidenza = RelationList(
-        title=_("correlato_in_evidenza_label", default="Correlato in evidenza"),
-        description=_(
-            "correlato_in_evidenza_help",
-            default="Seleziona un correlato da mettere in evidenza per questo"
-            " contenuto.",
-        ),
-        value_type=RelationChoice(
-            title=_("Correlato in evidenza"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
-        required=False,
-        default=[],
-    )
 
     form.widget(
         "tassonomia_argomenti",
@@ -54,12 +40,6 @@ class IArgomentiSchema(model.Schema):
             "selectableTypes": ["Pagina Argomento"],
         },
     )
-    form.widget(
-        "correlato_in_evidenza",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={"maximumSelectionSize": 1},
-    )
 
     textindexer.searchable("tassonomia_argomenti")
 
@@ -67,12 +47,6 @@ class IArgomentiSchema(model.Schema):
 @provider(IFormFieldProvider)
 class IArgomenti(IArgomentiSchema):
     """ """
-
-    model.fieldset(
-        "correlati",
-        label=_("correlati_label", default="Contenuti collegati"),
-        fields=["correlato_in_evidenza"],
-    )
 
 
 @provider(IFormFieldProvider)

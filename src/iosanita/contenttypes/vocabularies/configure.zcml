@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="design.plone.contenttypes"
+    >
+
+  <utility
+      name="design.plone.vocabularies.event_location"
+      component=".reference_vocabularies.EventLocationVocabularyFactory"
+      />
+
+
+</configure>
