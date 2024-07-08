@@ -4,6 +4,11 @@ from collective.taxonomy.interfaces import ITaxonomy
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
 
+import logging
+
+logger = logging.getLogger(__name__)
+DEFAULT_PROFILE = "profile-iosanita.contenttypes:default"
+
 
 @implementer(INonInstallable)
 class HiddenProfiles(object):
@@ -18,23 +23,74 @@ class HiddenProfiles(object):
         return ["iosanita.contenttypes.upgrades"]
 
 
+class colors(object):
+    GREEN = "\033[92m"
+    ENDC = "\033[0m"
+    RED = "\033[91m"
+    DARKCYAN = "\033[36m"
+    YELLOW = "\033[93m"
+
+
+def update_profile(context, profile, run_dependencies=True):
+    context.runImportStepFromProfile(DEFAULT_PROFILE, profile, run_dependencies)
+
+
+def update_types(context):
+    update_profile(context, "typeinfo")
+
+
+def update_registry(context):
+    update_profile(context, "plone.app.registry", run_dependencies=False)
+
+
+def update_catalog(context):
+    update_profile(context, "catalog")
+
+
 def post_install(context):
     """Post install script"""
+    # import pdb
 
+    # pdb.set_trace()
+    # for index in [
+    #     "tipologia_notizia",
+    #     "tipologia_target",
+    #     "tipologia_argomento",
+    # ]:
+    #     api.portal.get_tool("portal_catalog").delIndex(index)
+
+    # context.runImportStepFromProfile(
+    #     "iosanita.contenttypes:taxonomy", "collective.taxonomy"
+    # )
+
+    for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
+        utility.updateBehavior(**{"field_prefix": ""})
+        logger.info(
+            f"{colors.DARKCYAN} Change taxonomy prefix for {utility_name} {colors.ENDC}"  # noqa
+        )
+
+    logger.info(
+        f"{colors.DARKCYAN} iosanita.contentypes taxonomies imported {colors.ENDC}"  # noqa
+    )
+    update_types(context)
+    update_registry(context)
+    update_catalog(context)
+    # update_rolemap(context)
+    # logger.info(
+    #     f"{colors.DARKCYAN} Upgraded types, registry, catalog and rolemap {colors.ENDC}"  # noqa
+    # )
     # Do something at the end of the installation of this package.
 
 
-def post_install_taxonomy(context):
-    import pdb
+# def post_install_taxonomy(context):
 
-    pdb.set_trace()
-    context.runImportStepFromProfile(
-        "profile-iosanita.contenttypes:default", "typeinfo", True
-    )
-    # C'è una versione di collective.taxonomies in cui quel campo non viene
-    # settato correttamente.
-    for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
-        utility.updateBehavior(**{"field_prefix": ""})
+#     context.runImportStepFromProfile(
+#         "profile-iosanita.contenttypes:default", "typeinfo", True
+#     )
+#     # C'è una versione di collective.taxonomies in cui quel campo non viene
+#     # settato correttamente.
+#     for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
+#         utility.updateBehavior(**{"field_prefix": ""})
 
 
 def uninstall(context):

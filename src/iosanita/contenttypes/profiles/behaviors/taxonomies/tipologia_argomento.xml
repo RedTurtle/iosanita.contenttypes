@@ -22,4 +22,244 @@
       <langstring language="it">Allattamento</langstring>
     </caption>
   </term>
+  <term>
+    <termIdentifier>Ambiente</termIdentifier>
+    <caption>
+      <langstring language="it">Ambiente</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Animali</termIdentifier>
+    <caption>
+      <langstring language="it">Animali</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Anziani</termIdentifier>
+    <caption>
+      <langstring language="it">Anziani</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Certificati</termIdentifier>
+    <caption>
+      <langstring language="it">Certificati</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>COVID-19</termIdentifier>
+    <caption>
+      <langstring language="it">COVID-19</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Cure domiciliari</termIdentifier>
+    <caption>
+      <langstring language="it">Cure domiciliari</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Cure palliative</termIdentifier>
+    <caption>
+      <langstring language="it">Cure palliative</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Diabete</termIdentifier>
+    <caption>
+      <langstring language="it">Diabete</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Anziani</termIdentifier>
+    <caption>
+      <langstring language="it">Anziani</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Demenze</termIdentifier>
+    <caption>
+      <langstring language="it">Demenze</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Dipendenze</termIdentifier>
+    <caption>
+      <langstring language="it">Dipendenze</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Disabilità</termIdentifier>
+    <caption>
+      <langstring language="it">Disabilità</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Dispositivi medici</termIdentifier>
+    <caption>
+      <langstring language="it">Dispositivi medici</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Donazione organi e sangue</termIdentifier>
+    <caption>
+      <langstring language="it">Donazione organi e sangue</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Esami specialistici</termIdentifier>
+    <caption>
+      <langstring language="it">Esami specialistici</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>HIV e AIDS</termIdentifier>
+    <caption>
+      <langstring language="it">HIV e AIDS</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Igiene dentale e del cavo orale</termIdentifier>
+    <caption>
+      <langstring language="it">Igiene dentale e del cavo orale</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Igiene Pubblica</termIdentifier>
+    <caption>
+      <langstring language="it">Igiene Pubblica</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Influenza</termIdentifier>
+    <caption>
+      <langstring language="it">Influenza</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Malattie infettive</termIdentifier>
+    <caption>
+      <langstring language="it">Malattie infettive</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Malattie rare</termIdentifier>
+    <caption>
+      <langstring language="it">Malattie rare</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Organizzazione</termIdentifier>
+    <caption>
+      <langstring language="it">Organizzazione</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Prelievi</termIdentifier>
+    <caption>
+      <langstring language="it">Prelievi</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Prevenzione</termIdentifier>
+    <caption>
+      <langstring language="it">Prevenzione</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Professioni sanitarie</termIdentifier>
+    <caption>
+      <langstring language="it">Professioni sanitarie</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Profilassi</termIdentifier>
+    <caption>
+      <langstring language="it">Profilassi</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Programmazione sanitaria</termIdentifier>
+    <caption>
+      <langstring language="it">Programmazione sanitaria</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Ricerca e innovazione</termIdentifier>
+    <caption>
+      <langstring language="it">Ricerca e innovazione</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Salute donna</termIdentifier>
+    <caption>
+      <langstring language="it">Salute donna</langstring>
+    </caption>
+  </term>
+   <term>
+    <termIdentifier>Salute mentale</termIdentifier>
+    <caption>
+      <langstring language="it">Salute mentale</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Sanità internazionale</termIdentifier>
+    <caption>
+      <langstring language="it">Sanità internazionale</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Stili di vita</termIdentifier>
+    <caption>
+      <langstring language="it">Stili di vita</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Servizio farmaceutico</termIdentifier>
+    <caption>
+      <langstring language="it">Servizio farmaceutico</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Sicurezza alimentare</termIdentifier>
+    <caption>
+      <langstring language="it">Sicurezza alimentare</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Tessera sanitaria</termIdentifier>
+    <caption>
+      <langstring language="it">Tessera sanitaria</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Ticket ed esenzioni</termIdentifier>
+    <caption>
+      <langstring language="it">Ticket ed esenzioni</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Trapianti</termIdentifier>
+    <caption>
+      <langstring language="it">Trapianti</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Tumori</termIdentifier>
+    <caption>
+      <langstring language="it">Tumori</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Vaccinazioni</termIdentifier>
+    <caption>
+      <langstring language="it">Vaccinazioni</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Vaccinazioni anti COVID-19</termIdentifier>
+    <caption>
+      <langstring language="it">Vaccinazioni anti COVID-19</langstring>
+    </caption>
+  </term>
 </vdex>
