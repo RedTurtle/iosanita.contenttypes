@@ -267,7 +267,6 @@ class IEvento(model.Schema):
             # "organizzato_da_esterno",
             "patrocinato_da",
             "sponsor",
-
         ],
     )
     model.fieldset(
