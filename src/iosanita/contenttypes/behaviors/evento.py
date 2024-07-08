@@ -66,29 +66,29 @@ class IEvento(model.Schema):
     )
 
     # campi presenti nelle vecchie grafiche che abbiamo deciso di continuare a mostrare
-    # organizzato_da_interno = RelationList(
-    #     title=_("organizzato_da_interno_label", default="Organizzato da"),
-    #     default=[],
-    #     value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-    #     required=False,
-    #     description=_(
-    #         "organizzato_da_interno_help",
-    #         default="Se l'evento è organizzato direttamente dal comune,"
-    #         " indicare l'ufficio/ente organizzatore. I dati di contatto "
-    #         "verranno presi direttamente dall'ufficio selezionato. Se l'evento"
-    #         " non è organizzato direttamente dal comune, o si vogliono "
-    #         "sovrascrivere alcuni dati di contatto, utilizzare i seguenti campi.",  # noqa
-    #     ),
-    # )
-    # organizzato_da_esterno = BlocksField(
-    #     title=_("organizzato_da_esterno_label", default="Organizzatore"),
-    #     required=False,
-    #     description=_(
-    #         "organizzato_da_esterno_help",
-    #         default="Se l'evento non è organizzato direttamente dal comune oppure ha anche un organizzatore esterno,"  # noqa
-    #         " indicare il nome del contatto.",
-    #     ),
-    # )
+    organizzato_da_interno = RelationList(
+        title=_("organizzato_da_interno_label", default="Organizzato da"),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+        description=_(
+            "organizzato_da_interno_help",
+            default="Se l'evento è organizzato direttamente dal comune,"
+            " indicare l'ufficio/ente organizzatore. I dati di contatto "
+            "verranno presi direttamente dall'ufficio selezionato. Se l'evento"
+            " non è organizzato direttamente dal comune, o si vogliono "
+            "sovrascrivere alcuni dati di contatto, utilizzare i seguenti campi.",  # noqa
+        ),
+    )
+    organizzato_da_esterno = BlocksField(
+        title=_("organizzato_da_esterno_label", default="Organizzatore"),
+        required=False,
+        description=_(
+            "organizzato_da_esterno_help",
+            default="Se l'evento non è organizzato direttamente dal comune oppure ha anche un organizzatore esterno,"  # noqa
+            " indicare il nome del contatto.",
+        ),
+    )
 
     #  campi aggiunti con il pnrr
     patrocinato_da = BlocksField(
@@ -224,14 +224,14 @@ class IEvento(model.Schema):
 
     # custom widgets
 
-    # form.widget(
-    #     "organizzato_da_interno",
-    #     RelatedItemsFieldWidget,
-    #     vocabulary="plone.app.vocabularies.Catalog",
-    #     pattern_options={
-    #         "selectableTypes": ["Persona", "UnitaOrganizzativa", "Servizio"],
-    #     },
-    # )
+    form.widget(
+        "organizzato_da_interno",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Persona", "UnitaOrganizzativa", "Servizio"],
+        },
+    )
     form.widget(
         "persone_amministrazione",
         RelatedItemsFieldWidget,
@@ -263,8 +263,8 @@ class IEvento(model.Schema):
         "contatti",
         label=_("contatti_label", default="Contatti"),
         fields=[
-            # "organizzato_da_interno",
-            # "organizzato_da_esterno",
+            "organizzato_da_interno",
+            "organizzato_da_esterno",
             "patrocinato_da",
             "sponsor",
         ],
