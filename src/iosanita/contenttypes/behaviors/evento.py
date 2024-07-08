@@ -19,17 +19,17 @@ from zope.interface import provider
 class IEvento(model.Schema):
     """Marker inteerface for content type Evento"""
 
-    sottotitolo = schema.TextLine(
-        title=_("sottotitolo_label", default="Sottotitolo"),
-        description=_(
-            "sottotitolo_help",
-            default="Indica un eventuale sottotitolo/titolo alternativo.",
-        ),
-        required=False,
-    )
+    # sottotitolo = schema.TextLine(
+    #     title=_("sottotitolo_label", default="Sottotitolo"),
+    #     description=_(
+    #         "sottotitolo_help",
+    #         default="Indica un eventuale sottotitolo/titolo alternativo.",
+    #     ),
+    #     required=False,
+    # )
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa", default="Descrizione estesa"),
+        title=_("descrizione_estesa", default="Cosa è"),
         required=True,
         description=_(
             "descrizione_estesa_help",
@@ -66,29 +66,29 @@ class IEvento(model.Schema):
     )
 
     # campi presenti nelle vecchie grafiche che abbiamo deciso di continuare a mostrare
-    organizzato_da_interno = RelationList(
-        title=_("organizzato_da_interno_label", default="Organizzato da"),
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
-        description=_(
-            "organizzato_da_interno_help",
-            default="Se l'evento è organizzato direttamente dal comune,"
-            " indicare l'ufficio/ente organizzatore. I dati di contatto "
-            "verranno presi direttamente dall'ufficio selezionato. Se l'evento"
-            " non è organizzato direttamente dal comune, o si vogliono "
-            "sovrascrivere alcuni dati di contatto, utilizzare i seguenti campi.",  # noqa
-        ),
-    )
-    organizzato_da_esterno = BlocksField(
-        title=_("organizzato_da_esterno_label", default="Organizzatore"),
-        required=False,
-        description=_(
-            "organizzato_da_esterno_help",
-            default="Se l'evento non è organizzato direttamente dal comune oppure ha anche un organizzatore esterno,"  # noqa
-            " indicare il nome del contatto.",
-        ),
-    )
+    # organizzato_da_interno = RelationList(
+    #     title=_("organizzato_da_interno_label", default="Organizzato da"),
+    #     default=[],
+    #     value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+    #     required=False,
+    #     description=_(
+    #         "organizzato_da_interno_help",
+    #         default="Se l'evento è organizzato direttamente dal comune,"
+    #         " indicare l'ufficio/ente organizzatore. I dati di contatto "
+    #         "verranno presi direttamente dall'ufficio selezionato. Se l'evento"
+    #         " non è organizzato direttamente dal comune, o si vogliono "
+    #         "sovrascrivere alcuni dati di contatto, utilizzare i seguenti campi.",  # noqa
+    #     ),
+    # )
+    # organizzato_da_esterno = BlocksField(
+    #     title=_("organizzato_da_esterno_label", default="Organizzatore"),
+    #     required=False,
+    #     description=_(
+    #         "organizzato_da_esterno_help",
+    #         default="Se l'evento non è organizzato direttamente dal comune oppure ha anche un organizzatore esterno,"  # noqa
+    #         " indicare il nome del contatto.",
+    #     ),
+    # )
 
     #  campi aggiunti con il pnrr
     patrocinato_da = BlocksField(
@@ -97,6 +97,15 @@ class IEvento(model.Schema):
         description=_(
             "patrocinato_da_help",
             default="Indicare l'ente che supporta l'evento, se presente.",
+        ),
+    )
+
+    sponsor = BlocksField(
+        title=_("sponsor_label", default="Sponsor"),
+        required=False,
+        description=_(
+            "sponsor_help",
+            default="Lista degli sponsor dell'evento.",
         ),
     )
 
@@ -121,7 +130,7 @@ class IEvento(model.Schema):
     )
 
     evento_genitore = RelationList(
-        title="Evento genitore",
+        title="Fa parte di",
         default=[],
         description=_(
             "evento_genitore_help",
@@ -171,7 +180,7 @@ class IEvento(model.Schema):
     documenti_correlati = RelationList(
         title="Documenti correlati",
         default=[],
-        required=True,
+        required=False,
         description=_(
             "documenti_correlati_help",
             default="Link alle schede documenti e allegati di supporto all'evento. Per poter scaricare direttamente un file occorre inserirlo all'interno della cartella 'Allegati'.",
@@ -193,16 +202,36 @@ class IEvento(model.Schema):
         ),
     )
 
+    parliamo_di = schema.Choice(
+        title=_("parliamo_di_label", default="Parliamo di"),
+        description=_(
+            "parliamo_di_help",
+            default="",
+        ),
+        vocabulary="collective.taxonomy.tipologia_argomento",
+        required=False,
+        default="",
+    )
+
+    ultimo_aggiornamento = schema.Date(
+        title=_("ultimo_aggiornamento_label", default="Ultimo aggiornamento"),
+        required=True,
+        description=_(
+            "ultimo_aggiornamento_help",
+            default="Data in cui è stato effettuato l'ultimo aggiornamento ai contenuti della pagina.",
+        ),
+    )
+
     # custom widgets
 
-    form.widget(
-        "organizzato_da_interno",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["Persona", "UnitaOrganizzativa", "Servizio"],
-        },
-    )
+    # form.widget(
+    #     "organizzato_da_interno",
+    #     RelatedItemsFieldWidget,
+    #     vocabulary="plone.app.vocabularies.Catalog",
+    #     pattern_options={
+    #         "selectableTypes": ["Persona", "UnitaOrganizzativa", "Servizio"],
+    #     },
+    # )
     form.widget(
         "persone_amministrazione",
         RelatedItemsFieldWidget,
@@ -213,7 +242,7 @@ class IEvento(model.Schema):
     )
 
     # custom fieldsets and order
-    form.order_before(sottotitolo="ILeadImageBehavior.image")
+    # form.order_before(sottotitolo="ILeadImageBehavior.image")
 
     model.fieldset(
         "cose",
@@ -234,9 +263,11 @@ class IEvento(model.Schema):
         "contatti",
         label=_("contatti_label", default="Contatti"),
         fields=[
-            "organizzato_da_interno",
-            "organizzato_da_esterno",
+            # "organizzato_da_interno",
+            # "organizzato_da_esterno",
             "patrocinato_da",
+            "sponsor",
+
         ],
     )
     model.fieldset(

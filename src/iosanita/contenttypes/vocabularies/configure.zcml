@@ -1,10 +1,10 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="design.plone.contenttypes"
+    i18n_domain="iosanita.contenttypes"
     >
 
   <utility
-      name="design.plone.vocabularies.event_location"
+      name="iosanita.vocabularies.event_location"
       component=".reference_vocabularies.EventLocationVocabularyFactory"
       />
 
