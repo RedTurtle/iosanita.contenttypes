@@ -29,4 +29,6 @@ def news_service(context, **kw):
 @indexer(INewsItem)
 def news_venue(context, **kw):
     strutture = context.strutture_correlate
-    return [struttura.UID() for struttura in filter(bool, [x.to_object for x in strutture])]
+    return [
+        struttura.UID() for struttura in filter(bool, [x.to_object for x in strutture])
+    ]

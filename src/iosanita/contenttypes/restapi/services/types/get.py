@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes import _
+
 # from iosanita.contenttypes.controlpanels.geolocation_defaults import (
 #     IGeolocationDefaults,
 # )
-from plone import api
+# from plone import api
 from plone.restapi.services.types.get import TypesGet as BaseGet
 from zope.i18n import translate
 from zope.interface import implementer
