@@ -4,7 +4,7 @@ from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
-from plone.app.testing import PloneSandboxLayer
+# from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 
 from redturtle.volto.testing import RedturtleVoltoLayer
@@ -23,7 +23,7 @@ import collective.z3cform.datagridfield
 import kitconcept.seo
 import plone.app.caching
 import plone.formwidget.geolocation
-import redturtle.volto
+# import redturtle.volto
 
 import iosanita.contenttypes
 
@@ -42,7 +42,7 @@ class IosanitaContenttypesLayer(RedturtleVoltoLayer):
         self.loadZCML(package=collective.volto.enhancedlinks)
         self.loadZCML(package=iosanita.contenttypes, context=configurationContext)
         self.loadZCML(package=plone.formwidget.geolocation)
-        #self.loadZCML(name="overrides.zcml", package=iosanita.contenttypes)
+        # self.loadZCML(name="overrides.zcml", package=iosanita.contenttypes)
         xmlconfig.file(
             "configure.zcml",
             iosanita.contenttypes,
@@ -99,7 +99,7 @@ class IoSanitaContenttypesRestApiLayer(RedturtleVoltoRestApiLayer):
         )
         self.loadZCML(package=kitconcept.seo)
 
-        #self.loadZCML(name="overrides.zcml", package=iosanita.contenttypes)
+        # self.loadZCML(name="overrides.zcml", package=iosanita.contenttypes)
 
     def setUpPloneSite(self, portal):
         super().setUpPloneSite(portal)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
-#from iosanita.contenttypes.schema_overrides import SchemaTweaks
+
+# from iosanita.contenttypes.schema_overrides import SchemaTweaks
 from iosanita.contenttypes.testing import (
     IOSANITA_CONTENTTYPES_API_FUNCTIONAL_TESTING,
 )
@@ -9,9 +10,9 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
-from plone.autoform.interfaces import IFormFieldProvider
+# from plone.autoform.interfaces import IFormFieldProvider
 from plone.restapi.testing import RelativeSession
-from zope.component import provideAdapter
+# from zope.component import provideAdapter
 
 import transaction
 import unittest
@@ -353,7 +354,7 @@ class TestEventApi(unittest.TestCase):
         self.event = api.content.create(
             container=self.portal, type="Event", title="Evento"
         )
-        #provideAdapter(SchemaTweaks, (IFormFieldProvider,), name="schema.tweaks")
+        # provideAdapter(SchemaTweaks, (IFormFieldProvider,), name="schema.tweaks")
         transaction.commit()
 
     def tearDown(self):
