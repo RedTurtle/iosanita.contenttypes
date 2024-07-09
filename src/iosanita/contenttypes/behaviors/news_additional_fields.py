@@ -88,20 +88,20 @@ class INewsAdditionalFields(model.Schema):
             default="",
         ),
         vocabulary="collective.taxonomy.tipologia_target",
-        required=True,
-        default="",
-    )
-
-    argomenti = schema.Choice(
-        title=_("argomenti_label", default="Argomenti"),
-        description=_(
-            "argomenti_help",
-            default="",
-        ),
-        vocabulary="collective.taxonomy.tipologia_argomento",
         required=False,
         default="",
     )
+
+    # argomenti = schema.Choice(
+    #     title=_("argomenti_label", default="Argomenti"),
+    #     description=_(
+    #         "argomenti_help",
+    #         default="",
+    #     ),
+    #     vocabulary="collective.taxonomy.tipologia_argomento",
+    #     required=False,
+    #     default="",
+    # )
 
     documenti = RelationList(
         title="Documenti",
@@ -153,7 +153,7 @@ class INewsAdditionalFields(model.Schema):
     model.fieldset(
         "correlati",
         label=_("correlati_label", default="Contenuti collegati"),
-        fields=["notizie_correlate", "servizi_correlati"],
+        fields=["notizie_correlate", "servizi_correlati", "documenti"],
     )
     # custom fieldsets and order
     form.order_before(descrizione_estesa="ILeadImageBehavior.image")
