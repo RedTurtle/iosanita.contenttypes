@@ -59,9 +59,11 @@ setup(
         "plone.app.dexterity",
         "collective.volto.blocksfield",
         "collective.venue[geolocation]",
+        "collective.z3cform.datagridfield",
         "redturtle.volto",
         "plone.restapi",
         "collective.taxonomy",
+        "collective.volto.enhancedlinks",
     ],
     extras_require={
         "test": [
@@ -69,9 +71,11 @@ setup(
             # Plone KGS does not use this version, because it would break
             # Remove if your package shall be part of coredev.
             # plone_coredev tests as of 2016-04-01.
+            "collective.volto.blocksfield",
             "plone.testing>=5.0.0",
             "plone.app.contenttypes",
             "plone.app.robotframework[debug]",
+            "collective.MockMailHost",
         ],
     },
     entry_points="""
