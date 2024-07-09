@@ -8,10 +8,10 @@
   >
     <value key="title"
            i18n:translate=""
-    >Luogo evento</value>
+    >Struttura evento</value>
     <value key="description"
            i18n:translate=""
-    >Luogo correlato legato all'evento</value>
+    >Struttura correlata all'evento</value>
     <value key="enabled">True</value>
     <value key="sortable">False</value>
     <value key="operations">

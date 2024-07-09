@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from design.plone.contenttypes import _
+from iosanita.contenttypes import _
 from plone.dexterity.interfaces import IDexterityContent
 from zope.globalrequest import getRequest
 from zope.interface import implementer
