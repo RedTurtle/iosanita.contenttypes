@@ -99,6 +99,7 @@ class IAddressPersona(IAddress, IAddressNomeSede, IAddressLocal):
         ],
     )
 
+
 @implementer(IAddressVenue)
 @adapter(IDexterityContent)
 class AddressVenue(object):
@@ -115,6 +116,7 @@ class AddressEvent(object):
 
     def __init__(self, context):
         self.context = context
+
 
 @implementer(IAddressPersona)
 @adapter(IDexterityContent)

@@ -3,6 +3,7 @@ from Products.CMFPlone.interfaces import INonInstallable
 from collective.taxonomy.interfaces import ITaxonomy
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
+from plone import api
 
 import logging
 
@@ -49,19 +50,39 @@ def update_catalog(context):
 
 def post_install(context):
     """Post install script"""
-    # import pdb
 
-    # pdb.set_trace()
-    # for index in [
-    #     "tipologia_notizia",
-    #     "tipologia_target",
-    #     "tipologia_argomento",
-    # ]:
-    #     api.portal.get_tool("portal_catalog").delIndex(index)
+    context.runImportStepFromProfile(
+        "iosanita.contenttypes:taxonomy", "collective.taxonomy"
+    )
 
-    # context.runImportStepFromProfile(
-    #     "iosanita.contenttypes:taxonomy", "collective.taxonomy"
+    # for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
+    #     utility.updateBehavior(**{"field_prefix": ""})
+    #     logger.info(
+    #         f"{colors.DARKCYAN} Change taxonomy prefix for {utility_name} {colors.ENDC}"  # noqa
+    #     )
+
+    # logger.info(
+    #     f"{colors.DARKCYAN} iosanita.contentypes taxonomies imported {colors.ENDC}"  # noqa
     # )
+    # update_types(context)
+    # update_registry(context)
+    # update_catalog(context)
+
+    # Do something at the end of the installation of this package.
+
+
+def post_install_taxonomy(context):
+
+    try:
+        for index in [
+            "tipologia_notizia",
+            "tipologia_target",
+            "tipologia_argomento",
+            "tipologia_evento",
+        ]:
+            api.portal.get_tool("portal_catalog").delIndex(index)
+    except:
+        pass
 
     for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
         utility.updateBehavior(**{"field_prefix": ""})
@@ -75,22 +96,6 @@ def post_install(context):
     update_types(context)
     update_registry(context)
     update_catalog(context)
-    # update_rolemap(context)
-    # logger.info(
-    #     f"{colors.DARKCYAN} Upgraded types, registry, catalog and rolemap {colors.ENDC}"  # noqa
-    # )
-    # Do something at the end of the installation of this package.
-
-
-# def post_install_taxonomy(context):
-
-#     context.runImportStepFromProfile(
-#         "profile-iosanita.contenttypes:default", "typeinfo", True
-#     )
-#     # C'è una versione di collective.taxonomies in cui quel campo non viene
-#     # settato correttamente.
-#     for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
-#         utility.updateBehavior(**{"field_prefix": ""})
 
 
 def uninstall(context):

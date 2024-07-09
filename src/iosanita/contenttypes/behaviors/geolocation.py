@@ -35,6 +35,7 @@ class IGeolocatablePersona(IGeolocatable):
         fields=["geolocation"],
     )
 
+
 @implementer(IGeolocatablePersona)
 @adapter(IDexterityContent)
 class GeolocatablePersona(object):
