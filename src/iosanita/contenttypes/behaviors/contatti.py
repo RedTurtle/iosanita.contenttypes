@@ -26,6 +26,7 @@ class IContattiStep(model.Schema):
     )
 
 
+@provider(IFormFieldProvider)
 class IContattiEvent(model.Schema):
     contact_info = RelationList(
         title=_(
