@@ -25,3 +25,20 @@ class GeolocatableEvent(object):
 
     def __init__(self, context):
         self.context = context
+
+
+@provider(IFormFieldProvider)
+class IGeolocatablePersona(IGeolocatable):
+    model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        fields=["geolocation"],
+    )
+
+@implementer(IGeolocatablePersona)
+@adapter(IDexterityContent)
+class GeolocatablePersona(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context

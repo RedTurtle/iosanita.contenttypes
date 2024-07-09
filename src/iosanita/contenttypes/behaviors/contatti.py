@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces.step import IStep
+from iosanita.contenttypes.interfaces.persona import IPersona
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
@@ -59,6 +60,40 @@ class IContattiEvent(model.Schema):
     )
 
 
+@provider(IFormFieldProvider)
+class IContattiPersona(model.Schema):
+    contact_info = RelationList(
+        title=_(
+            "contact_info_label",
+            default="Punti di contatto",
+        ),
+        description=_(
+            "contact_info_help",
+            default="Punti di contatto della persona.",
+        ),
+        required=True,
+        default=[],
+        value_type=RelationChoice(
+            title=_("Punti di contatto"),
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+    )
+
+    form.widget(
+        "contact_info",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["PuntoDiContatto"],
+        },
+    )
+    model.fieldset(
+        "contatti",
+        label=_("contatti_label", default="Contatti"),
+        fields=["contact_info"],
+    )
+
+
 @implementer(IContattiStep)
 @adapter(IStep)
 class ContattiStep(object):
@@ -69,6 +104,15 @@ class ContattiStep(object):
 @implementer(IContattiEvent)
 @adapter(IContattiEvent)
 class ContattiEvent(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context
+
+
+@implementer(IContattiPersona)
+@adapter(IPersona)
+class ContattiPersona(object):
     """ """
 
     def __init__(self, context):

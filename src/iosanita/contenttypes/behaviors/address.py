@@ -17,7 +17,7 @@ class IAddressNomeSede(model.Schema):
         description=_(
             "help_nome_sede",
             default="Inserisci il nome della "
-            "sede, se non è presente tra i Luoghi del sito.",
+            "sede, se non è presente tra quelle del sito.",
         ),
         required=False,
     )
@@ -67,8 +67,8 @@ class IAddressEvent(IAddress, IAddressNomeSede, IAddressLocal):
     """"""
 
     model.fieldset(
-        "luogo",
-        label=_("luogo_label", default="Luogo"),
+        "struttura",
+        label=_("struttura_label", default="Struttura"),
         fields=[
             "nome_sede",
             "street",
@@ -80,6 +80,24 @@ class IAddressEvent(IAddress, IAddressNomeSede, IAddressLocal):
         ],
     )
 
+
+@provider(IFormFieldProvider)
+class IAddressPersona(IAddress, IAddressNomeSede, IAddressLocal):
+    """"""
+
+    model.fieldset(
+        "dove",
+        label=_("struttura_label", default="Dove"),
+        fields=[
+            "nome_sede",
+            "street",
+            "zip_code",
+            "city",
+            "quartiere",
+            "circoscrizione",
+            "country",
+        ],
+    )
 
 @implementer(IAddressVenue)
 @adapter(IDexterityContent)
@@ -93,6 +111,14 @@ class AddressVenue(object):
 @implementer(IAddressEvent)
 @adapter(IDexterityContent)
 class AddressEvent(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context
+
+@implementer(IAddressPersona)
+@adapter(IDexterityContent)
+class AddressPersona(object):
     """ """
 
     def __init__(self, context):

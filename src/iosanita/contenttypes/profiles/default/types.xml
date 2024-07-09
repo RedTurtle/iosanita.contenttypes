@@ -9,4 +9,7 @@
   <object meta_type="Dexterity FTI"
           name="Step"
   />
+  <object meta_type="Dexterity FTI"
+          name="Persona"
+  />
 </object>

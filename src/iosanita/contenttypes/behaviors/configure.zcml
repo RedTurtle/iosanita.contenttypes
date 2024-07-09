@@ -95,6 +95,14 @@
       marker=".address.IAddressEvent"
       />
   <plone:behavior
+      name="iosanita.contenttypes.behavior.address_persona"
+      title="Address Persona"
+      description="Behavior address per Persona."
+      factory=".address.AddressPersona"
+      provides=".address.IAddressPersona"
+      marker=".address.IAddressPersona"
+      />
+  <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_event"
       title="Contatti"
       description="Behavior contatti per Event."
@@ -111,6 +119,14 @@
       marker=".geolocation.IGeolocatableEvent"
       />
   <plone:behavior
+      name="iosanita.contenttypes.behavior.geolocation_persona"
+      title="Geolocatable"
+      description="Behavior geolocatable per Persona."
+      factory=".geolocation.GeolocatablePersona"
+      provides=".geolocation.IGeolocatablePersona"
+      marker=".geolocation.IGeolocatablePersona"
+      />
+  <plone:behavior
       name="iosanita.contenttypes.behavior.news"
       title="Metadati news"
       description="Adds fields."
@@ -118,6 +134,14 @@
       provides=".news_additional_fields.INewsAdditionalFields"
       for="plone.app.contenttypes.interfaces.INewsItem"
       marker=".news_additional_fields.INewsAdditionalFields"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_persona"
+      title="Contatti"
+      description="Behavior contatti per Persona."
+      factory=".contatti.ContattiPersona"
+      provides=".contatti.IContattiPersona"
+      marker=".contatti.IContattiPersona"
       />
 
 </configure>

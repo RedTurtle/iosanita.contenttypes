@@ -27,6 +27,10 @@
         id="iosanita.contenttypes.AddNotizieEComunicatiStampa"
         title="iosanita.contenttypes: Add NotizieEComunicatiStampa"
         />
+    <permission
+        id="iosanita.contenttypes.AddPersona"
+        title="iosanita.contenttypes: Add Persona"
+        />
   </configure>
 
 </configure>

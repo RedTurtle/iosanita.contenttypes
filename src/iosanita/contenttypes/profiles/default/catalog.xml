@@ -7,7 +7,7 @@
  <index name="rassegna" meta_type="BooleanIndex">
     <indexed_attr value="rassegna"/>
  </index>
-
+ 
   <!-- metadata -->
   <column value="event_location" />
   <column value="rassegna" />
@@ -25,5 +25,6 @@
   <column remove="True"
           value="argomenti"
   />
+  
 
 </object>
