@@ -285,6 +285,12 @@ class IEvento(model.Schema):
         fields=["appuntamenti"],
     )
 
+    model.fieldset(
+        "correlati",
+        label=_("correlati_label", default="Contenuti collegati"),
+        fields=["eventi_correlati", "documenti_correlati"],
+    )
+
     textindexer.searchable("descrizione_estesa")
 
 
