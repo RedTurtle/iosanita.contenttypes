@@ -10,8 +10,10 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+
 # from plone.autoform.interfaces import IFormFieldProvider
 from plone.restapi.testing import RelativeSession
+
 # from zope.component import provideAdapter
 
 import transaction
