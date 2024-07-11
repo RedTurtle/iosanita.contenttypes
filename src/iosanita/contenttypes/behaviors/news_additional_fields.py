@@ -31,6 +31,10 @@ class INewsAdditionalFields(model.Schema):
             "numero_progressivo_cs_label",
             default="Numero progressivo del comunicato stampa",
         ),
+        description=_(
+            "numero_progressivo_cs_help",
+            default="Se è un comunicato stampa, indicare un'eventuale numero progressivo del comunicato stampa.",
+        ),
         required=False,
     )
 
@@ -63,7 +67,7 @@ class INewsAdditionalFields(model.Schema):
         title=_("notizie_correlate_label", default="Notizie correlate"),
         description=_(
             "notizie_correlate_help",
-            default="Seleziona una lista di notizie correlate a questa.",
+            default="Elenco di altre notizie simili o collegate, con collegamento alle relative pagine foglia notizia.",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
@@ -71,10 +75,10 @@ class INewsAdditionalFields(model.Schema):
     )
 
     servizi_correlati = RelationList(
-        title=_("servizi_correlati_label", default="Servizi correlati"),
+        title=_("servizi_correlati_label", default="Servizi e prestazioni"),
         description=_(
             "servizi_correlati_help",
-            default="Seleziona una lista di servizi correlati.",
+            default="Elenco dei servizi e delle prestazioni dell'ASL citati nella notizia, con collegamento alle relative pagine foglia servizio. L'elemento è necessario se nella notizia sono citati specifici servizi o prestazioni dell'ASL.",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
@@ -92,23 +96,12 @@ class INewsAdditionalFields(model.Schema):
         default="",
     )
 
-    # argomenti = schema.Choice(
-    #     title=_("argomenti_label", default="Argomenti"),
-    #     description=_(
-    #         "argomenti_help",
-    #         default="",
-    #     ),
-    #     vocabulary="collective.taxonomy.tipologia_argomento",
-    #     required=False,
-    #     default="",
-    # )
-
     documenti = RelationList(
         title="Documenti",
         default=[],
         description=_(
             "documenti_help",
-            default="Seleziona la lista dei documenti di supporto.",
+            default="Elenco dei documenti correlati, con collegamento alle relative pagine foglia documento (se documenti ufficiali dell'ASL) o download diretto degli allegati.",
         ),
         value_type=RelationChoice(
             title=_("Documento"), vocabulary="plone.app.vocabularies.Catalog"
@@ -153,7 +146,7 @@ class INewsAdditionalFields(model.Schema):
     model.fieldset(
         "correlati",
         label=_("correlati_label", default="Contenuti collegati"),
-        fields=["notizie_correlate", "servizi_correlati", "documenti"],
+        fields=["a_cura_di_persone", "notizie_correlate", "servizi_correlati", "documenti"],
     )
     # custom fieldsets and order
     form.order_before(descrizione_estesa="ILeadImageBehavior.image")
