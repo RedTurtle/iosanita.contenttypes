@@ -27,7 +27,6 @@ class IUnitaOrganizzativa(model.Schema):
         required=False,
     )
 
-
     competenze = BlocksField(
         title=_("uo_competenze_label", default="Competenze"),
         description=_(

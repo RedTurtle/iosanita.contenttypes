@@ -107,7 +107,7 @@ class IAddressPersona(IAddress, IAddressNomeSede, IAddressLocal):
 class IAddressUnitaOrganizzativa(IAddress, IAddressNomeSede, IAddressLocal):
     """"""
 
-    structure =  RelationList(
+    structure = RelationList(
         title=_("strutura_label", default="Structure"),
         value_type=RelationChoice(
             title=_("structure_relation_label"),
@@ -136,7 +136,7 @@ class IAddressUnitaOrganizzativa(IAddress, IAddressNomeSede, IAddressLocal):
             "quartiere",
             "circoscrizione",
             "country",
-            "structure"
+            "structure",
         ],
     )
 
@@ -166,6 +166,7 @@ class AddressPersona(object):
 
     def __init__(self, context):
         self.context = context
+
 
 @implementer(IAddressUnitaOrganizzativa)
 @adapter(IDexterityContent)
