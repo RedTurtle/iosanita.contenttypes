@@ -95,8 +95,10 @@ class IContattiPersona(model.Schema):
 
 
 @implementer(IContattiStep)
-@adapter(IStep)
+@adapter(IContattiStep)
 class ContattiStep(object):
+    """ """
+    
     def __init__(self, context):
         self.context = context
 
