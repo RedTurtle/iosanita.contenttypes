@@ -183,7 +183,9 @@ class IEvento(model.Schema):
     )
 
     informazioni_aggiuntive_luogo = BlocksField(
-        title=_("informazioni_aggiuntive_luogo_label", default="Informazioni aggiuntive"),
+        title=_(
+            "informazioni_aggiuntive_luogo_label", default="Informazioni aggiuntive"
+        ),
         required=False,
         description=_(
             "informazioni_aggiuntive_luogo_help",
@@ -221,7 +223,7 @@ class IEvento(model.Schema):
             "descrizione_destinatari",
         ],
     )
-   
+
     model.fieldset("costi", label=_("costi_label", default="Costi"), fields=["prezzo"])
     model.fieldset(
         "contatti",
@@ -257,7 +259,10 @@ class IEvento(model.Schema):
     model.fieldset(
         "dove",
         label=_("dove_label", default="Dove"),
-        fields=["strutture", "informazioni_aggiuntive_luogo",]
+        fields=[
+            "strutture",
+            "informazioni_aggiuntive_luogo",
+        ],
     )
 
     textindexer.searchable("descrizione_estesa")
