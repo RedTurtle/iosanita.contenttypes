@@ -79,6 +79,7 @@ def post_install_taxonomy(context):
             "tipologia_target",
             "tipologia_argomento",
             "tipologia_evento",
+            "tipologia_punti_di_contatto",
         ]:
             api.portal.get_tool("portal_catalog").delIndex(index)
     except:

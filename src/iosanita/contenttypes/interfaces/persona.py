@@ -124,14 +124,14 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    ultimo_aggiornamento = schema.Date(
-        title=_("ultimo_aggiornamento_label", default="Ultimo aggiornamento"),
-        required=True,
-        description=_(
-            "ultimo_aggiornamento_help",
-            default="Data in cui è stato effettuato l'ultimo aggiornamento ai contenuti della pagina.",
-        ),
-    )
+    # ultimo_aggiornamento = schema.Date(
+    #     title=_("ultimo_aggiornamento_label", default="Ultimo aggiornamento"),
+    #     required=True,
+    #     description=_(
+    #         "ultimo_aggiornamento_help",
+    #         default="Data in cui è stato effettuato l'ultimo aggiornamento ai contenuti della pagina.",
+    #     ),
+    # )
 
     # custom widgets
     form.widget(

@@ -26,7 +26,7 @@
     <element value="iosanita.contenttypes.behavior.evento" />
     <element value="iosanita.contenttypes.behavior.address_event" />
     <element value="iosanita.contenttypes.behavior.geolocation_event" />
-    <element value="iosanita.contenttypes.behavior.contatti_event" />
+    <!-- <element value="iosanita.contenttypes.behavior.contatti_event" /> -->
     <element value="plone.dublincore" />
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
@@ -40,6 +40,7 @@
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="collective.taxonomy.generated.tipologia_evento" />
+    <element value="collective.taxonomy.generated.tipologia_punti_di_contatto" />
     <!-- remove unused behaviors -->
     <element remove="True"
              value="plone.eventlocation"

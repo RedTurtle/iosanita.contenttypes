@@ -5,7 +5,7 @@ from iosanita.contenttypes.interfaces import IIosanitaContenttypes
 
 # from plone.app.z3cform.widget import RelatedItemsFieldWidget
 # from plone.autoform import directives as form
-from plone.namedfile import field
+# from plone.namedfile import field
 from plone.supermodel import model
 
 # from z3c.relationfield.schema import RelationChoice
@@ -14,7 +14,7 @@ from zope import schema
 
 
 class IComeFarePer(model.Schema, IIosanitaContenttypes):
-    """Marker interface for content type Servizio"""
+    """Marker interface for content type"""
 
     sottotitolo = schema.TextLine(
         title=_("sottotitolo_label", default="Sottotitolo"),
@@ -23,15 +23,6 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
             default="Indica un eventuale sottotitolo/titolo alternativo.",
         ),
         required=False,
-    )
-
-    immagine_tema = field.NamedBlobImage(
-        title=_("immagine_tema_label", default="Immagine del tema"),
-        required=False,
-        description=_(
-            "immagine_tema_help",
-            default="Immagine del tema trattato.",
-        ),
     )
 
     descrizione_estesa = BlocksField(
@@ -48,17 +39,7 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
         required=True,
         description=_(
             "a_chi_si_rivolge_help",
-            default="A chi si rivolge questo servizio.",
-        ),
-    )
-
-    come_si_fa = BlocksField(
-        title=_("come_si_fa_label", default="Come fare"),
-        required=True,
-        description=_(
-            "come_si_fa_help",
-            default="Descrizione della procedura da seguire per poter"
-            " usufruire del servizio.",
+            default="Descrizione testuale degli utenti dell'ASL a cui è rivolta la procedura.",
         ),
     )
 
@@ -108,24 +89,16 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
     #     required=False,
     # )
 
-    parliamo_di = schema.Choice(
+    parliamo_di = schema.List(
         title=_("parliamo_di_label", default="Parliamo di"),
         description=_(
             "parliamo_di_help",
-            default="",
+            default="Indicazioni degli argomenti con cui il contenuto di pagina viene taggato.",
         ),
-        vocabulary="collective.taxonomy.tipologia_argomento",
+        value_type=schema.Choice(
+            vocabulary="collective.taxonomy.tipologia_argomento",
+        ),
         required=False,
-        default="",
-    )
-
-    ultimo_aggiornamento = schema.Date(
-        title=_("ultimo_aggiornamento_label", default="Ultimo aggiornamento"),
-        required=True,
-        description=_(
-            "ultimo_aggiornamento_help",
-            default="Data in cui è stato effettuato l'ultimo aggiornamento ai contenuti della pagina.",
-        ),
     )
 
     # form.widget(
@@ -142,3 +115,18 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
     #     vocabulary="plone.app.vocabularies.Catalog",
     #     pattern_options={"selectableTypes": ["Documento"]},
     # )
+
+    model.fieldset(
+        "utenti",
+        label=_("utenti_label", default="Utenti"),
+        fields=[
+            "a_chi_si_rivolge",
+        ],
+    )
+    model.fieldset(
+        "informazioni",
+        label=_("informazioni_label", default="Ulteriori informazioni"),
+        fields=[
+            "parliamo_di",
+        ],
+    )

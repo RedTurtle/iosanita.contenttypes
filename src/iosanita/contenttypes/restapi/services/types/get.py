@@ -18,6 +18,15 @@ class FieldsetsMismatchError(Exception):
 
 
 FIELDSETS_ORDER = {
+    "ComeFarePer": [
+        "default",
+        "utenti",
+        "informazioni",
+        "categorization",
+        "dates",
+        "settings",
+        "ownership",
+    ],
     "Event": [
         "default",
         "cose",
@@ -232,6 +241,7 @@ class TypesGet(BaseGet):
         return result
 
     def reply(self):
+        # import pdb;pdb.set_trace()
         result = super(TypesGet, self).reply()
         if "fieldsets" in result:
             result["fieldsets"] = self.reorder_fieldsets(schema=result)
