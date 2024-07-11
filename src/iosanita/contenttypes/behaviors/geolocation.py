@@ -12,8 +12,8 @@ from zope.interface import provider
 @provider(IFormFieldProvider)
 class IGeolocatableEvent(IGeolocatable):
     model.fieldset(
-        "luogo",
-        label=_("luogo_label", default="Luogo"),
+        "dove",
+        label=_("dove_label", default="Dove"),
         fields=["geolocation"],
     )
 

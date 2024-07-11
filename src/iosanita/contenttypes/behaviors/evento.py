@@ -19,15 +19,6 @@ from zope.interface import provider
 class IEvento(model.Schema):
     """Marker inteerface for content type Evento"""
 
-    # sottotitolo = schema.TextLine(
-    #     title=_("sottotitolo_label", default="Sottotitolo"),
-    #     description=_(
-    #         "sottotitolo_help",
-    #         default="Indica un eventuale sottotitolo/titolo alternativo.",
-    #     ),
-    #     required=False,
-    # )
-
     descrizione_estesa = BlocksField(
         title=_("descrizione_estesa", default="Cosa è"),
         required=True,
@@ -43,15 +34,6 @@ class IEvento(model.Schema):
         description=_(
             "a_chi_si_rivolge_help",
             default="Descrizione testuale dei principali destinatari dell'Evento",
-        ),
-    )
-
-    orari = BlocksField(
-        title=_("orari", default="Informazioni sugli orari"),
-        required=False,
-        description=_(
-            "orari_help",
-            default="Informazioni sugli orari di svolgimento dell'evento.",
         ),
     )
 
@@ -73,11 +55,7 @@ class IEvento(model.Schema):
         required=False,
         description=_(
             "organizzato_da_interno_help",
-            default="Se l'evento è organizzato direttamente dal comune,"
-            " indicare l'ufficio/ente organizzatore. I dati di contatto "
-            "verranno presi direttamente dall'ufficio selezionato. Se l'evento"
-            " non è organizzato direttamente dal comune, o si vogliono "
-            "sovrascrivere alcuni dati di contatto, utilizzare i seguenti campi.",  # noqa
+            default="Indicazione di chi ha organizzato l'evento. Se si tratta di un'Unità organizzativa dell'ASL, includere collegamento alla relativa pagina.",  # noqa
         ),
     )
     organizzato_da_esterno = BlocksField(
@@ -155,25 +133,16 @@ class IEvento(model.Schema):
         required=False,
     )
 
-    dove_rivolgersi = RelationList(
-        title="Dove rivolgersi",
+    strutture = RelationList(
+        title="Strutture",
         default=[],
         required=True,
         description=_(
-            "dove_rivolgersi_help",
+            "strutture_help",
             default="Link all'eventuale scheda della struttura dell'ASL in cui si svolge l'evento.",
         ),
         value_type=RelationChoice(
             title=_("Struttura"), vocabulary="plone.app.vocabularies.Catalog"
-        ),
-    )
-
-    a_chi_si_rivolge = BlocksField(
-        title=_("a_chi_si_rivolge_label", default="A chi è rivolto"),
-        required=True,
-        description=_(
-            "a_chi_si_rivolge_help",
-            default="A chi si rivolge questo servizio.",
         ),
     )
 
@@ -193,7 +162,7 @@ class IEvento(model.Schema):
     eventi_correlati = RelationList(
         title="Eventi correlati",
         default=[],
-        required=True,
+        required=False,
         description=_(
             "eventi_correlati_help", default="Seleziona gli eventi correlati."
         ),
@@ -213,12 +182,12 @@ class IEvento(model.Schema):
         default="",
     )
 
-    ultimo_aggiornamento = schema.Date(
-        title=_("ultimo_aggiornamento_label", default="Ultimo aggiornamento"),
-        required=True,
+    informazioni_aggiuntive_luogo = BlocksField(
+        title=_("informazioni_aggiuntive_luogo_label", default="Informazioni aggiuntive"),
+        required=False,
         description=_(
-            "ultimo_aggiornamento_help",
-            default="Data in cui è stato effettuato l'ultimo aggiornamento ai contenuti della pagina.",
+            "informazioni_aggiuntive_luogo_help",
+            default="Informazioni aggiuntivie sul luogo.",
         ),
     )
 
@@ -250,14 +219,9 @@ class IEvento(model.Schema):
         fields=[
             "descrizione_estesa",
             "descrizione_destinatari",
-            "persone_amministrazione",
         ],
     )
-    model.fieldset(
-        "date_e_orari",
-        label=_("date_e_orari_label", default="Date e orari"),
-        fields=["orari"],
-    )
+   
     model.fieldset("costi", label=_("costi_label", default="Costi"), fields=["prezzo"])
     model.fieldset(
         "contatti",
@@ -272,7 +236,7 @@ class IEvento(model.Schema):
     model.fieldset(
         "partecipanti",
         label=_("partecipanti_label", default="Chi partecipa"),
-        fields=["chi_partecipa"],
+        fields=["chi_partecipa", "persone_amministrazione"],
     )
     model.fieldset(
         "categorization",
@@ -289,6 +253,11 @@ class IEvento(model.Schema):
         "correlati",
         label=_("correlati_label", default="Contenuti collegati"),
         fields=["eventi_correlati", "documenti_correlati"],
+    )
+    model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        fields=["strutture", "informazioni_aggiuntive_luogo",]
     )
 
     textindexer.searchable("descrizione_estesa")

@@ -24,7 +24,7 @@
     <element value="plone.eventrecurrence" />
     <element value="iosanita.contenttypes.behavior.additional_help_infos" />
     <element value="iosanita.contenttypes.behavior.evento" />
-    <element value="iosanita.contenttypes.behavior.strutture_correlate" />
+    <!-- <element value="iosanita.contenttypes.behavior.strutture_correlate" /> -->
     <element value="iosanita.contenttypes.behavior.address_event" />
     <element value="iosanita.contenttypes.behavior.geolocation_event" />
     <element value="iosanita.contenttypes.behavior.contatti_event" />

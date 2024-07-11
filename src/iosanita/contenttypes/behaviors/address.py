@@ -67,8 +67,8 @@ class IAddressEvent(IAddress, IAddressNomeSede, IAddressLocal):
     """"""
 
     model.fieldset(
-        "struttura",
-        label=_("struttura_label", default="Struttura"),
+        "dove",
+        label=_("dove_label", default="Dove"),
         fields=[
             "nome_sede",
             "street",

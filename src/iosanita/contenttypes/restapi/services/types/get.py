@@ -21,9 +21,8 @@ FIELDSETS_ORDER = {
     "Event": [
         "default",
         "cose",
-        "chi_partecipa",
-        "luogo",
-        "date_e_orari",
+        "partecipanti",
+        "dove",
         "costi",
         "contatti",
         "informazioni",
