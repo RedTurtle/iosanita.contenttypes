@@ -26,9 +26,9 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
     )
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa_label", default="Panoramica"),
+        title=_("come_fare_per_descrizione_estesa_label", default="Panoramica"),
         description=_(
-            "descrizione_estesa_help",
+            "come_fare_per_descrizione_estesa_help",
             default="Descrizione estesa.",
         ),
         required=True,
@@ -38,8 +38,8 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
         title=_("a_chi_si_rivolge_label", default="A chi è rivolto"),
         required=True,
         description=_(
-            "a_chi_si_rivolge_help",
-            default="Descrizione testuale degli utenti dell'ASL a cui è rivolta la procedura.",
+            "come_fare_a_chi_si_rivolge_help",
+            default="A chi si rivolge questo servizio.",
         ),
     )
 

@@ -1,6 +1,3 @@
-#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-#SOME DESCRIPTIVE TITLE.
-#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -15,7 +12,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: iosanita.contenttypes\n"
+"Domain: DOMAIN\n"
 
 #: iosanita/contenttypes/behaviors/configure.zcml:96
 msgid "Address Event"
@@ -758,7 +755,7 @@ msgstr ""
 #. Default: "Structure"
 #: iosanita/contenttypes/behaviors/address.py:109
 msgid "structure_label"
-msgstr ""
+msgstr "Struttura"
 
 #. Default: "Dove"
 #: iosanita/contenttypes/behaviors/address.py:91
@@ -783,7 +780,7 @@ msgstr ""
 #. Default: "Subtitle"
 #: iosanita/contenttypes/content/unita_organizzativa.py:23
 msgid "subtitle_label"
-msgstr ""
+msgstr "Sottotitolo"
 
 #. Default: "Seleziona una lista di argomenti d'interesse per questo contenuto."
 #: iosanita/contenttypes/behaviors/argomenti.py:22

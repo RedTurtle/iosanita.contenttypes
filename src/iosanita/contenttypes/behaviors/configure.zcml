@@ -103,6 +103,14 @@
       marker=".address.IAddressPersona"
       />
   <plone:behavior
+      name="iosanita.contenttypes.behavior.address_unita_organizzativa"
+      title="Address Unita Organizzativa"
+      description="Behavior address per Unita Organizzativa."
+      factory=".address.AddressUnitaOrganizzativa"
+      provides=".address.IAddressUnitaOrganizzativa"
+      marker=".address.IAddressUnitaOrganizzativa"
+      />
+  <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_event"
       title="Contatti"
       description="Behavior contatti per Event."

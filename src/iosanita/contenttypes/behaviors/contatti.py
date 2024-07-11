@@ -21,7 +21,7 @@ class IContattiStep(model.Schema):
             default="Contatti",
         ),
         description=_(
-            "contact_info_help",
+            "contatti_step_contact_info_help",
             default="I contatti per questo step.",
         ),
     )
@@ -31,11 +31,11 @@ class IContattiStep(model.Schema):
 class IContattiEvent(model.Schema):
     contact_info = RelationList(
         title=_(
-            "contact_info_label",
+            "contatti_event_contact_info_label",
             default="Punti di contatto",
         ),
         description=_(
-            "contact_info_help",
+            "contatti_event_contact_info_help",
             default="Relazione con i punti di contatto dell'evento.",
         ),
         required=True,
@@ -64,7 +64,7 @@ class IContattiEvent(model.Schema):
 class IContattiPersona(model.Schema):
     contact_info = RelationList(
         title=_(
-            "contact_info_label",
+            "contatti_persona_contact_info_label",
             default="Punti di contatto",
         ),
         description=_(

@@ -12,4 +12,7 @@
   <object meta_type="Dexterity FTI"
           name="Persona"
   />
+  <object meta_type="Dexterity FTI"
+          name="UnitaOrganizzativa"
+  />
 </object>

@@ -31,6 +31,10 @@
         id="iosanita.contenttypes.AddPersona"
         title="iosanita.contenttypes: Add Persona"
         />
+    <permission
+        id="iosanita.contenttypes.AddUnitaOrganizzativa"
+        title="iosanita.contenttypes: Add UnitaOrganizzativa"
+        />
   </configure>
 
 </configure>

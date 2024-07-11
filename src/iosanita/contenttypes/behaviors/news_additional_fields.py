@@ -18,10 +18,10 @@ from zope.interface import provider
 @provider(IFormFieldProvider)
 class INewsAdditionalFields(model.Schema):
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa", default="Descrizione estesa"),
+        title=_("new_additional_fields_descrizione_estesa", default="Descrizione estesa"),
         required=True,
         description=_(
-            "descrizione_estesa_help",
+            "new_additional_fields_descrizione_estesa_help",
             default="Descrizione dettagliata e completa.",
         ),
     )

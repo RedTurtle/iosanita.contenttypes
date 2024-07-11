@@ -12,7 +12,7 @@
     </permission>
     <permission acquire="True"
                 name="iosanita.contenttypes: Add Step"
-                
+
     >
       <role name="Manager" />
       <role name="Site Administrator" />
@@ -39,6 +39,15 @@
 
    <permission acquire="True"
                 name="iosanita.contenttypes: Add Persona"
+    >
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Contributor" />
+    </permission>
+  </permissions>
+  <permission acquire="True"
+                name="iosanita.contenttypes: Add UnitaOrganizzativa"
     >
       <role name="Manager" />
       <role name="Site Administrator" />
