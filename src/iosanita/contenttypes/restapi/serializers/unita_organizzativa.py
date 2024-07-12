@@ -12,7 +12,8 @@ from zope.globalrequest import getRequest
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.security import checkPermission
-from plone.restapi.serializer.dxcontent import SerializeToJson, SerializeToJsonSummary
+from plone.restapi.serializer.dxcontent import SerializeToJson
+from plone.restapi.serializer import DefaultJSONSummarySerializer
 from zope.intid.interfaces import IIntIds
 
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
@@ -127,7 +128,7 @@ class UOSerializer(SerializeToJson):
 
 @implementer(ISerializeToJsonSummary)
 @adapter(IUnitaOrganizzativa, Interface)
-class UOJSONSummarySerializer(SerializeToJsonSummary):
+class UOJSONSummarySerializer(DefaultJSONSummarySerializer):
     def __call__(self, force_images=True, **kwargs):
         data = super().__call__(force_images=force_images, **kwargs)
         fields = [
