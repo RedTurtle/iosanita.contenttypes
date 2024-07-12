@@ -109,6 +109,14 @@
       provides=".address.IAddressUnitaOrganizzativa"
       marker=".address.IAddressUnitaOrganizzativa"
       />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.address_struttura"
+      title="Address Event"
+      description="Behavior address per Struttura."
+      factory=".address.AddressStruttura"
+      provides=".address.IAddressStruttura"
+      marker=".address.IAddressStruttura"
+      />
   <!-- <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_event"
       title="Contatti"
@@ -132,6 +140,14 @@
       factory=".geolocation.GeolocatablePersona"
       provides=".geolocation.IGeolocatablePersona"
       marker=".geolocation.IGeolocatablePersona"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.geolocation_struttura"
+      title="Geolocatable"
+      description="Behavior geolocatable per Struttura."
+      factory=".geolocation.GeolocatableStruttura"
+      provides=".geolocation.IGeolocatableStruttura"
+      marker=".geolocation.IGeolocatableStruttura"
       />
   <plone:behavior
       name="iosanita.contenttypes.behavior.news"

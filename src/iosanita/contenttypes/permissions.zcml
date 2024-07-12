@@ -39,6 +39,10 @@
         id="iosanita.contenttypes.AddPuntoDiContatto"
         title="iosanita.contenttypes: Add PuntoDiContatto"
         />
+    <permission
+        id="iosanita.contenttypes.AddStruttura"
+        title="iosanita.contenttypes: Add Struttura"
+        />
   </configure>
 
 </configure>

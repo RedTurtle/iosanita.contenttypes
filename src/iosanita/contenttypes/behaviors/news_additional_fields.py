@@ -91,7 +91,7 @@ class INewsAdditionalFields(model.Schema):
         title=_("parliamo_di_label", default="Parliamo di"),
         description=_(
             "parliamo_di_help",
-            default="",
+            default="Indicazione degli Argomenti  e dei tag Utente con cui il contenuto di pagina è stato taggato.",
         ),
         vocabulary="collective.taxonomy.tipologia_target",
         required=False,

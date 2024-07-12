@@ -18,4 +18,7 @@
   <object meta_type="Dexterity FTI"
           name="PuntoDiContatto"
   />
+  <object meta_type="Dexterity FTI"
+          name="Struttura"
+  />
 </object>

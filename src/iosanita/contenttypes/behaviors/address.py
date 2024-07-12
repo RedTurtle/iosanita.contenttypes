@@ -141,6 +141,24 @@ class IAddressUnitaOrganizzativa(IAddress, IAddressNomeSede, IAddressLocal):
     )
 
 
+@provider(IFormFieldProvider)
+class IAddressStruttura(IAddress, IAddressNomeSede, IAddressLocal):
+    """"""
+
+    model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        fields=[
+            "nome_sede",
+            "street",
+            "zip_code",
+            "city",
+            "quartiere",
+            "circoscrizione",
+            "country",
+        ],
+    )
+
 @implementer(IAddressVenue)
 @adapter(IDexterityContent)
 class AddressVenue(object):
@@ -171,6 +189,15 @@ class AddressPersona(object):
 @implementer(IAddressUnitaOrganizzativa)
 @adapter(IDexterityContent)
 class AddressUnitaOrganizzativa(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context
+
+
+@implementer(IAddressStruttura)
+@adapter(IDexterityContent)
+class AddressStruttura(object):
     """ """
 
     def __init__(self, context):
