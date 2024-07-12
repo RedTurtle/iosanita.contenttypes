@@ -41,6 +41,18 @@ FIELDSETS_ORDER = {
         "settings",
         "ownership",
     ],
+    "Struttura": [
+        "default",
+        "utenti",
+        "dove",
+        "contatti",
+        "correlati",
+        "informazioni",
+        "categorization",
+        "dates",
+        "settings",
+        "ownership",
+    ],
     "News Item": [
         "default",
         "dates",

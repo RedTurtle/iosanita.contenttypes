@@ -36,7 +36,7 @@
 
   <!-- Enabled behaviors -->
   <property name="behaviors"
-            purge="true"
+            purge="false"
   >
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
@@ -58,6 +58,7 @@
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
     <element value="collective.taxonomy.generated.tipologia_target" />
+    <element value="iosanita.contenttypes.behavior.contatti_struttura" />
     <!-- <element value="collective.taxonomy.generated.tipologia.argomento" /> -->
   </property>
 

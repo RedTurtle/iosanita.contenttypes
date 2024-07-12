@@ -86,6 +86,14 @@
       marker=".contatti.IContattiUnitaOrganizzativa"
       />
   <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_struttura"
+      title="Contatti"
+      description="Behavior contatti per Struttura."
+      factory=".contatti.ContattiStruttura"
+      provides=".contatti.IContattiStruttura"
+      marker=".contatti.IContattiStruttura"
+      />
+  <plone:behavior
       name="iosanita.contenttypes.behavior.address_event"
       title="Address Event"
       description="Behavior address per Event."

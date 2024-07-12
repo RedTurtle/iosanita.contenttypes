@@ -176,6 +176,18 @@ SUBFOLDERS_MAPPING = {
             {"id": "documenti", "title": "Documenti", "allowed_types": ("File",)},
         ],
     },
+    "Struttura": {
+        "content": [
+            {"id": "documenti", "title": "Documenti", "allowed_types": ("File",)},
+            {
+                "id": "multimedia",
+                "title": "Multimedia",
+                "allowed_types": (
+                    "Link",
+                ),
+            },
+        ],
+    },
 }
 
 
