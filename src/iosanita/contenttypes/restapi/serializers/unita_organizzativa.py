@@ -13,7 +13,7 @@ from zope.interface import implementer
 from zope.interface import Interface
 from zope.security import checkPermission
 from plone.restapi.serializer.dxcontent import SerializeToJson
-from plone.restapi.serializer import DefaultJSONSummarySerializer
+from plone.restapi.serializer.summary import DefaultJSONSummarySerializer
 from zope.intid.interfaces import IIntIds
 
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
