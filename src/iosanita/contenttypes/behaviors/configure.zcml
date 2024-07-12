@@ -109,14 +109,14 @@
       provides=".address.IAddressUnitaOrganizzativa"
       marker=".address.IAddressUnitaOrganizzativa"
       />
-  <plone:behavior
+  <!-- <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_event"
       title="Contatti"
       description="Behavior contatti per Event."
       factory=".contatti.ContattiEvent"
       provides=".contatti.IContattiEvent"
       marker=".contatti.IContattiEvent"
-      />
+      /> -->
   <plone:behavior
       name="iosanita.contenttypes.behavior.geolocation_event"
       title="Geolocatable"

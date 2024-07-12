@@ -61,37 +61,37 @@ class IContattiUnitaOrganizzativa(model.Schema):
     textindexer.searchable("orario_pubblico")
 
 
-@provider(IFormFieldProvider)
-class IContattiEvent(model.Schema):
-    contact_info = RelationList(
-        title=_(
-            "contact_info_label",
-            default="Punti di contatto",
-        ),
-        description=_(
-            "contact_info_help",
-            default="Relazione con i punti di contatto dell'evento.",
-        ),
-        required=True,
-        default=[],
-        value_type=RelationChoice(
-            title=_("Punti di contatto"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
-    )
-    form.widget(
-        "contact_info",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["PuntoDiContatto"],
-        },
-    )
-    model.fieldset(
-        "contatti",
-        label=_("contatti_label", default="Contatti"),
-        fields=["contact_info"],
-    )
+# @provider(IFormFieldProvider)
+# class IContattiEvent(model.Schema):
+#     contact_info = RelationList(
+#         title=_(
+#             "contact_info_label",
+#             default="Punti di contatto",
+#         ),
+#         description=_(
+#             "contact_info_help",
+#             default="Relazione con i punti di contatto dell'evento.",
+#         ),
+#         required=True,
+#         default=[],
+#         value_type=RelationChoice(
+#             title=_("Punti di contatto"),
+#             vocabulary="plone.app.vocabularies.Catalog",
+#         ),
+#     )
+#     form.widget(
+#         "contact_info",
+#         RelatedItemsFieldWidget,
+#         vocabulary="plone.app.vocabularies.Catalog",
+#         pattern_options={
+#             "selectableTypes": ["PuntoDiContatto"],
+#         },
+#     )
+#     model.fieldset(
+#         "contatti",
+#         label=_("contatti_label", default="Contatti"),
+#         fields=["contact_info"],
+#     )
 
 
 @provider(IFormFieldProvider)
@@ -180,13 +180,13 @@ class ContattiStep(object):
         self.context = context
 
 
-@implementer(IContattiEvent)
-@adapter(IContattiEvent)
-class ContattiEvent(object):
-    """ """
+# @implementer(IContattiEvent)
+# @adapter(IContattiEvent)
+# class ContattiEvent(object):
+#     """ """
 
-    def __init__(self, context):
-        self.context = context
+#     def __init__(self, context):
+#         self.context = context
 
 
 @implementer(IContattiPersona)
