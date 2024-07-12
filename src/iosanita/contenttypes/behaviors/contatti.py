@@ -13,6 +13,8 @@ from collective.volto.blocksfield.field import BlocksField
 
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces.persona import IPersona
+from iosanita.contenttypes.interfaces.step import IStep
+
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
 
 
@@ -61,28 +63,14 @@ class IContattiUnitaOrganizzativa(model.Schema):
 
 
 @provider(IFormFieldProvider)
-class IContattiStep(model.Schema):
-    contact_info = RelationList(
-        title=_(
-            "contact_info_label",
-            default="Contatti",
-        ),
-        description=_(
-            "contatti_step_contact_info_help",
-            default="I contatti per questo step.",
-        ),
-    )
-
-
-@provider(IFormFieldProvider)
 class IContattiEvent(model.Schema):
     contact_info = RelationList(
         title=_(
-            "contatti_event_contact_info_label",
+            "contact_info_label",
             default="Punti di contatto",
         ),
         description=_(
-            "contatti_event_contact_info_help",
+            "contact_info_help",
             default="Relazione con i punti di contatto dell'evento.",
         ),
         required=True,
@@ -111,12 +99,46 @@ class IContattiEvent(model.Schema):
 class IContattiPersona(model.Schema):
     contact_info = RelationList(
         title=_(
-            "contatti_persona_contact_info_label",
+            "contatti_event_contact_info_label",
             default="Punti di contatto",
         ),
         description=_(
             "contact_info_help",
             default="Punti di contatto della persona.",
+        ),
+        required=True,
+        default=[],
+        value_type=RelationChoice(
+            title=_("Punti di contatto"),
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+    )
+
+    form.widget(
+        "contact_info",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["PuntoDiContatto"],
+        },
+    )
+    model.fieldset(
+        "contatti",
+        label=_("contatti_label", default="Contatti"),
+        fields=["contact_info"],
+    )
+
+
+@provider(IFormFieldProvider)
+class IContattiStep(model.Schema):
+    contact_info = RelationList(
+        title=_(
+            "contatti_persona_contact_info_label",
+            default="Punti di contatto",
+        ),
+        description=_(
+            "contact_info_help",
+            default="Punti di contatto per questo passo.",
         ),
         required=True,
         default=[],
@@ -171,6 +193,15 @@ class ContattiEvent(object):
 @implementer(IContattiPersona)
 @adapter(IPersona)
 class ContattiPersona(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context
+
+
+@implementer(IContattiStep)
+@adapter(IStep)
+class ContattiStep(object):
     """ """
 
     def __init__(self, context):

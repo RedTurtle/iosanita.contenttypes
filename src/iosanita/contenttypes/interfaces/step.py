@@ -30,19 +30,6 @@ class IStep(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    # documenti = RelationList(
-    #     title="Documenti",
-    #     default=[],
-    #     description=_(
-    #         "documenti_help",
-    #         default="Seleziona la lista dei documenti di supporto.",
-    #     ),
-    #     value_type=RelationChoice(
-    #         title=_("Documento"), vocabulary="plone.app.vocabularies.Catalog"
-    #     ),
-    #     required=False,
-    # )
-
     # form.widget(
     #     "dove",
     #     RelatedItemsFieldWidget,

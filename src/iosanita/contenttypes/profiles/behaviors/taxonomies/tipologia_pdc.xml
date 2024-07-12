@@ -9,7 +9,7 @@
   <vocabName>
     <langstring language="it">Tipologia punti di contatto</langstring>
   </vocabName>
-  <vocabIdentifier>tipologia_punti_di_contatto</vocabIdentifier>
+  <vocabIdentifier>tipologia_pdc</vocabIdentifier>
   <term>
     <termIdentifier>email</termIdentifier>
     <caption>

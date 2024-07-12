@@ -10,10 +10,10 @@
 
 
   <include package=".browser" />
-  <!-- <include package=".adapters" /> -->
+  <include package=".adapters" />
   <include package=".behaviors" />
   <include package=".browser" />
-  <!-- <include package=".controlpanels" /> -->
+  <include package=".controlpanels" />
   <include package=".events" />
   <include package=".indexers" />
   <include package=".restapi" />

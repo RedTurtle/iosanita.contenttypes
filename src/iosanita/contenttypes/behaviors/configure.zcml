@@ -86,14 +86,6 @@
       marker=".contatti.IContattiUnitaOrganizzativa"
       />
   <plone:behavior
-      name="iosanita.contenttypes.behavior.contatti_step"
-      title="Contatti"
-      description="Behavior contatti per Step."
-      factory=".contatti.ContattiStep"
-      provides=".contatti.IContattiStep"
-      marker=".contatti.IContattiStep"
-      />
-  <plone:behavior
       name="iosanita.contenttypes.behavior.address_event"
       title="Address Event"
       description="Behavior address per Event."
@@ -158,5 +150,20 @@
       provides=".contatti.IContattiPersona"
       marker=".contatti.IContattiPersona"
       />
-
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_step"
+      title="Contatti"
+      description="Behavior contatti per Step."
+      factory=".contatti.ContattiStep"
+      provides=".contatti.IContattiStep"
+      marker=".contatti.IContattiStep"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.exclude_from_search"
+      title="Exclude from search"
+      description="Campo per escludere un contenuto dalle ricerche del sito."
+      factory=".exclude_from_search.ExcludeFromSearch"
+      provides=".exclude_from_search.IExcludeFromSearch"
+      marker=".exclude_from_search.IExcludeFromSearch"
+      />
 </configure>
