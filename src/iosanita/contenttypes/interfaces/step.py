@@ -5,6 +5,8 @@ from iosanita.contenttypes.interfaces import IIosanitaContenttypes
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.autoform import directives as form
 
 
 class IStep(model.Schema, IIosanitaContenttypes):
@@ -30,14 +32,14 @@ class IStep(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    # form.widget(
-    #     "dove",
-    #     RelatedItemsFieldWidget,
-    #     vocabulary="plone.app.vocabularies.Catalog",
-    #     pattern_options={
-    #         "selectableTypes": ["UnitaOrganizzativa"],
-    #     },
-    # )
+    form.widget(
+        "dove",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["UnitaOrganizzativa"],
+        },
+    )
     # form.widget(
     #     "documenti",
     #     RelatedItemsFieldWidget,
