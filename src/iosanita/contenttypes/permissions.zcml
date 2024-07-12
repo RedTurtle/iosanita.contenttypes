@@ -35,7 +35,7 @@
         id="iosanita.contenttypes.AddUnitaOrganizzativa"
         title="iosanita.contenttypes: Add UnitaOrganizzativa"
         />
-     <permission
+    <permission
         id="iosanita.contenttypes.AddPuntoDiContatto"
         title="iosanita.contenttypes: Add PuntoDiContatto"
         />

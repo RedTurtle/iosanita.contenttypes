@@ -16,5 +16,5 @@
       class=".settings.IoSanitaControlPanelView"
       permission="cmf.ManagePortal"
       />
-  
+
 </configure>
