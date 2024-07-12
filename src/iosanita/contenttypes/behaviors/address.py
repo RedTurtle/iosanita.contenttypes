@@ -90,7 +90,7 @@ class IAddressPersona(IAddress, IAddressNomeSede, IAddressLocal):
 
     model.fieldset(
         "dove",
-        label=_("struttura_label", default="Dove"),
+        label=_("dove_label", default="Dove"),
         fields=[
             "nome_sede",
             "street",

@@ -77,7 +77,14 @@
       provides=".descrizione_estesa.IDescrizioneEstesa"
       marker=".descrizione_estesa.IDescrizioneEstesa"
       />
-
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_uo"
+      title="Contatti"
+      description="Behavior contatti per UO."
+      factory=".contatti.ContattiUnitaOrganizzativa"
+      provides=".contatti.IContattiUnitaOrganizzativa"
+      marker=".contatti.IContattiUnitaOrganizzativa"
+      />
   <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_step"
       title="Contatti"

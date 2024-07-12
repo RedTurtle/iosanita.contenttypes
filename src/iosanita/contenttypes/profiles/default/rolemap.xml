@@ -45,7 +45,6 @@
       <role name="Owner" />
       <role name="Contributor" />
     </permission>
-  </permissions>
 
   <permission acquire="True"
                 name="iosanita.contenttypes: Add UnitaOrganizzativa"

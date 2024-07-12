@@ -51,20 +51,17 @@
     <element value="volto.preview_image" />
     <element value="plone.relateditems" />
     <element remove="True"
-             value="design.plone.contenttypes.behavior.address_uo"
-    />
-    <element remove="True"
              value="design.plone.contenttypes.behavior.geolocation_uo"
     />
-    <element value="design.plone.contenttypes.behavior.contatti_uo" />
-    <element value="design.plone.contenttypes.behavior.argomenti" />
+    <element value="iosanita.contenttypes.behavior.contatti_uo" />
+    <element value="iosanita.contenttypes.behavior.argomenti" />
     <element value="plone.textindexer" />
-    <element value="design.plone.contenttypes.behavior.additional_help_infos" />
+    <element value="iosanita.contenttypes.behavior.additional_help_infos" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
-    <element value="collective.taxonomy.generated.tipologia_organizzazione" />
     <element value="iosanita.contenttypes.behavior.address_unita_organizzativa" />
+    <element value="collective.taxonomy.generated.tipologia_target" />
   </property>
 
   <!-- View information -->

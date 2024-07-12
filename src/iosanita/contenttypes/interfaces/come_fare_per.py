@@ -92,7 +92,7 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
     parliamo_di = schema.List(
         title=_("parliamo_di_label", default="Parliamo di"),
         description=_(
-            "parliamo_di_help",
+            "come_fare_per_parliamo_di_help",
             default="Indicazioni degli argomenti con cui il contenuto di pagina viene taggato.",
         ),
         value_type=schema.Choice(

@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from iosanita.contenttypes import _
-from iosanita.contenttypes.interfaces.step import IStep
-from iosanita.contenttypes.interfaces.persona import IPersona
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
@@ -11,6 +8,57 @@ from z3c.relationfield.schema import RelationList
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
+from plone.app.dexterity import textindexer
+from collective.volto.blocksfield.field import BlocksField
+
+from iosanita.contenttypes import _
+from iosanita.contenttypes.interfaces.step import IStep
+from iosanita.contenttypes.interfaces.persona import IPersona
+from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
+
+
+@provider(IFormFieldProvider)
+class IContattiUnitaOrganizzativa(model.Schema):
+    contact_info = RelationList(
+        title=_(
+            "contact_unita_organizzativa_info_label",
+            default="Punti di contatto dell'unità organizzativa",
+        ),
+        description=_(
+            "contact_unita_organizzativa_info_help",
+            default="Contatti dell'unità organizzativa.",
+        ),
+        required=True,
+        default=[],
+        value_type=RelationChoice(
+            title=_("Informazioni di contatto"),
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+    )
+    orario_pubblico = BlocksField(
+        title=_("orario_pubblico_label", default="Orario per il pubblico"),
+        description=_(
+            "orario_pubblico_help",
+            default="Indicare eventuali orari di accesso al pubblico",
+        ),
+        required=True,
+    )
+
+    form.widget(
+        "contact_info",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["PuntoDiContatto"],
+        },
+    )
+    model.fieldset(
+        "contatti",
+        label=_("contatti_label", default="Contatti"),
+        fields=["contact_info", "orario_pubblico"],
+    )
+
+    textindexer.searchable("orario_pubblico")
 
 
 @provider(IFormFieldProvider)
@@ -92,6 +140,15 @@ class IContattiPersona(model.Schema):
         label=_("contatti_label", default="Contatti"),
         fields=["contact_info"],
     )
+
+
+@implementer(IContattiUnitaOrganizzativa)
+@adapter(IUnitaOrganizzativa)
+class ContattiUnitaOrganizzativa(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context
 
 
 @implementer(IContattiStep)
