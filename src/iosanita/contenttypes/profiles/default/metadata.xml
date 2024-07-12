@@ -6,5 +6,6 @@
     <dependency>profile-plone.restapi:default</dependency>
     <dependency>profile-collective.taxonomy:default</dependency>
     <dependency>profile-collective.venue:default</dependency>
+    <dependency>profile-collective.z3cform.datagridfield:default</dependency>
   </dependencies>
 </metadata>
