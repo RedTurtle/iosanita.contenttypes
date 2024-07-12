@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from collective.geolocationbehavior.geolocation import IGeolocatable
-from iosanita.contenttypes.interfaces.struttura import IStruttura
 from iosanita.contenttypes import _
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
@@ -46,9 +45,7 @@ class GeolocatablePersona(object):
         self.context = context
 
 
-provider(IFormFieldProvider)
-
-
+@provider(IFormFieldProvider)
 class IGeolocatableStruttura(IGeolocatable):
     model.fieldset(
         "dove",
@@ -58,7 +55,7 @@ class IGeolocatableStruttura(IGeolocatable):
 
 
 @implementer(IGeolocatableStruttura)
-@adapter(IStruttura)
+@adapter(IDexterityContent)
 class GeolocatableStruttura(object):
     """ """
 

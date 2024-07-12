@@ -42,7 +42,6 @@
     <element value="plone.allowdiscussion" />
     <element value="plone.excludefromnavigation" />
     <element value="plone.shortname" />
-    <element value="iosanita.contenttypes.behavior.geolocation_struttura" />
     <element value="plone.ownership" />
     <element value="plone.publication" />
     <element value="plone.categorization" />
@@ -52,6 +51,7 @@
     <element value="volto.preview_image" />
     <element value="plone.relateditems" />
     <element value="iosanita.contenttypes.behavior.address_struttura" />
+    <element value="iosanita.contenttypes.behavior.geolocation_struttura" />
     <element value="iosanita.contenttypes.behavior.additional_help_infos" />
     <element value="plone.textindexer" />
     <element value="plone.translatable" />
