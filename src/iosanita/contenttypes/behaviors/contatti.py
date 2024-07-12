@@ -12,7 +12,6 @@ from plone.app.dexterity import textindexer
 from collective.volto.blocksfield.field import BlocksField
 
 from iosanita.contenttypes import _
-from iosanita.contenttypes.interfaces.step import IStep
 from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
 
@@ -155,7 +154,7 @@ class ContattiUnitaOrganizzativa(object):
 @adapter(IContattiStep)
 class ContattiStep(object):
     """ """
-    
+
     def __init__(self, context):
         self.context = context
 

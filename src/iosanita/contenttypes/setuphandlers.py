@@ -82,7 +82,8 @@ def post_install_taxonomy(context):
             "tipologia_punti_di_contatto",
         ]:
             api.portal.get_tool("portal_catalog").delIndex(index)
-    except:
+    # NOTE: non va bene, cosa è che si rompe
+    except:  # noqa
         pass
 
     for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):

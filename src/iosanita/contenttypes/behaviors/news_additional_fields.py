@@ -148,7 +148,12 @@ class INewsAdditionalFields(model.Schema):
     model.fieldset(
         "correlati",
         label=_("correlati_label", default="Contenuti collegati"),
-        fields=["a_cura_di_persone", "notizie_correlate", "servizi_correlati", "documenti"],
+        fields=[
+            "a_cura_di_persone",
+            "notizie_correlate",
+            "servizi_correlati",
+            "documenti",
+        ],
     )
     # custom fieldsets and order
     form.order_before(descrizione_estesa="ILeadImageBehavior.image")
