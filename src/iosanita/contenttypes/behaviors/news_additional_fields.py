@@ -18,10 +18,12 @@ from zope.interface import provider
 @provider(IFormFieldProvider)
 class INewsAdditionalFields(model.Schema):
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa", default="Descrizione estesa"),
+        title=_(
+            "new_additional_fields_descrizione_estesa", default="Descrizione estesa"
+        ),
         required=True,
         description=_(
-            "descrizione_estesa_help",
+            "new_additional_fields_descrizione_estesa_help",
             default="Descrizione dettagliata e completa.",
         ),
     )
@@ -146,7 +148,12 @@ class INewsAdditionalFields(model.Schema):
     model.fieldset(
         "correlati",
         label=_("correlati_label", default="Contenuti collegati"),
-        fields=["a_cura_di_persone", "notizie_correlate", "servizi_correlati", "documenti"],
+        fields=[
+            "a_cura_di_persone",
+            "notizie_correlate",
+            "servizi_correlati",
+            "documenti",
+        ],
     )
     # custom fieldsets and order
     form.order_before(descrizione_estesa="ILeadImageBehavior.image")

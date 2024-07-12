@@ -1,0 +1,814 @@
+#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+#SOME DESCRIPTIVE TITLE.
+#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-07-12 10:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: iosanita.contenttypes\n"
+
+#: iosanita/contenttypes/behaviors/configure.zcml:103
+msgid "Address Event"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:111
+msgid "Address Persona"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:119
+msgid "Address Unita Organizzativa"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:20
+msgid "Adds fields."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:30
+msgid "Argomenti"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/argomenti.py:28
+msgid "Argomenti correlati"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:103
+msgid "Behavior address per Event."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:111
+msgid "Behavior address per Persona."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:119
+msgid "Behavior address per Unita Organizzativa."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:127
+msgid "Behavior contatti per Event."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:160
+msgid "Behavior contatti per Persona."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:95
+msgid "Behavior contatti per Step."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:87
+msgid "Behavior contatti per UO."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:135
+msgid "Behavior geolocatable per Event."
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:143
+msgid "Behavior geolocatable per Persona."
+msgstr ""
+
+#: iosanita/contenttypes/vocabularies/mockup.py:26
+msgid "Canon 5D IV"
+msgstr ""
+
+#: iosanita/contenttypes/profiles/default/types/ComeFarePer.xml
+msgid "Come fare per"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:87
+msgid "Contatti"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:79
+msgid "Descrizione estesa"
+msgstr ""
+
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:79
+msgid "Documenti pubblici"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/evento.py:158
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:116
+msgid "Documento"
+msgstr ""
+
+#: iosanita/contenttypes/profiles/default/types/ComeFarePer.xml
+#: iosanita/contenttypes/profiles/default/types/Persona.xml
+#: iosanita/contenttypes/profiles/default/types/Step.xml
+msgid "Edit"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/evento.py:118
+msgid "Event"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:135
+msgid "Geolocatable"
+msgstr ""
+
+#: iosanita/contenttypes/vocabularies/mockup.py:30
+msgid "Giovanni"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/contatti.py:34
+msgid "Informazioni di contatto"
+msgstr ""
+
+#: iosanita/contenttypes/configure.zcml:31
+msgid "Installs the iosanita.contenttypes add-on."
+msgstr ""
+
+#: iosanita/contenttypes/configure.zcml:40
+msgid "Io sanita: Content-types (behaviors)"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:20
+msgid "Metadati evento"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:152
+msgid "Metadati news"
+msgstr ""
+
+#. Default: "Nome e cognome"
+#: iosanita/contenttypes/restapi/services/types/get.py:130
+msgid "Nome e Cognome"
+msgstr ""
+
+#: iosanita/contenttypes/interfaces/persona.py:90
+msgid "Organizzazione di riferimento"
+msgstr ""
+
+#: iosanita/contenttypes/vocabularies/mockup.py:29
+msgid "Paperino"
+msgstr ""
+
+#: iosanita/contenttypes/profiles/default/types/Persona.xml
+msgid "Persona pubblica"
+msgstr ""
+
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:61
+msgid "Persone della struttura"
+msgstr ""
+
+#: iosanita/contenttypes/vocabularies/mockup.py:27
+msgid "Pippo"
+msgstr ""
+
+#: iosanita/contenttypes/vocabularies/mockup.py:28
+msgid "Pluto"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/contatti.py:92
+msgid "Punti di contatto"
+msgstr ""
+
+#: iosanita/contenttypes/configure.zcml:40
+msgid "Registers taxonomies."
+msgstr ""
+
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:43
+msgid "Responsabile"
+msgstr ""
+
+#: iosanita/contenttypes/vocabularies/mockup.py:25
+msgid "Sony Aplha 7R III"
+msgstr ""
+
+#: iosanita/contenttypes/profiles/default/types/Step.xml
+msgid "Step"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/evento.py:145
+msgid "Struttura"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/strutture_correlate.py:21
+msgid "Struttura correlata"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:60
+msgid "Strutture correlate"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:30
+msgid "Tassonomia argomenti"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:40
+msgid "Tassonomia argomenti evento"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:50
+msgid "Tassonomia argomenti news"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/configure.zcml:70
+msgid "Ulteriori campi aiuto testuali"
+msgstr ""
+
+#: iosanita/contenttypes/configure.zcml:49
+msgid "Uninstalls the iosanita.contenttypes add-on."
+msgstr ""
+
+#: iosanita/contenttypes/profiles/default/types/UnitaOrganizzativa.xml
+msgid "Unita Organizzativa"
+msgstr ""
+
+#: iosanita/contenttypes/profiles/default/types/ComeFarePer.xml
+#: iosanita/contenttypes/profiles/default/types/Persona.xml
+#: iosanita/contenttypes/profiles/default/types/Step.xml
+msgid "View"
+msgstr ""
+
+#. Default: "Descrizione testuale dei principali destinatari dell'Evento"
+#: iosanita/contenttypes/behaviors/evento.py:34
+msgid "a_chi_si_rivolge_help"
+msgstr ""
+
+#. Default: "A chi è rivolto"
+#: iosanita/contenttypes/behaviors/evento.py:32
+#: iosanita/contenttypes/interfaces/come_fare_per.py:38
+msgid "a_chi_si_rivolge_label"
+msgstr ""
+
+#. Default: "Seleziona l'ufficio di comunicazione responsabile di questa notizia/comunicato stampa."
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:41
+msgid "a_cura_di_help"
+msgstr ""
+
+#. Default: "A cura di"
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:40
+msgid "a_cura_di_label"
+msgstr ""
+
+#. Default: "Seleziona una lista di persone dell'amministrazione citate in questa notizia/comunicato stampa. Questa informazione verrà mostrata nella sezione \"A cura di\"."
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:53
+msgid "a_cura_di_persone_help"
+msgstr ""
+
+#. Default: "Persone"
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:52
+msgid "a_cura_di_persone_label"
+msgstr ""
+
+#. Default: "Link agli eventi figlio (solo se l'evento in questione è evento genitore)."
+#: iosanita/contenttypes/behaviors/evento.py:126
+msgid "appuntamenti_help"
+msgstr ""
+
+#. Default: "Categorizzazione"
+#: iosanita/contenttypes/behaviors/evento.py:250
+msgid "appuntamenti_label"
+msgstr ""
+
+#. Default: "Solo per persona politica: testo descrittivo che riporta la biografia della persona."
+#: iosanita/contenttypes/interfaces/persona.py:67
+msgid "biografia_help"
+msgstr ""
+
+#. Default: "Biografia"
+#: iosanita/contenttypes/interfaces/persona.py:66
+msgid "biografia_label"
+msgstr ""
+
+#. Default: "Descrizione testuale dei principali partecipanti."
+#: iosanita/contenttypes/behaviors/evento.py:104
+msgid "chi_partecipa_help"
+msgstr ""
+
+#. Default: "Parteciperanno"
+#: iosanita/contenttypes/behaviors/evento.py:102
+msgid "chi_partecipa_label"
+msgstr ""
+
+#. Default: "Circoscrizione"
+#: iosanita/contenttypes/behaviors/address.py:40
+msgid "circoscrizione"
+msgstr ""
+
+#. Default: "A chi si rivolge questo servizio."
+#: iosanita/contenttypes/interfaces/come_fare_per.py:40
+msgid "come_fare_a_chi_si_rivolge_help"
+msgstr ""
+
+#. Default: "Descrizione estesa."
+#: iosanita/contenttypes/interfaces/come_fare_per.py:30
+msgid "come_fare_per_descrizione_estesa_help"
+msgstr ""
+
+#. Default: "Panoramica"
+#: iosanita/contenttypes/interfaces/come_fare_per.py:29
+msgid "come_fare_per_descrizione_estesa_label"
+msgstr ""
+
+#. Default: "Indicazioni degli argomenti con cui il contenuto di pagina viene taggato."
+#: iosanita/contenttypes/interfaces/come_fare_per.py:94
+msgid "come_fare_per_parliamo_di_help"
+msgstr ""
+
+#. Default: "Descrizione del ruolo e dei compiti della persona."
+#: iosanita/contenttypes/interfaces/persona.py:99
+msgid "competenze_help"
+msgstr ""
+
+#. Default: "Competenze"
+#: iosanita/contenttypes/interfaces/persona.py:98
+msgid "competenze_label"
+msgstr ""
+
+#. Default: "Punti di contatto della persona."
+#: iosanita/contenttypes/behaviors/contatti.py:118
+msgid "contact_info_help"
+msgstr ""
+
+#. Default: "Contatti"
+#: iosanita/contenttypes/behaviors/contatti.py:67
+msgid "contact_info_label"
+msgstr ""
+
+#. Default: "Contatti dell'unità organizzativa."
+#: iosanita/contenttypes/behaviors/contatti.py:27
+msgid "contact_unita_organizzativa_info_help"
+msgstr ""
+
+#. Default: "Punti di contatto dell'unità organizzativa"
+#: iosanita/contenttypes/behaviors/contatti.py:23
+msgid "contact_unita_organizzativa_info_label"
+msgstr ""
+
+#. Default: "Relazione con i punti di contatto dell'evento."
+#: iosanita/contenttypes/behaviors/contatti.py:85
+msgid "contatti_event_contact_info_help"
+msgstr ""
+
+#. Default: "Punti di contatto"
+#: iosanita/contenttypes/behaviors/contatti.py:81
+msgid "contatti_event_contact_info_label"
+msgstr ""
+
+#. Default: "Contatti"
+#: iosanita/contenttypes/behaviors/contatti.py:57
+#: iosanita/contenttypes/behaviors/evento.py:230
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:130
+msgid "contatti_label"
+msgstr ""
+
+#. Default: "Punti di contatto"
+#: iosanita/contenttypes/behaviors/contatti.py:114
+msgid "contatti_persona_contact_info_label"
+msgstr ""
+
+#. Default: "I contatti per questo step."
+#: iosanita/contenttypes/behaviors/contatti.py:71
+msgid "contatti_step_contact_info_help"
+msgstr ""
+
+#. Default: "Contenuti collegati"
+#: iosanita/contenttypes/behaviors/evento.py:256
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:157
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:136
+msgid "correlati_label"
+msgstr ""
+
+#. Default: "Competenze"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:113
+msgid "cosa_fa_label"
+msgstr ""
+
+#. Default: "Cos'è"
+#: iosanita/contenttypes/behaviors/evento.py:220
+msgid "cose_label"
+msgstr ""
+
+#. Default: "Costi"
+#: iosanita/contenttypes/behaviors/evento.py:227
+msgid "costi_label"
+msgstr ""
+
+#. Default: "Allega un file contenente il curriculum vitae della persona. Se ha più file da allegare, utilizza questo campo per quello principale e gli altri mettili dentro alla cartella \"Curriculum vitae\" che troverai dentro alla Persona."
+#: iosanita/contenttypes/interfaces/persona.py:119
+msgid "curriculum_vitae_help"
+msgstr ""
+
+#. Default: "Curriculum vitae"
+#: iosanita/contenttypes/interfaces/persona.py:117
+msgid "curriculum_vitae_label"
+msgstr ""
+
+#. Default: "Descrizione estesa"
+#: iosanita/contenttypes/behaviors/descrizione_estesa.py:16
+msgid "descrizione_estesa"
+msgstr ""
+
+#. Default: "Descrizione dettagliata e completa."
+#: iosanita/contenttypes/behaviors/descrizione_estesa.py:18
+msgid "descrizione_estesa_help"
+msgstr ""
+
+#. Default: "Link alle schede documenti e allegati di supporto all'evento. Per poter scaricare direttamente un file occorre inserirlo all'interno della cartella 'Allegati'."
+#: iosanita/contenttypes/behaviors/evento.py:153
+msgid "documenti_correlati_help"
+msgstr ""
+
+#. Default: "Seleziona la lista dei documenti di supporto."
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:111
+msgid "documenti_help"
+msgstr ""
+
+#. Default: "Documenti"
+#: iosanita/contenttypes/interfaces/persona.py:158
+msgid "documenti_label"
+msgstr ""
+
+#. Default: "Documenti pubblici importanti, collegati a questa Unità Organizzativa"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:74
+msgid "documenti_pubblici_help"
+msgstr ""
+
+#. Default: "Documenti pubblici"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:72
+msgid "documenti_pubblici_label"
+msgstr ""
+
+#. Default: "Seleziona una struttura o punto di contatto."
+#: iosanita/contenttypes/interfaces/step.py:27
+msgid "dove_help"
+msgstr ""
+
+#. Default: "Dove"
+#: iosanita/contenttypes/behaviors/address.py:56
+#: iosanita/contenttypes/behaviors/evento.py:261
+#: iosanita/contenttypes/behaviors/geolocation.py:16
+msgid "dove_label"
+msgstr ""
+
+#. Default: "Cosa è"
+#: iosanita/contenttypes/behaviors/evento.py:23
+msgid "event_descrizione_estesa"
+msgstr ""
+
+#. Default: "Seleziona gli eventi correlati."
+#: iosanita/contenttypes/behaviors/evento.py:166
+msgid "eventi_correlati_help"
+msgstr ""
+
+#. Default: "Descrizione dettagliata e completa."
+#: iosanita/contenttypes/behaviors/evento.py:25
+msgid "evento_descrizione_estesa_help"
+msgstr ""
+
+#. Default: "Un evento può essere parte di un altro evento definito come \"genitore\""
+#: iosanita/contenttypes/behaviors/evento.py:113
+msgid "evento_genitore_help"
+msgstr ""
+
+#. Default: "Categorizzazione"
+#: iosanita/contenttypes/behaviors/evento.py:245
+msgid "evento_genitore_label"
+msgstr ""
+
+#. Default: "Foto da mostrare della persona. La dimensione suggerita è 100x180px."
+#: iosanita/contenttypes/interfaces/persona.py:40
+msgid "foto_persona_help"
+msgstr ""
+
+#. Default: "Foto della persona"
+#: iosanita/contenttypes/interfaces/persona.py:38
+msgid "foto_persona_label"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/address.py:41
+msgid "help_circoscrizione"
+msgstr ""
+
+#. Default: "Inserisci il nome della sede, se non è presente tra quelle del sito."
+#: iosanita/contenttypes/behaviors/address.py:20
+msgid "help_nome_sede"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/address.py:35
+msgid "help_quartiere"
+msgstr ""
+
+#. Default: "Indicazione degli incarichi della persona all'interno dell'ASL."
+#: iosanita/contenttypes/interfaces/persona.py:49
+msgid "incarichi_help"
+msgstr ""
+
+#. Default: "Incarichi"
+#: iosanita/contenttypes/interfaces/persona.py:48
+msgid "incarichi_label"
+msgstr ""
+
+#. Default: "Informazioni aggiuntivie sul luogo."
+#: iosanita/contenttypes/behaviors/evento.py:190
+msgid "informazioni_aggiuntive_luogo_help"
+msgstr ""
+
+#. Default: "Informazioni aggiuntive"
+#: iosanita/contenttypes/behaviors/evento.py:186
+msgid "informazioni_aggiuntive_luogo_label"
+msgstr ""
+
+#. Default: "Ulteriori informazioni"
+#: iosanita/contenttypes/behaviors/additional_help_infos.py:26
+#: iosanita/contenttypes/interfaces/come_fare_per.py:128
+msgid "informazioni_label"
+msgstr ""
+
+#: iosanita/contenttypes/configure.zcml:31
+msgid "iosanita.contenttypes"
+msgstr ""
+
+#: iosanita/contenttypes/configure.zcml:49
+msgid "iosanita.contenttypes (uninstall)"
+msgstr ""
+
+#. Default: "Descrizione estesa"
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:21
+msgid "new_additional_fields_descrizione_estesa"
+msgstr ""
+
+#. Default: "Descrizione dettagliata e completa."
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:25
+msgid "new_additional_fields_descrizione_estesa_help"
+msgstr ""
+
+#. Default: "Nome sede"
+#: iosanita/contenttypes/behaviors/address.py:19
+msgid "nome_sede"
+msgstr ""
+
+#. Default: "Seleziona una lista di notizie correlate a questa."
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:66
+msgid "notizie_correlate_help"
+msgstr ""
+
+#. Default: "Notizie correlate"
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:65
+msgid "notizie_correlate_label"
+msgstr ""
+
+#. Default: "Numero progressivo del comunicato stampa"
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:32
+msgid "numero_progressivo_cs_label"
+msgstr ""
+
+#. Default: "Orari durante i quali è possibile incontrare la persona descritta, se effettua ricevimento."
+#: iosanita/contenttypes/interfaces/persona.py:58
+msgid "orari_di_ricevimento_help"
+msgstr ""
+
+#. Default: "Orari di ricevimento"
+#: iosanita/contenttypes/interfaces/persona.py:57
+msgid "orari_di_ricevimento_label"
+msgstr ""
+
+#. Default: "Indicare eventuali orari di accesso al pubblico"
+#: iosanita/contenttypes/behaviors/contatti.py:40
+msgid "orario_pubblico_help"
+msgstr ""
+
+#. Default: "Orario per il pubblico"
+#: iosanita/contenttypes/behaviors/contatti.py:39
+msgid "orario_pubblico_label"
+msgstr ""
+
+#. Default: "Se l'evento non è organizzato direttamente dal comune oppure ha anche un organizzatore esterno, indicare il nome del contatto."
+#: iosanita/contenttypes/behaviors/evento.py:64
+msgid "organizzato_da_esterno_help"
+msgstr ""
+
+#. Default: "Organizzatore"
+#: iosanita/contenttypes/behaviors/evento.py:62
+msgid "organizzato_da_esterno_label"
+msgstr ""
+
+#. Default: "Indicazione di chi ha organizzato l'evento. Se si tratta di un'Unità organizzativa dell'ASL, includere collegamento alla relativa pagina."
+#: iosanita/contenttypes/behaviors/evento.py:56
+msgid "organizzato_da_interno_help"
+msgstr ""
+
+#. Default: "Organizzato da"
+#: iosanita/contenttypes/behaviors/evento.py:52
+msgid "organizzato_da_interno_label"
+msgstr ""
+
+#. Default: "Seleziona una lista di organizzazioni a cui la persona appartiene."
+#: iosanita/contenttypes/interfaces/persona.py:84
+msgid "organizzazione_riferimento_help"
+msgstr ""
+
+#. Default: "Unità organizzativa di appartenenza"
+#: iosanita/contenttypes/interfaces/persona.py:80
+msgid "organizzazione_riferimento_label"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/evento.py:176
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:88
+msgid "parliamo_di_help"
+msgstr ""
+
+#. Default: "Parliamo di"
+#: iosanita/contenttypes/behaviors/evento.py:175
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:87
+#: iosanita/contenttypes/interfaces/come_fare_per.py:93
+msgid "parliamo_di_label"
+msgstr ""
+
+#. Default: "Chi partecipa"
+#: iosanita/contenttypes/behaviors/evento.py:240
+msgid "partecipanti_label"
+msgstr ""
+
+#. Default: "Link a persone dell'amministrazione che interverranno all'evento"
+#: iosanita/contenttypes/behaviors/evento.py:95
+msgid "parteciperanno_help"
+msgstr ""
+
+#. Default: "Parteciperanno (Persone)"
+#: iosanita/contenttypes/behaviors/evento.py:91
+msgid "parteciperanno_label"
+msgstr ""
+
+#. Default: "Indicare l'ente che supporta l'evento, se presente."
+#: iosanita/contenttypes/behaviors/evento.py:75
+msgid "patrocinato_da_help"
+msgstr ""
+
+#. Default: "Patrocinato da"
+#: iosanita/contenttypes/behaviors/evento.py:73
+msgid "patrocinato_da_label"
+msgstr ""
+
+#. Default: "Persone"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:125
+msgid "persone_label"
+msgstr ""
+
+#. Default: "Seleziona la lista delle persone che compongono la struttura."
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:64
+msgid "persone_struttura_help"
+msgstr ""
+
+#. Default: "Persone che compongono la struttura"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:56
+msgid "persone_struttura_label"
+msgstr ""
+
+#. Default: "Costo"
+#: iosanita/contenttypes/behaviors/evento.py:41
+msgid "prezzo"
+msgstr ""
+
+#. Default: "Eventuale costo dell'evento (se ci sono uno o più biglietti), con link all'acquisto se disponibile"
+#: iosanita/contenttypes/behaviors/evento.py:43
+msgid "prezzo_help"
+msgstr ""
+
+#. Default: "Quartiere"
+#: iosanita/contenttypes/behaviors/address.py:34
+msgid "quartiere"
+msgstr ""
+
+#. Default: "Selezionare il/i responsabile/i della struttura."
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:46
+msgid "responsabile_help"
+msgstr ""
+
+#. Default: "Responsabile"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:41
+msgid "responsabile_label"
+msgstr ""
+
+#. Default: "Ruolo"
+#: iosanita/contenttypes/interfaces/persona.py:149
+msgid "ruolo_label"
+msgstr ""
+
+#. Default: "Seleziona una lista di servizi correlati."
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:77
+msgid "servizi_correlati_help"
+msgstr ""
+
+#. Default: "Servizi correlati"
+#: iosanita/contenttypes/behaviors/news_additional_fields.py:76
+msgid "servizi_correlati_label"
+msgstr ""
+
+#. Default: "Indica un eventuale sottotitolo/titolo alternativo."
+#: iosanita/contenttypes/interfaces/come_fare_per.py:21
+#: iosanita/contenttypes/interfaces/persona.py:30
+msgid "sottotitolo_help"
+msgstr ""
+
+#. Default: "Sottotitolo"
+#: iosanita/contenttypes/interfaces/come_fare_per.py:20
+#: iosanita/contenttypes/interfaces/persona.py:29
+msgid "sottotitolo_label"
+msgstr ""
+
+#. Default: "Lista degli sponsor dell'evento."
+#: iosanita/contenttypes/behaviors/evento.py:84
+msgid "sponsor_help"
+msgstr ""
+
+#. Default: "Sponsor"
+#: iosanita/contenttypes/behaviors/evento.py:82
+msgid "sponsor_label"
+msgstr ""
+
+#: iosanita/contenttypes/behaviors/address.py:113
+msgid "structure_relation_label"
+msgstr ""
+
+#. Default: "Dove"
+#: iosanita/contenttypes/behaviors/address.py:130
+msgid "struttura_label"
+msgstr ""
+
+#. Default: "Seleziona la lista delle strutture correlate."
+#: iosanita/contenttypes/behaviors/strutture_correlate.py:26
+msgid "strutture_correlate_help"
+msgstr ""
+
+#. Default: "Link all'eventuale scheda della struttura dell'ASL in cui si svolge l'evento."
+#: iosanita/contenttypes/behaviors/evento.py:140
+msgid "strutture_help"
+msgstr ""
+
+#. Default: "Structure"
+#: iosanita/contenttypes/behaviors/address.py:111
+msgid "strutura_label"
+msgstr ""
+
+#. Default: "Contenuti collegati"
+#: iosanita/contenttypes/behaviors/strutture_correlate.py:42
+msgid "sturetture_correlate_struttura_label"
+msgstr ""
+
+#. Default: "Subtitle"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:24
+msgid "subtitle_label"
+msgstr ""
+
+#. Default: "Seleziona una lista di argomenti d'interesse per questo contenuto."
+#: iosanita/contenttypes/behaviors/argomenti.py:22
+msgid "tassonomia_argomenti_help"
+msgstr ""
+
+#. Default: "Argomenti"
+#: iosanita/contenttypes/behaviors/argomenti.py:21
+msgid "tassonomia_argomenti_label"
+msgstr ""
+
+#. Default: "Descrizione del passo della procedura."
+#: iosanita/contenttypes/interfaces/step.py:15
+msgid "testo_help"
+msgstr ""
+
+#. Default: "Testo"
+#: iosanita/contenttypes/interfaces/step.py:14
+msgid "testo_label"
+msgstr ""
+
+#. Default: "Ulteriori informazioni"
+#: iosanita/contenttypes/behaviors/additional_help_infos.py:16
+msgid "ulteriori_informazioni"
+msgstr ""
+
+#. Default: "Ulteriori informazioni non contemplate dai campi precedenti."
+#: iosanita/contenttypes/behaviors/additional_help_infos.py:17
+msgid "ulteriori_informazioni_help"
+msgstr ""
+
+#. Default: "Struttura"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:118
+msgid "unita_organizzativa_struttura_label"
+msgstr ""
+
+#. Default: "Descrizione dei compiti assegnati alla struttura."
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:33
+msgid "uo_competenze_help"
+msgstr ""
+
+#. Default: "Competenze"
+#: iosanita/contenttypes/interfaces/unita_organizzativa.py:32
+msgid "uo_competenze_label"
+msgstr ""
+
+#. Default: "Utenti"
+#: iosanita/contenttypes/interfaces/come_fare_per.py:121
+msgid "utenti_label"
+msgstr ""

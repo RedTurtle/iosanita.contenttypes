@@ -77,7 +77,14 @@
       provides=".descrizione_estesa.IDescrizioneEstesa"
       marker=".descrizione_estesa.IDescrizioneEstesa"
       />
-
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti_uo"
+      title="Contatti"
+      description="Behavior contatti per UO."
+      factory=".contatti.ContattiUnitaOrganizzativa"
+      provides=".contatti.IContattiUnitaOrganizzativa"
+      marker=".contatti.IContattiUnitaOrganizzativa"
+      />
   <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_step"
       title="Contatti"
@@ -101,6 +108,14 @@
       factory=".address.AddressPersona"
       provides=".address.IAddressPersona"
       marker=".address.IAddressPersona"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.address_unita_organizzativa"
+      title="Address Unita Organizzativa"
+      description="Behavior address per Unita Organizzativa."
+      factory=".address.AddressUnitaOrganizzativa"
+      provides=".address.IAddressUnitaOrganizzativa"
+      marker=".address.IAddressUnitaOrganizzativa"
       />
   <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_event"

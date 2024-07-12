@@ -748,7 +748,7 @@ msgstr ""
 #. Default: "Structure"
 #: iosanita/contenttypes/behaviors/address.py:111
 msgid "strutura_label"
-msgstr ""
+msgstr "Struttura"
 
 #. Default: "Contenuti collegati"
 #: iosanita/contenttypes/behaviors/strutture_correlate.py:42
@@ -758,7 +758,7 @@ msgstr ""
 #. Default: "Subtitle"
 #: iosanita/contenttypes/interfaces/unita_organizzativa.py:24
 msgid "subtitle_label"
-msgstr ""
+msgstr "Sottotitolo"
 
 #. Default: "Seleziona una lista di argomenti d'interesse per questo contenuto."
 #: iosanita/contenttypes/behaviors/argomenti.py:22

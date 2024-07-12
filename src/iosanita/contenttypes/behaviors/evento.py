@@ -20,10 +20,10 @@ class IEvento(model.Schema):
     """Marker inteerface for content type Evento"""
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa", default="Cosa è"),
+        title=_("event_descrizione_estesa", default="Cosa è"),
         required=True,
         description=_(
-            "descrizione_estesa_help",
+            "evento_descrizione_estesa_help",
             default="Descrizione dettagliata e completa.",
         ),
     )

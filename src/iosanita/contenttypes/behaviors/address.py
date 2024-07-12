@@ -9,6 +9,9 @@ from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
+from z3c.relationfield.schema import RelationChoice, RelationList
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.autoform import directives as form
 
 
 class IAddressNomeSede(model.Schema):
@@ -87,6 +90,43 @@ class IAddressPersona(IAddress, IAddressNomeSede, IAddressLocal):
 
     model.fieldset(
         "dove",
+        label=_("dove_label", default="Dove"),
+        fields=[
+            "nome_sede",
+            "street",
+            "zip_code",
+            "city",
+            "quartiere",
+            "circoscrizione",
+            "country",
+        ],
+    )
+
+
+@provider(IFormFieldProvider)
+class IAddressUnitaOrganizzativa(IAddress, IAddressNomeSede, IAddressLocal):
+    """"""
+
+    structure = RelationList(
+        title=_("strutura_label", default="Structure"),
+        value_type=RelationChoice(
+            title=_("structure_relation_label"),
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+        required=False,
+        default=[],
+    )
+    form.widget(
+        "structure",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "maximumSelectionSize": 1,
+            "selectableTypes": ["Struttura"],
+        },
+    )
+    model.fieldset(
+        "dove",
         label=_("struttura_label", default="Dove"),
         fields=[
             "nome_sede",
@@ -96,6 +136,7 @@ class IAddressPersona(IAddress, IAddressNomeSede, IAddressLocal):
             "quartiere",
             "circoscrizione",
             "country",
+            "structure",
         ],
     )
 
@@ -121,6 +162,15 @@ class AddressEvent(object):
 @implementer(IAddressPersona)
 @adapter(IDexterityContent)
 class AddressPersona(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context
+
+
+@implementer(IAddressUnitaOrganizzativa)
+@adapter(IDexterityContent)
+class AddressUnitaOrganizzativa(object):
     """ """
 
     def __init__(self, context):
