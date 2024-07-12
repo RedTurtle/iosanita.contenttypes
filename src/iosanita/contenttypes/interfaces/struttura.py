@@ -29,7 +29,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         required=False,
         description=_(
             "evento_descrizione_estesa_help",
-            default="Descrizione dettagliata e completa.",
+            default="Descrizione più estesa della struttura con riferimento alle principali attività sanitarie svolte.",
         ),
     )
 
@@ -38,7 +38,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         required=True,
         description=_(
             "a_chi_si_rivolge_help",
-            default="A chi si rivolge questo servizio.",
+            default="Descrizione testuale degli utenti dell'ASL a cui è rivolta la struttura.",
         ),
     )
 
@@ -117,7 +117,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         missing_value=(),
         description=_(
             "strutture_correlate_help",
-            default="Seleziona la lista delle strutture correlate.",
+            default="Elenco di altre strutture simili o collegate.",
         ),
     )
     form.widget(
