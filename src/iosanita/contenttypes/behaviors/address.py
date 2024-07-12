@@ -159,6 +159,7 @@ class IAddressStruttura(IAddress, IAddressNomeSede, IAddressLocal):
         ],
     )
 
+
 @implementer(IAddressVenue)
 @adapter(IDexterityContent)
 class AddressVenue(object):

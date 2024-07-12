@@ -61,7 +61,6 @@ class IContattiUnitaOrganizzativa(model.Schema):
     textindexer.searchable("orario_pubblico")
 
 
-
 @provider(IFormFieldProvider)
 class IContattiPersona(model.Schema):
     contact_info = RelationList(
@@ -180,7 +179,6 @@ class ContattiStep(object):
 
     def __init__(self, context):
         self.context = context
-
 
 
 @implementer(IContattiPersona)

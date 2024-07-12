@@ -47,6 +47,8 @@ class GeolocatablePersona(object):
 
 
 provider(IFormFieldProvider)
+
+
 class IGeolocatableStruttura(IGeolocatable):
     model.fieldset(
         "dove",

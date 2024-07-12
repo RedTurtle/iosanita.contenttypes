@@ -182,9 +182,7 @@ SUBFOLDERS_MAPPING = {
             {
                 "id": "multimedia",
                 "title": "Multimedia",
-                "allowed_types": (
-                    "Link",
-                ),
+                "allowed_types": ("Link",),
             },
         ],
     },
