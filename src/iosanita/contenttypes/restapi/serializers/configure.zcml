@@ -1,0 +1,9 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
+
+  <adapter factory=".unita_organizzativa.UOJSONSummarySerializer" />
+  <adapter factory=".unita_organizzativa.UOSerializer" />
+
+</configure>
