@@ -15,7 +15,7 @@ class IoSanitaSettingsControlpanel(IControlpanel):
 
 
 class IIoSanitaSettings(Interface):
-    
+
     lead_image_dimension = List(
         title=_(
             "lead_image_dimension_label",
