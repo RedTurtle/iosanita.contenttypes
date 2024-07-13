@@ -62,7 +62,10 @@ class PersonaSerializer(SerializeToJson):
             version=version, include_items=include_items
         )
         
+        if getattr(self.context, "incarichi", ""):
+            result["ruolo"] = getattr(self.context, "incarichi").raw
+            
         result["organizzazione_riferimento"] = self.get_service_backreferences("UnitaOrganizzativa")
-        result["structure_backreferences"] = self.get_service_backreferences("Struttura")
+        result["strutture_in_cui_opera"] = self.get_service_backreferences("Struttura")
 
         return result

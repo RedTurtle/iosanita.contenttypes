@@ -7,6 +7,18 @@
  <index name="rassegna" meta_type="BooleanIndex">
     <indexed_attr value="rassegna"/>
  </index>
+<index name="news_people" meta_type="KeywordIndex">
+  <indexed_attr value="news_people"/>
+ </index>
+<index name="news_uo" meta_type="KeywordIndex">
+  <indexed_attr value="news_uo"/>
+ </index>
+<index name="news_service" meta_type="KeywordIndex">
+  <indexed_attr value="news_service"/>
+ </index>
+<index name="news_venue" meta_type="KeywordIndex">
+  <indexed_attr value="news_venue"/>
+ </index>
  
   <!-- metadata -->
   <column value="event_location" />
