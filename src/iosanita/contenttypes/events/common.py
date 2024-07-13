@@ -103,41 +103,15 @@ SUBFOLDERS_MAPPING = {
     "Persona": {
         "content": [
             {
-                "id": "foto-e-attivita-politica",
-                "title": "Foto e attività politica",
-                "allowed_types": ("Image",),
-            },
-            {
                 "id": "curriculum-vitae",
                 "title": "Curriculum vitae",
                 "allowed_types": ("File",),
             },
             {
-                "id": "situazione-patrimoniale",
-                "title": "Situazione patrimoniale",
-                "allowed_types": ("File",),
+                "id": "multimedia",
+                "title": "Multimedia",
+                "allowed_types": ("Image", "Video"),
             },
-            {
-                "id": "dichiarazione-dei-redditi",
-                "title": "Dichiarazione dei redditi",
-                "allowed_types": ("File",),
-            },
-            {
-                "id": "spese-elettorali",
-                "title": "Spese elettorali",
-                "allowed_types": ("File",),
-            },
-            {
-                "id": "variazione-situazione-patrimoniale",
-                "title": "Variazione situazione patrimoniale",
-                "allowed_types": ("File",),
-            },
-            {
-                "id": "altre-cariche",
-                "title": "Altre cariche",
-                "allowed_types": ("File",),
-            },
-            {"id": "incarichi", "title": "Incarichi", "allowed_types": ("Incarico",)},
             {
                 "id": "altri-documenti",
                 "title": "Altri documenti",

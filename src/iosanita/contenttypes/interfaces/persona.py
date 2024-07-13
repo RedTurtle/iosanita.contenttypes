@@ -72,27 +72,27 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         required=False,
     )
 
-    # Questo campo per direttive e richieste viene nascosto nella form
-    # Lo si tiene perche si vuole evitare di perder dati tra le migrazioni
-    # e magari non poter piu' usare la feature collegata, ossia
-    # la check persone, in quanto relazioni potrebbero rompersi o perdersi
-    organizzazione_riferimento = RelationList(
-        title=_(
-            "organizzazione_riferimento_label",
-            default="Unità organizzativa di appartenenza",
-        ),
-        description=_(
-            "organizzazione_riferimento_help",
-            default="Seleziona una lista di organizzazioni a cui la persona"
-            " appartiene.",
-        ),
-        value_type=RelationChoice(
-            title=_("Organizzazione di riferimento"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
-        default=[],
-        required=False,
-    )
+    # # Questo campo per direttive e richieste viene nascosto nella form
+    # # Lo si tiene perche si vuole evitare di perder dati tra le migrazioni
+    # # e magari non poter piu' usare la feature collegata, ossia
+    # # la check persone, in quanto relazioni potrebbero rompersi o perdersi
+    # organizzazione_riferimento = RelationList(
+    #     title=_(
+    #         "organizzazione_riferimento_label",
+    #         default="Unità organizzativa di appartenenza",
+    #     ),
+    #     description=_(
+    #         "organizzazione_riferimento_help",
+    #         default="Seleziona una lista di organizzazioni a cui la persona"
+    #         " appartiene.",
+    #     ),
+    #     value_type=RelationChoice(
+    #         title=_("Organizzazione di riferimento"),
+    #         vocabulary="plone.app.vocabularies.Catalog",
+    #     ),
+    #     default=[],
+    #     required=False,
+    # )
 
     competenze = BlocksField(
         title=_("competenze_label", default="Competenze"),
@@ -100,7 +100,7 @@ class IPersona(model.Schema, IIosanitaContenttypes):
             "competenze_help",
             default="Descrizione del ruolo e dei compiti della persona.",
         ),
-        required=False,
+        required=True,
     )
 
     biografia = BlocksField(
@@ -113,42 +113,43 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         required=False,
     )
 
-    curriculum_vitae = field.NamedBlobFile(
-        title=_("curriculum_vitae_label", default="Curriculum vitae"),
-        required=False,
-        description=_(
-            "curriculum_vitae_help",
-            default="Allega un file contenente il curriculum vitae della persona. "
-            "Se ha più file da allegare, utilizza questo campo per quello principale "
-            'e gli altri mettili dentro alla cartella "Curriculum vitae" che troverai dentro alla Persona.',  # noqa
-        ),
-    )
+    # curriculum_vitae = field.NamedBlobFile(
+    #     title=_("curriculum_vitae_label", default="Curriculum vitae"),
+    #     required=False,
+    #     description=_(
+    #         "curriculum_vitae_help",
+    #         default="Allega un file contenente il curriculum vitae della persona. "
+    #         "Se ha più file da allegare, utilizza questo campo per quello principale "
+    #         'e gli altri mettili dentro alla cartella "Curriculum vitae" che troverai dentro alla Persona.',  # noqa
+    #     ),
+    # )
 
     # custom widgets
-    form.widget(
-        "organizzazione_riferimento",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["UnitaOrganizzativa"],
-        },
-    )
+    # form.widget(
+    #     "organizzazione_riferimento",
+    #     RelatedItemsFieldWidget,
+    #     vocabulary="plone.app.vocabularies.Catalog",
+    #     pattern_options={
+    #         "selectableTypes": ["UnitaOrganizzativa"],
+    #     },
+    # )
 
     # custom fieldsets
     model.fieldset(
         "ruolo",
         label=_("ruolo_label", default="Ruolo"),
         fields=[
-            "organizzazione_riferimento",
+            # "organizzazione_riferimento",
+            "incarichi",
             "competenze",
             "biografia",
         ],
     )
-    model.fieldset(
-        "documenti",
-        label=_("documenti_label", default="Documenti"),
-        fields=["curriculum_vitae"],
-    )
+    # model.fieldset(
+    #     "documenti",
+    #     label=_("documenti_label", default="Documenti"),
+    #     fields=["curriculum_vitae"],
+    # )
 
     # SearchableText fields
     textindexer.searchable("competenze")
