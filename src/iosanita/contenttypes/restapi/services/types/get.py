@@ -64,6 +64,7 @@ FIELDSETS_ORDER = {
     "Persona": [
         "default",
         "ruolo",
+        "dove",
         "contatti",
         "informazioni",
         "categorization",
