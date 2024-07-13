@@ -25,14 +25,13 @@
   <property name="behaviors"
             purge="False"
   >
+    <element value="collective.taxonomy.generated.tipologia_notizia" />
     <element value="volto.preview_image" />
     <element value="iosanita.contenttypes.behavior.news" />
-    <element value="iosanita.contenttypes.behavior.strutture_correlate" />
     <element value="plone.constraintypes" />
     <element value="plone.textindexer" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
-    <element value="collective.taxonomy.generated.tipologia_notizia" />
     <element remove="True"
              value="iosanita.contenttypes.behavior.argomenti"
     />

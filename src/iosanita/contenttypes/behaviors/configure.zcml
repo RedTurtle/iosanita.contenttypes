@@ -49,7 +49,7 @@
       marker=".argomenti.IArgomentiNews"
       />
 
-  <plone:behavior
+  <!-- <plone:behavior
       name="iosanita.contenttypes.behavior.strutture_correlate"
       title="Strutture correlate"
       description=""
@@ -57,7 +57,7 @@
       provides=".strutture_correlate.IStruttureCorrelate"
       for="plone.dexterity.interfaces.IDexterityContent"
       marker=".strutture_correlate.IStruttureCorrelate"
-      />
+      /> -->
 
   <plone:behavior
       name="iosanita.contenttypes.behavior.additional_help_infos"

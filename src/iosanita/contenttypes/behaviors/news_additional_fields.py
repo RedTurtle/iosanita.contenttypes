@@ -56,9 +56,7 @@ class INewsAdditionalFields(model.Schema):
         title=_("a_cura_di_persone_label", default="Persone"),
         description=_(
             "a_cura_di_persone_help",
-            default="Seleziona una lista di persone dell'amministrazione "
-            "citate in questa notizia/comunicato stampa. Questa informazione "
-            'verrà mostrata nella sezione "A cura di".',
+            default="Elenco delle persone dell'ASL citate nella notizia, con collegamento alle relative pagine foglia persona. L'elemento è necessario se nella notizia sono citate persone dell'ASL che hanno una pagina persona.",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
@@ -87,15 +85,27 @@ class INewsAdditionalFields(model.Schema):
         required=False,
     )
 
-    parliamo_di = schema.Choice(
+    strutture_correlate = RelationList(
+        title=_("strutture_correlate_label", default="Strutture correlate"),
+        description=_(
+            "strutture_correlate_help",
+            default="Elenco delle strutture dell'ASL citate nella notizia, con collegamento alle relative pagine foglia struttura. L'elemento è necessario se nella notizia sono citate strutture dell'ASL.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+    )
+
+    parliamo_di = schema.List(
         title=_("parliamo_di_label", default="Parliamo di"),
         description=_(
             "parliamo_di_help",
             default="Indicazione degli Argomenti  e dei tag Utente con cui il contenuto di pagina è stato taggato.",
         ),
-        vocabulary="collective.taxonomy.tipologia_target",
+        value_type=schema.Choice(
+            vocabulary="collective.taxonomy.tipologia_argomento",
+        ),
         required=False,
-        default="",
     )
 
     documenti = RelationList(
@@ -142,7 +152,7 @@ class INewsAdditionalFields(model.Schema):
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
-            "selectableTypes": ["News Item"],
+            "selectableTypes": ["Servizio"],
         },
     )
     model.fieldset(
@@ -152,6 +162,7 @@ class INewsAdditionalFields(model.Schema):
             "a_cura_di_persone",
             "notizie_correlate",
             "servizi_correlati",
+            "strutture_correlate",
             "documenti",
         ],
     )

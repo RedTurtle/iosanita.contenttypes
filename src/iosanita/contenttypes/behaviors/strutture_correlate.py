@@ -39,7 +39,7 @@ class IStruttureCorrelate(model.Schema):
 
     model.fieldset(
         "correlati",
-        label=_("sturetture_correlate_struttura_label", default="Contenuti collegati"),
+        label=_("strutture_correlate_label", default="Contenuti collegati"),
         fields=["strutture_correlate"],
     )
 
