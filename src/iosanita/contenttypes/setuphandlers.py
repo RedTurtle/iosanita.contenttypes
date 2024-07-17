@@ -73,18 +73,14 @@ def post_install(context):
 
 
 def post_install_taxonomy(context):
-    try:
-        for index in [
-            "tipologia_notizia",
-            "a_chi_si_rivolge_tassonomia",
-            "tipologia_argomento",
-            "tipologia_evento",
-            "tipologia_punti_di_contatto",
-        ]:
-            api.portal.get_tool("portal_catalog").delIndex(index)
-    # NOTE: non va bene, cosa è che si rompe
-    except:  # noqa
-        pass
+    for index in [
+        "tipologia_notizia",
+        "a_chi_si_rivolge_tassonomia",
+        "tipologia_argomento",
+        "tipologia_evento",
+        "tipologia_punti_di_contatto",
+    ]:
+        api.portal.get_tool("portal_catalog").delIndex(index)
 
     for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
         utility.updateBehavior(**{"field_prefix": ""})
