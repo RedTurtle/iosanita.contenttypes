@@ -48,10 +48,9 @@
     <element value="plone.categorization" />
     <element value="plone.basic" />
     <element value="plone.locking" />
-    <element value="iosanita.contenttypes.behavior.address_persona" />
-    <element value="iosanita.contenttypes.behavior.geolocation_persona" />
-    <element value="iosanita.contenttypes.behavior.additional_help_infos" />
-    <element value="iosanita.contenttypes.behavior.contatti_persona" />
+    <element value="iosanita.contenttypes.behavior.dove" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
+    <element value="iosanita.contenttypes.behavior.contatti" />
     <element value="plone.textindexer" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />

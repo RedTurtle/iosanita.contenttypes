@@ -7,7 +7,7 @@
 
   <property name="title"
             i18n:translate=""
-  >Notizie e comunicati stampa</property>
+  >Notizia e comunicato stampa</property>
 
   <property name="allowed_content_types"
             purge="False"
@@ -26,15 +26,13 @@
             purge="False"
   >
     <element value="collective.taxonomy.generated.tipologia_notizia" />
+    <element value="collective.taxonomy.generated.parliamo_di" />
     <element value="volto.preview_image" />
     <element value="iosanita.contenttypes.behavior.news" />
     <element value="plone.constraintypes" />
     <element value="plone.textindexer" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
-    <element remove="True"
-             value="iosanita.contenttypes.behavior.argomenti"
-    />
   </property>
 
 </object>

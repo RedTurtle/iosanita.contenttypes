@@ -107,11 +107,11 @@ SUBFOLDERS_MAPPING = {
                 "title": "Curriculum vitae",
                 "allowed_types": ("File",),
             },
-            {
-                "id": "multimedia",
-                "title": "Multimedia",
-                "allowed_types": ("Image", "Video"),
-            },
+            # {
+            #     "id": "multimedia",
+            #     "title": "Multimedia",
+            #     "allowed_types": ("Image", "Video"),
+            # },
             {
                 "id": "altri-documenti",
                 "title": "Altri documenti",

@@ -21,7 +21,7 @@ FIELDSETS_ORDER = {
     "ComeFarePer": [
         "default",
         "utenti",
-        "informazioni",
+        "ulteriori_informazioni",
         "categorization",
         "dates",
         "settings",
@@ -34,8 +34,8 @@ FIELDSETS_ORDER = {
         "dove",
         "costi",
         "contatti",
-        "informazioni",
-        "correlati",
+        "ulteriori_informazioni",
+        "contenuti_collegati",
         "categorization",
         "dates",
         "settings",
@@ -43,20 +43,26 @@ FIELDSETS_ORDER = {
     ],
     "Struttura": [
         "default",
-        "utenti",
+        "cosa_e",
+        "a_chi_si_rivolge",
         "dove",
+        "come_accedere",
+        "orari_apertura",
         "contatti",
-        "correlati",
-        "informazioni",
-        "categorization",
-        "dates",
+        "servizi",
+        "persone_struttura",
+        "contenuti_collegati",
+        "ulteriori_informazioni",
         "settings",
         "ownership",
+        "dates",
+        "categorization",
+        "seo",
     ],
     "News Item": [
         "default",
         "dates",
-        "correlati",
+        "contenuti_collegati",
         "categorization",
         "settings",
         "ownership",
@@ -66,7 +72,7 @@ FIELDSETS_ORDER = {
         "ruolo",
         "dove",
         "contatti",
-        "informazioni",
+        "ulteriori_informazioni",
         "categorization",
         "dates",
         "ownership",
@@ -87,8 +93,8 @@ FIELDSETS_ORDER = {
         "contatti",
         "documenti",
         "link_utili",
-        "informazioni",
-        "correlati",
+        "ulteriori_informazioni",
+        "contenuti_collegati",
         "categorization",
         "settings",
         "ownership",
@@ -100,9 +106,9 @@ FIELDSETS_ORDER = {
         "struttura",
         "persone",
         "contatti",
-        "correlati",
+        "contenuti_collegati",
         "categorization",
-        "informazioni",
+        "ulteriori_informazioni",
         "settings",
         "ownership",
         "dates",
@@ -114,9 +120,9 @@ FIELDSETS_ORDER = {
         "dove",
         "orari",
         "contatti",
-        "informazioni",
+        "ulteriori_informazioni",
         "settings",
-        "correlati",
+        "contenuti_collegati",
         "categorization",
     ],
 }
@@ -124,82 +130,6 @@ FIELDSETS_ORDER = {
 
 @implementer(IPublishTraverse)
 class TypesGet(BaseGet):
-    def customize_document_schema(self, result):
-        moved = ["image", "image_caption", "preview_image"]
-        removed = ["preview_caption"]
-        for fieldset in result.get("fieldsets", []):
-            if fieldset.get("id", "") == "testata":
-                fieldset["fields"] = moved + fieldset["fields"]
-            if fieldset.get("id", "") == "default":
-                fieldset["fields"] = [
-                    x for x in fieldset["fields"] if x not in moved and x not in removed
-                ]
-        return result
-
-    def customize_persona_schema(self, result):
-        if "title" in result["properties"]:
-            msgid = _("Nome e Cognome", default="Nome e cognome")
-            result["properties"]["title"]["title"] = translate(
-                msgid, context=self.request
-            )
-        return result
-
-    # def customize_venue_schema(self, result):
-    #     """
-    #     Unico modo per spostare il campo "notes"
-    #     """
-    #     result.get("required").append("description")
-    #     result.get("required").append("street")
-    #     result.get("required").append("city")
-    #     result.get("required").append("zip_code")
-    #     result.get("required").append("geolocation")
-
-    #     if "properties" in result:
-    #         if "country" in result["properties"]:
-    #             if not result["properties"]["country"].get("default", ""):
-    #                 result["properties"]["country"]["default"] = {
-    #                     "title": "Italia",
-    #                     "token": "380",
-    #                 }
-    #         if "city" in result["properties"]:
-    #             if not result["properties"]["city"].get("default", ""):
-    #                 result["properties"]["city"]["default"] = (
-    #                     api.portal.get_registry_record(
-    #                         "city", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-    #         if "zip_code" in result["properties"]:
-    #             if not result["properties"]["zip_code"].get("default", ""):
-    #                 result["properties"]["zip_code"]["default"] = (
-    #                     api.portal.get_registry_record(
-    #                         "zip_code", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-
-    #         if "street" in result["properties"]:
-    #             if not result["properties"]["street"].get("default", ""):
-    #                 result["properties"]["street"]["default"] = (
-    #                     api.portal.get_registry_record(
-    #                         "street", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-
-    #         if "geolocation" in result["properties"]:
-    #             if not result["properties"]["geolocation"].get("default", {}):
-    #                 result["properties"]["geolocation"]["default"] = eval(
-    #                     api.portal.get_registry_record(
-    #                         "geolocation", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-
-    #     for fieldset in result["fieldsets"]:
-    #         if fieldset.get("id") == "default" and "notes" in fieldset["fields"]:
-    #             fieldset["fields"].remove("notes")
-    #         if fieldset.get("id") == "dove" and "notes" not in fieldset["fields"]:
-    #             fieldset["fields"].append("notes")
-
-    #     return result
-
     def customize_versioning_fields_fieldset(self, result):
         """
         Unico modo per spostare i campi del versioning.
@@ -252,7 +182,6 @@ class TypesGet(BaseGet):
         return result
 
     def reply(self):
-        # import pdb;pdb.set_trace()
         result = super(TypesGet, self).reply()
         if "fieldsets" in result:
             result["fieldsets"] = self.reorder_fieldsets(schema=result)
@@ -293,7 +222,6 @@ class TypesGet(BaseGet):
             # no match
             return original
         original_fieldsets = [x["id"] for x in original]
-
         for fieldset_id in original_fieldsets:
             # if some fieldsets comes from additional addons (not from the
             # base ones), then append them to the order list.

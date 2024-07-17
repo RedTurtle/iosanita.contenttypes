@@ -63,7 +63,6 @@ setup(
         "redturtle.volto",
         "plone.restapi",
         "collective.taxonomy",
-        "collective.volto.enhancedlinks",
     ],
     extras_require={
         "test": [

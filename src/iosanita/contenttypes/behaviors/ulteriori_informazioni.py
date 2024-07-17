@@ -11,28 +11,28 @@ from zope.interface import provider
 
 
 @provider(IFormFieldProvider)
-class IAdditionalHelpInfos(model.Schema):
+class IUlterioriInformazioni(model.Schema):
     ulteriori_informazioni = BlocksField(
         title=_("ulteriori_informazioni", default="Ulteriori informazioni"),
         description=_(
             "ulteriori_informazioni_help",
-            default="Ulteriori informazioni non contemplate" " dai campi precedenti.",
+            default="Ulteriori informazioni non contemplate dai campi precedenti.",
         ),
         required=False,
     )
 
     model.fieldset(
-        "informazioni",
-        label=_("informazioni_label", default="Ulteriori informazioni"),
+        "ulteriori_informazioni",
+        label=_("ulteriori_informazioni_label", default="Ulteriori informazioni"),
         fields=["ulteriori_informazioni"],
     )
 
     textindexer.searchable("ulteriori_informazioni")
 
 
-@implementer(IAdditionalHelpInfos)
+@implementer(IUlterioriInformazioni)
 @adapter(IDexterityContent)
-class AdditionalHelpInfos(object):
+class UlterioriInformazioni(object):
     """ """
 
     def __init__(self, context):

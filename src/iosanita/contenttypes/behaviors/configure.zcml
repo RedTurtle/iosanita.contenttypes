@@ -9,154 +9,78 @@
       file="meta.zcml"
       />
 
+  <!-- common -->
   <plone:behavior
-      name="iosanita.contenttypes.behavior.evento"
-      title="Metadati evento"
-      description="Adds fields."
-      factory=".evento.Evento"
-      provides=".evento.IEvento"
-      for="plone.event.interfaces.IEvent"
-      marker=".evento.IEvento"
-      />
-
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.argomenti"
-      title="Argomenti"
-      description="Tassonomia argomenti"
-      factory=".argomenti.Argomenti"
-      provides=".argomenti.IArgomenti"
+      name="iosanita.contenttypes.behavior.parliamo_di"
+      title="Parliamo di"
+      description="Parliamo di"
+      factory=".parliamo_di.ParliamoDi"
+      provides=".parliamo_di.IParliamoDi"
       for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".argomenti.IArgomenti"
+      marker=".parliamo_di.IParliamoDi"
       />
-
   <plone:behavior
-      name="iosanita.contenttypes.behavior.argomenti_evento"
-      title="Argomenti"
-      description="Tassonomia argomenti evento"
-      factory=".argomenti.ArgomentiEvento"
-      provides=".argomenti.IArgomentiEvento"
+      name="iosanita.contenttypes.behavior.a_chi_si_rivolge"
+      title="A chi si rivolge"
+      description=""
+      factory=".a_chi_si_rivolge.AChiSiRivolge"
+      provides=".a_chi_si_rivolge.IAChiSiRivolge"
       for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".argomenti.IArgomentiEvento"
+      marker=".a_chi_si_rivolge.IAChiSiRivolge"
       />
-
   <plone:behavior
-      name="iosanita.contenttypes.behavior.argomenti_news"
-      title="Argomenti"
-      description="Tassonomia argomenti news"
-      factory=".argomenti.ArgomentiNews"
-      provides=".argomenti.IArgomentiNews"
+      name="iosanita.contenttypes.behavior.ulteriori_informazioni"
+      title="Ulteriori informazioni"
+      description=""
+      factory=".ulteriori_informazioni.UlterioriInformazioni"
+      provides=".ulteriori_informazioni.IUlterioriInformazioni"
       for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".argomenti.IArgomentiNews"
+      marker=".ulteriori_informazioni.IUlterioriInformazioni"
       />
-
-  <!-- <plone:behavior
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.contatti"
+      title="Contatti"
+      description=""
+      factory=".contatti.Contatti"
+      provides=".contatti.IContatti"
+      marker=".contatti.IContatti"
+      />
+    <plone:behavior
+      name="iosanita.contenttypes.behavior.dove"
+      title="Dove"
+      description=""
+      factory=".dove.Dove"
+      provides=".dove.IDove"
+      marker=".dove.IDove"
+      />
+    
+    <plone:behavior
+      name="iosanita.contenttypes.behavior.exclude_from_search"
+      title="Exclude from search"
+      description="Campo per escludere un contenuto dalle ricerche del sito."
+      factory=".exclude_from_search.ExcludeFromSearch"
+      provides=".exclude_from_search.IExcludeFromSearch"
+      marker=".exclude_from_search.IExcludeFromSearch"
+      />
+    <plone:behavior
       name="iosanita.contenttypes.behavior.strutture_correlate"
       title="Strutture correlate"
       description=""
       factory=".strutture_correlate.StruttureCorrelate"
       provides=".strutture_correlate.IStruttureCorrelate"
-      for="plone.dexterity.interfaces.IDexterityContent"
       marker=".strutture_correlate.IStruttureCorrelate"
-      /> -->
-
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.additional_help_infos"
-      title="Ulteriori campi aiuto testuali"
-      description=""
-      factory=".additional_help_infos.AdditionalHelpInfos"
-      provides=".additional_help_infos.IAdditionalHelpInfos"
-      for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".additional_help_infos.IAdditionalHelpInfos"
       />
-
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.descrizione_estesa"
-      title="Descrizione estesa"
-      description=""
-      factory=".descrizione_estesa.DescrizioneEstesa"
-      provides=".descrizione_estesa.IDescrizioneEstesa"
-      marker=".descrizione_estesa.IDescrizioneEstesa"
-      />
+  <!-- ct specific -->
   <plone:behavior
       name="iosanita.contenttypes.behavior.contatti_uo"
-      title="Contatti"
+      title="Contatti UO"
       description="Behavior contatti per UO."
       factory=".contatti.ContattiUnitaOrganizzativa"
       provides=".contatti.IContattiUnitaOrganizzativa"
       marker=".contatti.IContattiUnitaOrganizzativa"
       />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.contatti_struttura"
-      title="Contatti"
-      description="Behavior contatti per Struttura."
-      factory=".contatti.ContattiStruttura"
-      provides=".contatti.IContattiStruttura"
-      marker=".contatti.IContattiStruttura"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.address_event"
-      title="Address Event"
-      description="Behavior address per Event."
-      factory=".address.AddressEvent"
-      provides=".address.IAddressEvent"
-      marker=".address.IAddressEvent"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.address_persona"
-      title="Address Persona"
-      description="Behavior address per Persona."
-      factory=".address.AddressPersona"
-      provides=".address.IAddressPersona"
-      marker=".address.IAddressPersona"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.address_unita_organizzativa"
-      title="Address Unita Organizzativa"
-      description="Behavior address per Unita Organizzativa."
-      factory=".address.AddressUnitaOrganizzativa"
-      provides=".address.IAddressUnitaOrganizzativa"
-      marker=".address.IAddressUnitaOrganizzativa"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.address_struttura"
-      title="Address Event"
-      description="Behavior address per Struttura."
-      factory=".address.AddressStruttura"
-      provides=".address.IAddressStruttura"
-      marker=".address.IAddressStruttura"
-      />
-  <!-- <plone:behavior
-      name="iosanita.contenttypes.behavior.contatti_event"
-      title="Contatti"
-      description="Behavior contatti per Event."
-      factory=".contatti.ContattiEvent"
-      provides=".contatti.IContattiEvent"
-      marker=".contatti.IContattiEvent"
-      /> -->
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.geolocation_event"
-      title="Geolocatable"
-      description="Behavior geolocatable per Event."
-      factory=".geolocation.GeolocatableEvent"
-      provides=".geolocation.IGeolocatableEvent"
-      marker=".geolocation.IGeolocatableEvent"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.geolocation_persona"
-      title="Geolocatable"
-      description="Behavior geolocatable per Persona."
-      factory=".geolocation.GeolocatablePersona"
-      provides=".geolocation.IGeolocatablePersona"
-      marker=".geolocation.IGeolocatablePersona"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.geolocation_struttura"
-      title="Geolocatable"
-      description="Behavior geolocatable per Struttura."
-      factory=".geolocation.GeolocatableStruttura"
-      provides=".geolocation.IGeolocatableStruttura"
-      marker=".geolocation.IGeolocatableStruttura"
-      />
+
+  <!-- to check -->
   <plone:behavior
       name="iosanita.contenttypes.behavior.news"
       title="Metadati news"
@@ -167,27 +91,13 @@
       marker=".news_additional_fields.INewsAdditionalFields"
       />
   <plone:behavior
-      name="iosanita.contenttypes.behavior.contatti_persona"
-      title="Contatti"
-      description="Behavior contatti per Persona."
-      factory=".contatti.ContattiPersona"
-      provides=".contatti.IContattiPersona"
-      marker=".contatti.IContattiPersona"
+      name="iosanita.contenttypes.behavior.evento"
+      title="Metadati evento"
+      description="Adds fields."
+      factory=".evento.Evento"
+      provides=".evento.IEvento"
+      for="plone.event.interfaces.IEvent"
+      marker=".evento.IEvento"
       />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.contatti_step"
-      title="Contatti"
-      description="Behavior contatti per Step."
-      factory=".contatti.ContattiStep"
-      provides=".contatti.IContattiStep"
-      marker=".contatti.IContattiStep"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.exclude_from_search"
-      title="Exclude from search"
-      description="Campo per escludere un contenuto dalle ricerche del sito."
-      factory=".exclude_from_search.ExcludeFromSearch"
-      provides=".exclude_from_search.IExcludeFromSearch"
-      marker=".exclude_from_search.IExcludeFromSearch"
-      />
+  
 </configure>

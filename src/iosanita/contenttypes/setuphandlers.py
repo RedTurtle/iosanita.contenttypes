@@ -76,7 +76,7 @@ def post_install_taxonomy(context):
     try:
         for index in [
             "tipologia_notizia",
-            "tipologia_target",
+            "a_chi_si_rivolge_tassonomia",
             "tipologia_argomento",
             "tipologia_evento",
             "tipologia_punti_di_contatto",

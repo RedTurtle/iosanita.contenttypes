@@ -96,18 +96,6 @@ class INewsAdditionalFields(model.Schema):
         required=False,
     )
 
-    parliamo_di = schema.List(
-        title=_("parliamo_di_label", default="Parliamo di"),
-        description=_(
-            "parliamo_di_help",
-            default="Indicazione degli Argomenti  e dei tag Utente con cui il contenuto di pagina è stato taggato.",
-        ),
-        value_type=schema.Choice(
-            vocabulary="collective.taxonomy.tipologia_argomento",
-        ),
-        required=False,
-    )
-
     documenti = RelationList(
         title="Documenti",
         default=[],

@@ -47,19 +47,21 @@
     <element value="plone.categorization" />
     <element value="plone.basic" />
     <element value="plone.locking" />
+    <element value="plone.constraintypes" />
     <element value="plone.leadimage" />
     <element value="volto.preview_image" />
     <element value="plone.relateditems" />
-    <element value="iosanita.contenttypes.behavior.address_struttura" />
-    <element value="iosanita.contenttypes.behavior.geolocation_struttura" />
-    <element value="iosanita.contenttypes.behavior.additional_help_infos" />
     <element value="plone.textindexer" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
-    <element value="collective.taxonomy.generated.tipologia_target" />
-    <element value="iosanita.contenttypes.behavior.contatti_struttura" />
-    <!-- <element value="collective.taxonomy.generated.tipologia.argomento" /> -->
+    <element value="iosanita.contenttypes.behavior.dove" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
+    <element value="iosanita.contenttypes.behavior.a_chi_si_rivolge" />
+    <element value="collective.taxonomy.generated.a_chi_si_rivolge_tassonomia" />
+    <element value="iosanita.contenttypes.behavior.contatti" />
+    <element value="collective.taxonomy.generated.parliamo_di" />
+    <element value="iosanita.contenttypes.behavior.strutture_correlate" />
   </property>
 
   <!-- View information -->

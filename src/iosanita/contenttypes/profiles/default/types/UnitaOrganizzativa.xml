@@ -50,18 +50,15 @@
     <element value="plone.leadimage" />
     <element value="volto.preview_image" />
     <element value="plone.relateditems" />
-    <element remove="True"
-             value="design.plone.contenttypes.behavior.geolocation_uo"
-    />
     <element value="iosanita.contenttypes.behavior.contatti_uo" />
-    <element value="iosanita.contenttypes.behavior.argomenti" />
     <element value="plone.textindexer" />
-    <element value="iosanita.contenttypes.behavior.additional_help_infos" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
-    <element value="iosanita.contenttypes.behavior.address_unita_organizzativa" />
-    <element value="collective.taxonomy.generated.tipologia_target" />
+    <element value="iosanita.contenttypes.behavior.dove" />
+    <element value="collective.taxonomy.generated.a_chi_si_rivolge_tassonomia" />
+    <element value="collective.taxonomy.generated.parliamo_di" />
   </property>
 
   <!-- View information -->
