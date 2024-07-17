@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
-from iosanita.contenttypes.interfaces.persona import IPersona
-from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
 from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form

@@ -3,23 +3,9 @@ from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
 from plone.app.dexterity import textindexer
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
-from plone.autoform import directives as form
 from plone.namedfile import field
 from plone.supermodel import model
-from z3c.relationfield.schema import RelationChoice
-from z3c.relationfield.schema import RelationList
 from zope import schema
-
-
-# TODO: migration script for these commented fields towards PDC
-# telefono
-# fax
-# email
-# TODO: migration script for these commented fields towards Incarico
-# atto_nomina
-# data_conclusione_incarico
-# data_insediamento
 
 
 class IPersona(model.Schema, IIosanitaContenttypes):

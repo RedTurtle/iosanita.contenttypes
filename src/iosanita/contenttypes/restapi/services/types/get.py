@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from iosanita.contenttypes import _
 from plone.restapi.services.types.get import TypesGet as BaseGet
-from zope.i18n import translate
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
