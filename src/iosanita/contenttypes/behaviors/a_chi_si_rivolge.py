@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
@@ -7,7 +8,6 @@ from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
-from collective.volto.blocksfield.field import BlocksField
 
 
 @provider(IFormFieldProvider)

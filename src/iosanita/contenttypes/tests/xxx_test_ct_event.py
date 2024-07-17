@@ -2,9 +2,7 @@
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
 
 # from iosanita.contenttypes.schema_overrides import SchemaTweaks
-from iosanita.contenttypes.testing import (
-    IOSANITA_CONTENTTYPES_API_FUNCTIONAL_TESTING,
-)
+from iosanita.contenttypes.testing import IOSANITA_CONTENTTYPES_API_FUNCTIONAL_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -14,10 +12,12 @@ from plone.app.testing import TEST_USER_ID
 # from plone.autoform.interfaces import IFormFieldProvider
 from plone.restapi.testing import RelativeSession
 
-# from zope.component import provideAdapter
-
 import transaction
 import unittest
+
+
+# from zope.component import provideAdapter
+
 
 
 class TestEventSchema(unittest.TestCase):

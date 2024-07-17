@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 from collective.address.behaviors import IAddress
+from collective.geolocationbehavior.geolocation import IGeolocatable
 from iosanita.contenttypes import _
 from plone.app.dexterity import textindexer
+from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
+from z3c.relationfield.schema import RelationChoice
+from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
-from z3c.relationfield.schema import RelationChoice, RelationList
-from collective.geolocationbehavior.geolocation import IGeolocatable
-from z3c.relationfield.schema import RelationChoice
-from z3c.relationfield.schema import RelationList
-from plone.autoform.interfaces import IFormFieldProvider
 from zope.interface import provider
 
 

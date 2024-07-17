@@ -1,26 +1,25 @@
+from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.testing.zope import WSGI_SERVER_FIXTURE
-from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
+from redturtle.volto.testing import RedturtleVoltoLayer
 from zope.configuration import xmlconfig
 
-import plone.restapi
 import collective.venue
 import collective.volto.blocksfield
 import collective.volto.cookieconsent
 import collective.z3cform.datagridfield
+import iosanita.contenttypes
 import kitconcept.seo
 import plone.app.caching
 import plone.formwidget.geolocation
-import iosanita.contenttypes
-from redturtle.volto.testing import RedturtleVoltoLayer
+import plone.restapi
 
 
 class TestLayer(RedturtleVoltoLayer):
-
     def setUpZope(self, app, configurationContext):
         super().setUpZope(app, configurationContext)
         self.loadZCML(package=iosanita.contenttypes, context=configurationContext)

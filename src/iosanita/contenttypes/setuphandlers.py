@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.interfaces import INonInstallable
 from collective.taxonomy.interfaces import ITaxonomy
+from plone import api
+from Products.CMFPlone.interfaces import INonInstallable
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
-from plone import api
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 DEFAULT_PROFILE = "profile-iosanita.contenttypes:default"
@@ -72,7 +73,6 @@ def post_install(context):
 
 
 def post_install_taxonomy(context):
-
     try:
         for index in [
             "tipologia_notizia",

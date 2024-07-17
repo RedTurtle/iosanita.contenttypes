@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-#from .related_news_serializer import SerializeFolderToJson
+# from .related_news_serializer import SerializeFolderToJson
 from Acquisition import aq_inner
 from iosanita.contenttypes.interfaces.persona import IPersona
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer.dxcontent import SerializeToJson
-
 from zc.relation.interfaces import ICatalog
 from zope.component import adapter
 from zope.component import getMultiAdapter
@@ -43,7 +42,6 @@ class PersonaSerializer(SerializeToJson):
                 items.append(summary)
         return sorted(items, key=lambda k: k["title"])
 
-
     def get_structure_backreferences(self, ct_type):
         catalog = getUtility(ICatalog)
         intids = getUtility(IIntIds)
@@ -56,16 +54,18 @@ class PersonaSerializer(SerializeToJson):
             for i in backreferences
             if i.portal_type == ct_type
         ]
-    
+
     def __call__(self, version=None, include_items=True):
         result = super(PersonaSerializer, self).__call__(
             version=version, include_items=include_items
         )
-        
+
         if getattr(self.context, "incarichi", ""):
             result["ruolo"] = getattr(self.context, "incarichi").raw
-            
-        result["organizzazione_riferimento"] = self.get_service_backreferences("UnitaOrganizzativa")
+
+        result["organizzazione_riferimento"] = self.get_service_backreferences(
+            "UnitaOrganizzativa"
+        )
         result["strutture_in_cui_opera"] = self.get_service_backreferences("Struttura")
 
         return result

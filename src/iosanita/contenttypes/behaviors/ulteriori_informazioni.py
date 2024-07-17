@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from iosanita.contenttypes import _
 from collective.volto.blocksfield.field import BlocksField
+from iosanita.contenttypes import _
 from plone.app.dexterity import textindexer
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent

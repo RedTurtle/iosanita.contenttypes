@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.volto.blocksfield.field import BlocksField
+from iosanita.contenttypes import _
 from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
@@ -7,9 +8,6 @@ from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
-
-
-from iosanita.contenttypes import _
 
 
 # TODO: migration script for these commented fields towards PDC
