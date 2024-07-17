@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes import _
-
 # from iosanita.contenttypes.controlpanels.geolocation_defaults import (
 #     IGeolocationDefaults,
 # )
