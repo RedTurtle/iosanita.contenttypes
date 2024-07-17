@@ -27,43 +27,17 @@
     :alt: License
 
 
-=====================
-iosanita.contenttypes
-=====================
+=======================
+IO-Sanita content-types
+=======================
 
-An add-on for Plone
-
-Features
---------
-
-- Can be bullet points
+Gestione dei content-type di Io-Sanita
 
 
-Examples
---------
+Installazione
+=============
 
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
-
-Translations
-------------
-
-This product has been translated into
-
-- Klingon (thanks, K'Plai)
-
-
-Installation
-------------
-
-Install iosanita.contenttypes by adding it to your buildout::
+Per installare iosanita.contenttypes bisogna per prima cosa aggiungerlo al buildout::
 
     [buildout]
 
@@ -73,39 +47,28 @@ Install iosanita.contenttypes by adding it to your buildout::
         iosanita.contenttypes
 
 
-and then running ``bin/buildout``
+e poi lanciare il buildout con ``bin/buildout``.
+
+Successivamente va installato dal pannello di controllo di Plone.
 
 
-Authors
--------
+Contribuisci
+============
 
-Provided by awesome people ;)
-
-
-Contributors
-------------
-
-Put your name here, you deserve it!
-
-- ?
+- Issue Tracker: https://github.com/redturtle/iosanita.contenttypes/issues
+- Codice sorgente: https://github.com/redturtle/iosanita.contenttypes
 
 
-Contribute
-----------
+Licenza
+=======
 
-- Issue Tracker: https://github.com/collective/iosanita.contenttypes/issues
-- Source Code: https://github.com/collective/iosanita.contenttypes
-- Documentation: https://docs.plone.org/foo/bar
+Questo progetto è rilasciato con licenza GPLv2.
 
+Autori
+======
 
-Support
--------
+Questo progetto è stato sviluppato da **RedTurtle Technology**.
 
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
-
-
-License
--------
-
-The project is licensed under the GPLv2.
+.. image:: https://avatars1.githubusercontent.com/u/1087171?s=100&v=4
+   :alt: RedTurtle Technology Site
+   :target: http://www.redturtle.it/
