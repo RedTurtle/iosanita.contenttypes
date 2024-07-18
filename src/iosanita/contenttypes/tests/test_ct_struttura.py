@@ -8,7 +8,6 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
-from transaction import commit
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
 from zope.event import notify

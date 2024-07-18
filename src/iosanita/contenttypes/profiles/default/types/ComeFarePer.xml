@@ -46,16 +46,18 @@
     <element value="plone.publication" />
     <element value="plone.categorization" />
     <element value="plone.basic" />
+    <element value="iosanita.contenttypes.behavior.sottotitolo" />
     <element value="plone.locking" />
     <element value="plone.leadimage" />
     <element value="volto.preview_image" />
     <element value="plone.relateditems" />
-    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
     <element value="plone.textindexer" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
+    <element value="iosanita.contenttypes.behavior.a_chi_si_rivolge" />
     <element value="collective.taxonomy.generated.a_chi_si_rivolge_tassonomia" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
     <element value="collective.taxonomy.generated.parliamo_di" />
   </property>
 

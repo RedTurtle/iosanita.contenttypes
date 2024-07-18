@@ -13,6 +13,7 @@ class FieldsetsMismatchError(Exception):
 FIELDSETS_ORDER = {
     "ComeFarePer": [
         "default",
+        "a_chi_si_rivolge",
         "utenti",
         "ulteriori_informazioni",
     ],
