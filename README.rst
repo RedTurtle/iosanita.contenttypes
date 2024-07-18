@@ -56,6 +56,26 @@ Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aument
 Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: *&portal_type=Servizio*.
 
 
+Strutture
+-------------------
+
+Alcuni content-type tipo Servizio o Struttura, hanno una correlazione con le Strutture.
+
+Da una Struttura, è possibile sapere quali contenuti la correlano facendo una ricerca in catalogo sull'indice **struttura_correlata**.
+
+Ad esempio::
+
+    > http://localhost:8080/Plone/++api++/@search?struttura_correlata=xxx
+
+
+Dove xxx è l'uid di una Struttura.
+
+Questa chiamata ritorna tutti i contenuti del sito che correlano quella Struttura.
+Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aumentare con determinati parametri.
+
+Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: *&portal_type=Servizio*.
+
+
 Installazione
 =============
 
