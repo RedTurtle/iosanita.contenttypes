@@ -33,6 +33,28 @@ IO-Sanita content-types
 
 Gestione dei content-type di Io-Sanita
 
+Correlazioni tra content-type
+=============================
+
+Unità Organizzative
+-------------------
+
+Alcuni content-type tipo Servizio o Struttura, hanno una correlazione con le Unità organizzative.
+
+Da un'Unità organizzativa, è possibile sapere quali contenuti la correlano facendo una ricerca in catalogo sull'indice `uo_correlata`.
+
+Ad esempio::
+
+    > http://localhost:8080/Plone/++api++/@search?uo_correlata=xxx
+
+
+Dove xxx è l'uid di una Unità organizzativa.
+
+Questa chiamata ritorna tutti i contenuti del sito che correlano quell'Unità Organizzativa.
+Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aumentare con determinati parametri.
+
+Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: `&portal_type=Servizio`.
+
 
 Installazione
 =============

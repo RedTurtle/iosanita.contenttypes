@@ -2,8 +2,8 @@
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
-from plone.supermodel import model
 from plone.autoform import directives as form
+from plone.supermodel import model
 
 
 class IComeFarePer(model.Schema, IIosanitaContenttypes):

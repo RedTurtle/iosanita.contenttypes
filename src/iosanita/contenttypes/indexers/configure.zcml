@@ -28,7 +28,10 @@
       factory=".events.rassegna"
       name="rassegna"
       />
-  <adapter factory=".uo.uo_correlata_uid" name="uo_correlata_uid" />
+  <adapter
+      factory=".uo.uo_correlata_uid"
+      name="uo_correlata_uid"
+      />
 
   <!-- only metadata -->
 

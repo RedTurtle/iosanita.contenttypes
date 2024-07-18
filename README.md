@@ -1,1 +1,0 @@
-# iosanita.contenttypes
