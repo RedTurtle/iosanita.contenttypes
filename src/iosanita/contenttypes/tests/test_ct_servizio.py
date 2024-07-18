@@ -11,7 +11,7 @@ from plone.restapi.testing import RelativeSession
 import unittest
 
 
-class TestStrutturaSchema(unittest.TestCase):
+class TestServizioSchema(unittest.TestCase):
     layer = RESTAPI_TESTING
 
     def setUp(self):
@@ -28,10 +28,10 @@ class TestStrutturaSchema(unittest.TestCase):
     def tearDown(self):
         self.api_session.close()
 
-    def test_behaviors_enabled_for_struttura(self):
+    def test_behaviors_enabled_for_servizio(self):
         portal_types = api.portal.get_tool(name="portal_types")
         self.assertEqual(
-            portal_types["Struttura"].behaviors,
+            portal_types["Servizio"].behaviors,
             (
                 "plone.namefromtitle",
                 "plone.allowdiscussion",
@@ -51,71 +51,76 @@ class TestStrutturaSchema(unittest.TestCase):
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
-                "iosanita.contenttypes.behavior.dove",
-                "iosanita.contenttypes.behavior.ulteriori_informazioni",
+                "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
                 "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",
-                "iosanita.contenttypes.behavior.contatti",
-                "iosanita.contenttypes.behavior.servizi",
                 "collective.taxonomy.generated.parliamo_di",
-                "iosanita.contenttypes.behavior.strutture_correlate",
+                "iosanita.contenttypes.behavior.ulteriori_informazioni",
             ),
         )
 
-    def test_struttura_fieldsets(self):
+    def test_servizio_fieldsets(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(len(resp["fieldsets"]), 16)
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(len(resp["fieldsets"]), 18)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
                 "default",
-                "cosa_e",
-                "a_chi_si_rivolge",
+                "cosa_serve",
+                "accedi_al_servizio",
+                "tempi_attesa",
+                "costi",
                 "dove",
-                "come_accedere",
                 "orari",
                 "contatti",
-                "servizi",
-                "persone_struttura",
-                "contenuti_collegati",
+                "cosa_e",
+                "a_chi_si_rivolge",
+                "procedure_collegate_esito",
+                "responsabili",
                 "ulteriori_informazioni",
-                "seo",
                 "settings",
                 "ownership",
                 "dates",
                 "categorization",
+                "seo",
             ],
         )
 
-    def test_struttura_required_fields(self):
-        resp = self.api_session.get("@types/Struttura").json()
+    def test_servizio_required_fields(self):
+        resp = self.api_session.get("@types/Servizio").json()
         self.assertEqual(
             sorted(resp["required"]),
             sorted(
                 [
-                    "a_chi_si_rivolge",
-                    "come_accedere",
-                    "orari",
-                    "punti_di_contatto",
-                    "responsabile_correlato",
                     "title",
+                    "cosa_serve",
+                    "come_accedere",
+                    "tempi_attesa",
+                    "costi",
+                    "orari",
+                    "uo_correlata",
+                    "responsabile_correlato",
+                    "punti_di_contatto",
+                    "a_chi_si_rivolge",
+                    "description",
                 ]
             ),
         )
 
-    def test_struttura_fields_default_fieldset(self):
+    def test_servizio_fields_default_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/Struttura").json()
+        resp = self.api_session.get("@types/Servizio").json()
         self.assertEqual(
             resp["fieldsets"][0]["fields"],
             [
                 "title",
                 "description",
+                "stato_servizio",
                 "sottotitolo",
                 "image",
                 "image_caption",
@@ -125,103 +130,104 @@ class TestStrutturaSchema(unittest.TestCase):
             ],
         )
 
-    def test_struttura_fields_cosa_e_fieldset(self):
+    def test_servizio_fields_cosa_serve_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/Struttura").json()
+        resp = self.api_session.get("@types/Servizio").json()
         self.assertEqual(
             resp["fieldsets"][1]["fields"],
-            ["descrizione_estesa"],
+            ["cosa_serve"],
         )
 
-    def test_struttura_fields_a_chi_si_rivolge_fieldset(self):
+    def test_servizio_fields_accedi_al_servizio_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/Struttura").json()
+        resp = self.api_session.get("@types/Servizio").json()
         self.assertEqual(
             resp["fieldsets"][2]["fields"],
+            ["come_accedere", "piattaforma_online_link", "piattaforma_online_label"],
+        )
+
+    def test_servizio_fields_tempi_attesa_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(
+            resp["fieldsets"][3]["fields"],
+            ["tempi_attesa"],
+        )
+
+    def test_servizio_fields_costi_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(
+            resp["fieldsets"][4]["fields"],
+            ["costi"],
+        )
+
+    def test_servizio_fields_strutture_correlate_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(resp["fieldsets"][5]["fields"], ["strutture_correlate"])
+
+    def test_servizio_fields_orari_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(resp["fieldsets"][6]["fields"], ["orari"])
+
+    def test_servizio_fields_contatti_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(resp["fieldsets"][7]["fields"], ["punti_di_contatto"])
+
+    def test_servizio_fields_cosa_e_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(resp["fieldsets"][8]["fields"], ["descrizione_estesa"])
+
+    def test_servizio_fields_a_chi_si_rivolge_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(
+            resp["fieldsets"][9]["fields"],
             ["a_chi_si_rivolge", "a_chi_si_rivolge_tassonomia"],
         )
 
-    def test_struttura_fields_dove_fieldset(self):
+    def test_servizio_fields_esito_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/Struttura").json()
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(resp["fieldsets"][10]["fields"], ["procedure_collegate_esito"])
+
+    def test_servizio_fields_responsabili_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
         self.assertEqual(
-            resp["fieldsets"][3]["fields"],
-            [
-                "luogo_correlato",
-                "nome_sede",
-                "street",
-                "zip_code",
-                "city",
-                "quartiere",
-                "circoscrizione",
-                "country",
-                "geolocation",
-            ],
+            resp["fieldsets"][11]["fields"],
+            ["uo_correlata", "responsabile_correlato"],
         )
 
-    def test_struttura_fields_come_accedere_fieldset(self):
+    def test_servizio_fields_ulteriori_informazioni_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(
-            resp["fieldsets"][4]["fields"],
-            ["come_accedere"],
-        )
-
-    def test_struttura_fields_orari_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(resp["fieldsets"][5]["fields"], ["orari"])
-
-    def test_struttura_fields_contatti_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["punti_di_contatto"])
-
-    def test_struttura_fields_servizi_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(resp["fieldsets"][7]["fields"], ["servizi"])
-
-    def test_struttura_fields_persone_struttura_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(
-            resp["fieldsets"][8]["fields"],
-            ["responsabile_correlato", "coordinatore_correlato", "personale_correlato"],
-        )
-
-    def test_struttura_fields_correlati_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(
-            resp["fieldsets"][9]["fields"],
-            ["uo_correlata", "strutture_correlate"],
-        )
-
-    def test_struttura_fields_ulteriori_informazioni_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(
-            resp["fieldsets"][10]["fields"],
-            ["ulteriori_informazioni"],
-        )
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(resp["fieldsets"][12]["fields"], ["ulteriori_informazioni"])

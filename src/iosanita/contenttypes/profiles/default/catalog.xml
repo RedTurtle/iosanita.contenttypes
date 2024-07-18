@@ -19,8 +19,8 @@
 <index name="news_venue" meta_type="KeywordIndex">
   <indexed_attr value="news_venue"/>
 </index>
-<index name="uo_appartenenza_uid" meta_type="KeywordIndex">
-  <indexed_attr value="uo_appartenenza_uid"/>
+<index name="uo_correlata_uid" meta_type="KeywordIndex">
+  <indexed_attr value="uo_correlata_uid"/>
 </index>
 
   <!-- metadata -->

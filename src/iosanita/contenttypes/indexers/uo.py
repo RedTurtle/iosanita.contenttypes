@@ -4,10 +4,10 @@ from plone.indexer.decorator import indexer
 
 
 @indexer(IDexterityContent)
-def uo_appartenenza_uid(context, **kw):
+def uo_correlata_uid(context, **kw):
     """ """
     return [
         x.to_object.UID()
-        for x in getattr(context.aq_base, "uo_appartenenza", [])
+        for x in getattr(context.aq_base, "uo_correlata", [])
         if x.to_object
     ]

@@ -17,7 +17,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         title=_("descrizione_estesa_struttura_label", default="Descrizione estesa"),
         required=False,
         description=_(
-            "descrizione_estesa_label_help",
+            "descrizione_estesa_struttura_help",
             default="Descrizione più estesa della struttura con riferimento alle principali attività sanitarie svolte.",
         ),
     )
@@ -31,22 +31,22 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    orari_apertura = BlocksField(
-        title=_("orari_apertura_label", default="Orari di apertura"),
+    orari = BlocksField(
+        title=_("orari_struttura_label", default="Orari di apertura"),
         required=True,
         description=_(
-            "orari_apertura_help",
-            default="Orario di apertura della struttura al pubblico.",
+            "orari_struttura_help",
+            default="Orari di apertura della struttura al pubblico.",
         ),
     )
 
-    responsabile_struttura = RelationList(
+    responsabile_correlato = RelationList(
         title=_(
-            "responsabile_struttura_label",
+            "responsabile_correlato_struttura_label",
             default="Responsabile",
         ),
         description=_(
-            "responsabile_help",
+            "responsabile_correlato_struttura_help",
             default="La persona che dirige la struttura.",
         ),
         required=True,
@@ -54,40 +54,36 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
 
-    coordinatore_struttura = RelationList(
+    coordinatore_correlato = RelationList(
         title=_(
-            "coordinatore_label",
+            "coordinatore_correlato_struttura_label",
             default="Coordinatore",
         ),
         description=_(
-            "responsabile_struttura_help",
+            "coordinatore_correlato_struttura_help",
             default="La persona che coordina la struttura.",
         ),
         required=False,
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
-    personale_struttura = RelationList(
+    personale_correlato = RelationList(
         title=_(
-            "personale_label",
+            "personale_correlato_struttura_label",
             default="Personale",
         ),
         description=_(
-            "personale_struttura_help",
+            "personale_correlato_struttura_help",
             default="Elenco del personale che opera nella struttura.",
         ),
         required=False,
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
-    uo_appartenenza = RelationList(
+    uo_correlata = RelationList(
         title=_(
-            "uo_appartenenza_label",
+            "uo_correlata_struttura_label",
             default="Unità organizzativa di appartenenza",
-        ),
-        description=_(
-            "uo_appartenenza_help",
-            default="",
         ),
         required=False,
         default=[],
@@ -95,26 +91,26 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     )
 
     form.widget(
-        "responsabile_struttura",
+        "responsabile_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Persona"]},
     )
     form.widget(
-        "coordinatore_struttura",
+        "coordinatore_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Persona"]},
     )
     form.widget(
-        "personale_struttura",
+        "personale_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Persona"]},
     )
 
     form.widget(
-        "uo_appartenenza",
+        "uo_correlata",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["UnitaOrganizzativa"]},
@@ -132,22 +128,22 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         fields=["come_accedere"],
     )
     model.fieldset(
-        "orari_apertura",
-        label=_("orari_apertura_label", default="Orari di apertura"),
-        fields=["orari_apertura"],
+        "orari",
+        label=_("orari_label", default="Orari di apertura"),
+        fields=["orari"],
     )
 
     model.fieldset(
         "persone_struttura",
         label=_("persone_struttura_label", default="Persone struttura"),
         fields=[
-            "responsabile_struttura",
-            "coordinatore_struttura",
-            "personale_struttura",
+            "responsabile_correlato",
+            "coordinatore_correlato",
+            "personale_correlato",
         ],
     )
     model.fieldset(
         "contenuti_collegati",
         label=_("contenuti_collegati_label", default="Contenuti collegati"),
-        fields=["uo_appartenenza"],
+        fields=["uo_correlata"],
     )

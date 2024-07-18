@@ -20,14 +20,6 @@
         title="iosanita.contenttypes: Add Step"
         />
     <permission
-        id="iosanita.contenttypes.AddEvento"
-        title="iosanita.contenttypes: Add Evento"
-        />
-    <permission
-        id="iosanita.contenttypes.AddNotizieEComunicatiStampa"
-        title="iosanita.contenttypes: Add NotizieEComunicatiStampa"
-        />
-    <permission
         id="iosanita.contenttypes.AddPersona"
         title="iosanita.contenttypes: Add Persona"
         />
@@ -42,6 +34,10 @@
     <permission
         id="iosanita.contenttypes.AddStruttura"
         title="iosanita.contenttypes: Add Struttura"
+        />
+    <permission
+        id="iosanita.contenttypes.AddServizio"
+        title="iosanita.contenttypes: Add Servizio"
         />
   </configure>
 

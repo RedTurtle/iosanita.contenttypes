@@ -5,11 +5,7 @@
         i18n:domain="plone"
 >
 
-  <property name="behaviors"
-            purge="False"
-  >
-    <element value="plone.versioning" />
-    <element value="plone.tableofcontents" />
+  <property name="behaviors" purge="False">
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.constraintypes" />
