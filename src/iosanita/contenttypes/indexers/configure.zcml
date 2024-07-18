@@ -32,7 +32,10 @@
       factory=".relations.uo_correlata_uid"
       name="uo_correlata_uid"
       />
-  <adapter factory=".relations.struttura_correlata_uid" name="struttura_correlata_uid" />
+  <adapter
+      factory=".relations.struttura_correlata_uid"
+      name="struttura_correlata_uid"
+      />
 
 
   <!-- only metadata -->
