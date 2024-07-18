@@ -3,9 +3,6 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
-  <adapter factory=".unita_organizzativa.UOJSONSummarySerializer" />
-  <adapter factory=".unita_organizzativa.UOSerializer" />
-
   <adapter factory=".persona.PersonaSerializer" />
 
 </configure>

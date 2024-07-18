@@ -16,7 +16,7 @@ class IUnitaOrganizzativa(model.Schema):
         title=_("uo_competenze_label", default="Competenze"),
         description=_(
             "uo_competenze_help",
-            default="Descrizione dei compiti assegnati alla struttura.",
+            default="Descrizione dei compiti assegnati a quest unità organizzativa.",
         ),
         required=True,
     )
@@ -40,18 +40,6 @@ class IUnitaOrganizzativa(model.Schema):
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
-    )
-
-    struttura_correlata = RelationChoice(
-        title=_("struttura_correlata_label", default="Struttura correlata"),
-        description=_(
-            "struttura_correlata_uo_help",
-            default="Seleziona la sede di questa unità organizzativa. "
-            "Se la sede è una Struttura, utilizza questo campo. "
-            "In alternativa compila i campi successivi.",
-        ),
-        vocabulary="plone.app.vocabularies.Catalog",
         required=False,
     )
 
@@ -100,14 +88,6 @@ class IUnitaOrganizzativa(model.Schema):
             # "basePath": "/amministrazione",
         },
     )
-    form.widget(
-        "struttura_correlata",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["Struttura"],
-        },
-    )
 
     # custom fieldsets and order
     model.fieldset(
@@ -122,16 +102,6 @@ class IUnitaOrganizzativa(model.Schema):
             "responsabile_uo",
             "personale_uo",
         ],
-    )
-    model.fieldset(
-        "dove",
-        label=_("dove_label", default="Dove"),
-        description=_(
-            "dove_uo_label",
-            default="Se la sede dell'Unità organizzativa è una Struttura presente nel sito, utilizza il relativo campo per correlarla. "
-            "In alternativa puoi selezionare un Luogo, o come ultima opzione inserire i dati a mano.",
-        ),
-        fields=["struttura_correlata"],
     )
     model.fieldset(
         "orari_apertura",

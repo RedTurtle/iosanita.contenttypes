@@ -155,7 +155,6 @@ class TestUOSchema(unittest.TestCase):
         self.assertEqual(
             resp["fieldsets"][4]["fields"],
             [
-                "struttura_correlata",
                 "luogo_correlato",
                 "nome_sede",
                 "street",

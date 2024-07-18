@@ -18,25 +18,13 @@
  </index>
 <index name="news_venue" meta_type="KeywordIndex">
   <indexed_attr value="news_venue"/>
- </index>
- 
+</index>
+<index name="uo_appartenenza_uid" meta_type="KeywordIndex">
+  <indexed_attr value="uo_appartenenza_uid"/>
+</index>
+
   <!-- metadata -->
   <column value="event_location" />
   <column value="rassegna" />
-
-  <!-- cleanup -->
-  <index name="argomenti_correlati"
-         remove="True"
-  />
-  <column remove="True"
-          value="argomenti_correlati"
-  />
-  <index name="argomenti"
-         remove="True"
-  />
-  <column remove="True"
-          value="argomenti"
-  />
-  
 
 </object>

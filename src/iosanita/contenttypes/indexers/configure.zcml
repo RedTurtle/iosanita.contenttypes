@@ -28,6 +28,10 @@
       factory=".events.rassegna"
       name="rassegna"
       />
+  <adapter
+      factory=".uo_appartenenza.uo_appartenenza_uid"
+      name="uo_appartenenza_uid"
+      />
 
   <!-- only metadata -->
 

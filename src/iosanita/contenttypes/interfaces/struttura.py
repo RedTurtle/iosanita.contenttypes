@@ -80,13 +80,13 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
-    unita_organizzativa_appartenenza = RelationList(
+    uo_appartenenza = RelationList(
         title=_(
-            "unita_organizzativa_appartenenza_label",
+            "uo_appartenenza_label",
             default="Unità organizzativa di appartenenza",
         ),
         description=_(
-            "unita_organizzativa_appartenenza_help",
+            "uo_appartenenza_help",
             default="",
         ),
         required=False,
@@ -114,7 +114,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     )
 
     form.widget(
-        "unita_organizzativa_appartenenza",
+        "uo_appartenenza",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["UnitaOrganizzativa"]},
@@ -149,5 +149,5 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     model.fieldset(
         "contenuti_collegati",
         label=_("contenuti_collegati_label", default="Contenuti collegati"),
-        fields=["unita_organizzativa_appartenenza"],
+        fields=["uo_appartenenza"],
     )
