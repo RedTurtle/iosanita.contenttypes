@@ -3,13 +3,13 @@
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
-from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
+from plone.app.dexterity import textindexer
 
 
 class IServizio(model.Schema, IIosanitaContenttypes):
@@ -73,13 +73,13 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         default="Prenota online",
         required=False,
     )
-    strutture_correlate = RelationList(
+    struttura_correlata = RelationList(
         title=_(
-            "strutture_correlate_label",
+            "struttura_correlata_label",
             default="Struttura correlata",
         ),
         description=_(
-            "strutture_correlate_help",
+            "struttura_correlata_help",
             default="Seleziona una struttura correlata.",
         ),
         default=[],
@@ -141,7 +141,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
 
     # widgets
     form.widget(
-        "strutture_correlate",
+        "struttura_correlata",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -191,7 +191,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     model.fieldset(
         "dove",
         label=_("dove_label", default="Dove"),
-        fields=["strutture_correlate"],
+        fields=["struttura_correlata"],
     )
     model.fieldset(
         "orari",

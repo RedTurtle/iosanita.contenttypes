@@ -89,7 +89,30 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
+    struttura_correlata = RelationList(
+        title=_(
+            "struttura_correlata_label",
+            default="Struttura correlata",
+        ),
+        description=_(
+            "struttura_correlata_help",
+            default="Seleziona una struttura correlata.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+        missing_value=(),
+    )
 
+    # widgets
+    form.widget(
+        "struttura_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Struttura"],
+        },
+    )
     form.widget(
         "responsabile_correlato",
         RelatedItemsFieldWidget,
@@ -145,5 +168,5 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     model.fieldset(
         "contenuti_collegati",
         label=_("contenuti_collegati_label", default="Contenuti collegati"),
-        fields=["uo_correlata"],
+        fields=["uo_correlata", "struttura_correlata"],
     )

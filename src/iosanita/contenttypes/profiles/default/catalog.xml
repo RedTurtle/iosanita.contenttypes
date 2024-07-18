@@ -22,7 +22,9 @@
 <index name="uo_correlata_uid" meta_type="KeywordIndex">
   <indexed_attr value="uo_correlata_uid"/>
 </index>
-
+<index name="struttura_correlata_uid" meta_type="KeywordIndex">
+  <indexed_attr value="struttura_correlata_uid"/>
+</index>
   <!-- metadata -->
   <column value="event_location" />
   <column value="rassegna" />

@@ -58,7 +58,6 @@ class TestStrutturaSchema(unittest.TestCase):
                 "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.servizi",
                 "collective.taxonomy.generated.parliamo_di",
-                "iosanita.contenttypes.behavior.strutture_correlate",
             ),
         )
 
@@ -213,7 +212,7 @@ class TestStrutturaSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
             resp["fieldsets"][9]["fields"],
-            ["uo_correlata", "strutture_correlate"],
+            ["uo_correlata", "struttura_correlata"],
         )
 
     def test_struttura_fields_ulteriori_informazioni_fieldset(self):

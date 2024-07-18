@@ -79,7 +79,7 @@ FIELDSETS_ORDER = {
         "persone",
         "servizi",
         "dove",
-        "orari_apertura",
+        "orari",
         "contatti",
         "documenti",
         "ulteriori_informazioni",

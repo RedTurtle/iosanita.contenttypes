@@ -71,7 +71,7 @@ class TestUOSchema(unittest.TestCase):
                 "persone_uo",
                 "servizi",
                 "dove",
-                "orari_apertura",
+                "orari",
                 "contatti",
                 "documenti",
                 "ulteriori_informazioni",
@@ -91,10 +91,10 @@ class TestUOSchema(unittest.TestCase):
                 [
                     "competenze",
                     "description",
-                    "orari_apertura",
+                    "orari",
                     "punti_di_contatto",
                     "title",
-                    "responsabile_uo",
+                    "responsabile_correlato",
                 ]
             ),
         )
@@ -134,7 +134,7 @@ class TestUOSchema(unittest.TestCase):
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(
             resp["fieldsets"][2]["fields"],
-            ["responsabile_uo", "personale_uo"],
+            ["responsabile_correlato", "personale_correlato"],
         )
 
     def test_uo_fields_servizi_fieldset(self):
@@ -167,12 +167,12 @@ class TestUOSchema(unittest.TestCase):
             ],
         )
 
-    def test_uo_fields_orari_apertura_fieldset(self):
+    def test_uo_fields_orari_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][5]["fields"], ["orari_apertura"])
+        self.assertEqual(resp["fieldsets"][5]["fields"], ["orari"])
 
     def test_uo_fields_contatti_fieldset(self):
         """

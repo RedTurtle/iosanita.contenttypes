@@ -170,12 +170,12 @@ class TestServizioSchema(unittest.TestCase):
             ["costi"],
         )
 
-    def test_servizio_fields_strutture_correlate_fieldset(self):
+    def test_servizio_fields_struttura_correlata_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Servizio").json()
-        self.assertEqual(resp["fieldsets"][5]["fields"], ["strutture_correlate"])
+        self.assertEqual(resp["fieldsets"][5]["fields"], ["struttura_correlata"])
 
     def test_servizio_fields_orari_fieldset(self):
         """

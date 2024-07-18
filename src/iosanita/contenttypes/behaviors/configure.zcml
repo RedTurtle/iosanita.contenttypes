@@ -80,14 +80,6 @@
       provides=".exclude_from_search.IExcludeFromSearch"
       marker=".exclude_from_search.IExcludeFromSearch"
       />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.strutture_correlate"
-      title="Strutture correlate"
-      description=""
-      factory=".strutture_correlate.StruttureCorrelate"
-      provides=".strutture_correlate.IStruttureCorrelate"
-      marker=".strutture_correlate.IStruttureCorrelate"
-      />
   <!-- ct specific -->
 
   <!-- to check -->

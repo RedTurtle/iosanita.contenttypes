@@ -21,10 +21,10 @@ class IUnitaOrganizzativa(model.Schema):
         required=True,
     )
 
-    responsabile_uo = RelationList(
-        title=_("responsabile_label", default="Responsabile"),
+    responsabile_correlato = RelationList(
+        title=_("responsabile_correlato_uo_label", default="Responsabile"),
         description=_(
-            "responsabile_uo_help",
+            "responsabile_correlato_uo_help",
             default="La persona che dirige l'unità organizzativa.",
         ),
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
@@ -32,10 +32,10 @@ class IUnitaOrganizzativa(model.Schema):
         required=True,
     )
 
-    personale_uo = RelationList(
-        title=_("personale_label", default="Personale"),
+    personale_correlato = RelationList(
+        title=_("personale_correlato_uo_label", default="Personale"),
         description=_(
-            "personale_uo_help",
+            "personale_correlato_uo_help",
             default="Elenco del personale che opera nell'unità organizzativa.",
         ),
         default=[],
@@ -43,10 +43,10 @@ class IUnitaOrganizzativa(model.Schema):
         required=False,
     )
 
-    orari_apertura = BlocksField(
-        title=_("orari_apertura_label", default="Orari di apertura"),
+    orari = BlocksField(
+        title=_("orari_uo_label", default="Orari di apertura"),
         description=_(
-            "orari_apertura_help",
+            "orari_uo_help",
             default="Indicazione delle fasce orarie in cui è possibile contattare o accedere all'unità organizzativa.",
         ),
         required=True,
@@ -73,13 +73,13 @@ class IUnitaOrganizzativa(model.Schema):
         },
     )
     form.widget(
-        "personale_uo",
+        "personale_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Persona"]},
     )
     form.widget(
-        "responsabile_uo",
+        "responsabile_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -99,14 +99,14 @@ class IUnitaOrganizzativa(model.Schema):
         "persone_uo",
         label=_("persone_uo_fieldset_label", default="Persone Unità organizzativa"),
         fields=[
-            "responsabile_uo",
-            "personale_uo",
+            "responsabile_correlato",
+            "personale_correlato",
         ],
     )
     model.fieldset(
-        "orari_apertura",
-        label=_("orari_apertura_label", default="Orari di apertura"),
-        fields=["orari_apertura"],
+        "orari",
+        label=_("orari_uo_label", default="Orari di apertura"),
+        fields=["orari"],
     )
 
     model.fieldset(
@@ -117,4 +117,4 @@ class IUnitaOrganizzativa(model.Schema):
 
     # SearchableText indexers
     textindexer.searchable("competenze")
-    textindexer.searchable("orari_apertura")
+    textindexer.searchable("orari")
