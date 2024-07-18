@@ -7,7 +7,6 @@ from plone.autoform import directives as form
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
-from zope import schema
 
 
 class IUnitaOrganizzativa(model.Schema):
