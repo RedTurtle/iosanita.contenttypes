@@ -3,26 +3,15 @@
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
-from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
-from zope import schema
 
 
 class IStruttura(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type"""
-
-    sottotitolo = schema.TextLine(
-        title=_("sottotitolo_label", default="Sottotitolo"),
-        description=_(
-            "sottotitolo_help",
-            default="Indica un eventuale sottotitolo/titolo alternativo.",
-        ),
-        required=False,
-    )
 
     descrizione_estesa = BlocksField(
         title=_("descrizione_estesa_struttura_label", default="Descrizione estesa"),
@@ -50,27 +39,14 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
             default="Orario di apertura della struttura al pubblico.",
         ),
     )
-    servizi = RelationList(
-        title=_("servizi_label", default="Servizi"),
-        default=[],
-        value_type=RelationChoice(
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
-        required=False,
-        missing_value=(),
-        description=_(
-            "servizi_help",
-            default="Elenco dei servizi e delle prestazioni offerti dalla struttura.",
-        ),
-    )
 
     responsabile_struttura = RelationList(
         title=_(
             "responsabile_struttura_label",
-            default="Responsabile struttura",
+            default="Responsabile",
         ),
         description=_(
-            "responsabile_struttura_help",
+            "responsabile_help",
             default="La persona che dirige la struttura.",
         ),
         required=True,
@@ -80,8 +56,8 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
 
     coordinatore_struttura = RelationList(
         title=_(
-            "coordinatore_struttura_label",
-            default="Coordinatore della struttura",
+            "coordinatore_label",
+            default="Coordinatore",
         ),
         description=_(
             "responsabile_struttura_help",
@@ -93,8 +69,8 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     )
     personale_struttura = RelationList(
         title=_(
-            "personale_struttura_label",
-            default="Personale della struttura",
+            "personale_label",
+            default="Personale",
         ),
         description=_(
             "personale_struttura_help",
@@ -160,11 +136,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         label=_("orari_apertura_label", default="Orari di apertura"),
         fields=["orari_apertura"],
     )
-    model.fieldset(
-        "servizi",
-        label=_("servizi_label", default="Servizi"),
-        fields=["servizi"],
-    )
+
     model.fieldset(
         "persone_struttura",
         label=_("persone_struttura_label", default="Persone struttura"),
@@ -179,6 +151,3 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         label=_("contenuti_collegati_label", default="Contenuti collegati"),
         fields=["unita_organizzativa_appartenenza"],
     )
-
-    # SearchableText
-    textindexer.searchable("sottotitolo")

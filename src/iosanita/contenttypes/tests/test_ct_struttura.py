@@ -41,6 +41,7 @@ class TestStrutturaSchema(unittest.TestCase):
                 "plone.publication",
                 "plone.categorization",
                 "plone.basic",
+                "iosanita.contenttypes.behavior.sottotitolo",
                 "plone.locking",
                 "plone.constraintypes",
                 "plone.leadimage",
@@ -55,6 +56,7 @@ class TestStrutturaSchema(unittest.TestCase):
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
                 "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",
                 "iosanita.contenttypes.behavior.contatti",
+                "iosanita.contenttypes.behavior.servizi",
                 "collective.taxonomy.generated.parliamo_di",
                 "iosanita.contenttypes.behavior.strutture_correlate",
             ),
@@ -80,11 +82,11 @@ class TestStrutturaSchema(unittest.TestCase):
                 "persone_struttura",
                 "contenuti_collegati",
                 "ulteriori_informazioni",
+                "seo",
                 "settings",
                 "ownership",
                 "dates",
                 "categorization",
-                "seo",
             ],
         )
 

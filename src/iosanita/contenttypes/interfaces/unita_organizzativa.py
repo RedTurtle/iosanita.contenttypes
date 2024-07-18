@@ -10,21 +10,8 @@ from z3c.relationfield.schema import RelationList
 from zope import schema
 
 
-# TODO: migration script for these commented fields towards PDC
-# contact_info
-# Probabilmente non possibile trattandosi di un campo a blocchi
-# preferirei si arrangiassero le redazioni. Altrimenti si defaulta
-# ad un tipo a caso + tutto il testo e poi si arrangiano comunque
 class IUnitaOrganizzativa(model.Schema):
     """Marker interface for content type UnitaOrganizzativa"""
-
-    subtitle = schema.TextLine(
-        title=_(
-            "subtitle_label",
-            default="Subtitle",
-        ),
-        required=False,
-    )
 
     competenze = BlocksField(
         title=_("uo_competenze_label", default="Competenze"),
@@ -35,53 +22,63 @@ class IUnitaOrganizzativa(model.Schema):
         required=True,
     )
 
-    responsabile = RelationList(
+    responsabile_uo = RelationList(
         title=_("responsabile_label", default="Responsabile"),
-        value_type=RelationChoice(
-            title=_("Responsabile"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
         description=_(
-            "responsabile_help",
-            default="Selezionare il/i responsabile/i della struttura.",
+            "responsabile_uo_help",
+            default="La persona che dirige l'unità organizzativa.",
+        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        default=[],
+        required=True,
+    )
+
+    personale_uo = RelationList(
+        title=_("personale_label", default="Personale"),
+        description=_(
+            "personale_uo_help",
+            default="Elenco del personale che opera nell'unità organizzativa.",
         ),
         default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
     )
 
-    # vocabolario di riferimento sara' dinamico con i content type persona
-    persone_struttura = RelationList(
-        title=_(
-            "persone_struttura_label", default="Persone che compongono la struttura"
-        ),
-        default=[],
-        value_type=RelationChoice(
-            title=_("Persone della struttura"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
+    struttura_correlata = RelationChoice(
+        title=_("struttura_correlata_label", default="Struttura correlata"),
         description=_(
-            "persone_struttura_help",
-            default="Seleziona la lista delle persone che compongono" " la struttura.",
+            "struttura_correlata_uo_help",
+            default="Seleziona la sede di questa unità organizzativa. "
+            "Se la sede è una Struttura, utilizza questo campo. "
+            "In alternativa compila i campi successivi.",
         ),
+        vocabulary="plone.app.vocabularies.Catalog",
         required=False,
     )
 
-    documenti_pubblici = RelationList(
-        title=_("documenti_pubblici_label", default="Documenti pubblici"),
+    orari_apertura = BlocksField(
+        title=_("orari_apertura_label", default="Orari di apertura"),
+        description=_(
+            "orari_apertura_help",
+            default="Indicazione delle fasce orarie in cui è possibile contattare o accedere all'unità organizzativa.",
+        ),
+        required=True,
+    )
+
+    documenti = RelationList(
+        title=_("documenti_label", default="Documenti"),
         default=[],
         description=_(
-            "documenti_pubblici_help",
-            default="Documenti pubblici importanti, collegati a questa Unità Organizzativa",  # noqa
+            "documenti_help",
+            default="Seleziona dei documenti correlati.",
         ),
-        value_type=RelationChoice(
-            title=_("Documenti pubblici"), vocabulary="plone.app.vocabularies.Catalog"
-        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
     )
 
     #  custom widgets
     form.widget(
-        "documenti_pubblici",
+        "documenti",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -89,19 +86,27 @@ class IUnitaOrganizzativa(model.Schema):
         },
     )
     form.widget(
-        "persone_struttura",
+        "personale_uo",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Persona"]},
     )
     form.widget(
-        "responsabile",
+        "responsabile_uo",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "maximumSelectionSize": 1,
             "selectableTypes": ["Persona"],
             # "basePath": "/amministrazione",
+        },
+    )
+    form.widget(
+        "struttura_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Struttura"],
         },
     )
 
@@ -112,31 +117,35 @@ class IUnitaOrganizzativa(model.Schema):
         fields=["competenze"],
     )
     model.fieldset(
-        "struttura",
-        label=_("unita_organizzativa_struttura_label", default="Struttura"),
+        "persone_uo",
+        label=_("persone_uo_fieldset_label", default="Persone Unità organizzativa"),
         fields=[
-            "responsabile",
+            "responsabile_uo",
+            "personale_uo",
         ],
     )
     model.fieldset(
-        "persone",
-        label=_("persone_label", default="Persone"),
-        fields=["persone_struttura"],
+        "dove",
+        label=_("dove_label", default="Dove"),
+        description=_(
+            "dove_uo_label",
+            default="Se la sede dell'Unità organizzativa è una Struttura presente nel sito, utilizza il relativo campo per correlarla. "
+            "In alternativa puoi selezionare un Luogo, o come ultima opzione inserire i dati a mano.",
+        ),
+        fields=["struttura_correlata"],
     )
     model.fieldset(
-        "contatti",
-        label=_("contatti_label", default="Contatti"),
-        fields=[],
+        "orari_apertura",
+        label=_("orari_apertura_label", default="Orari di apertura"),
+        fields=["orari_apertura"],
     )
 
     model.fieldset(
-        "correlati",
-        label=_("correlati_label", default="Contenuti collegati"),
-        fields=["documenti_pubblici"],
+        "documenti",
+        label=_("documenti_label", default="Documenti"),
+        fields=["documenti"],
     )
-
-    form.order_after(documenti_pubblici="relatedItems")
 
     # SearchableText indexers
     textindexer.searchable("competenze")
-    textindexer.searchable("responsabile")
+    textindexer.searchable("orari_apertura")

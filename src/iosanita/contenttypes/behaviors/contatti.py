@@ -50,38 +50,9 @@ class IContatti(IContattiSchema):
     """"""
 
 
-@provider(IFormFieldProvider)
-class IContattiUnitaOrganizzativa(IContattiSchema):
-    orario_pubblico = BlocksField(
-        title=_("orario_pubblico_label", default="Orario per il pubblico"),
-        description=_(
-            "orario_pubblico_help",
-            default="Indicare eventuali orari di accesso al pubblico",
-        ),
-        required=True,
-    )
-
-    model.fieldset(
-        "contatti",
-        label=_("contatti_label", default="Contatti"),
-        fields=["orario_pubblico"],
-    )
-
-    textindexer.searchable("orario_pubblico")
-
-
 @implementer(IContatti)
 @adapter(IDexterityContent)
 class Contatti(object):
-    """ """
-
-    def __init__(self, context):
-        self.context = context
-
-
-@implementer(IContattiUnitaOrganizzativa)
-@adapter(IDexterityContent)
-class ContattiUnitaOrganizzativa(object):
     """ """
 
     def __init__(self, context):

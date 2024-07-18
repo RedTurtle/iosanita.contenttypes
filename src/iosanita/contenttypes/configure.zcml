@@ -23,7 +23,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="Io-Sanita contenttypes"
+      title="Io-Sanita: Content-types"
       description="Installs the iosanita.contenttypes add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/default"

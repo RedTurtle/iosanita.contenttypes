@@ -11,6 +11,24 @@
 
   <!-- common -->
   <plone:behavior
+      name="iosanita.contenttypes.behavior.sottotitolo"
+      title="Sottotitolo"
+      description=""
+      factory=".sottotitolo.Sottotitolo"
+      provides=".sottotitolo.ISottotitolo"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".sottotitolo.ISottotitolo"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.servizi"
+      title="Servizi"
+      description=""
+      factory=".servizi.Servizi"
+      provides=".servizi.IServizi"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".servizi.IServizi"
+      />
+  <plone:behavior
       name="iosanita.contenttypes.behavior.parliamo_di"
       title="Parliamo di"
       description="Parliamo di"
@@ -71,14 +89,6 @@
       marker=".strutture_correlate.IStruttureCorrelate"
       />
   <!-- ct specific -->
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.contatti_uo"
-      title="Contatti UO"
-      description="Behavior contatti per UO."
-      factory=".contatti.ContattiUnitaOrganizzativa"
-      provides=".contatti.IContattiUnitaOrganizzativa"
-      marker=".contatti.IContattiUnitaOrganizzativa"
-      />
 
   <!-- to check -->
   <plone:behavior

@@ -33,7 +33,7 @@ class IStruttureCorrelate(model.Schema):
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
-            "selectableTypes": ["UnitaOrganizzativa"],
+            "selectableTypes": ["Struttura"],
         },
     )
 
