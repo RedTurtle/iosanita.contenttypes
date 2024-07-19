@@ -5,4 +5,10 @@
 
   <adapter factory=".persona.PersonaSerializer" />
 
+
+  <!-- Summary Serializer Metadata -->
+  <utility
+      factory=".summary.JSONSummarySerializerMetadata"
+      name="iosanita.contenttypes.summary_serializer_metadata"
+      />
 </configure>
