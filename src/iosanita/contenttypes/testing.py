@@ -14,6 +14,7 @@ import kitconcept.seo
 import plone.app.caching
 import plone.formwidget.geolocation
 import plone.restapi
+import collective.taxonomy
 
 
 class TestLayer(RedturtleVoltoLayer):

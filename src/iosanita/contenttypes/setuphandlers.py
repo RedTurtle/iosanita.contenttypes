@@ -56,32 +56,8 @@ def post_install(context):
         "iosanita.contenttypes:taxonomy", "collective.taxonomy"
     )
 
-    # for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
-    #     utility.updateBehavior(**{"field_prefix": ""})
-    #     logger.info(
-    #         f"{colors.DARKCYAN} Change taxonomy prefix for {utility_name} {colors.ENDC}"  # noqa
-    #     )
-
-    # logger.info(
-    #     f"{colors.DARKCYAN} iosanita.contentypes taxonomies imported {colors.ENDC}"  # noqa
-    # )
-    # update_types(context)
-    # update_registry(context)
-    # update_catalog(context)
-
-    # Do something at the end of the installation of this package.
-
 
 def post_install_taxonomy(context):
-    for index in [
-        "tipologia_notizia",
-        "a_chi_si_rivolge_tassonomia",
-        "tipologia_argomento",
-        "tipologia_evento",
-        "tipologia_punti_di_contatto",
-    ]:
-        api.portal.get_tool("portal_catalog").delIndex(index)
-
     for utility_name, utility in list(getUtilitiesFor(ITaxonomy)):
         utility.updateBehavior(**{"field_prefix": ""})
         logger.info(
@@ -91,8 +67,8 @@ def post_install_taxonomy(context):
     logger.info(
         f"{colors.DARKCYAN} iosanita.contentypes taxonomies imported {colors.ENDC}"  # noqa
     )
-    update_types(context)
-    update_registry(context)
+    # update_types(context)
+    # update_registry(context)
     update_catalog(context)
 
 

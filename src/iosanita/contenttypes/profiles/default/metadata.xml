@@ -6,5 +6,6 @@
     <dependency>profile-collective.taxonomy:default</dependency>
     <dependency>profile-collective.venue:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
+    <dependency>profile-iosanita.contenttypes:taxonomy</dependency>
   </dependencies>
 </metadata>
