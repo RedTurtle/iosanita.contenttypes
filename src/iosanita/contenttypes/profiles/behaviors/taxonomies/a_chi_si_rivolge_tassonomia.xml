@@ -34,13 +34,13 @@
       </caption>
     </term>
     <term>
-      <termIdentifier>persone_con_disabilita</termIdentifier>
+      <termIdentifier>persone-con-disabilita</termIdentifier>
       <caption>
         <langstring language="it">Persone con disabilità</langstring>
       </caption>
     </term>
     <term>
-      <termIdentifier>cittadini_stranieri</termIdentifier>
+      <termIdentifier>cittadini-stranieri</termIdentifier>
       <caption>
         <langstring language="it">Cittadini stranieri</langstring>
       </caption>
@@ -58,13 +58,13 @@
       </caption>
     </term>
     <term>
-      <termIdentifier>proprietari_animali_domestici</termIdentifier>
+      <termIdentifier>proprietari-animali-domestici</termIdentifier>
       <caption>
         <langstring language="it">Proprietari di animali domestici e di affezione</langstring>
       </caption>
     </term>
     <term>
-      <termIdentifier>prestatori_di cura</termIdentifier>
+      <termIdentifier>prestatori-di cura</termIdentifier>
       <caption>
         <langstring language="it">Prestatori di cura (Caregiver)</langstring>
       </caption>
@@ -94,7 +94,7 @@
       </caption>
     </term>
     <term>
-      <termIdentifier>enti_pubblici</termIdentifier>
+      <termIdentifier>enti-pubblici</termIdentifier>
       <caption>
         <langstring language="it">Enti pubblici</langstring>
       </caption>

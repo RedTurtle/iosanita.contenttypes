@@ -25,8 +25,13 @@
 <index name="struttura_correlata_uid" meta_type="KeywordIndex">
   <indexed_attr value="struttura_correlata_uid"/>
 </index>
+
   <!-- metadata -->
   <column value="event_location" />
   <column value="rassegna" />
+  <column value="parliamo_di_metadata" />
+  <column value="a_chi_si_rivolge_tassonomia_metadata" />
+
+
 
 </object>
