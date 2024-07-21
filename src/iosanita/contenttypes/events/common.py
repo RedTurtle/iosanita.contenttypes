@@ -99,7 +99,7 @@ SUBFOLDERS_MAPPING = {
             {
                 "id": "multimedia",
                 "title": "Multimedia",
-                "allowed_types": ("Image"),
+                "allowed_types": ("Image",),
             },
             {
                 "id": "altri-documenti",

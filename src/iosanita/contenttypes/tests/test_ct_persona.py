@@ -7,6 +7,7 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from plone.dexterity.utils import createContentInContainer
 
 import unittest
 
@@ -185,21 +186,27 @@ class TestPersonaSchema(unittest.TestCase):
         self.assertEqual(resp["fieldsets"][7]["fields"], ["ulteriori_informazioni"])
 
 
-# class TestPersona(unittest.TestCase):
-#     """"""
+class TestPersona(unittest.TestCase):
+    """"""
 
-#     layer = INTEGRATION_TESTING
+    layer = INTEGRATION_TESTING
 
-#     def setUp(self):
-#         self.app = self.layer["app"]
-#         self.portal = self.layer["portal"]
-#         self.portal_url = self.portal.absolute_url()
-#         setRoles(self.portal, TEST_USER_ID, ["Manager"])
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
-#     def test_title_composed(self):
-#         persona = api.content.create(
-#             container=self.portal, type="Persona", nome="John", cognome="Doe"
-#         )
+    def test_persona_title_composed(self):
+        createContentInContainer(self.portal, "Persona", nome="John", cognome="Doe")
+        self.assertIn("doe-john", self.portal.keys())
+        persona = self.portal["doe-john"]
+        self.assertEqual(persona.title, "Doe John")
 
-#         self.assertEqual(persona.title, "Doe John")
-#         self.assertEqual(persona.getId(), "doe-john")
+    def test_persona_title_composed_also_with_titolo(self):
+        createContentInContainer(
+            self.portal, "Persona", nome="John", cognome="Doe", titolo_persona="dr."
+        )
+        self.assertIn("dr-doe-john", self.portal.keys())
+        persona = self.portal["dr-doe-john"]
+        self.assertEqual(persona.title, "dr. Doe John")
