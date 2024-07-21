@@ -48,9 +48,12 @@ FIELDSETS_ORDER = {
     ],
     "Persona": [
         "default",
-        "ruolo",
+        "incarichi",
+        "competenze",
         "dove",
+        "orari_ricevimento",
         "contatti",
+        "biografia",
         "ulteriori_informazioni",
     ],
     "PuntoDiContatto": [
@@ -116,67 +119,12 @@ class TypesGet(BaseGet):
 
         return result
 
-    def customize_servizio_schema(self, result):
-        result.get("required").append("description")
-        return result
-
-    def customize_evento_schema(self, result):
-        result.get("required").append("description")
-        return result
-
-    def customize_uo_schema(self, result):
-        result.get("required").append("description")
-        versioning_fields = ["contact_info"]
-        for field in versioning_fields:
-            for fieldset in result["fieldsets"]:
-                if fieldset.get("id") == "contatti" and field in fieldset["fields"]:
-                    fieldset["fields"].remove(field)
-                    fieldset["fields"].insert(0, field)
-        return result
-
-    def customize_news_schema(self, result):
-        result.get("required").append("description")
-        if self.context.portal_type == "News Item":
-            # we are in a news and not in container
-            review_state = self.context.portal_workflow.getInfoFor(
-                self.context, "review_state"
-            )
-            if review_state == "published":
-                result.get("required").append("effective")
-
-        return result
-
-    def customize_documento_schema(self, result):
-        result.get("required").append("description")
-        return result
-
     def reply(self):
         result = super(TypesGet, self).reply()
         if "fieldsets" in result:
             result["fieldsets"] = self.reorder_fieldsets(schema=result)
-        pt = self.request.PATH_INFO.split("/")[-1]
-
-        # be careful: result could be dict or list. If list it will not
-        # contains title. And this is ok for us.
-        pt = self.request.PATH_INFO.split("/")[-1]
 
         if "title" in result:
-            if pt == "Persona":
-                result = self.customize_persona_schema(result)
-            # if pt == "Venue":
-            #     result = self.customize_venue_schema(result)
-            if pt == "Document":
-                result = self.customize_document_schema(result)
-            if pt == "Servizio":
-                result = self.customize_servizio_schema(result)
-            if pt == "UnitaOrganizzativa":
-                result = self.customize_uo_schema(result)
-            if pt == "News Item":
-                result = self.customize_news_schema(result)
-            if pt == "Documento":
-                result = self.customize_documento_schema(result)
-            if pt == "Event":
-                result = self.customize_evento_schema(result)
             result = self.customize_versioning_fields_fieldset(result)
         return result
 

@@ -81,7 +81,14 @@ class TestComeFarePerSchema(unittest.TestCase):
         resp = self.api_session.get("@types/ComeFarePer").json()
         self.assertEqual(
             sorted(resp["required"]),
-            sorted(["a_chi_si_rivolge", "panoramica", "title"]),
+            sorted(
+                [
+                    "a_chi_si_rivolge",
+                    "panoramica",
+                    "title",
+                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                ]
+            ),
         )
 
     def test_come_fare_per_fields_default_fieldset(self):

@@ -100,12 +100,12 @@ class TestServizioSchema(unittest.TestCase):
                     "come_accedere",
                     "tempi_attesa",
                     "costi",
+                    # "description", is required from schema_tweaks.py but it doesn't apply in test
                     "orari",
                     "uo_correlata",
                     "responsabile_correlato",
                     "punti_di_contatto",
                     "a_chi_si_rivolge",
-                    "description",
                 ]
             ),
         )

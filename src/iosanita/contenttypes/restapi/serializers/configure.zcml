@@ -3,9 +3,6 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
-  <adapter factory=".persona.PersonaSerializer" />
-
-
   <!-- Summary Serializer Metadata -->
   <utility
       factory=".summary.JSONSummarySerializerMetadata"

@@ -55,17 +55,6 @@ SUBFOLDERS_MAPPING = {
             },
         ],
     },
-    "Incarico": {
-        "content": [
-            {"id": "compensi-file", "title": "Compensi", "allowed": ("File",)},
-            {
-                "id": "importi-di-viaggio-e-o-servizi",
-                "title": "Importi di viaggio e/o servizi",
-                "allowed_types": ("File",),
-            },
-        ],
-        "allowed_types": [],
-    },
     "Venue": {
         "content": [
             {
@@ -107,11 +96,11 @@ SUBFOLDERS_MAPPING = {
                 "title": "Curriculum vitae",
                 "allowed_types": ("File",),
             },
-            # {
-            #     "id": "multimedia",
-            #     "title": "Multimedia",
-            #     "allowed_types": ("Image", "Video"),
-            # },
+            {
+                "id": "multimedia",
+                "title": "Multimedia",
+                "allowed_types": ("Image"),
+            },
             {
                 "id": "altri-documenti",
                 "title": "Altri documenti",
@@ -119,16 +108,6 @@ SUBFOLDERS_MAPPING = {
             },
         ],
         "allowed_types": [],
-    },
-    "Pratica": {
-        "content": [
-            {
-                "id": "allegati",
-                "title": "Allegati",
-                "type": "Folder",
-                "allowed_types": ("File",),
-            }
-        ],
     },
     "Servizio": {
         "content": [

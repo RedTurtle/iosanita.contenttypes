@@ -97,6 +97,7 @@ class TestStrutturaSchema(unittest.TestCase):
                 [
                     "a_chi_si_rivolge",
                     "come_accedere",
+                    # "description", is required from schema_tweaks.py but it doesn't apply in test
                     "orari",
                     "punti_di_contatto",
                     "responsabile_correlato",

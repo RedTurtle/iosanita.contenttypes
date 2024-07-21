@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.testing import RESTAPI_TESTING, INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -11,7 +11,7 @@ from plone.restapi.testing import RelativeSession
 import unittest
 
 
-class TestUOSchema(unittest.TestCase):
+class TestPersonaSchema(unittest.TestCase):
     layer = RESTAPI_TESTING
 
     def setUp(self):
@@ -28,10 +28,10 @@ class TestUOSchema(unittest.TestCase):
     def tearDown(self):
         self.api_session.close()
 
-    def test_behaviors_enabled_for_uo(self):
+    def test_behaviors_enabled_for_persona(self):
         portal_types = api.portal.get_tool(name="portal_types")
         self.assertEqual(
-            portal_types["UnitaOrganizzativa"].behaviors,
+            portal_types["Persona"].behaviors,
             (
                 "plone.namefromtitle",
                 "plone.allowdiscussion",
@@ -39,41 +39,37 @@ class TestUOSchema(unittest.TestCase):
                 "plone.shortname",
                 "plone.ownership",
                 "plone.publication",
-                "plone.categorization",
-                "plone.basic",
-                "iosanita.contenttypes.behavior.sottotitolo",
-                "plone.locking",
-                "plone.leadimage",
-                "volto.preview_image",
                 "plone.relateditems",
+                "plone.categorization",
+                "plone.locking",
                 "plone.textindexer",
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
+                "plone.constraintypes",
+                "collective.taxonomy.generated.incarico",
                 "iosanita.contenttypes.behavior.dove",
-                "iosanita.contenttypes.behavior.servizi",
                 "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
             ),
         )
 
-    def test_uo_fieldsets(self):
+    def test_persona_fieldsets(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(len(resp["fieldsets"]), 14)
+        resp = self.api_session.get("@types/Persona").json()
+        self.assertEqual(len(resp["fieldsets"]), 13)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
                 "default",
-                "cosa_fa",
-                "persone_uo",
-                "servizi",
+                "incarichi",
+                "competenze",
                 "dove",
-                "orari",
+                "orari_ricevimento",
                 "contatti",
-                "documenti",
+                "biografia",
                 "ulteriori_informazioni",
                 "settings",
                 "ownership",
@@ -83,78 +79,68 @@ class TestUOSchema(unittest.TestCase):
             ],
         )
 
-    def test_uo_required_fields(self):
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
+    def test_persona_required_fields(self):
+        resp = self.api_session.get("@types/Persona").json()
         self.assertEqual(
             sorted(resp["required"]),
             sorted(
                 [
+                    "cognome",
                     "competenze",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
-                    "orari",
+                    "description",
+                    "incarico",
+                    "nome",
                     "punti_di_contatto",
-                    "responsabile_correlato",
-                    "title",
                 ]
             ),
         )
 
-    def test_uo_fields_default_fieldset(self):
+    def test_persona_fields_default_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
+        resp = self.api_session.get("@types/Persona").json()
         self.assertEqual(
             resp["fieldsets"][0]["fields"],
             [
-                "title",
+                "cognome",
+                "nome",
+                "titolo_persona",
                 "description",
-                "sottotitolo",
                 "image",
-                "image_caption",
-                "preview_image",
-                "preview_caption",
+                "uo_correlata",
+                "struttura_correlata",
             ],
         )
 
-    def test_uo_fields_cosa_fa_fieldset(self):
+    def test_persona_fields_incarichi_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
+        resp = self.api_session.get("@types/Persona").json()
         self.assertEqual(
-            resp["fieldsets"][1]["fields"],
+            resp["fieldsets"][1]["fields"], ["incarico", "altri_incarichi"]
+        )
+
+    def test_persona_fields_competenze_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Persona").json()
+        self.assertEqual(
+            resp["fieldsets"][2]["fields"],
             ["competenze"],
         )
 
-    def test_uo_fields_persone_fieldset(self):
+    def test_persona_fields_dove_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(
-            resp["fieldsets"][2]["fields"],
-            ["responsabile_correlato", "personale_correlato"],
-        )
-
-    def test_uo_fields_servizi_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
+        resp = self.api_session.get("@types/Persona").json()
         self.assertEqual(
             resp["fieldsets"][3]["fields"],
-            ["servizi"],
-        )
-
-    def test_uo_fields_dove_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(
-            resp["fieldsets"][4]["fields"],
             [
+                "struttura_ricevimento",
                 "luogo_correlato",
                 "nome_sede",
                 "street",
@@ -167,33 +153,53 @@ class TestUOSchema(unittest.TestCase):
             ],
         )
 
-    def test_uo_fields_orari_fieldset(self):
+    def test_persona_fields_orari_ricevimento_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][5]["fields"], ["orari"])
-
-    def test_uo_fields_contatti_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["punti_di_contatto"])
-
-    def test_uo_fields_documenti_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
+        resp = self.api_session.get("@types/Persona").json()
         self.assertEqual(
-            resp["fieldsets"][7]["fields"],
-            ["documenti"],
+            resp["fieldsets"][4]["fields"],
+            ["orari_ricevimento"],
         )
 
-    def test_uo_fields_ulteriori_informazioni_fieldset(self):
+    def test_persona_fields_contatti_fieldset(self):
         """
         Get the list from restapi
         """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][8]["fields"], ["ulteriori_informazioni"])
+        resp = self.api_session.get("@types/Persona").json()
+        self.assertEqual(resp["fieldsets"][5]["fields"], ["punti_di_contatto"])
+
+    def test_persona_fields_biografia_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Persona").json()
+        self.assertEqual(resp["fieldsets"][6]["fields"], ["biografia"])
+
+    def test_persona_fields_ulteriori_informazioni_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Persona").json()
+        self.assertEqual(resp["fieldsets"][7]["fields"], ["ulteriori_informazioni"])
+
+
+# class TestPersona(unittest.TestCase):
+#     """"""
+
+#     layer = INTEGRATION_TESTING
+
+#     def setUp(self):
+#         self.app = self.layer["app"]
+#         self.portal = self.layer["portal"]
+#         self.portal_url = self.portal.absolute_url()
+#         setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+#     def test_title_composed(self):
+#         persona = api.content.create(
+#             container=self.portal, type="Persona", nome="John", cognome="Doe"
+#         )
+
+#         self.assertEqual(persona.title, "Doe John")
+#         self.assertEqual(persona.getId(), "doe-john")

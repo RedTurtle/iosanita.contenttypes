@@ -6,79 +6,75 @@ from plone.app.dexterity import textindexer
 from plone.namedfile import field
 from plone.supermodel import model
 from zope import schema
+from plone.autoform import directives as form
+from z3c.form.interfaces import IAddForm, IEditForm
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from z3c.relationfield.schema import RelationChoice
+from z3c.relationfield.schema import RelationList
 
 
 class IPersona(model.Schema, IIosanitaContenttypes):
     """Marker interface for contenttype Persona"""
 
-    sottotitolo = schema.TextLine(
-        title=_("sottotitolo_label", default="Sottotitolo"),
+    cognome = schema.TextLine(
+        title=_("cognome_label", default="Cognome"),
+        description="",
+        required=True,
+        missing_value="",
+        default="",
+    )
+    nome = schema.TextLine(
+        title=_("nome_label", default="Nome"),
+        description="",
+        required=True,
+        missing_value="",
+        default="",
+    )
+    titolo_persona = schema.TextLine(
+        title=_("titolo_persona_label", default="Titolo persona"),
         description=_(
-            "sottotitolo_help",
-            default="Indica un eventuale sottotitolo/titolo alternativo.",
+            "titolo_persona_help", default="Un titolo personale come ad esempio Dr. "
+        ),
+        required=False,
+        missing_value="",
+        default="",
+    )
+    title = schema.TextLine(
+        title=_("label_title", default="Titolo"),
+        description="",
+        required=False,
+        missing_value="",
+        readonly=True,
+        default="",
+    )
+    description = schema.Text(
+        title=_("label_description", default="Descrizione"),
+        description=_(
+            "help_description",
+            default="Usato nell'elenco degli elementi e nei risultati delle ricerche.",
         ),
         required=True,
+        missing_value="",
     )
 
-    foto_persona = field.NamedBlobImage(
-        title=_("foto_persona_label", default="Foto della persona"),
+    image = field.NamedBlobImage(
+        title=_("foto_persona_label", default="Foto"),
         required=False,
         description=_(
             "foto_persona_help",
-            default="Foto da mostrare della persona. "
+            default="Foto da mostrare dentro al sito. "
             "La dimensione suggerita è 100x180px.",
         ),
     )
 
-    incarichi = BlocksField(
-        title=_("incarichi_label", default="Incarichi"),
+    altri_incarichi = BlocksField(
+        title=_("altri_incarichi_label", default="Altri incarichi"),
         description=_(
-            "incarichi_help",
-            default="Indicazione degli incarichi della persona all'interno dell'ASL.",
+            "altri incarichi_help",
+            default="Indicazione degli altri incarichi della persona all'interno dell'ASL.",
         ),
         required=False,
     )
-
-    orari_di_ricevimento = BlocksField(
-        title=_("orari_di_ricevimento_label", default="Orari di ricevimento"),
-        description=_(
-            "orari_di_ricevimento_help",
-            default="Orari durante i quali è possibile incontrare la persona descritta, se effettua ricevimento.",
-        ),
-        required=False,
-    )
-
-    biografia = BlocksField(
-        title=_("biografia_label", default="Biografia"),
-        description=_(
-            "biografia_help",
-            default="Solo per persona politica: testo descrittivo che riporta"
-            " la biografia della persona.",
-        ),
-        required=False,
-    )
-
-    # # Questo campo per direttive e richieste viene nascosto nella form
-    # # Lo si tiene perche si vuole evitare di perder dati tra le migrazioni
-    # # e magari non poter piu' usare la feature collegata, ossia
-    # # la check persone, in quanto relazioni potrebbero rompersi o perdersi
-    # organizzazione_riferimento = RelationList(
-    #     title=_(
-    #         "organizzazione_riferimento_label",
-    #         default="Unità organizzativa di appartenenza",
-    #     ),
-    #     description=_(
-    #         "organizzazione_riferimento_help",
-    #         default="Seleziona una lista di organizzazioni a cui la persona"
-    #         " appartiene.",
-    #     ),
-    #     value_type=RelationChoice(
-    #         title=_("Organizzazione di riferimento"),
-    #         vocabulary="plone.app.vocabularies.Catalog",
-    #     ),
-    #     default=[],
-    #     required=False,
-    # )
 
     competenze = BlocksField(
         title=_("competenze_label", default="Competenze"),
@@ -89,57 +85,143 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         required=True,
     )
 
-    biografia = BlocksField(
-        title=_("biografia_label", default="Biografia"),
+    uo_correlata = RelationList(
+        title=_(
+            "uo_correlata_servizio_label", default="Unità organizzativa responsabile"
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+        missing_value=(),
+    )
+
+    orari_ricevimento = BlocksField(
+        title=_("orari_ricevimento_label", default="Orari di ricevimento"),
         description=_(
-            "biografia_help",
-            default="Solo per persona politica: testo descrittivo che riporta"
-            " la biografia della persona.",
+            "orari_ricevimento_help",
+            default="Orari durante i quali è possibile incontrare la persona descritta, se effettua ricevimento.",
         ),
         required=False,
     )
+    struttura_ricevimento = RelationList(
+        title=_(
+            "struttura_ricevimento_label",
+            default="Struttura ricevimento",
+        ),
+        description=_(
+            "struttura_ricevimento_help",
+            default="Seleziona una struttura presente sul portale dove la persona riceve i pazienti. Se non è disponibile, compila i campi successivi.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+        missing_value=(),
+    )
 
-    # curriculum_vitae = field.NamedBlobFile(
-    #     title=_("curriculum_vitae_label", default="Curriculum vitae"),
-    #     required=False,
-    #     description=_(
-    #         "curriculum_vitae_help",
-    #         default="Allega un file contenente il curriculum vitae della persona. "
-    #         "Se ha più file da allegare, utilizza questo campo per quello principale "
-    #         'e gli altri mettili dentro alla cartella "Curriculum vitae" che troverai dentro alla Persona.',  # noqa
-    #     ),
-    # )
+    struttura_correlata = RelationList(
+        title=_(
+            "struttura_correlata_label",
+            default="Strutture in cui opera",
+        ),
+        description=_(
+            "struttura_correlata_help",
+            default="Necessario per le persone interne all'ASL, opzionale per medici di base e pediatri.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+        missing_value=(),
+    )
+
+    biografia = BlocksField(
+        title=_("biografia_label", default="Biografia"),
+        description=_("biografia_help", default=""),
+        required=False,
+    )
 
     # custom widgets
-    # form.widget(
-    #     "organizzazione_riferimento",
-    #     RelatedItemsFieldWidget,
-    #     vocabulary="plone.app.vocabularies.Catalog",
-    #     pattern_options={
-    #         "selectableTypes": ["UnitaOrganizzativa"],
-    #     },
-    # )
+    form.widget(
+        "uo_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["UnitaOrganizzativa"],
+        },
+    )
+    form.widget(
+        "struttura_ricevimento",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "maximumSelectionSize": 1,
+            "selectableTypes": ["Struttura"],
+        },
+    )
+    form.widget(
+        "struttura_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Struttura"],
+        },
+    )
 
     # custom fieldsets
     model.fieldset(
-        "ruolo",
-        label=_("ruolo_label", default="Ruolo"),
+        "incarichi",
+        label=_("incarichi_label", default="Incarichi"),
         fields=[
-            # "organizzazione_riferimento",
-            "incarichi",
+            "altri_incarichi",
+        ],
+    )
+    model.fieldset(
+        "competenze",
+        label=_("competenze_label", default="Competenze"),
+        fields=[
             "competenze",
+        ],
+    )
+
+    model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        description=_(
+            "dove_persona_help",
+            default="Se la persona fa ricevimento, indicare dove. "
+            "Questo elemento è necessario per i medici di base e pediatri.",
+        ),
+        fields=["struttura_ricevimento"],
+    )
+
+    model.fieldset(
+        "orari_ricevimento",
+        label=_("orari_ricevimento_label", default="Orari di ricevimento"),
+        fields=[
+            "orari_ricevimento",
+        ],
+    )
+
+    model.fieldset(
+        "biografia",
+        label=_("biografia_label", default="Biografia"),
+        fields=[
             "biografia",
         ],
     )
-    # model.fieldset(
-    #     "documenti",
-    #     label=_("documenti_label", default="Documenti"),
-    #     fields=["curriculum_vitae"],
-    # )
+
+    form.order_before(description="*")
+    form.order_before(title="*")
+    form.order_before(titolo_persona="*")
+    form.order_before(nome="*")
+    form.order_before(cognome="*")
+    form.order_after(altri_incarichi="incarico")
+
+    form.omitted("description")
+    form.omitted("title")
+    form.no_omit(IEditForm, "description")
+    form.no_omit(IAddForm, "description")
 
     # SearchableText fields
+    textindexer.searchable("nome")
+    textindexer.searchable("cognome")
     textindexer.searchable("competenze")
-    # TODO: migration script for these commented fields towards PDC
-    # textindexer.searchable("telefono")
-    # textindexer.searchable("fax")
-    # textindexer.searchable("email")

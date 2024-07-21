@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<vdex xmlns="http://www.imsglobal.org/xsd/imsvdex_v1p0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsvdex_v1p0 imsvdex_v1p0.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd" orderSignificant="false" profileType="hierarchicalTokenTerms" language="it">
+  <vocabName>
+    <langstring language="it">Incarico</langstring>
+  </vocabName>
+  <vocabIdentifier>incarico</vocabIdentifier>
+  <term>
+    <termIdentifier>dirigenziale</termIdentifier>
+    <caption>
+      <langstring language="it">Dirigenziale</langstring>
+    </caption>
+    <term>
+      <termIdentifier>dirigenza-medica</termIdentifier>
+      <caption>
+        <langstring language="it">Dirigenza medica</langstring>
+      </caption>
+      <term>
+        <termIdentifier>primari</termIdentifier>
+        <caption>
+          <langstring language="it">Primari</langstring>
+        </caption>
+      </term>
+    </term>
+    <term>
+      <termIdentifier>dirigenza-non-medica</termIdentifier>
+      <caption>
+        <langstring language="it">Dirigenza non medica</langstring>
+      </caption>
+      <term>
+        <termIdentifier>dirigenti-amministrativi</termIdentifier>
+        <caption>
+          <langstring language="it">Dirigenti amministrativi</langstring>
+        </caption>
+      </term>
+    </term>
+  </term>
+  <term>
+    <termIdentifier>professionale</termIdentifier>
+    <caption>
+      <langstring language="it">Professionale</langstring>
+    </caption>
+    <term>
+      <termIdentifier>medici-di-base</termIdentifier>
+      <caption>
+        <langstring language="it">Medici di base</langstring>
+      </caption>
+    </term>
+    <term>
+      <termIdentifier>medici-specialisti</termIdentifier>
+      <caption>
+        <langstring language="it">Medici specialisti</langstring>
+      </caption>
+    </term>
+  </term>
+</vdex>
