@@ -46,22 +46,19 @@
     <element value="plone.publication" />
     <element value="plone.categorization" />
     <element value="plone.basic" />
+    <element value="iosanita.contenttypes.behavior.sottotitolo" />
     <element value="plone.locking" />
     <element value="plone.leadimage" />
     <element value="volto.preview_image" />
     <element value="plone.relateditems" />
-    <element remove="True"
-             value="design.plone.contenttypes.behavior.geolocation_uo"
-    />
-    <element value="iosanita.contenttypes.behavior.contatti_uo" />
-    <element value="iosanita.contenttypes.behavior.argomenti" />
     <element value="plone.textindexer" />
-    <element value="iosanita.contenttypes.behavior.additional_help_infos" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
-    <element value="iosanita.contenttypes.behavior.address_unita_organizzativa" />
-    <element value="collective.taxonomy.generated.tipologia_target" />
+    <element value="iosanita.contenttypes.behavior.dove" />
+    <element value="iosanita.contenttypes.behavior.servizi" />
+    <element value="iosanita.contenttypes.behavior.contatti" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
   </property>
 
   <!-- View information -->

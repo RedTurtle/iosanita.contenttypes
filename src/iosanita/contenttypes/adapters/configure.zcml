@@ -3,22 +3,11 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     >
 
-  <!-- <adapter
-      factory=".servizi_correlati.GetCorrelatiServizi"
-      provides=".interfaces.ICorrelati"
-      for="design.plone.contenttypes.interfaces.servizio.IServizio
-           zope.publisher.interfaces.browser.IHTTPRequest"
-      name="correlati-servizi"
-      />
-
-  <adapter factory=".searchabletext_indexers.RelationChoiceFieldConverter" />
-  <adapter factory=".searchabletext_indexers.RelationListFieldConverter" />
+  <adapter factory=".query.ZCatalogCompatibleQueryAdapter" />
 
   <adapter
-      factory=".searchabletext_indexers.TextBlockSearchableText"
-      name="text"
-      /> -->
-
-  <adapter factory=".query.ZCatalogCompatibleQueryAdapter" />
+      factory=".schema_tweaks.SchemaTweaks"
+      name="schema.tweaks_iosanita"
+      />
 
 </configure>

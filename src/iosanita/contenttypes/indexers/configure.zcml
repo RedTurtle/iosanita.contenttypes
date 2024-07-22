@@ -5,12 +5,12 @@
       name="event_location"
       />
   <adapter
-      factory=".common.tassonomia_argomenti"
-      name="tassonomia_argomenti"
+      factory=".common.parliamo_di"
+      name="parliamo_di"
       />
   <adapter
-      factory=".common.tassonomia_argomenti_uid"
-      name="tassonomia_argomenti_uid"
+      factory=".common.parliamo_di_uid"
+      name="parliamo_di_uid"
       />
   <adapter
       factory=".common.ufficio_responsabile"
@@ -28,7 +28,24 @@
       factory=".events.rassegna"
       name="rassegna"
       />
+  <adapter
+      factory=".relations.uo_correlata_uid"
+      name="uo_correlata_uid"
+      />
+  <adapter
+      factory=".relations.struttura_correlata_uid"
+      name="struttura_correlata_uid"
+      />
+
 
   <!-- only metadata -->
+  <adapter
+      factory=".taxonomies.parliamo_di_metadata"
+      name="parliamo_di_metadata"
+      />
+  <adapter
+      factory=".taxonomies.a_chi_si_rivolge_tassonomia_metadata"
+      name="a_chi_si_rivolge_tassonomia_metadata"
+      />
 
 </configure>

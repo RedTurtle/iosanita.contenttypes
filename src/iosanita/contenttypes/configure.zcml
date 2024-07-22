@@ -23,7 +23,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="iosanita.contenttypes"
+      title="Io-Sanita: Content-types"
       description="Installs the iosanita.contenttypes add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/default"
@@ -32,7 +32,7 @@
 
   <genericsetup:registerProfile
       name="taxonomy"
-      title="Io sanita: Content-types (behaviors)"
+      title="Io-Sanita: Content-types (behaviors)"
       description="Registers taxonomies."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/behaviors"
@@ -41,7 +41,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="iosanita.contenttypes (uninstall)"
+      title="Io-Sanita contenttypes (uninstall)"
       description="Uninstalls the iosanita.contenttypes add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/uninstall"

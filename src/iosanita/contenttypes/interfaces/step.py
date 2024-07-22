@@ -2,11 +2,11 @@
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.autoform import directives as form
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
-from plone.autoform import directives as form
 
 
 class IStep(model.Schema, IIosanitaContenttypes):

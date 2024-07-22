@@ -13,41 +13,39 @@ from zope.interface import provider
 
 
 @provider(IFormFieldProvider)
-class IStruttureCorrelate(model.Schema):
-    strutture_correlate = RelationList(
-        title="Strutture correlate",
+class IServizi(model.Schema):
+    """Marker interface"""
+
+    servizi = RelationList(
+        title=_("servizi_label", default="Servizi"),
         default=[],
         value_type=RelationChoice(
-            title=_("Struttura correlata"),
             vocabulary="plone.app.vocabularies.Catalog",
         ),
         required=False,
         missing_value=(),
         description=_(
-            "strutture_correlate_help",
-            default="Seleziona la lista delle strutture correlate.",
+            "servizi_help",
+            default="Elenco dei servizi e delle prestazioni offerti.",
         ),
     )
     form.widget(
-        "strutture_correlate",
+        "servizi",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["UnitaOrganizzativa"],
-        },
+        pattern_options={"selectableTypes": ["Servizio"]},
     )
-
     model.fieldset(
-        "correlati",
-        label=_("strutture_correlate_label", default="Contenuti collegati"),
-        fields=["strutture_correlate"],
+        "servizi",
+        label=_("servizi_label", default="Servizi"),
+        fields=["servizi"],
     )
 
 
-@implementer(IStruttureCorrelate)
+@implementer(IServizi)
 @adapter(IDexterityContent)
-class StruttureCorrelate(object):
-    """ """
+class Servizi(object):
+    """"""
 
     def __init__(self, context):
         self.context = context

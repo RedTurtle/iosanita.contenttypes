@@ -8,11 +8,11 @@ try:
 except ImportError:
     from Products.CMFPlone.utils import safe_unicode as safe_text
 
+from zope.component.hooks import getSite
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.component.hooks import getSite
 
 
 class ReferencesVocabulary(object):

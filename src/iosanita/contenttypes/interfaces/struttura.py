@@ -1,61 +1,29 @@
 # -*- coding: utf-8 -*-
+
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
-
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.supermodel import model
-
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
-from zope import schema
 
 
 class IStruttura(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type"""
 
-    sottotitolo = schema.TextLine(
-        title=_("sottotitolo_label", default="Sottotitolo"),
-        description=_(
-            "sottotitolo_help",
-            default="Indica un eventuale sottotitolo/titolo alternativo.",
-        ),
-        required=False,
-    )
-
     descrizione_estesa = BlocksField(
-        title=_("event_descrizione_estesa", default="Cosa è"),
+        title=_("descrizione_estesa_struttura_label", default="Descrizione estesa"),
         required=False,
         description=_(
-            "evento_descrizione_estesa_help",
+            "descrizione_estesa_struttura_help",
             default="Descrizione più estesa della struttura con riferimento alle principali attività sanitarie svolte.",
         ),
     )
 
-    a_chi_si_rivolge = BlocksField(
-        title=_("a_chi_si_rivolge_label", default="A chi è rivolto"),
-        required=True,
-        description=_(
-            "a_chi_si_rivolge_help",
-            default="Descrizione testuale degli utenti dell'ASL a cui è rivolta la struttura.",
-        ),
-    )
-
-    parliamo_di = schema.List(
-        title=_("parliamo_di_label", default="Parliamo di"),
-        description=_(
-            "parliamo_di_help",
-            default="Indicazioni degli argomenti con cui il contenuto di pagina viene taggato.",
-        ),
-        value_type=schema.Choice(
-            vocabulary="collective.taxonomy.tipologia_argomento",
-        ),
-        required=False,
-    )
-
     come_accedere = BlocksField(
-        title=_("come_accedere", default="Come accedere"),
+        title=_("come_accedere_label", default="Come accedere"),
         required=True,
         description=_(
             "come_accedere_help",
@@ -63,97 +31,142 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    orari_apertura = BlocksField(
-        title=_("orari_apertura", default="Orari di apertura"),
+    orari = BlocksField(
+        title=_("orari_struttura_label", default="Orari di apertura"),
         required=True,
         description=_(
-            "orari_apertura_help",
-            default="Orario di apertura della struttura al pubblico.",
+            "orari_struttura_help",
+            default="Orari di apertura della struttura al pubblico.",
         ),
     )
 
-    responsabile_struttura = RelationList(
+    responsabile_correlato = RelationList(
         title=_(
-            "responsabile_struttura_label",
-            default="Responsabile struttura",
+            "responsabile_correlato_struttura_label",
+            default="Responsabile",
         ),
         description=_(
-            "responsabile_struttura_help",
-            default="La persona che dirige la struttura, con collegamento alla relativa pagina foglia persona.",
+            "responsabile_correlato_struttura_help",
+            default="La persona che dirige la struttura.",
         ),
         required=True,
         default=[],
-        value_type=RelationChoice(
-            title=_("Persona"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
 
-    coordinatore_struttura = RelationList(
+    coordinatore_correlato = RelationList(
         title=_(
-            "coordinatore_struttura_label",
-            default="Coordinatore struttura",
+            "coordinatore_correlato_struttura_label",
+            default="Coordinatore",
         ),
         description=_(
-            "responsabile_struttura_help",
-            default="La persona che coordina la struttura, con collegamento alla relativa pagina foglia persona.",
+            "coordinatore_correlato_struttura_help",
+            default="La persona che coordina la struttura.",
         ),
         required=False,
         default=[],
-        value_type=RelationChoice(
-            title=_("Persona"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
-
-    strutture_correlate = RelationList(
-        title="Strutture correlate",
-        default=[],
-        value_type=RelationChoice(
-            title=_("Struttura correlata"),
-            vocabulary="plone.app.vocabularies.Catalog",
+    personale_correlato = RelationList(
+        title=_(
+            "personale_correlato_struttura_label",
+            default="Personale",
         ),
+        description=_(
+            "personale_correlato_struttura_help",
+            default="Elenco del personale che opera nella struttura.",
+        ),
+        required=False,
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+    )
+    uo_correlata = RelationList(
+        title=_(
+            "uo_correlata_struttura_label",
+            default="Unità organizzativa di appartenenza",
+        ),
+        required=False,
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+    )
+    struttura_correlata = RelationList(
+        title=_(
+            "struttura_correlata_label",
+            default="Struttura correlata",
+        ),
+        description=_(
+            "struttura_correlata_help",
+            default="Seleziona una struttura correlata.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
         missing_value=(),
-        description=_(
-            "strutture_correlate_help",
-            default="Elenco di altre strutture simili o collegate.",
-        ),
     )
+
+    # widgets
     form.widget(
-        "strutture_correlate",
+        "struttura_correlata",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "selectableTypes": ["Struttura"],
         },
     )
-
     form.widget(
-        "responsabile_struttura",
+        "responsabile_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["Persona"],
-        },
+        pattern_options={"selectableTypes": ["Persona"]},
+    )
+    form.widget(
+        "coordinatore_correlato",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Persona"]},
+    )
+    form.widget(
+        "personale_correlato",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Persona"]},
+    )
+
+    form.widget(
+        "uo_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["UnitaOrganizzativa"]},
     )
 
     model.fieldset(
-        "utenti",
-        label=_("utenti_label", default="Utenti"),
+        "cosa_e",
+        label=_("cosa_e_fieldset", default="Cos'è"),
+        fields=["descrizione_estesa"],
+    )
+
+    model.fieldset(
+        "come_accedere",
+        label=_("come_accedere_label", default="Come accedere"),
+        fields=["come_accedere"],
+    )
+    model.fieldset(
+        "orari",
+        label=_("orari_label", default="Orari di apertura"),
+        fields=["orari"],
+    )
+
+    model.fieldset(
+        "persone_struttura",
+        label=_("persone_struttura_label", default="Persone struttura"),
         fields=[
-            "a_chi_si_rivolge",
+            "responsabile_correlato",
+            "coordinatore_correlato",
+            "personale_correlato",
         ],
     )
     model.fieldset(
-        "informazioni",
-        label=_("informazioni_label", default="Ulteriori informazioni"),
-        fields=[
-            "parliamo_di",
-        ],
-    )
-    model.fieldset(
-        "correlati",
-        label=_("sturetture_correlate_struttura_label", default="Contenuti collegati"),
-        fields=["strutture_correlate"],
+        "contenuti_collegati",
+        label=_("contenuti_collegati_label", default="Contenuti collegati"),
+        fields=["uo_correlata", "struttura_correlata"],
     )

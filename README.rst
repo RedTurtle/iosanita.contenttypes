@@ -27,43 +27,59 @@
     :alt: License
 
 
-=====================
-iosanita.contenttypes
-=====================
+=======================
+IO-Sanita content-types
+=======================
 
-An add-on for Plone
+Gestione dei content-type di Io-Sanita
 
-Features
---------
+Correlazioni tra content-type
+=============================
 
-- Can be bullet points
+Unità Organizzative
+-------------------
 
+Alcuni content-type tipo Servizio o Struttura, hanno una correlazione con le Unità organizzative.
 
-Examples
---------
+Da un'Unità organizzativa, è possibile sapere quali contenuti la correlano facendo una ricerca in catalogo sull'indice **uo_correlata**.
 
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
+Ad esempio::
 
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
+    > http://localhost:8080/Plone/++api++/@search?uo_correlata=xxx
 
 
-Translations
-------------
+Dove xxx è l'uid di una Unità organizzativa.
 
-This product has been translated into
+Questa chiamata ritorna tutti i contenuti del sito che correlano quell'Unità Organizzativa.
+Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aumentare con determinati parametri.
 
-- Klingon (thanks, K'Plai)
+Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: *&portal_type=Servizio*.
 
 
-Installation
-------------
+Strutture
+-------------------
 
-Install iosanita.contenttypes by adding it to your buildout::
+Alcuni content-type tipo Servizio o Struttura, hanno una correlazione con le Strutture.
+
+Da una Struttura, è possibile sapere quali contenuti la correlano facendo una ricerca in catalogo sull'indice **struttura_correlata**.
+
+Ad esempio::
+
+    > http://localhost:8080/Plone/++api++/@search?struttura_correlata=xxx
+
+
+Dove xxx è l'uid di una Struttura.
+
+Questa chiamata ritorna tutti i contenuti del sito che correlano quella Struttura.
+Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aumentare con determinati parametri.
+
+Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: *&portal_type=Servizio*.
+
+
+Installazione
+=============
+
+Per installare iosanita.contenttypes bisogna per prima cosa aggiungerlo al buildout::
 
     [buildout]
 
@@ -73,39 +89,28 @@ Install iosanita.contenttypes by adding it to your buildout::
         iosanita.contenttypes
 
 
-and then running ``bin/buildout``
+e poi lanciare il buildout con ``bin/buildout``.
+
+Successivamente va installato dal pannello di controllo di Plone.
 
 
-Authors
--------
+Contribuisci
+============
 
-Provided by awesome people ;)
-
-
-Contributors
-------------
-
-Put your name here, you deserve it!
-
-- ?
+- Issue Tracker: https://github.com/redturtle/iosanita.contenttypes/issues
+- Codice sorgente: https://github.com/redturtle/iosanita.contenttypes
 
 
-Contribute
-----------
+Licenza
+=======
 
-- Issue Tracker: https://github.com/collective/iosanita.contenttypes/issues
-- Source Code: https://github.com/collective/iosanita.contenttypes
-- Documentation: https://docs.plone.org/foo/bar
+Questo progetto è rilasciato con licenza GPLv2.
 
+Autori
+======
 
-Support
--------
+Questo progetto è stato sviluppato da **RedTurtle Technology**.
 
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
-
-
-License
--------
-
-The project is licensed under the GPLv2.
+.. image:: https://avatars1.githubusercontent.com/u/1087171?s=100&v=4
+   :alt: RedTurtle Technology Site
+   :target: http://www.redturtle.it/

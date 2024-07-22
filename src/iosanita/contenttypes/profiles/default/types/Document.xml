@@ -5,21 +5,11 @@
         i18n:domain="plone"
 >
 
-  <property name="behaviors"
-            purge="False"
-  >
-    <element value="plone.versioning" />
-    <element value="plone.tableofcontents" />
-    <!-- <element value="iosanita.contenttypes.behavior.argomenti_document" /> -->
+  <property name="behaviors" purge="False">
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.constraintypes" />
     <element value="plone.leadimage" />
     <element value="iosanita.contenttypes.behavior.exclude_from_search" />
-  </property>
-  <property name="view_methods">
-    <element value="document_view" />
-    <!-- <element value="trasparenza_view" />
-    <element value="dettagli_procedimenti_view" /> -->
   </property>
 </object>

@@ -9,7 +9,6 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
-from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
@@ -29,7 +28,7 @@ class IEvento(model.Schema):
     )
 
     descrizione_destinatari = BlocksField(
-        title=_("a_chi_si_rivolge_label", default="A chi è rivolto"),
+        title=_("a_chi_si_rivolge_label", default="A chi si rivolge"),
         required=True,
         description=_(
             "a_chi_si_rivolge_help",
@@ -169,17 +168,6 @@ class IEvento(model.Schema):
         value_type=RelationChoice(
             title=_("Event"), vocabulary="plone.app.vocabularies.Catalog"
         ),
-    )
-
-    parliamo_di = schema.Choice(
-        title=_("parliamo_di_label", default="Parliamo di"),
-        description=_(
-            "parliamo_di_help",
-            default="",
-        ),
-        vocabulary="collective.taxonomy.tipologia_argomento",
-        required=False,
-        default="",
     )
 
     informazioni_aggiuntive_luogo = BlocksField(

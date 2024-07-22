@@ -233,7 +233,7 @@ msgstr ""
 msgid "a_chi_si_rivolge_help"
 msgstr ""
 
-#. Default: "A chi è rivolto"
+#. Default: "A chi si rivolge"
 #: iosanita/contenttypes/behaviors/evento.py:32
 #: iosanita/contenttypes/interfaces/come_fare_per.py:38
 msgid "a_chi_si_rivolge_label"

@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
-from iosanita.contenttypes import _
-
-# from iosanita.contenttypes.controlpanels.geolocation_defaults import (
-#     IGeolocationDefaults,
-# )
-# from plone import api
 from plone.restapi.services.types.get import TypesGet as BaseGet
-from zope.i18n import translate
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
@@ -20,12 +13,9 @@ class FieldsetsMismatchError(Exception):
 FIELDSETS_ORDER = {
     "ComeFarePer": [
         "default",
+        "a_chi_si_rivolge",
         "utenti",
-        "informazioni",
-        "categorization",
-        "dates",
-        "settings",
-        "ownership",
+        "ulteriori_informazioni",
     ],
     "Event": [
         "default",
@@ -34,78 +24,68 @@ FIELDSETS_ORDER = {
         "dove",
         "costi",
         "contatti",
-        "informazioni",
-        "correlati",
-        "categorization",
-        "dates",
-        "settings",
-        "ownership",
+        "ulteriori_informazioni",
+        "contenuti_collegati",
     ],
     "Struttura": [
         "default",
-        "utenti",
+        "cosa_e",
+        "a_chi_si_rivolge",
         "dove",
+        "come_accedere",
+        "orari",
         "contatti",
-        "correlati",
-        "informazioni",
-        "categorization",
-        "dates",
-        "settings",
-        "ownership",
+        "servizi",
+        "persone_struttura",
+        "contenuti_collegati",
+        "ulteriori_informazioni",
+        "seo",
     ],
     "News Item": [
         "default",
         "dates",
-        "correlati",
-        "categorization",
-        "settings",
-        "ownership",
+        "contenuti_collegati",
     ],
     "Persona": [
         "default",
-        "ruolo",
+        "incarichi",
+        "competenze",
         "dove",
+        "orari_ricevimento",
         "contatti",
-        "informazioni",
-        "categorization",
-        "dates",
-        "ownership",
-        "settings",
+        "biografia",
+        "ulteriori_informazioni",
     ],
     "PuntoDiContatto": [
         "default",
     ],
     "Servizio": [
         "default",
-        "cose",
-        "a_chi_si_rivolge",
-        "accedi_al_servizio",
         "cosa_serve",
-        "costi_e_vincoli",
-        "tempi_e_scadenze",
-        "casi_particolari",
+        "accedi_al_servizio",
+        "tempi_attesa",
+        "costi",
+        "dove",
+        "orari",
         "contatti",
-        "documenti",
-        "link_utili",
-        "informazioni",
-        "correlati",
-        "categorization",
-        "settings",
-        "ownership",
-        "dates",
+        "cosa_e",
+        "a_chi_si_rivolge",
+        "procedure_collegate_esito",
+        "responsabili",
+        "ulteriori_informazioni",
     ],
     "UnitaOrganizzativa": [
         "default",
         "cosa_fa",
+        "persone_uo",
         "struttura",
         "persone",
+        "servizi",
+        "dove",
+        "orari",
         "contatti",
-        "correlati",
-        "categorization",
-        "informazioni",
-        "settings",
-        "ownership",
-        "dates",
+        "documenti",
+        "ulteriori_informazioni",
     ],
     "Venue": [
         "default",
@@ -114,92 +94,14 @@ FIELDSETS_ORDER = {
         "dove",
         "orari",
         "contatti",
-        "informazioni",
-        "settings",
-        "correlati",
-        "categorization",
+        "ulteriori_informazioni",
+        "contenuti_collegati",
     ],
 }
 
 
 @implementer(IPublishTraverse)
 class TypesGet(BaseGet):
-    def customize_document_schema(self, result):
-        moved = ["image", "image_caption", "preview_image"]
-        removed = ["preview_caption"]
-        for fieldset in result.get("fieldsets", []):
-            if fieldset.get("id", "") == "testata":
-                fieldset["fields"] = moved + fieldset["fields"]
-            if fieldset.get("id", "") == "default":
-                fieldset["fields"] = [
-                    x for x in fieldset["fields"] if x not in moved and x not in removed
-                ]
-        return result
-
-    def customize_persona_schema(self, result):
-        if "title" in result["properties"]:
-            msgid = _("Nome e Cognome", default="Nome e cognome")
-            result["properties"]["title"]["title"] = translate(
-                msgid, context=self.request
-            )
-        return result
-
-    # def customize_venue_schema(self, result):
-    #     """
-    #     Unico modo per spostare il campo "notes"
-    #     """
-    #     result.get("required").append("description")
-    #     result.get("required").append("street")
-    #     result.get("required").append("city")
-    #     result.get("required").append("zip_code")
-    #     result.get("required").append("geolocation")
-
-    #     if "properties" in result:
-    #         if "country" in result["properties"]:
-    #             if not result["properties"]["country"].get("default", ""):
-    #                 result["properties"]["country"]["default"] = {
-    #                     "title": "Italia",
-    #                     "token": "380",
-    #                 }
-    #         if "city" in result["properties"]:
-    #             if not result["properties"]["city"].get("default", ""):
-    #                 result["properties"]["city"]["default"] = (
-    #                     api.portal.get_registry_record(
-    #                         "city", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-    #         if "zip_code" in result["properties"]:
-    #             if not result["properties"]["zip_code"].get("default", ""):
-    #                 result["properties"]["zip_code"]["default"] = (
-    #                     api.portal.get_registry_record(
-    #                         "zip_code", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-
-    #         if "street" in result["properties"]:
-    #             if not result["properties"]["street"].get("default", ""):
-    #                 result["properties"]["street"]["default"] = (
-    #                     api.portal.get_registry_record(
-    #                         "street", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-
-    #         if "geolocation" in result["properties"]:
-    #             if not result["properties"]["geolocation"].get("default", {}):
-    #                 result["properties"]["geolocation"]["default"] = eval(
-    #                     api.portal.get_registry_record(
-    #                         "geolocation", interface=IGeolocationDefaults
-    #                     )
-    #                 )
-
-    #     for fieldset in result["fieldsets"]:
-    #         if fieldset.get("id") == "default" and "notes" in fieldset["fields"]:
-    #             fieldset["fields"].remove("notes")
-    #         if fieldset.get("id") == "dove" and "notes" not in fieldset["fields"]:
-    #             fieldset["fields"].append("notes")
-
-    #     return result
-
     def customize_versioning_fields_fieldset(self, result):
         """
         Unico modo per spostare i campi del versioning.
@@ -217,68 +119,12 @@ class TypesGet(BaseGet):
 
         return result
 
-    def customize_servizio_schema(self, result):
-        result.get("required").append("description")
-        return result
-
-    def customize_evento_schema(self, result):
-        result.get("required").append("description")
-        return result
-
-    def customize_uo_schema(self, result):
-        result.get("required").append("description")
-        versioning_fields = ["contact_info"]
-        for field in versioning_fields:
-            for fieldset in result["fieldsets"]:
-                if fieldset.get("id") == "contatti" and field in fieldset["fields"]:
-                    fieldset["fields"].remove(field)
-                    fieldset["fields"].insert(0, field)
-        return result
-
-    def customize_news_schema(self, result):
-        result.get("required").append("description")
-        if self.context.portal_type == "News Item":
-            # we are in a news and not in container
-            review_state = self.context.portal_workflow.getInfoFor(
-                self.context, "review_state"
-            )
-            if review_state == "published":
-                result.get("required").append("effective")
-
-        return result
-
-    def customize_documento_schema(self, result):
-        result.get("required").append("description")
-        return result
-
     def reply(self):
-        # import pdb;pdb.set_trace()
         result = super(TypesGet, self).reply()
         if "fieldsets" in result:
             result["fieldsets"] = self.reorder_fieldsets(schema=result)
-        pt = self.request.PATH_INFO.split("/")[-1]
-
-        # be careful: result could be dict or list. If list it will not
-        # contains title. And this is ok for us.
-        pt = self.request.PATH_INFO.split("/")[-1]
 
         if "title" in result:
-            if pt == "Persona":
-                result = self.customize_persona_schema(result)
-            # if pt == "Venue":
-            #     result = self.customize_venue_schema(result)
-            if pt == "Document":
-                result = self.customize_document_schema(result)
-            if pt == "Servizio":
-                result = self.customize_servizio_schema(result)
-            if pt == "UnitaOrganizzativa":
-                result = self.customize_uo_schema(result)
-            if pt == "News Item":
-                result = self.customize_news_schema(result)
-            if pt == "Documento":
-                result = self.customize_documento_schema(result)
-            if pt == "Event":
-                result = self.customize_evento_schema(result)
             result = self.customize_versioning_fields_fieldset(result)
         return result
 
@@ -293,7 +139,6 @@ class TypesGet(BaseGet):
             # no match
             return original
         original_fieldsets = [x["id"] for x in original]
-
         for fieldset_id in original_fieldsets:
             # if some fieldsets comes from additional addons (not from the
             # base ones), then append them to the order list.

@@ -6,12 +6,8 @@
 >
 
   <!-- Basic properties -->
-  <property name="title"
-            i18n:translate=""
-  >Persona pubblica</property>
-  <property name="description"
-            i18n:translate=""
-  />
+  <property name="title" i18n:translate="">Persona</property>
+  <property name="description" i18n:translate=""/>
 
   <property name="allow_discussion">False</property>
   <property name="factory">Persona</property>
@@ -35,9 +31,6 @@
   <property name="behaviors"
             purge="false"
   >
-    <!-- Details about all standard behaviors following can be read at
-         https://docs.plone.org/external/plone.app.dexterity/docs/reference/standard-behaviours.html
-    -->
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
     <element value="plone.excludefromnavigation" />
@@ -46,17 +39,16 @@
     <element value="plone.publication" />
     <element value="plone.relateditems" />
     <element value="plone.categorization" />
-    <element value="plone.basic" />
     <element value="plone.locking" />
-    <element value="iosanita.contenttypes.behavior.address_persona" />
-    <element value="iosanita.contenttypes.behavior.geolocation_persona" />
-    <element value="iosanita.contenttypes.behavior.additional_help_infos" />
-    <element value="iosanita.contenttypes.behavior.contatti_persona" />
     <element value="plone.textindexer" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
     <element value="plone.constraintypes" />
+    <element value="collective.taxonomy.generated.incarico" />
+    <element value="iosanita.contenttypes.behavior.dove" />
+    <element value="iosanita.contenttypes.behavior.contatti" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
   </property>
 
   <!-- View information -->

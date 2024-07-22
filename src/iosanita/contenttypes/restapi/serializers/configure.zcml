@@ -3,9 +3,9 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
-  <adapter factory=".unita_organizzativa.UOJSONSummarySerializer" />
-  <adapter factory=".unita_organizzativa.UOSerializer" />
-
-  <adapter factory=".persona.PersonaSerializer" />
-
+  <!-- Summary Serializer Metadata -->
+  <utility
+      factory=".summary.JSONSummarySerializerMetadata"
+      name="iosanita.contenttypes.summary_serializer_metadata"
+      />
 </configure>

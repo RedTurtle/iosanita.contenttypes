@@ -85,26 +85,14 @@ class INewsAdditionalFields(model.Schema):
         required=False,
     )
 
-    strutture_correlate = RelationList(
-        title=_("strutture_correlate_label", default="Strutture correlate"),
+    struttura_correlata = RelationList(
+        title=_("struttura_correlata_label", default="Strutture correlate"),
         description=_(
-            "strutture_correlate_help",
+            "struttura_correlata_help",
             default="Elenco delle strutture dell'ASL citate nella notizia, con collegamento alle relative pagine foglia struttura. L'elemento è necessario se nella notizia sono citate strutture dell'ASL.",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
-    )
-
-    parliamo_di = schema.List(
-        title=_("parliamo_di_label", default="Parliamo di"),
-        description=_(
-            "parliamo_di_help",
-            default="Indicazione degli Argomenti  e dei tag Utente con cui il contenuto di pagina è stato taggato.",
-        ),
-        value_type=schema.Choice(
-            vocabulary="collective.taxonomy.tipologia_argomento",
-        ),
         required=False,
     )
 
@@ -162,7 +150,7 @@ class INewsAdditionalFields(model.Schema):
             "a_cura_di_persone",
             "notizie_correlate",
             "servizi_correlati",
-            "strutture_correlate",
+            "struttura_correlata",
             "documenti",
         ],
     )

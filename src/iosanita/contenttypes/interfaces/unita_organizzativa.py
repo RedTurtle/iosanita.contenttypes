@@ -1,89 +1,71 @@
 # -*- coding: utf-8 -*-
 from collective.volto.blocksfield.field import BlocksField
+from iosanita.contenttypes import _
 from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
-from zope import schema
 
 
-from iosanita.contenttypes import _
-
-
-# TODO: migration script for these commented fields towards PDC
-# contact_info
-# Probabilmente non possibile trattandosi di un campo a blocchi
-# preferirei si arrangiassero le redazioni. Altrimenti si defaulta
-# ad un tipo a caso + tutto il testo e poi si arrangiano comunque
 class IUnitaOrganizzativa(model.Schema):
     """Marker interface for content type UnitaOrganizzativa"""
-
-    subtitle = schema.TextLine(
-        title=_(
-            "subtitle_label",
-            default="Subtitle",
-        ),
-        required=False,
-    )
 
     competenze = BlocksField(
         title=_("uo_competenze_label", default="Competenze"),
         description=_(
             "uo_competenze_help",
-            default="Descrizione dei compiti assegnati alla struttura.",
+            default="Descrizione dei compiti assegnati a quest unità organizzativa.",
         ),
         required=True,
     )
 
-    responsabile = RelationList(
-        title=_("responsabile_label", default="Responsabile"),
-        value_type=RelationChoice(
-            title=_("Responsabile"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
+    responsabile_correlato = RelationList(
+        title=_("responsabile_correlato_uo_label", default="Responsabile"),
         description=_(
-            "responsabile_help",
-            default="Selezionare il/i responsabile/i della struttura.",
+            "responsabile_correlato_uo_help",
+            default="La persona che dirige l'unità organizzativa.",
+        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        default=[],
+        required=True,
+    )
+
+    personale_correlato = RelationList(
+        title=_("personale_correlato_uo_label", default="Personale"),
+        description=_(
+            "personale_correlato_uo_help",
+            default="Elenco del personale che opera nell'unità organizzativa.",
         ),
         default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
     )
 
-    # vocabolario di riferimento sara' dinamico con i content type persona
-    persone_struttura = RelationList(
-        title=_(
-            "persone_struttura_label", default="Persone che compongono la struttura"
-        ),
-        default=[],
-        value_type=RelationChoice(
-            title=_("Persone della struttura"),
-            vocabulary="plone.app.vocabularies.Catalog",
-        ),
+    orari = BlocksField(
+        title=_("orari_uo_label", default="Orari di apertura"),
         description=_(
-            "persone_struttura_help",
-            default="Seleziona la lista delle persone che compongono" " la struttura.",
+            "orari_uo_help",
+            default="Indicazione delle fasce orarie in cui è possibile contattare o accedere all'unità organizzativa.",
         ),
-        required=False,
+        required=True,
     )
 
-    documenti_pubblici = RelationList(
-        title=_("documenti_pubblici_label", default="Documenti pubblici"),
+    documenti = RelationList(
+        title=_("documenti_label", default="Documenti"),
         default=[],
         description=_(
-            "documenti_pubblici_help",
-            default="Documenti pubblici importanti, collegati a questa Unità Organizzativa",  # noqa
+            "documenti_help",
+            default="Seleziona dei documenti correlati.",
         ),
-        value_type=RelationChoice(
-            title=_("Documenti pubblici"), vocabulary="plone.app.vocabularies.Catalog"
-        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
     )
 
     #  custom widgets
     form.widget(
-        "documenti_pubblici",
+        "documenti",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -91,13 +73,13 @@ class IUnitaOrganizzativa(model.Schema):
         },
     )
     form.widget(
-        "persone_struttura",
+        "personale_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Persona"]},
     )
     form.widget(
-        "responsabile",
+        "responsabile_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -114,31 +96,25 @@ class IUnitaOrganizzativa(model.Schema):
         fields=["competenze"],
     )
     model.fieldset(
-        "struttura",
-        label=_("unita_organizzativa_struttura_label", default="Struttura"),
+        "persone_uo",
+        label=_("persone_uo_fieldset_label", default="Persone Unità organizzativa"),
         fields=[
-            "responsabile",
+            "responsabile_correlato",
+            "personale_correlato",
         ],
     )
     model.fieldset(
-        "persone",
-        label=_("persone_label", default="Persone"),
-        fields=["persone_struttura"],
-    )
-    model.fieldset(
-        "contatti",
-        label=_("contatti_label", default="Contatti"),
-        fields=[],
+        "orari",
+        label=_("orari_uo_label", default="Orari di apertura"),
+        fields=["orari"],
     )
 
     model.fieldset(
-        "correlati",
-        label=_("correlati_label", default="Contenuti collegati"),
-        fields=["documenti_pubblici"],
+        "documenti",
+        label=_("documenti_label", default="Documenti"),
+        fields=["documenti"],
     )
-
-    form.order_after(documenti_pubblici="relatedItems")
 
     # SearchableText indexers
     textindexer.searchable("competenze")
-    textindexer.searchable("responsabile")
+    textindexer.searchable("orari")

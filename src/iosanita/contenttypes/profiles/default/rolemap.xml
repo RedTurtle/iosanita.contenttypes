@@ -19,24 +19,6 @@
       <role name="Owner" />
       <role name="Contributor" />
     </permission>
-    <permission acquire="True"
-               name="iosanita.contenttypes: Add Evento"
-   >
-   <role name="Manager" />
-      <role name="Site Administrator" />
-      <role name="Owner" />
-      <role name="Contributor" />
-    </permission>
-
-   <permission acquire="True"
-                name="iosanita.contenttypes: Add NotizieEComunicatiStampa"
-    >
-      <role name="Manager" />
-      <role name="Site Administrator" />
-      <role name="Owner" />
-      <role name="Contributor" />
-    </permission>
-
    <permission acquire="True"
                 name="iosanita.contenttypes: Add Persona"
     >
@@ -71,5 +53,11 @@
       <role name="Owner" />
       <role name="Contributor" />
     </permission>
-  </permissions>
+  <permission acquire="True" name="iosanita.contenttypes: Add Servizio">
+    <role name="Manager" />
+    <role name="Site Administrator" />
+    <role name="Owner" />
+    <role name="Contributor" />
+  </permission>
+</permissions>
 </rolemap>

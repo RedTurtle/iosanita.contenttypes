@@ -4,19 +4,19 @@ from plone.indexer.decorator import indexer
 
 
 @indexer(IDexterityContent)
-def tassonomia_argomenti(context, **kw):
+def parliamo_di(context, **kw):
     return [
         x.to_object.Title()
-        for x in getattr(context.aq_base, "tassonomia_argomenti", [])
+        for x in getattr(context.aq_base, "parliamo_di", [])
         if x.to_object
     ]
 
 
 @indexer(IDexterityContent)
-def tassonomia_argomenti_uid(context, **kw):
+def parliamo_di_uid(context, **kw):
     return [
         x.to_object.UID()
-        for x in getattr(context.aq_base, "tassonomia_argomenti", [])
+        for x in getattr(context.aq_base, "parliamo_di", [])
         if x.to_object
     ]
 

@@ -4,7 +4,6 @@
         name="Event"
         i18n:domain="plone"
 >
-  <property name="global_allow">True</property>
   <property name="allowed_content_types"
             purge="False"
   >
@@ -12,20 +11,16 @@
     <element value="Document" />
     <element value="Image" />
     <element value="File" />
-
   </property>
 
-  <property name="behaviors"
-            purge="False"
-  >
+  <property name="behaviors" purge="False">
     <element value="plone.eventbasic" />
     <element value="plone.leadimage" />
     <element value="volto.preview_image" />
     <element value="plone.eventrecurrence" />
-    <element value="iosanita.contenttypes.behavior.additional_help_infos" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
     <element value="iosanita.contenttypes.behavior.evento" />
-    <element value="iosanita.contenttypes.behavior.address_event" />
-    <element value="iosanita.contenttypes.behavior.geolocation_event" />
+    <element value="iosanita.contenttypes.behavior.dove" />
     <element value="plone.dublincore" />
     <element value="plone.namefromtitle" />
     <element value="plone.allowdiscussion" />
@@ -39,6 +34,7 @@
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="collective.taxonomy.generated.tipologia_evento" />
+    <element value="collective.taxonomy.generated.parliamo_di" />
     <!-- remove unused behaviors -->
     <element remove="True"
              value="plone.eventlocation"
