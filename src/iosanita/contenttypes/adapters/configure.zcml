@@ -4,7 +4,10 @@
     >
 
   <adapter factory=".query.ZCatalogCompatibleQueryAdapter" />
-  
-  <adapter factory=".schema_tweaks.SchemaTweaks" name="schema.tweaks_iosanita" />
+
+  <adapter
+      factory=".schema_tweaks.SchemaTweaks"
+      name="schema.tweaks_iosanita"
+      />
 
 </configure>

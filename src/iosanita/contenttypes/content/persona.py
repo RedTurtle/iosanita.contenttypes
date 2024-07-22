@@ -2,7 +2,6 @@
 from iosanita.contenttypes.interfaces.persona import IPersona
 from plone.dexterity.content import Container
 from plone.app.content.interfaces import INameFromTitle
-from plone.i18n.normalizer import idnormalizer
 from zope.interface import implementer
 
 

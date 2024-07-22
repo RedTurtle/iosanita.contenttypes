@@ -38,8 +38,14 @@
       />
 
 
-    <!-- only metadata -->
-    <adapter factory=".taxonomies.parliamo_di_metadata" name="parliamo_di_metadata" />
-    <adapter factory=".taxonomies.a_chi_si_rivolge_tassonomia_metadata" name="a_chi_si_rivolge_tassonomia_metadata" />
+  <!-- only metadata -->
+  <adapter
+      factory=".taxonomies.parliamo_di_metadata"
+      name="parliamo_di_metadata"
+      />
+  <adapter
+      factory=".taxonomies.a_chi_si_rivolge_tassonomia_metadata"
+      name="a_chi_si_rivolge_tassonomia_metadata"
+      />
 
 </configure>

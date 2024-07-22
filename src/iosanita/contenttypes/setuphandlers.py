@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from collective.taxonomy.interfaces import ITaxonomy
-from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
@@ -67,8 +66,6 @@ def post_install_taxonomy(context):
     logger.info(
         f"{colors.DARKCYAN} iosanita.contentypes taxonomies imported {colors.ENDC}"  # noqa
     )
-    # update_types(context)
-    # update_registry(context)
     update_catalog(context)
 
 
