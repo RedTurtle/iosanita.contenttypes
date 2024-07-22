@@ -28,7 +28,7 @@ class IStep(model.Schema, IIosanitaContenttypes):
         required=True,
         description=_(
             "dove_help",
-            default="Seleziona una struttura o punto di contatto.",
+            default="Seleziona una o più strutture.",
         ),
     )
 
@@ -37,7 +37,7 @@ class IStep(model.Schema, IIosanitaContenttypes):
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
-            "selectableTypes": ["UnitaOrganizzativa"],
+            "selectableTypes": ["Struttura"],
         },
     )
     # form.widget(
