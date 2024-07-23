@@ -4,30 +4,6 @@ from plone.indexer.decorator import indexer
 
 
 @indexer(IDexterityContent)
-def parliamo_di(context, **kw):
-    return [
-        x.to_object.Title()
-        for x in getattr(context.aq_base, "parliamo_di", [])
-        if x.to_object
-    ]
-
-
-@indexer(IDexterityContent)
-def parliamo_di_uid(context, **kw):
-    return [
-        x.to_object.UID()
-        for x in getattr(context.aq_base, "parliamo_di", [])
-        if x.to_object
-    ]
-
-
-@indexer(IDexterityContent)
-def ufficio_responsabile(context, **kw):
-    uffici = getattr(context.aq_base, "ufficio_responsabile", [])
-    return [ufficio.UID() for ufficio in filter(bool, [x.to_object for x in uffici])]
-
-
-@indexer(IDexterityContent)
 def parent(context):
     obj_parent = context.aq_parent
     return {

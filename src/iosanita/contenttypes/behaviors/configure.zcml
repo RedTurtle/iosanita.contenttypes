@@ -29,15 +29,6 @@
       marker=".servizi.IServizi"
       />
   <plone:behavior
-      name="iosanita.contenttypes.behavior.parliamo_di"
-      title="Parliamo di"
-      description="Parliamo di"
-      factory=".parliamo_di.ParliamoDi"
-      provides=".parliamo_di.IParliamoDi"
-      for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".parliamo_di.IParliamoDi"
-      />
-  <plone:behavior
       name="iosanita.contenttypes.behavior.a_chi_si_rivolge"
       title="A chi si rivolge"
       description=""

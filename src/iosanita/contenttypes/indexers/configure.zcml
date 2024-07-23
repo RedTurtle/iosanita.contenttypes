@@ -5,18 +5,6 @@
       name="event_location"
       />
   <adapter
-      factory=".common.parliamo_di"
-      name="parliamo_di"
-      />
-  <adapter
-      factory=".common.parliamo_di_uid"
-      name="parliamo_di_uid"
-      />
-  <adapter
-      factory=".common.ufficio_responsabile"
-      name="ufficio_responsabile"
-      />
-  <adapter
       factory=".common.parent"
       name="parent"
       />

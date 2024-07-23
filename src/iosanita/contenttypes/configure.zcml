@@ -17,7 +17,6 @@
   <include package=".events" />
   <include package=".indexers" />
   <include package=".restapi" />
-  <include package=".vocabularies" />
 
   <include file="permissions.zcml" />
 
