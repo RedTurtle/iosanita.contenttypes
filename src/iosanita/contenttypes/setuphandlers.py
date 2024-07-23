@@ -3,6 +3,8 @@ from collective.taxonomy.interfaces import ITaxonomy
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
+from redturtle.bandi.interfaces.settings import IBandoSettings
+from plone import api
 
 import logging
 
@@ -51,8 +53,25 @@ def update_catalog(context):
 def post_install(context):
     """Post install script"""
 
+    # add taxonomies
     context.runImportStepFromProfile(
         "iosanita.contenttypes:taxonomy", "collective.taxonomy"
+    )
+
+    # setup bandi
+    setup_bandi()
+
+
+def setup_bandi():
+    """
+    clean bandi data
+    """
+    # remove default ente
+    api.portal.set_registry_record("default_ente", (), interface=IBandoSettings)
+    api.portal.set_registry_record(
+        "tipologie_bando",
+        (("Bando|Bando", "Concorso|Concorso")),
+        interface=IBandoSettings,
     )
 
 

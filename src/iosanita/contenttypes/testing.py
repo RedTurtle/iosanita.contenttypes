@@ -16,18 +16,20 @@ import plone.app.caching
 import plone.formwidget.geolocation
 import plone.restapi
 import collective.taxonomy
+import redturtle.bandi
 
 
 class TestLayer(RedturtleVoltoLayer):
     def setUpZope(self, app, configurationContext):
         super().setUpZope(app, configurationContext)
-        self.loadZCML(package=iosanita.contenttypes, context=configurationContext)
         self.loadZCML(package=collective.taxonomy)
         self.loadZCML(package=collective.venue)
         self.loadZCML(package=collective.volto.blocksfield)
         self.loadZCML(package=collective.z3cform.datagridfield)
         self.loadZCML(package=kitconcept.seo)
         self.loadZCML(package=plone.formwidget.geolocation)
+        self.loadZCML(package=redturtle.bandi)
+        self.loadZCML(package=iosanita.contenttypes, context=configurationContext)
         xmlconfig.file(
             "configure.zcml",
             iosanita.contenttypes,

@@ -61,6 +61,7 @@ setup(
         "collective.venue[geolocation]",
         "collective.z3cform.datagridfield",
         "redturtle.volto",
+        "redturtle.bandi",
         "plone.restapi",
         "collective.taxonomy",
     ],

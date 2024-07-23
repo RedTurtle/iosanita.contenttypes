@@ -11,6 +11,13 @@ class FieldsetsMismatchError(Exception):
 
 
 FIELDSETS_ORDER = {
+    "Bando": [
+        "default",
+        "cosa_e",
+        "a_chi_si_rivolge",
+        "come_partecipare",
+        "modalita_selezione",
+    ],
     "ComeFarePer": [
         "default",
         "a_chi_si_rivolge",
@@ -19,12 +26,13 @@ FIELDSETS_ORDER = {
     ],
     "Event": [
         "default",
-        "cose",
+        "cosa_e",
         "partecipanti",
         "dove",
         "costi",
         "contatti",
         "ulteriori_informazioni",
+        "a_chi_si_rivolge",
         "contenuti_collegati",
     ],
     "Struttura": [

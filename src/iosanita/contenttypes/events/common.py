@@ -8,13 +8,12 @@ from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 SUBFOLDERS_MAPPING = {
     "Bando": {
         "content": [
-            {"id": "documenti", "title": "Documenti", "type": "Bando Folder Deepening"},
             {
-                "id": "comunicazioni",
-                "title": "Comunicazioni",
+                "id": "graduatoria",
+                "title": "Graduatoria",
                 "type": "Bando Folder Deepening",
             },
-            {"id": "esiti", "title": "Esiti", "type": "Bando Folder Deepening"},
+            {"id": "documenti", "title": "Documenti", "type": "Bando Folder Deepening"},
         ],
     },
     "Documento": {

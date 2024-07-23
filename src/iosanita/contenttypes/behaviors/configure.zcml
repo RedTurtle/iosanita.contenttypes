@@ -81,25 +81,33 @@
       marker=".exclude_from_search.IExcludeFromSearch"
       />
   <!-- ct specific -->
-
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.evento"
+      title="Campi aggiuntivi Event"
+      description=""
+      factory=".evento.Evento"
+      provides=".evento.IEvento"
+      for="plone.event.interfaces.IEvent"
+      marker=".evento.IEvento"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.bando"
+      title="Campi aggiuntivi Bando"
+      description=""
+      factory=".bando.Bando"
+      provides=".bando.IBando"
+      for="redturtle.bandi.interfaces.bando.IBando"
+      marker=".bando.IBando"
+      />
   <!-- to check -->
   <plone:behavior
       name="iosanita.contenttypes.behavior.news"
       title="Metadati news"
       description="Adds fields."
-      factory=".news_additional_fields.NewsAdditionalFields"
-      provides=".news_additional_fields.INewsAdditionalFields"
+      factory=".news.NewsAdditionalFields"
+      provides=".news.INewsAdditionalFields"
       for="plone.app.contenttypes.interfaces.INewsItem"
-      marker=".news_additional_fields.INewsAdditionalFields"
-      />
-  <plone:behavior
-      name="iosanita.contenttypes.behavior.evento"
-      title="Metadati evento"
-      description="Adds fields."
-      factory=".evento.Evento"
-      provides=".evento.IEvento"
-      for="plone.event.interfaces.IEvent"
-      marker=".evento.IEvento"
+      marker=".news.INewsAdditionalFields"
       />
 
 </configure>

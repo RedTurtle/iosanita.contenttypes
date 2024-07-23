@@ -100,7 +100,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     )
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa_servizio_label", default="Descrizione estesa"),
+        title=_("descrizione_estesa_label", default="Descrizione estesa"),
         required=False,
         description=_(
             "descrizione_estesa_servizio_help",

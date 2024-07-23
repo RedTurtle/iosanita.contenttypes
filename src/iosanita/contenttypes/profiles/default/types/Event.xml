@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         meta_type="Dexterity FTI"
-        name="Event"
+        name="Evento"
         i18n:domain="plone"
 >
   <property name="allowed_content_types"
@@ -14,45 +14,23 @@
   </property>
 
   <property name="behaviors" purge="False">
-    <element value="plone.eventbasic" />
-    <element value="plone.leadimage" />
-    <element value="volto.preview_image" />
-    <element value="plone.eventrecurrence" />
+    <element value="plone.translatable" />
+    <element value="kitconcept.seo" />
+    <element value="iosanita.contenttypes.behavior.a_chi_si_rivolge" />
+    <element value="collective.taxonomy.generated.a_chi_si_rivolge_tassonomia" />
     <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
     <element value="iosanita.contenttypes.behavior.evento" />
     <element value="iosanita.contenttypes.behavior.dove" />
-    <element value="plone.dublincore" />
-    <element value="plone.namefromtitle" />
-    <element value="plone.allowdiscussion" />
-    <element value="plone.excludefromnavigation" />
-    <element value="plone.shortname" />
-    <element value="plone.relateditems" />
-    <element value="plone.versioning" />
-    <element value="plone.locking" />
-    <element value="plone.constraintypes" />
-    <element value="plone.textindexer" />
-    <element value="plone.translatable" />
-    <element value="kitconcept.seo" />
+    <element value="iosanita.contenttypes.behavior.contatti" />
+    <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
     <element value="collective.taxonomy.generated.tipologia_evento" />
     <element value="collective.taxonomy.generated.parliamo_di" />
     <!-- remove unused behaviors -->
-    <element remove="True"
-             value="plone.eventlocation"
-    />
-    <element remove="True"
-             value="plone.eventattendees"
-    />
-    <element remove="True"
-             value="plone.eventcontact"
-    />
-    <element remove="True"
-             value="collective.venue.behaviors.ILocation"
-    />
-    <element remove="True"
-             value="collective.venue.behaviors.IOrganizer"
-    />
-    <element remove="True"
-             value="volto.blocks"
-    />
+    <element remove="True" value="plone.eventlocation"/>
+    <element remove="True" value="plone.eventattendees"/>
+    <element remove="True" value="plone.eventcontact"/>
+    <element remove="True" value="collective.venue.behaviors.ILocation"/>
+    <element remove="True" value="collective.venue.behaviors.IOrganizer"/>
+    <element remove="True" value="volto.blocks"/>
   </property>
 </object>

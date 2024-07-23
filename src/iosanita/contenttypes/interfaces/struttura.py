@@ -14,7 +14,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type"""
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa_struttura_label", default="Descrizione estesa"),
+        title=_("descrizione_estesa_label", default="Descrizione estesa"),
         required=False,
         description=_(
             "descrizione_estesa_struttura_help",
