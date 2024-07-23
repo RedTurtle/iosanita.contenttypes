@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.testing import RESTAPI_TESTING, INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -225,3 +225,22 @@ class TestStrutturaSchema(unittest.TestCase):
             resp["fieldsets"][10]["fields"],
             ["ulteriori_informazioni"],
         )
+
+
+class TestStruttura(unittest.TestCase):
+    """"""
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+    def test_struttura_default_children(self):
+        struttura = api.content.create(
+            container=self.portal, type="Struttura", title="xxx"
+        )
+
+        self.assertEqual(struttura.keys(), ["documenti", "multimedia"])

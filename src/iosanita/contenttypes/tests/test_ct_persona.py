@@ -210,3 +210,13 @@ class TestPersona(unittest.TestCase):
         self.assertIn("dr-doe-john", self.portal.keys())
         persona = self.portal["dr-doe-john"]
         self.assertEqual(persona.title, "dr. Doe John")
+
+    def test_persona_default_children(self):
+        createContentInContainer(
+            self.portal, "Persona", nome="John", cognome="Doe", titolo_persona="dr."
+        )
+        persona = self.portal["dr-doe-john"]
+
+        self.assertEqual(
+            persona.keys(), ["curriculum-vitae", "multimedia", "altri-documenti"]
+        )

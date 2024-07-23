@@ -238,3 +238,10 @@ class TestEvent(unittest.TestCase):
         brain = api.content.find(UID=parent.UID())[0]
 
         self.assertTrue(brain.rassegna)
+
+    def test_event_default_children(self):
+        event = api.content.create(container=self.portal, type="Event", title="xxx")
+
+        self.assertEqual(
+            event.keys(), ["immagini", "video", "sponsor-evento", "documenti"]
+        )

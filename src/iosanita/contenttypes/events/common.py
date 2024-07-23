@@ -41,7 +41,7 @@ SUBFOLDERS_MAPPING = {
                 "publish": True,
             },
             {
-                "id": "sponsor_evento",
+                "id": "sponsor-evento",
                 "title": "Sponsor Evento",
                 "allowed_types": ("Link",),
                 "publish": True,
