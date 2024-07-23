@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from collective.taxonomy.interfaces import ITaxonomy
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
+from redturtle.bandi.interfaces.settings import IBandoSettings
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
-from redturtle.bandi.interfaces.settings import IBandoSettings
-from plone import api
 
 import logging
 

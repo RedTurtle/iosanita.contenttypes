@@ -1,4 +1,3 @@
-import iosanita.contenttypes.adapters
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -6,16 +5,17 @@ from plone.testing.zope import WSGI_SERVER_FIXTURE
 from redturtle.volto.testing import RedturtleVoltoLayer
 from zope.configuration import xmlconfig
 
+import collective.taxonomy
 import collective.venue
 import collective.volto.blocksfield
 import collective.volto.cookieconsent
 import collective.z3cform.datagridfield
 import iosanita.contenttypes
+import iosanita.contenttypes.adapters
 import kitconcept.seo
 import plone.app.caching
 import plone.formwidget.geolocation
 import plone.restapi
-import collective.taxonomy
 import redturtle.bandi
 
 

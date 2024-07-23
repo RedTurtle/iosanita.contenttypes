@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from plone.indexer.decorator import indexer
 from collective.taxonomy import PATH_SEPARATOR
 from collective.taxonomy.interfaces import ITaxonomy
+from plone.dexterity.interfaces import IDexterityContent
+from plone.indexer.decorator import indexer
 from zope.component import getUtility
 from zope.globalrequest import getRequest
-from plone.dexterity.interfaces import IDexterityContent
 
 
 def extract_taxonomies(context, field):
