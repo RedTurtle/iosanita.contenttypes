@@ -83,7 +83,6 @@ class TestComeFarePerSchema(unittest.TestCase):
             sorted(resp["required"]),
             sorted(
                 [
-                    "a_chi_si_rivolge",
                     "panoramica",
                     "title",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test

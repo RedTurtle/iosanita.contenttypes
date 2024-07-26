@@ -15,7 +15,7 @@ class IAChiSiRivolge(model.Schema):
 
     a_chi_si_rivolge = BlocksField(
         title=_("a_chi_si_rivolge_label", default="A chi si rivolge"),
-        required=True,
+        required=False,
         description=_(
             "a_chi_e_rivolta_help",
             default="Descrizione testuale degli utenti dell'ASL a cui è rivolto questo contenuto.",
@@ -24,6 +24,10 @@ class IAChiSiRivolge(model.Schema):
     model.fieldset(
         "a_chi_si_rivolge",
         label=_("a_chi_si_rivolge_label", default="A chi si rivolge"),
+        description=_(
+            "a_chi_si_rivolge_fieldset_help",
+            default="Compila almeno uno dei due campi.",
+        ),
         fields=["a_chi_si_rivolge"],
     )
 

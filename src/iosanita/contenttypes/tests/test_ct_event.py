@@ -22,6 +22,8 @@ class TestEventSchema(unittest.TestCase):
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
+        self.request["LANGUAGE"] = "it"
+
         self.api_session = RelativeSession(self.portal_url)
         self.api_session.headers.update({"Accept": "application/json"})
         self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
@@ -93,14 +95,13 @@ class TestEventSchema(unittest.TestCase):
             sorted(resp["required"]),
             sorted(
                 [
-                    "title",
-                    "start",
-                    "end",
-                    "tipologia_evento",
-                    "a_chi_si_rivolge",
-                    "descrizione_estesa",
                     "costo",
+                    "descrizione_estesa",
+                    "end",
                     "punti_di_contatto",
+                    "start",
+                    "tipologia_evento",
+                    "title",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test
                 ]
             ),

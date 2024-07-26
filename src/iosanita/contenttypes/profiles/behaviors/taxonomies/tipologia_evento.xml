@@ -5,7 +5,7 @@
   </vocabName>
   <vocabIdentifier>tipologia_evento</vocabIdentifier>
   <term>
-    <termIdentifier>evento_di_formazione</termIdentifier>
+    <termIdentifier>evento-di-formazione</termIdentifier>
     <caption>
       <langstring language="it">Evento di formazione</langstring>
     </caption>
@@ -28,7 +28,7 @@
       </caption>
     </term>
     <term>
-      <termIdentifier>presentazione_libro</termIdentifier>
+      <termIdentifier>presentazione-libro</termIdentifier>
       <caption>
         <langstring language="it">Presentazione libro</langstring>
       </caption>
@@ -41,7 +41,7 @@
     </term>
   </term>
   <term>
-    <termIdentifier>conferenza_summit</termIdentifier>
+    <termIdentifier>conferenza-summit</termIdentifier>
     <caption>
       <langstring language="it">Conferenza e Summit</langstring>
     </caption>
@@ -65,13 +65,13 @@
     </term>
   </term>
   <term>
-    <termIdentifier>giornata_informativa</termIdentifier>
+    <termIdentifier>giornata-informativa</termIdentifier>
     <caption>
       <langstring language="en"></langstring>
       <langstring language="it">Giornata informativa</langstring>
     </caption>
     <term>
-      <termIdentifier>giornata_aperta</termIdentifier>
+      <termIdentifier>giornata-aperta</termIdentifier>
       <caption>
         <langstring language="en"></langstring>
         <langstring language="it">Giornata aperta</langstring>

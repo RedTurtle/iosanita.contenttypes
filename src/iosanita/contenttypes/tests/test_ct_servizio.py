@@ -106,7 +106,6 @@ class TestServizioSchema(unittest.TestCase):
                     "uo_correlata",
                     "responsabile_correlato",
                     "punti_di_contatto",
-                    "a_chi_si_rivolge",
                 ]
             ),
         )
