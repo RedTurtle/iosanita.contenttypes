@@ -43,7 +43,7 @@ class DeserializeFromJson(BaseDeserializer):
         if not create:
             if (
                 "a_chi_si_rivolge" not in data
-                and "a_chi_si_rivolge_tassonomia" not in data
+                and "a_chi_si_rivolge_tassonomia" not in data  # noqa
             ):
                 return
         a_chi_si_rivolge = data.get("a_chi_si_rivolge", {})
@@ -68,7 +68,7 @@ class DeserializeFromJson(BaseDeserializer):
         if not create:
             if (
                 "organizzato_da_esterno" not in data
-                and "organizzato_da_interno" not in data
+                and "organizzato_da_interno" not in data  # noqa
             ):
                 return
 
