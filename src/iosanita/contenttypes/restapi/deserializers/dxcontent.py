@@ -1,19 +1,18 @@
-from plone.restapi.deserializer.dxcontent import DeserializeFromJson as BaseDeserializer
+from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi import _
+from plone.restapi.deserializer import json_body
+from plone.restapi.deserializer.dxcontent import DeserializeFromJson as BaseDeserializer
 from plone.restapi.interfaces import IDeserializeFromJson
+from zExceptions import BadRequest
 from zope.component import adapter
 from zope.interface import implementer
-from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
-from zExceptions import BadRequest
-from plone.restapi.deserializer import json_body
-from plone import api
 
 
 @implementer(IDeserializeFromJson)
 @adapter(IDexterityContent, IIosanitaContenttypesLayer)
 class DeserializeFromJson(BaseDeserializer):
-
     def __call__(
         self, validate_all=False, data=None, create=False, mask_validation_errors=True
     ):
@@ -21,15 +20,6 @@ class DeserializeFromJson(BaseDeserializer):
             data = json_body(self.request)
         # iosanità validations
         self.validate_data_iosanita(data=data, create=create)
-        # if errors:
-        #     if mask_validation_errors:
-        #         # Drop Python specific error classes in order to be able to better handle
-        #         # errors on front-end
-        #         for error in errors:
-        #             error["error"] = "ValidationError"
-        #     for error in errors:
-        #         error["message"] = translate(error["message"], context=self.request)
-        #     raise BadRequest(errors)
 
         return super().__call__(
             validate_all=validate_all,
@@ -39,7 +29,6 @@ class DeserializeFromJson(BaseDeserializer):
         )
 
     def validate_data_iosanita(self, data, create):
-
         if not create:
             portal_type = self.context.portal_type
         else:

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
 from plone.app.testing import setRoles
@@ -33,10 +32,7 @@ class TestCustomValidation(unittest.TestCase):
         self.api_session.close()
 
     def test_event_raise_badrequest_if_missing_organizzato_da(self):
-
-        pdc = api.content.create(
-            type="PuntoDiContatto", title="pdc", container=self.portal
-        )
+        api.content.create(type="PuntoDiContatto", title="pdc", container=self.portal)
         commit()
         data = {
             "costo": {"blocks": {}},
@@ -107,10 +103,7 @@ class TestCustomValidation(unittest.TestCase):
         self.assertEqual(resp.status_code, 201)
 
     def test_raise_bad_request_if_missing_a_chi_si_rivolge_fields(self):
-
-        pdc = api.content.create(
-            type="PuntoDiContatto", title="pdc", container=self.portal
-        )
+        api.content.create(type="PuntoDiContatto", title="pdc", container=self.portal)
         commit()
         data = {
             "come_accedere": {"blocks": {}},
