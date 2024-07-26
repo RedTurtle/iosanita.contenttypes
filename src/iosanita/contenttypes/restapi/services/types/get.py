@@ -24,6 +24,11 @@ FIELDSETS_ORDER = {
         "utenti",
         "ulteriori_informazioni",
     ],
+    "Documento": [
+        "default",
+        "cosa_e",
+        "a_chi_si_rivolge",
+    ],
     "Event": [
         "default",
         "cosa_e",
