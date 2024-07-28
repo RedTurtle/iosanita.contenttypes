@@ -104,6 +104,20 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         missing_value=(),
     )
 
+    servizi = RelationList(
+        title=_("servizi_label", default="Servizi"),
+        default=[],
+        value_type=RelationChoice(
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+        required=True,
+        missing_value=(),
+        description=_(
+            "servizi_help",
+            default="Elenco dei servizi e delle prestazioni offerti.",
+        ),
+    )
+
     # widgets
     form.widget(
         "struttura_correlata",
@@ -139,6 +153,14 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         pattern_options={"selectableTypes": ["UnitaOrganizzativa"]},
     )
 
+    form.widget(
+        "servizi",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Servizio"]},
+    )
+
+    # fieldsets
     model.fieldset(
         "cosa_e",
         label=_("cosa_e_fieldset", default="Cos'è"),
@@ -169,4 +191,10 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         "contenuti_collegati",
         label=_("contenuti_collegati_label", default="Contenuti collegati"),
         fields=["uo_correlata", "struttura_correlata"],
+    )
+
+    model.fieldset(
+        "servizi",
+        label=_("servizi_label", default="Servizi"),
+        fields=["servizi"],
     )

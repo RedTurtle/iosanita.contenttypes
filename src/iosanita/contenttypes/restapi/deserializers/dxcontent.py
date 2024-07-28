@@ -34,18 +34,34 @@ class DeserializeFromJson(BaseDeserializer):
         else:
             portal_type = data.get("@type", "")
 
-        self.validate_a_chi_si_rivolge(data=data, create=create)
+        self.validate_a_chi_si_rivolge(
+            portal_type=portal_type, data=data, create=create
+        )
 
         if portal_type == "Event":
             self.validate_event(data=data, create=create)
 
-    def validate_a_chi_si_rivolge(self, data, create):
+    def validate_a_chi_si_rivolge(self, portal_type, data, create):
+        portal_types = api.portal.get_tool(name="portal_types")
+        behaviors = portal_types[portal_type].behaviors
+
+        has_behaviors = False
+        for bhv in [
+            "iosanita.contenttypes.behavior.a_chi_si_rivolge",
+            "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",
+        ]:
+            if bhv in behaviors:
+                has_behaviors = True
+        if not has_behaviors:
+            # skip check
+            return
         if not create:
             if (
                 "a_chi_si_rivolge" not in data
                 and "a_chi_si_rivolge_tassonomia" not in data  # noqa
             ):
                 return
+
         a_chi_si_rivolge = data.get("a_chi_si_rivolge", {})
         a_chi_si_rivolge_tassonomia = data.get("a_chi_si_rivolge_tassonomia", [])
 

@@ -61,7 +61,6 @@
     <element value="iosanita.contenttypes.behavior.a_chi_si_rivolge" />
     <element value="collective.taxonomy.generated.a_chi_si_rivolge_tassonomia" />
     <element value="iosanita.contenttypes.behavior.contatti" />
-    <element value="iosanita.contenttypes.behavior.servizi" />
     <element value="collective.taxonomy.generated.parliamo_di" />
   </property>
 

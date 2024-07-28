@@ -57,7 +57,6 @@ class TestStrutturaSchema(unittest.TestCase):
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
                 "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",
                 "iosanita.contenttypes.behavior.contatti",
-                "iosanita.contenttypes.behavior.servizi",
                 "collective.taxonomy.generated.parliamo_di",
             ),
         )
@@ -102,6 +101,7 @@ class TestStrutturaSchema(unittest.TestCase):
                     "punti_di_contatto",
                     "responsabile_correlato",
                     "title",
+                    "servizi",
                 ]
             ),
         )

@@ -56,7 +56,6 @@
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
     <element value="iosanita.contenttypes.behavior.dove" />
-    <element value="iosanita.contenttypes.behavior.servizi" />
     <element value="iosanita.contenttypes.behavior.contatti" />
     <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
   </property>

@@ -21,6 +21,7 @@ FIELDSETS_ORDER = {
     "ComeFarePer": [
         "default",
         "a_chi_si_rivolge",
+        "come_fare",
         "utenti",
         "ulteriori_informazioni",
     ],

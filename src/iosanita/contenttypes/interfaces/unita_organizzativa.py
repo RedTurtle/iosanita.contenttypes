@@ -63,6 +63,20 @@ class IUnitaOrganizzativa(model.Schema):
         required=False,
     )
 
+    servizi = RelationList(
+        title=_("servizi_label", default="Servizi"),
+        default=[],
+        value_type=RelationChoice(
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+        required=False,
+        missing_value=(),
+        description=_(
+            "servizi_help",
+            default="Elenco dei servizi e delle prestazioni offerti.",
+        ),
+    )
+
     #  custom widgets
     form.widget(
         "documenti",
@@ -87,6 +101,12 @@ class IUnitaOrganizzativa(model.Schema):
             "selectableTypes": ["Persona"],
             # "basePath": "/amministrazione",
         },
+    )
+    form.widget(
+        "servizi",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Servizio"]},
     )
 
     # custom fieldsets and order
@@ -113,6 +133,11 @@ class IUnitaOrganizzativa(model.Schema):
         "documenti",
         label=_("documenti_label", default="Documenti"),
         fields=["documenti"],
+    )
+    model.fieldset(
+        "servizi",
+        label=_("servizi_label", default="Servizi"),
+        fields=["servizi"],
     )
 
     # SearchableText indexers

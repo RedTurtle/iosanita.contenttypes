@@ -62,12 +62,13 @@ class TestComeFarePerSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/ComeFarePer").json()
-        self.assertEqual(len(resp["fieldsets"]), 8)
+        self.assertEqual(len(resp["fieldsets"]), 9)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
                 "default",
                 "a_chi_si_rivolge",
+                "come_fare",
                 "ulteriori_informazioni",
                 "settings",
                 "ownership",
@@ -125,4 +126,4 @@ class TestComeFarePerSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/ComeFarePer").json()
-        self.assertEqual(resp["fieldsets"][2]["fields"], ["ulteriori_informazioni"])
+        self.assertEqual(resp["fieldsets"][2]["fields"], ["come_fare"])

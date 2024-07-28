@@ -52,7 +52,6 @@ class TestUOSchema(unittest.TestCase):
                 "kitconcept.seo",
                 "plone.versioning",
                 "iosanita.contenttypes.behavior.dove",
-                "iosanita.contenttypes.behavior.servizi",
                 "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
             ),

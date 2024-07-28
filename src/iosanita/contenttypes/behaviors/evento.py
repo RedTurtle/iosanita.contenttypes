@@ -131,6 +131,10 @@ class IEvento(model.Schema):
     model.fieldset(
         "contatti",
         label=_("contatti_label", default="Contatti"),
+        description=_(
+            "contatti_fieldset_help",
+            default='Almeno uno dei due campi "Organizzato da" deve essere compilato.',
+        ),
         fields=[
             "organizzato_da_interno",
             "organizzato_da_esterno",

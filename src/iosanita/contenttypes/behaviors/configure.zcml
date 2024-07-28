@@ -20,15 +20,6 @@
       marker=".sottotitolo.ISottotitolo"
       />
   <plone:behavior
-      name="iosanita.contenttypes.behavior.servizi"
-      title="Servizi"
-      description=""
-      factory=".servizi.Servizi"
-      provides=".servizi.IServizi"
-      for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".servizi.IServizi"
-      />
-  <plone:behavior
       name="iosanita.contenttypes.behavior.a_chi_si_rivolge"
       title="A chi si rivolge"
       description=""
