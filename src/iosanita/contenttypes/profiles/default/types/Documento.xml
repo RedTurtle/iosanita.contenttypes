@@ -58,6 +58,7 @@
     <element value="iosanita.contenttypes.behavior.a_chi_si_rivolge" />
     <element value="collective.taxonomy.generated.a_chi_si_rivolge_tassonomia" />
     <element value="collective.taxonomy.generated.parliamo_di" />
+    <element value="iosanita.contenttypes.behavior.multi_file" />
   </property>
 
   <!-- View information -->

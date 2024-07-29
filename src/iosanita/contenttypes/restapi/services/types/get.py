@@ -26,6 +26,7 @@ FIELDSETS_ORDER = {
     ],
     "Documento": [
         "default",
+        "formati",
         "cosa_e",
         "a_chi_si_rivolge",
     ],

@@ -67,6 +67,10 @@ class IDocumento(model.Schema, IIosanitaContenttypes):
 
     uo_correlata = RelationList(
         title=_("uo_correlata_documento_label", default="Responsabile del documento"),
+        description=_(
+            "uo_correlata_documento_help",
+            default="Indicazione dell'unità organizzativa responsabile del documento.",
+        ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=True,
