@@ -18,13 +18,11 @@ from zope.interface import provider
 @provider(IFormFieldProvider)
 class INewsAdditionalFields(model.Schema):
     descrizione_estesa = BlocksField(
-        title=_(
-            "new_additional_fields_descrizione_estesa", default="Descrizione estesa"
-        ),
+        title=_("descrizione_estesa_news_label", default="Testo"),
         required=True,
         description=_(
-            "new_additional_fields_descrizione_estesa_help",
-            default="Descrizione dettagliata e completa.",
+            "descrizione_estesa_news_help",
+            default="Testo principale della notizia.",
         ),
     )
 
@@ -40,87 +38,60 @@ class INewsAdditionalFields(model.Schema):
         required=False,
     )
 
-    a_cura_di = RelationList(
-        title=_("a_cura_di_label", default="A cura di"),
-        description=_(
-            "a_cura_di_help",
-            default="Seleziona l'ufficio di comunicazione responsabile di "
-            "questa notizia/comunicato stampa.",
-        ),
-        required=True,
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-    )
-
-    a_cura_di_persone = RelationList(
-        title=_("a_cura_di_persone_label", default="Persone"),
-        description=_(
-            "a_cura_di_persone_help",
-            default="Elenco delle persone dell'ASL citate nella notizia, con collegamento alle relative pagine foglia persona. L'elemento è necessario se nella notizia sono citate persone dell'ASL che hanno una pagina persona.",
-        ),
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+    persona_correlata = RelationList(
+        title=_("persona_correlata_news_label", default="Persone"),
         required=False,
-    )
-
-    notizie_correlate = RelationList(
-        title=_("notizie_correlate_label", default="Notizie correlate"),
-        description=_(
-            "notizie_correlate_help",
-            default="Elenco di altre notizie simili o collegate, con collegamento alle relative pagine foglia notizia.",
-        ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        description=_(
+            "persona_correlata_news_help",
+            default="Seleziona una serie di Persone dell'ASL citate nella notizia.",
+        ),
+    )
+    struttura_correlata = RelationList(
+        title=_("struttura_correlata_news_label", default="Strutture"),
         required=False,
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        description=_(
+            "struttura_correlata_news_help",
+            default="Seleziona una serie di Strutture dell'ASL citate nella notizia.",
+        ),
     )
 
-    servizi_correlati = RelationList(
-        title=_("servizi_correlati_label", default="Servizi e prestazioni"),
+    servizio_correlato = RelationList(
+        title=_("servizio_correlato_label", default="Servizi e prestazioni"),
         description=_(
-            "servizi_correlati_help",
+            "servizio_correlato_help",
             default="Elenco dei servizi e delle prestazioni dell'ASL citati nella notizia, con collegamento alle relative pagine foglia servizio. L'elemento è necessario se nella notizia sono citati specifici servizi o prestazioni dell'ASL.",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
     )
-
-    struttura_correlata = RelationList(
-        title=_("struttura_correlata_label", default="Strutture correlate"),
+    uo_correlata = RelationList(
+        title=_("uo_correlata_label", default="A cura di"),
         description=_(
-            "struttura_correlata_help",
-            default="Elenco delle strutture dell'ASL citate nella notizia, con collegamento alle relative pagine foglia struttura. L'elemento è necessario se nella notizia sono citate strutture dell'ASL.",
+            "uo_correlata_help",
+            default="Unità Organizzativa che ha curato il comunicato.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=True,
+    )
+    notizia_correlata = RelationList(
+        title=_("notizia_correlata_label", default="Notizie correlate"),
+        description=_(
+            "notizia_correlata_help",
+            default="Elenco di notizie simili o collegate.",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
     )
-
-    documenti = RelationList(
-        title="Documenti",
-        default=[],
-        description=_(
-            "documenti_help",
-            default="Elenco dei documenti correlati, con collegamento alle relative pagine foglia documento (se documenti ufficiali dell'ASL) o download diretto degli allegati.",
-        ),
-        value_type=RelationChoice(
-            title=_("Documento"), vocabulary="plone.app.vocabularies.Catalog"
-        ),
-        required=False,
-    )
-
     # custom widgets
     form.widget(
-        "a_cura_di",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "maximumSelectionSize": 1,
-            "selectableTypes": ["UnitaOrganizzativa"],
-        },
-    )
-    form.widget(
-        "a_cura_di_persone",
+        "persona_correlata",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -128,7 +99,7 @@ class INewsAdditionalFields(model.Schema):
         },
     )
     form.widget(
-        "notizie_correlate",
+        "notizia_correlata",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -136,28 +107,43 @@ class INewsAdditionalFields(model.Schema):
         },
     )
     form.widget(
-        "servizi_correlati",
+        "struttura_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Struttura"],
+        },
+    )
+    form.widget(
+        "servizio_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "selectableTypes": ["Servizio"],
         },
     )
+    form.widget(
+        "uo_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["UnitaOrganizzativa"],
+        },
+    )
     model.fieldset(
         "correlati",
         label=_("correlati_label", default="Contenuti collegati"),
         fields=[
-            "a_cura_di_persone",
-            "notizie_correlate",
-            "servizi_correlati",
+            "persona_correlata",
             "struttura_correlata",
-            "documenti",
+            "servizio_correlato",
+            "uo_correlata",
+            "notizia_correlata",
         ],
     )
     # custom fieldsets and order
-    form.order_before(descrizione_estesa="ILeadImageBehavior.image")
-    form.order_before(numero_progressivo_cs="ILeadImageBehavior.image")
-    form.order_before(a_cura_di="ILeadImageBehavior.image")
+    form.order_after(numero_progressivo_cs="description")
+    form.order_after(descrizione_estesa="numero_progressivo_cs")
 
     textindexer.searchable("descrizione_estesa")
 

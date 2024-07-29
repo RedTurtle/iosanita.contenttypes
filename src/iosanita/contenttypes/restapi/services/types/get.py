@@ -52,8 +52,8 @@ FIELDSETS_ORDER = {
     ],
     "News Item": [
         "default",
+        "correlati",
         "dates",
-        "contenuti_collegati",
     ],
     "Persona": [
         "default",

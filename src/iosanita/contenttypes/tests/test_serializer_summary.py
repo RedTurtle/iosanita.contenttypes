@@ -78,3 +78,27 @@ class TestSerializerSummary(unittest.TestCase):
                 {"title": "Imprese", "token": "imprese"},
             ],
         )
+
+    def test_summary_serializer_always_return_id_metadata(
+        self,
+    ):
+        """ """
+        struttura = api.content.create(
+            container=self.portal,
+            type="Struttura",
+            title="Test servizio",
+            a_chi_si_rivolge_tassonomia=[
+                "farmacie",
+                "imprese",
+            ],
+        )
+
+        commit()
+        resp = self.api_session.get(f"@search?UID={struttura.UID()}").json()
+
+        self.assertEqual(resp["items_total"], 1)
+        self.assertIn("id", resp["items"][0])
+        self.assertEqual(
+            resp["items"][0]["id"],
+            "test-servizio",
+        )

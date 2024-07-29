@@ -8,4 +8,4 @@ class JSONSummarySerializerMetadata:
         """
         Force always return some metadata
         """
-        return {"parliamo_di_metadata", "a_chi_si_rivolge_tassonomia_metadata"}
+        return {"parliamo_di_metadata", "a_chi_si_rivolge_tassonomia_metadata", "id"}
