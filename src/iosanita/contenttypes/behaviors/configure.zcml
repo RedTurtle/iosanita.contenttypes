@@ -81,6 +81,32 @@
       for="redturtle.bandi.interfaces.bando.IBando"
       marker=".bando.IBando"
       />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.info_testata"
+      title="Info per la testata"
+      description=""
+      factory=".info_testata.InfoTestata"
+      provides=".info_testata.IInfoTestata"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".info_testata.IInfoTestata"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.show_modified"
+      title="Show modified"
+      description="Mostra la data di modifica."
+      factory=".show_modified.ShowModified"
+      provides=".show_modified.IShowModified"
+      marker=".show_modified.IShowModified"
+      />
+    <plone:behavior
+      name="iosanita.contenttypes.behavior.argomenti_document"
+      title="Argomenti Document"
+      description="Tassonomia argomenti per i Document"
+      factory=".argomenti.ArgomentiDocument"
+      provides=".argomenti.IArgomentiDocument"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".argomenti.IArgomentiDocument"
+      />
   <!-- to check -->
   <plone:behavior
       name="iosanita.contenttypes.behavior.news"
