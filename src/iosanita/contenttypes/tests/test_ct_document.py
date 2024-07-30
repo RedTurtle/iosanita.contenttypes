@@ -11,7 +11,6 @@ from plone.restapi.testing import RelativeSession
 import unittest
 
 
-
 class TestDocumentSchema(unittest.TestCase):
     layer = RESTAPI_TESTING
 
@@ -34,25 +33,25 @@ class TestDocumentSchema(unittest.TestCase):
         self.assertEqual(
             portal_types["Document"].behaviors,
             (
-                'plone.namefromtitle',
-                'plone.allowdiscussion',
-                'plone.excludefromnavigation',
-                'plone.shortname',
-                'plone.dublincore',
-                'plone.relateditems',
-                'plone.locking',
-                'volto.blocks',
-                'volto.preview_image',
-                'plone.versioning',
-                'plone.tableofcontents',
-                'iosanita.contenttypes.behavior.info_testata',
-                'iosanita.contenttypes.behavior.argomenti_document',
-                'plone.translatable',
-                'iosanita.contenttypes.behavior.show_modified',
-                'kitconcept.seo',
-                'plone.constraintypes',
-                'plone.leadimage',
-                'iosanita.contenttypes.behavior.exclude_from_search'
+                "plone.namefromtitle",
+                "plone.allowdiscussion",
+                "plone.excludefromnavigation",
+                "plone.shortname",
+                "plone.dublincore",
+                "plone.relateditems",
+                "plone.locking",
+                "volto.blocks",
+                "volto.preview_image",
+                "plone.versioning",
+                "plone.tableofcontents",
+                "iosanita.contenttypes.behavior.info_testata",
+                "iosanita.contenttypes.behavior.argomenti_document",
+                "plone.translatable",
+                "iosanita.contenttypes.behavior.show_modified",
+                "kitconcept.seo",
+                "plone.constraintypes",
+                "plone.leadimage",
+                "iosanita.contenttypes.behavior.exclude_from_search",
             ),
         )
 
@@ -92,12 +91,12 @@ class TestDocumentSchema(unittest.TestCase):
         self.assertEqual(
             resp["fieldsets"][0]["fields"],
             [
-                'title',
-                'description',
-                'preview_image',
-                'preview_caption',
-                'image',
-                'image_caption'
+                "title",
+                "description",
+                "preview_image",
+                "preview_caption",
+                "image",
+                "image_caption",
             ],
         )
 
@@ -127,7 +126,7 @@ class TestDocumentSchema(unittest.TestCase):
                 "exclude_from_nav",
                 "id",
                 "versioning_enabled",
-                'table_of_contents',
+                "table_of_contents",
                 "show_modified",
                 "exclude_from_search",
                 "changeNote",
@@ -168,7 +167,6 @@ class TestDocumentSchema(unittest.TestCase):
         self.assertEqual(
             resp["fieldsets"][6]["fields"], ["creators", "contributors", "rights"]
         )
-
 
     def test_document_fields_seo_fieldset(self):
         """

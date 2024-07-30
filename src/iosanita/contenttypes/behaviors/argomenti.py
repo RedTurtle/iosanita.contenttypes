@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes import _
 from plone.app.contenttypes.interfaces import IDocument
-from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
@@ -61,7 +60,7 @@ class IArgomentiDocument(IArgomentiSchema):
         label=_("correlati_label", default="Contenuti collegati"),
         fields=["correlato_in_evidenza"],
     )
-   
+
     form.order_after(correlato_in_evidenza="IRelatedItems.relatedItems")
 
 

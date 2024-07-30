@@ -98,7 +98,7 @@
       provides=".show_modified.IShowModified"
       marker=".show_modified.IShowModified"
       />
-    <plone:behavior
+  <plone:behavior
       name="iosanita.contenttypes.behavior.argomenti_document"
       title="Argomenti Document"
       description="Tassonomia argomenti per i Document"

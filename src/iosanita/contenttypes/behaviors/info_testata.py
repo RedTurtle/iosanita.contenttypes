@@ -47,7 +47,7 @@ class IInfoTestata(model.Schema):
             "la condivisione sui vari social, mail e stampa.",
         ),
     )
-    
+
     model.fieldset(
         "testata",
         label=_("testata_fieldset_label", default="Testata"),
