@@ -3,6 +3,9 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
+  <adapter factory=".news.NewsItemSerializeToJson" />
+  <adapter factory=".summary.IOSanitaJSONSummarySerializer" />
+
   <!-- Summary Serializer Metadata -->
   <utility
       factory=".summary.JSONSummarySerializerMetadata"

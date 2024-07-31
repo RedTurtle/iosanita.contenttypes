@@ -7,10 +7,14 @@ from zope.component import getUtility
 from zope.globalrequest import getRequest
 
 
-def extract_taxonomies(context, field):
+def get_taxonomy_vocab(field):
     request = getRequest()
     taxonomy = getUtility(ITaxonomy, name=f"collective.taxonomy.{field}")
-    taxonomy_voc = taxonomy.makeVocabulary(request.get("LANGUAGE"))
+    return taxonomy.makeVocabulary(request.get("LANGUAGE"))
+
+
+def extract_taxonomies(context, field):
+    taxonomy_voc = get_taxonomy_vocab(field)
     data = []
     for key in getattr(context, field, []) or []:
         value = taxonomy_voc.inv_data.get(key, None)
