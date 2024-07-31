@@ -1,17 +1,16 @@
-from plone.restapi.interfaces import ISerializeToJson
-from zope.interface import implementer
-from plone.volto.interfaces import IFolderishNewsItem
-from plone.restapi.serializer.dxcontent import SerializeFolderToJson
-from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
-from zope.component import adapter
-from iosanita.contenttypes.indexers.taxonomies import get_taxonomy_vocab
 from collective.taxonomy import PATH_SEPARATOR
+from iosanita.contenttypes.indexers.taxonomies import get_taxonomy_vocab
+from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from plone.restapi.interfaces import ISerializeToJson
+from plone.restapi.serializer.dxcontent import SerializeFolderToJson
+from plone.volto.interfaces import IFolderishNewsItem
+from zope.component import adapter
+from zope.interface import implementer
 
 
 @implementer(ISerializeToJson)
 @adapter(IFolderishNewsItem, IIosanitaContenttypesLayer)
 class NewsItemSerializeToJson(SerializeFolderToJson):
-
     def __call__(self, version=None, include_items=True):
         data = super().__call__(version=version, include_items=include_items)
 

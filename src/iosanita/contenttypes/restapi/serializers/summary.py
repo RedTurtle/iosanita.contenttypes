@@ -1,13 +1,12 @@
-from typing import Any
-from plone.restapi.interfaces import IJSONSummarySerializerMetadata
-from zope.interface import implementer
-from plone.restapi.interfaces import ISerializeToJsonSummary
-from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
-from zope.interface import Interface
-from zope.component import adapter
-from iosanita.contenttypes.indexers.taxonomies import get_taxonomy_vocab
 from collective.taxonomy import PATH_SEPARATOR
+from iosanita.contenttypes.indexers.taxonomies import get_taxonomy_vocab
+from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from plone.restapi.interfaces import IJSONSummarySerializerMetadata
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from redturtle.volto.restapi.serializer.summary import DefaultJSONSummarySerializer
+from zope.component import adapter
+from zope.interface import implementer
+from zope.interface import Interface
 
 
 @implementer(IJSONSummarySerializerMetadata)
@@ -27,7 +26,6 @@ class JSONSummarySerializerMetadata:
 @implementer(ISerializeToJsonSummary)
 @adapter(Interface, IIosanitaContenttypesLayer)
 class IOSanitaJSONSummarySerializer(DefaultJSONSummarySerializer):
-
     def __call__(self):
         """
         Customize type_title for News Items

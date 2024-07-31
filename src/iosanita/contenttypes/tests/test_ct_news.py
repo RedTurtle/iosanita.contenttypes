@@ -7,11 +7,10 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
-from plone.restapi.testing import RelativeSession
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
+from plone.restapi.testing import RelativeSession
 from zope.component import queryMultiAdapter
-from transaction import commit
 
 import unittest
 
