@@ -22,5 +22,6 @@
           name="Struttura"
   />
   <object meta_type="Dexterity FTI" name="Servizio" />
+  <object meta_type="Dexterity FTI" name="Documento" />
 
 </object>

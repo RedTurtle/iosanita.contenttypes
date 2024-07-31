@@ -39,6 +39,10 @@
         id="iosanita.contenttypes.AddServizio"
         title="iosanita.contenttypes: Add Servizio"
         />
+    <permission
+        id="iosanita.contenttypes.AddDocumento"
+        title="iosanita.contenttypes: Add Documento"
+        />
   </configure>
 
 </configure>

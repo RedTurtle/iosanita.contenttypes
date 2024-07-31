@@ -81,6 +81,14 @@
       for="redturtle.bandi.interfaces.bando.IBando"
       marker=".bando.IBando"
       />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.multi_file"
+      title="Multi File"
+      description="Tre campi file aggiuntivi."
+      factory=".multi_file.MultiFile"
+      provides=".multi_file.IMultiFile"
+      marker=".multi_file.IMultiFile"
+      />
   <!-- to check -->
   <plone:behavior
       name="iosanita.contenttypes.behavior.news"
