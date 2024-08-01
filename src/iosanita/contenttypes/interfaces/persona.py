@@ -86,16 +86,6 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         required=True,
     )
 
-    uo_correlata = RelationList(
-        title=_(
-            "uo_correlata_servizio_label", default="Unità organizzativa responsabile"
-        ),
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
-        missing_value=(),
-    )
-
     orari_ricevimento = BlocksField(
         title=_("orari_ricevimento_label", default="Orari di ricevimento"),
         description=_(
@@ -119,21 +109,6 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         missing_value=(),
     )
 
-    struttura_correlata = RelationList(
-        title=_(
-            "struttura_correlata_label",
-            default="Strutture in cui opera",
-        ),
-        description=_(
-            "struttura_correlata_help",
-            default="Necessario per le persone interne all'ASL, opzionale per medici di base e pediatri.",
-        ),
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
-        missing_value=(),
-    )
-
     biografia = BlocksField(
         title=_("biografia_label", default="Biografia"),
         description=_("biografia_help", default=""),
@@ -142,27 +117,11 @@ class IPersona(model.Schema, IIosanitaContenttypes):
 
     # custom widgets
     form.widget(
-        "uo_correlata",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "selectableTypes": ["UnitaOrganizzativa"],
-        },
-    )
-    form.widget(
         "struttura_ricevimento",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "maximumSelectionSize": 1,
-            "selectableTypes": ["Struttura"],
-        },
-    )
-    form.widget(
-        "struttura_correlata",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
             "selectableTypes": ["Struttura"],
         },
     )

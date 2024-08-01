@@ -110,8 +110,6 @@ class TestPersonaSchema(unittest.TestCase):
                 "titolo_persona",
                 "description",
                 "image",
-                "uo_correlata",
-                "struttura_correlata",
             ],
         )
 
