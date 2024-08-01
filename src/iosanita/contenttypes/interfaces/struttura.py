@@ -160,6 +160,14 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     )
 
     model.fieldset(
+        "persone_struttura",
+        label=_("persone_struttura_label", default="Persone struttura"),
+        fields=[
+            "responsabile_correlato",
+            "coordinatore_correlato",
+        ],
+    )
+    model.fieldset(
         "contenuti_collegati",
         label=_("contenuti_collegati_label", default="Contenuti collegati"),
         fields=["uo_correlata", "struttura_correlata"],

@@ -92,7 +92,7 @@ class TestPersonaSchema(unittest.TestCase):
                     "description",
                     "incarico",
                     "nome",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                 ]
             ),
         )
@@ -170,7 +170,7 @@ class TestPersonaSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Persona").json()
-        self.assertEqual(resp["fieldsets"][5]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][5]["fields"], ["pdc_correlato"])
 
     def test_persona_fields_biografia_fieldset(self):
         """

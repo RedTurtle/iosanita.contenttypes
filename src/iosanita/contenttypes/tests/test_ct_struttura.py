@@ -98,7 +98,7 @@ class TestStrutturaSchema(unittest.TestCase):
                     "come_accedere",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test
                     "orari",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                     "responsabile_correlato",
                     "title",
                     "servizi",
@@ -187,7 +187,7 @@ class TestStrutturaSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][6]["fields"], ["pdc_correlato"])
 
     def test_struttura_fields_servizi_fieldset(self):
         """
@@ -203,7 +203,7 @@ class TestStrutturaSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
             resp["fieldsets"][8]["fields"],
-            ["responsabile_correlato", "coordinatore_correlato", "personale_correlato"],
+            ["responsabile_correlato", "coordinatore_correlato"],
         )
 
     def test_struttura_fields_correlati_fieldset(self):

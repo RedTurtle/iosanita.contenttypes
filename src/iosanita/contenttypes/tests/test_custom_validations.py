@@ -40,7 +40,7 @@ class TestCustomValidation(unittest.TestCase):
             "descrizione_estesa": {"blocks": {}},
             "end": "2024-07-26T10:00:00+00:00",
             "geolocation": {"latitude": 44.821502405601, "longitude": 11.632933286779},
-            "punti_di_contatto": [{"@id": "/pdc"}],
+            "pdc_correlato": [{"@id": "/pdc"}],
             "start": "2024-07-26T09:00:00+00:00",
             "tipologia_evento": "giornata-informativa",
             "title": "titolo",
@@ -109,7 +109,7 @@ class TestCustomValidation(unittest.TestCase):
             "come_accedere": {"blocks": {}},
             "orari_apertura": {"blocks": {}},
             "description": "asdasd",
-            "punti_di_contatto": [{"@id": "/pdc"}],
+            "pdc_correlato": [{"@id": "/pdc"}],
             "title": "titolo",
             "@type": "Struttura",
         }

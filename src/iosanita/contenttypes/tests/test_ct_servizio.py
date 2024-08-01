@@ -105,7 +105,7 @@ class TestServizioSchema(unittest.TestCase):
                     "orari",
                     "uo_correlata",
                     "responsabile_correlato",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                 ]
             ),
         )
@@ -189,7 +189,7 @@ class TestServizioSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Servizio").json()
-        self.assertEqual(resp["fieldsets"][7]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][7]["fields"], ["pdc_correlato"])
 
     def test_servizio_fields_cosa_e_fieldset(self):
         """

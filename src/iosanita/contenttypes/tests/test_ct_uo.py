@@ -92,7 +92,7 @@ class TestUOSchema(unittest.TestCase):
                     "competenze",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test
                     "orari",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                     "responsabile_correlato",
                     "title",
                 ]
@@ -179,7 +179,7 @@ class TestUOSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][6]["fields"], ["pdc_correlato"])
 
     def test_uo_fields_documenti_fieldset(self):
         """

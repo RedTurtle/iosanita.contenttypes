@@ -98,7 +98,7 @@ class TestEventSchema(unittest.TestCase):
                     "costo",
                     "descrizione_estesa",
                     "end",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                     "start",
                     "tipologia_evento",
                     "title",
@@ -188,7 +188,7 @@ class TestEventSchema(unittest.TestCase):
                 "organizzato_da_interno",
                 "organizzato_da_esterno",
                 "patrocinato_da",
-                "punti_di_contatto",
+                "pdc_correlato",
             ],
         )
 
