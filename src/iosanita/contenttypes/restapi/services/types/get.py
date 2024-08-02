@@ -102,15 +102,9 @@ FIELDSETS_ORDER = {
         "documenti",
         "ulteriori_informazioni",
     ],
-    "Venue": [
+    "Step": [
         "default",
-        "descrizione",
-        "accesso",
-        "dove",
-        "orari",
         "contatti",
-        "ulteriori_informazioni",
-        "contenuti_collegati",
     ],
 }
 

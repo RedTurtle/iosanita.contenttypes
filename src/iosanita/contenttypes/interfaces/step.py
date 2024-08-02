@@ -20,29 +20,22 @@ class IStep(model.Schema, IIosanitaContenttypes):
         ),
         required=False,
     )
-
-    dove = RelationList(
-        title="Dove",
+    uo_correlata = RelationList(
+        title=_("uo_correlata_step_label", default="Dove"),
+        description=_(
+            "uo_correlata_step_help",
+            default="Seleziona una Unità organizzativa.",
+        ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=True,
-        description=_(
-            "dove_help",
-            default="Seleziona una struttura o punto di contatto.",
-        ),
     )
 
     form.widget(
-        "dove",
+        "uo_correlata",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "selectableTypes": ["UnitaOrganizzativa"],
         },
     )
-    # form.widget(
-    #     "documenti",
-    #     RelatedItemsFieldWidget,
-    #     vocabulary="plone.app.vocabularies.Catalog",
-    #     pattern_options={"selectableTypes": ["Documento"]},
-    # )
