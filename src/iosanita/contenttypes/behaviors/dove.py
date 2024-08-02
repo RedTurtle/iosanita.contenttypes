@@ -3,17 +3,17 @@ from collective.address.behaviors import IAddress
 from collective.geolocationbehavior.geolocation import IGeolocatable
 from iosanita.contenttypes import _
 from plone.app.dexterity import textindexer
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
+from z3c.relationfield.schema import RelationChoice
+from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
-from z3c.relationfield.schema import RelationChoice
-from z3c.relationfield.schema import RelationList
-from plone.autoform import directives as form
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
 
 
 class IDoveSchema(IGeolocatable, IAddress):
