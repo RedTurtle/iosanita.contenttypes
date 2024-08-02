@@ -76,11 +76,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     struttura_correlata = RelationList(
         title=_(
             "struttura_correlata_label",
-            default="Struttura correlata",
-        ),
-        description=_(
-            "struttura_correlata_help",
-            default="Seleziona una struttura correlata.",
+            default="Struttura di riferimento",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),

@@ -103,6 +103,7 @@ class TestEventSchema(unittest.TestCase):
                     "tipologia_evento",
                     "title",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "struttura_correlata",
                 ]
             ),
         )
@@ -155,7 +156,7 @@ class TestEventSchema(unittest.TestCase):
         self.assertEqual(
             resp["fieldsets"][3]["fields"],
             [
-                "luogo_correlato",
+                "struttura_correlata",
                 "nome_sede",
                 "street",
                 "zip_code",

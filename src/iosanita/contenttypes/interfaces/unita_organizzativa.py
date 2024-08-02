@@ -111,6 +111,16 @@ class IUnitaOrganizzativa(model.Schema):
 
     # custom fieldsets and order
     model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        description=_(
+            "dove_uo_help",
+            default="Se la sede dell Unità Organizzativa .",
+        ),
+        fields=[],
+    )
+
+    model.fieldset(
         "cosa_fa",
         label=_("cosa_fa_label", default="Competenze"),
         fields=["competenze"],
