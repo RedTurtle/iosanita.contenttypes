@@ -44,10 +44,10 @@
     <element value="plone.shortname" />
     <element value="plone.ownership" />
     <element value="plone.publication" />
-    <element value="plone.categorization" />
-    <element value="plone.basic" />
-    <element value="plone.locking" />
     <element value="plone.relateditems" />
+    <element value="plone.categorization" />
+    <element value="plone.locking" />
+    <element value="plone.textindexer" />
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />

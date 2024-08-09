@@ -41,10 +41,10 @@ class TestStepSchema(unittest.TestCase):
                 "plone.shortname",
                 "plone.ownership",
                 "plone.publication",
-                "plone.categorization",
-                "plone.basic",
-                "plone.locking",
                 "plone.relateditems",
+                "plone.categorization",
+                "plone.locking",
+                "plone.textindexer",
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
@@ -78,7 +78,6 @@ class TestStepSchema(unittest.TestCase):
             sorted(
                 [
                     "title",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
                     "uo_correlata",
                     "pdc_correlato",
                 ]
@@ -94,7 +93,6 @@ class TestStepSchema(unittest.TestCase):
             resp["fieldsets"][0]["fields"],
             [
                 "title",
-                "description",
                 "testo",
                 "uo_correlata",
             ],

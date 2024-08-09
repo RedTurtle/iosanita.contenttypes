@@ -68,7 +68,7 @@ class IPuntoDiContatto(model.Schema, IIosanitaContenttypes):
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=True,
+        required=False,
     )
 
     form.widget(

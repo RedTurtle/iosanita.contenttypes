@@ -97,7 +97,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         value_type=RelationChoice(
             vocabulary="plone.app.vocabularies.Catalog",
         ),
-        required=True,
+        required=False,
         missing_value=(),
         description=_(
             "servizi_help",

@@ -101,7 +101,6 @@ class TestStrutturaSchema(unittest.TestCase):
                     "pdc_correlato",
                     "responsabile_correlato",
                     "title",
-                    "servizi",
                 ]
             ),
         )

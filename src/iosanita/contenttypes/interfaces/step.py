@@ -7,10 +7,14 @@ from plone.autoform import directives as form
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
+from zope import schema
+from plone.app.dexterity import textindexer
 
 
 class IStep(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type Step"""
+
+    title = schema.TextLine(title=_("label_title", default="Titolo"), required=True)
 
     testo = BlocksField(
         title=_("testo_label", default="Testo"),
@@ -39,3 +43,7 @@ class IStep(model.Schema, IIosanitaContenttypes):
             "selectableTypes": ["UnitaOrganizzativa"],
         },
     )
+
+    # SearchableText fields
+    textindexer.searchable("title")
+    textindexer.searchable("testo")
