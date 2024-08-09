@@ -2,13 +2,13 @@
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
+from plone.app.dexterity import textindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.supermodel import model
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
-from plone.app.dexterity import textindexer
 
 
 class IStep(model.Schema, IIosanitaContenttypes):
