@@ -51,7 +51,6 @@
     <element value="plone.translatable" />
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
-    <element value="iosanita.contenttypes.behavior.contatti" />
   </property>
 
   <!-- View information -->

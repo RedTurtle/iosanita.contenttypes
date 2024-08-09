@@ -48,7 +48,6 @@ class TestStepSchema(unittest.TestCase):
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
-                "iosanita.contenttypes.behavior.contatti",
             ),
         )
 
@@ -78,8 +77,6 @@ class TestStepSchema(unittest.TestCase):
             sorted(
                 [
                     "title",
-                    "uo_correlata",
-                    "pdc_correlato",
                 ]
             ),
         )

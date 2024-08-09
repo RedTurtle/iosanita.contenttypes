@@ -32,7 +32,34 @@ class IStep(model.Schema, IIosanitaContenttypes):
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=True,
+        required=False,
+    )
+
+    # questo lo mettiamo qui perché é l'unico non obbligatorio
+    pdc_correlato = RelationList(
+        title=_(
+            "pdc_correlato_label",
+            default="Punti di contatto",
+        ),
+        description=_(
+            "pdc_correlato_help",
+            default="Seleziona una lista di punti di contatto.",
+        ),
+        required=False,
+        default=[],
+        value_type=RelationChoice(
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+    )
+
+    # custom widgets
+    form.widget(
+        "pdc_correlato",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["PuntoDiContatto"],
+        },
     )
 
     form.widget(
@@ -42,6 +69,13 @@ class IStep(model.Schema, IIosanitaContenttypes):
         pattern_options={
             "selectableTypes": ["UnitaOrganizzativa"],
         },
+    )
+
+    # custom fieldsets
+    model.fieldset(
+        "contatti",
+        label=_("contatti_label", default="Contatti"),
+        fields=["pdc_correlato"],
     )
 
     # SearchableText fields
