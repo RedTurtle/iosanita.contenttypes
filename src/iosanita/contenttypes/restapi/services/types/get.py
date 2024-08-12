@@ -35,11 +35,11 @@ FIELDSETS_ORDER = {
         "default",
         "cosa_e",
         "partecipanti",
+        "a_chi_si_rivolge",
         "dove",
         "costi",
         "contatti",
         "ulteriori_informazioni",
-        "a_chi_si_rivolge",
         "contenuti_collegati",
     ],
     "Struttura": [

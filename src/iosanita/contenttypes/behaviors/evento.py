@@ -118,6 +118,11 @@ class IEvento(model.Schema):
         required=False,
     )
 
+    # custom order
+    form.order_after(organizzato_da_interno="pdc_correlato")
+    form.order_after(organizzato_da_esterno="organizzato_da_interno")
+    form.order_after(patrocinato_da="organizzato_da_esterno")
+
     # custom widgets
 
     form.widget(

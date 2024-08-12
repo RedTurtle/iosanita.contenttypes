@@ -76,11 +76,11 @@ class TestEventSchema(unittest.TestCase):
                 "default",
                 "cosa_e",
                 "partecipanti",
+                "a_chi_si_rivolge",
                 "dove",
                 "costi",
                 "contatti",
                 "ulteriori_informazioni",
-                "a_chi_si_rivolge",
                 "contenuti_collegati",
                 "categorization",
                 "dates",
@@ -148,13 +148,23 @@ class TestEventSchema(unittest.TestCase):
             ["persona_correlata", "parteciperanno"],
         )
 
-    def test_event_fields_dove_fieldset(self):
+    def test_event_fields_a_chi_si_rivolge_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Event").json()
         self.assertEqual(
             resp["fieldsets"][3]["fields"],
+            ["a_chi_si_rivolge", "a_chi_si_rivolge_tassonomia"],
+        )
+
+    def test_event_fields_dove_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Event").json()
+        self.assertEqual(
+            resp["fieldsets"][4]["fields"],
             [
                 "webinar",
                 "struttura_correlata",
@@ -175,7 +185,7 @@ class TestEventSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/Event").json()
         self.assertEqual(
-            resp["fieldsets"][4]["fields"],
+            resp["fieldsets"][5]["fields"],
             ["costo"],
         )
 
@@ -185,12 +195,12 @@ class TestEventSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/Event").json()
         self.assertEqual(
-            resp["fieldsets"][5]["fields"],
+            resp["fieldsets"][6]["fields"],
             [
+                "pdc_correlato",
                 "organizzato_da_interno",
                 "organizzato_da_esterno",
                 "patrocinato_da",
-                "pdc_correlato",
             ],
         )
 
@@ -199,17 +209,7 @@ class TestEventSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Event").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["ulteriori_informazioni"])
-
-    def test_event_fields_a_chi_si_rivolge_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Event").json()
-        self.assertEqual(
-            resp["fieldsets"][7]["fields"],
-            ["a_chi_si_rivolge", "a_chi_si_rivolge_tassonomia"],
-        )
+        self.assertEqual(resp["fieldsets"][7]["fields"], ["ulteriori_informazioni"])
 
     def test_event_fields_contenuti_collegati_fieldset(self):
         """
