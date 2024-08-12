@@ -31,6 +31,8 @@ class IOSanitaJSONSummarySerializer(DefaultJSONSummarySerializer):
         Customize type_title for News Items
         """
         data = super().__call__()
+        if self.is_get_call():
+            data["has_children"] = self.has_children()
 
         if data["@type"] != "News Item":
             return data
@@ -45,4 +47,26 @@ class IOSanitaJSONSummarySerializer(DefaultJSONSummarySerializer):
                 data["type_title"] = "Notizia"
         else:
             data["type_title"] = "Notizia"
+
         return data
+
+    def is_get_call(self):
+        steps = self.request.steps
+        if not steps:
+            return False
+        return steps[-1] == "GET_application_json_"
+
+    def has_children(self):
+        """
+        Return info if the item has at least one child
+        """
+        try:
+            obj = self.context.getObject()
+        except AttributeError:
+            obj = self.context
+        try:
+            if obj.aq_base.keys():
+                return True
+        except AttributeError:
+            return False
+        return False

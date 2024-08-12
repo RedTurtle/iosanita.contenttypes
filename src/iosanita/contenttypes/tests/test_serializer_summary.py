@@ -136,3 +136,53 @@ class TestSerializerSummary(unittest.TestCase):
         self.assertEqual(resp["items_total"], 1)
         self.assertIn("tipologia_notizia", resp["items"][0])
         self.assertEqual(resp["items"][0]["tipologia_notizia"], ["notizia"])
+
+    def test_summary_serializer_return_has_children_info_in_GET_calls(self):
+        """ """
+        news = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="Test news",
+        )
+
+        api.content.create(
+            container=news["multimedia"],
+            type="Link",
+            title="Test link",
+        )
+        commit()
+        resp = self.api_session.get(news.absolute_url()).json()
+
+        self.assertEqual(len(resp["items"]), 2)
+        self.assertIn("has_children", resp["items"][0])
+        self.assertIn("has_children", resp["items"][1])
+        self.assertTrue(resp["items"][0]["has_children"])
+        self.assertFalse(resp["items"][1]["has_children"])
+
+    def test_summary_serializer_does_not_return_has_children_info_in_POST_calls(self):
+        """ """
+        news = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="Test news",
+        )
+
+        api.content.create(
+            container=news["multimedia"],
+            type="Link",
+            title="Test link",
+        )
+        commit()
+        resp = self.api_session.get(
+            f"@search?path={'/'.join(news.getPhysicalPath())}&id=multimedia"
+        ).json()
+
+        self.assertEqual(len(resp["items"]), 1)
+        self.assertNotIn("has_children", resp["items"][0])
+
+        resp = self.api_session.get(
+            f"@search?path={'/'.join(news.getPhysicalPath())}&id=documenti-allegati"
+        ).json()
+
+        self.assertEqual(len(resp["items"]), 1)
+        self.assertNotIn("has_children", resp["items"][0])
