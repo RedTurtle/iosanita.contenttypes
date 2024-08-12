@@ -9,6 +9,8 @@ from zExceptions import BadRequest
 from zope.component import adapter
 from zope.interface import implementer
 
+import json
+
 
 @implementer(IDeserializeFromJson)
 @adapter(IDexterityContent, IIosanitaContenttypesLayer)
@@ -72,12 +74,16 @@ class DeserializeFromJson(BaseDeserializer):
                     default='Devi compilare almeno uno dei due campi di "A chi si rivolge".',
                 )
             )
-            raise BadRequest(
-                [
-                    {"field": "a_chi_si_rivolge", "message": msg},
-                    {"field": "a_chi_si_rivolge_tassonomia", "message": msg},
-                ]
-            )
+            # temporaneamente commentato perché Volto non lo gestisce bene
+            # raise BadRequest(
+            # json.dumps(
+            #     [
+            #         {"field": "a_chi_si_rivolge", "message": msg},
+            #         {"field": "a_chi_si_rivolge_tassonomia", "message": msg},
+            #     ]
+            # )
+            # )
+            raise BadRequest(json.dumps({"error": {"message": msg}}))
 
     def validate_event(self, data, create):
         # validate organizzato da
@@ -98,12 +104,14 @@ class DeserializeFromJson(BaseDeserializer):
                     default="Devi compilare almeno uno dei due campi per l'organizzazione.",
                 )
             )
-            raise BadRequest(
-                [
-                    {"field": "organizzato_da_esterno", "message": msg},
-                    {"field": "organizzato_da_interno", "message": msg},
-                ]
-            )
+            # temporaneamente commentato perché Volto non lo gestisce bene
+            # raise BadRequest(
+            #     [
+            #         {"field": "organizzato_da_esterno", "message": msg},
+            #         {"field": "organizzato_da_interno", "message": msg},
+            #     ]
+            # )
+            raise BadRequest(json.dumps({"error": {"message": msg}}))
 
     def is_empty_blocks(self, blocks_field):
         blocks = blocks_field.get("blocks", {})
