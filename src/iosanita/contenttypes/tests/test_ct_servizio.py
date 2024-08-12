@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -8,7 +9,6 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
-from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from zope.interface import alsoProvides
 
 import unittest

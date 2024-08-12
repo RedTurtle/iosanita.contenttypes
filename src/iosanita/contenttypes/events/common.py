@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.utils import create_default_blocks
 from plone import api
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
-from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
+
 
 SUBFOLDERS_MAPPING = {
     "Bando": {

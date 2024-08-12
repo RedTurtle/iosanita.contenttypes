@@ -1,4 +1,5 @@
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi import _
@@ -8,7 +9,6 @@ from plone.restapi.interfaces import IDeserializeFromJson
 from zExceptions import BadRequest
 from zope.component import adapter
 from zope.interface import implementer
-from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 
 import json
 
