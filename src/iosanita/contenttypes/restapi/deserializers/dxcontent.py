@@ -74,7 +74,7 @@ class DeserializeFromJson(BaseDeserializer):
             msg = api.portal.translate(
                 _(
                     "a_chi_si_rivolge_validation_error",
-                    default='Devi compilare almeno uno dei due campi di "A chi si rivolge".',
+                    default='Devi compilare almeno uno dei due campi del tab "A chi si rivolge".',
                 )
             )
             # temporaneamente commentato perché Volto non lo gestisce bene
@@ -97,6 +97,13 @@ class DeserializeFromJson(BaseDeserializer):
             ):
                 return
 
+            if (
+                "webinar" not in data
+                and "struttura_correlata" not in data  # noqa
+                and "geolocation" not in data  # noqa
+            ):
+                return
+
         organizzato_da_esterno = data.get("organizzato_da_esterno", {})
         organizzato_da_interno = data.get("organizzato_da_interno", [])
 
@@ -104,7 +111,7 @@ class DeserializeFromJson(BaseDeserializer):
             msg = api.portal.translate(
                 _(
                     "organizzato_validation_error",
-                    default="Devi compilare almeno uno dei due campi per l'organizzazione.",
+                    default='Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".',
                 )
             )
             # temporaneamente commentato perché Volto non lo gestisce bene
@@ -115,6 +122,27 @@ class DeserializeFromJson(BaseDeserializer):
             #     ]
             # )
             raise BadRequest(json.dumps({"error": {"message": msg}}))
+
+        # validate dove
+        has_webinar = not self.is_empty_blocks(data.get("webinar", {}))
+        has_struttura_correlata = data.get("struttura_correlata", [])
+        has_location_infos = self.has_location_infos(data)
+        if not has_webinar and not has_struttura_correlata and not has_location_infos:
+            msg = api.portal.translate(
+                _(
+                    "dove_event_validation_error",
+                    default='Devi compilare almeno uno tra i campi "Webinar", "Struttura di riferimento" o "Geolocation" del tab "Dove".',
+                )
+            )
+            raise BadRequest(json.dumps({"error": {"message": msg}}))
+
+    def has_location_infos(self, data):
+        has_data = True
+        for fieldname in ["geolocation"]:
+            value = data.get(fieldname, None)
+            if not value or value in [{"latitude": 0, "longitude": 0}]:
+                has_data = False
+        return has_data
 
     def is_empty_blocks(self, blocks_field):
         blocks = blocks_field.get("blocks", {})

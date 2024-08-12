@@ -70,9 +70,9 @@ class INewsAdditionalFields(model.Schema):
         required=False,
     )
     uo_correlata = RelationList(
-        title=_("uo_correlata_label", default="A cura di"),
+        title=_("uo_correlata_news_label", default="A cura di"),
         description=_(
-            "uo_correlata_help",
+            "uo_correlata_news_help",
             default="Unità Organizzativa che ha curato il comunicato.",
         ),
         default=[],

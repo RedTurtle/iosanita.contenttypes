@@ -38,7 +38,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         title=_("come_accedere_label", default="Come accedere"),
         required=True,
         description=_(
-            "come_accedere_help",
+            "come_accedere_servizio_help",
             default="Descrizione della procedura da seguire per poter"
             " usufruire del servizio.",
         ),
@@ -96,7 +96,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     )
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa_label", default="Descrizione estesa"),
+        title=_("descrizione_estesa_servizio_label", default="Descrizione estesa"),
         required=False,
         description=_(
             "descrizione_estesa_servizio_help",

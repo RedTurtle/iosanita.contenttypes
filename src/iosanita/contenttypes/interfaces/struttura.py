@@ -14,7 +14,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type"""
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa_label", default="Descrizione estesa"),
+        title=_("descrizione_estesa_struttura_label", default="Descrizione estesa"),
         required=False,
         description=_(
             "descrizione_estesa_struttura_help",
@@ -26,7 +26,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         title=_("come_accedere_label", default="Come accedere"),
         required=True,
         description=_(
-            "come_accedere_help",
+            "come_accedere_struttura_help",
             default="Modalità di accesso alla struttura con particolare attenzione agli accessi per disabili ed eventuale descrizione di come arrivare, costi e regole di accesso.",
         ),
     )
@@ -78,11 +78,11 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
     )
     struttura_correlata = RelationList(
         title=_(
-            "struttura_correlata_label",
+            "struttura_correlata_struttura_label",
             default="Struttura correlata",
         ),
         description=_(
-            "struttura_correlata_help",
+            "struttura_correlata_struttura_help",
             default="Seleziona una struttura correlata.",
         ),
         default=[],

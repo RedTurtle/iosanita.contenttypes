@@ -62,7 +62,7 @@ class TestCustomValidation(unittest.TestCase):
             json.loads(resp.json()["message"]),
             {
                 "error": {
-                    "message": "Devi compilare almeno uno dei due campi per l'organizzazione."
+                    "message": 'Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".'
                 }
             },
         )
@@ -88,7 +88,7 @@ class TestCustomValidation(unittest.TestCase):
             json.loads(resp.json()["message"]),
             {
                 "error": {
-                    "message": "Devi compilare almeno uno dei due campi per l'organizzazione."
+                    "message": 'Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".'
                 }
             },
         )
@@ -125,11 +125,12 @@ class TestCustomValidation(unittest.TestCase):
         resp = self.api_session.post(self.portal_url, json=data)
 
         self.assertEqual(resp.status_code, 400)
+
         self.assertEqual(
             json.loads(resp.json()["message"]),
             {
                 "error": {
-                    "message": 'Devi compilare almeno uno dei due campi di "A chi si rivolge".'
+                    "message": 'Devi compilare almeno uno dei due campi del tab "A chi si rivolge".'
                 }
             },
         )
@@ -155,7 +156,7 @@ class TestCustomValidation(unittest.TestCase):
             json.loads(resp.json()["message"]),
             {
                 "error": {
-                    "message": 'Devi compilare almeno uno dei due campi di "A chi si rivolge".'
+                    "message": 'Devi compilare almeno uno dei due campi del tab "A chi si rivolge".'
                 }
             },
         )

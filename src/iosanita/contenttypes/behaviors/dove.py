@@ -16,7 +16,8 @@ from zope.interface import implementer
 from zope.interface import provider
 
 
-class IDoveSchema(IGeolocatable, IAddress):
+@provider(IFormFieldProvider)
+class IDove(IGeolocatable, IAddress):
     nome_sede = schema.TextLine(
         title=_("nome_sede", default="Nome sede"),
         description=_(
@@ -44,9 +45,6 @@ class IDoveSchema(IGeolocatable, IAddress):
     textindexer.searchable("quartiere")
     textindexer.searchable("circoscrizione")
 
-
-@provider(IFormFieldProvider)
-class IDoveStruttura(IDoveSchema):
     model.fieldset(
         "dove",
         label=_("dove_label", default="Dove"),
@@ -63,57 +61,48 @@ class IDoveStruttura(IDoveSchema):
     )
 
 
-@provider(IFormFieldProvider)
-class IDove(IDoveSchema):
-    struttura_correlata = RelationList(
-        title=_("struttura_correlata_label", default="Struttura di riferimento"),
-        description=_(
-            "struttura_correlata_help",
-            default="Indicare una o più strutture che fanno a capo a questo contenuto.",
-        ),
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        default=[],
-        required=True,
-    )
-    form.widget(
-        "struttura_correlata",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={"selectableTypes": ["Struttura"]},
-    )
-    model.fieldset(
-        "dove",
-        label=_("dove_label", default="Dove"),
-        description=_(
-            "dove_help",
-            default="Se la sede di questo contenuto non coincide con la Struttura di riferimento, compilare gli altri campi.",
-        ),
-        fields=[
-            "struttura_correlata",
-            "nome_sede",
-            "street",
-            "zip_code",
-            "city",
-            "quartiere",
-            "circoscrizione",
-            "country",
-            "geolocation",
-        ],
-    )
+# @provider(IFormFieldProvider)
+# class IDove(IDoveSchema):
+#     struttura_correlata = RelationList(
+#         title=_("struttura_correlata_label", default="Struttura di riferimento"),
+#         description=_(
+#             "struttura_correlata_help",
+#             default="Indicare una o più strutture che fanno a capo a questo contenuto.",
+#         ),
+#         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+#         default=[],
+#         required=True,
+#     )
+#     form.widget(
+#         "struttura_correlata",
+#         RelatedItemsFieldWidget,
+#         vocabulary="plone.app.vocabularies.Catalog",
+#         pattern_options={"selectableTypes": ["Struttura"]},
+#     )
+#     model.fieldset(
+#         "dove",
+#         label=_("dove_label", default="Dove"),
+#         description=_(
+#             "dove_help",
+#             default="Se la sede di questo contenuto non coincide con la Struttura di riferimento, compilare gli altri campi.",
+#         ),
+#         fields=[
+#             "struttura_correlata",
+#             "nome_sede",
+#             "street",
+#             "zip_code",
+#             "city",
+#             "quartiere",
+#             "circoscrizione",
+#             "country",
+#             "geolocation",
+#         ],
+#     )
 
 
 @implementer(IDove)
 @adapter(IDexterityContent)
 class Dove(object):
-    """ """
-
-    def __init__(self, context):
-        self.context = context
-
-
-@implementer(IDoveStruttura)
-@adapter(IDexterityContent)
-class DoveStruttura(object):
     """ """
 
     def __init__(self, context):

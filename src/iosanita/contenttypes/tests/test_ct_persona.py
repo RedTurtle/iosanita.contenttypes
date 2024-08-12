@@ -52,7 +52,7 @@ class TestPersonaSchema(unittest.TestCase):
                 "plone.versioning",
                 "plone.constraintypes",
                 "collective.taxonomy.generated.incarico",
-                "iosanita.contenttypes.behavior.dove_struttura",
+                "iosanita.contenttypes.behavior.dove",
                 "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
             ),

@@ -54,7 +54,7 @@ class TestStrutturaSchema(unittest.TestCase):
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
-                "iosanita.contenttypes.behavior.dove_struttura",
+                "iosanita.contenttypes.behavior.dove",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
                 "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",

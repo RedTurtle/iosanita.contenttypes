@@ -77,6 +77,17 @@ class IUnitaOrganizzativa(model.Schema):
         ),
     )
 
+    struttura_correlata = RelationList(
+        title=_("struttura_correlata_label", default="Struttura di riferimento"),
+        description=_(
+            "struttura_correlata_help",
+            default="Indicare una o più strutture che fanno a capo a questo contenuto.",
+        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        default=[],
+        required=True,
+    )
+
     #  custom widgets
     form.widget(
         "documenti",
@@ -108,18 +119,14 @@ class IUnitaOrganizzativa(model.Schema):
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Servizio"]},
     )
-
-    # custom fieldsets and order
-    model.fieldset(
-        "dove",
-        label=_("dove_label", default="Dove"),
-        description=_(
-            "dove_uo_help",
-            default="Se la sede dell Unità Organizzativa .",
-        ),
-        fields=[],
+    form.widget(
+        "struttura_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Struttura"]},
     )
 
+    # custom fieldsets and order
     model.fieldset(
         "cosa_fa",
         label=_("cosa_fa_label", default="Competenze"),
@@ -148,6 +155,16 @@ class IUnitaOrganizzativa(model.Schema):
         "servizi",
         label=_("servizi_label", default="Servizi"),
         fields=["servizi"],
+    )
+
+    model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        description=_(
+            "dove_uo_help",
+            default="Se la sede di questo contenuto non coincide con la Struttura di riferimento, compilare gli altri campi.",
+        ),
+        fields=["struttura_correlata"],
     )
 
     # SearchableText indexers

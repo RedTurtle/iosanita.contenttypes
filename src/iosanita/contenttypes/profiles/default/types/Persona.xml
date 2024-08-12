@@ -46,7 +46,7 @@
     <element value="plone.versioning" />
     <element value="plone.constraintypes" />
     <element value="collective.taxonomy.generated.incarico" />
-    <element value="iosanita.contenttypes.behavior.dove_struttura" />
+    <element value="iosanita.contenttypes.behavior.dove" />
     <element value="iosanita.contenttypes.behavior.contatti" />
     <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
   </property>

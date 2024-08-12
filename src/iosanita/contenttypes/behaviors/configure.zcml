@@ -54,14 +54,6 @@
       marker=".dove.IDove"
       />
   <plone:behavior
-      name="iosanita.contenttypes.behavior.dove_struttura"
-      title="Dove (struttura)"
-      description=""
-      factory=".dove.DoveStruttura"
-      provides=".dove.IDoveStruttura"
-      marker=".dove.IDoveStruttura"
-      />
-  <plone:behavior
       name="iosanita.contenttypes.behavior.exclude_from_search"
       title="Exclude from search"
       description="Campo per escludere un contenuto dalle ricerche del sito."
