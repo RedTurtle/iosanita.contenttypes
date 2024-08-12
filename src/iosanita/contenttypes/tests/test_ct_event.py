@@ -46,7 +46,6 @@ class TestEventSchema(unittest.TestCase):
                 "plone.allowdiscussion",
                 "plone.excludefromnavigation",
                 "plone.shortname",
-                "plone.relateditems",
                 "plone.versioning",
                 "plone.locking",
                 "plone.constraintypes",

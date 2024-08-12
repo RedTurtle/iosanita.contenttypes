@@ -121,6 +121,14 @@ class IEvento(model.Schema):
     # custom widgets
 
     form.widget(
+        "eventi_correlati",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Event"],
+        },
+    )
+    form.widget(
         "organizzato_da_interno",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",

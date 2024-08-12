@@ -32,5 +32,6 @@
     <element remove="True" value="collective.venue.behaviors.ILocation"/>
     <element remove="True" value="collective.venue.behaviors.IOrganizer"/>
     <element remove="True" value="volto.blocks"/>
+    <element remove="True" value="plone.relateditems"/>
   </property>
 </object>
