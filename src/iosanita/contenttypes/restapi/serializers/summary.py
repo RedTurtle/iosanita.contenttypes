@@ -20,6 +20,16 @@ class JSONSummarySerializerMetadata:
             "a_chi_si_rivolge_tassonomia_metadata",
             "id",
             "tipologia_notizia",
+            "start",
+            "end",
+            "recurrence",
+            "whole_day",
+            "open_end",
+            "street",
+            "zip_code",
+            "city",
+            "province",
+            "geolocation",
         }
 
 

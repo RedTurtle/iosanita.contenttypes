@@ -31,6 +31,11 @@
   <column value="rassegna" />
   <column value="parliamo_di_metadata" />
   <column value="a_chi_si_rivolge_tassonomia_metadata" />
+  <column value="street"/>
+  <column value="zip_code"/>
+  <column value="city"/>
+  <column value="province"/>
+  <column value="geolocation"/>
 
 
 
