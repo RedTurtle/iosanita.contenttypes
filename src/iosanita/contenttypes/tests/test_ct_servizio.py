@@ -8,6 +8,8 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -241,6 +243,7 @@ class TestServizio(unittest.TestCase):
     def setUp(self):
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
@@ -250,3 +253,9 @@ class TestServizio(unittest.TestCase):
         )
 
         self.assertEqual(servizio.keys(), ["modulistica", "allegati"])
+
+    def test_servizio_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(container=self.portal, type="Servizio", title="xxx")
+
+        self.assertEqual(len(uo.keys()), 0)

@@ -3,7 +3,7 @@ from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
 from iosanita.contenttypes.utils import create_default_blocks
 from plone import api
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
-
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 
 SUBFOLDERS_MAPPING = {
     "Bando": {
@@ -155,6 +155,8 @@ def createSubfolders(context, event):
     Create subfolders structure based on a portal_type mapping
     """
     if not IIosanitaContenttypesLayer.providedBy(context.REQUEST):
+        return
+    if IoSanitaMigrationMarker.providedBy(context.REQUEST):
         return
 
     subfolders_mapping = SUBFOLDERS_MAPPING.get(context.portal_type, [])

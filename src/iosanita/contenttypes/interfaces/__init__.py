@@ -12,3 +12,9 @@ class IIosanitaContenttypes(Interface):
     """
     Marker interface
     """
+
+
+class IoSanitaMigrationMarker(Interface):
+    """
+    Marker interface to disable validation checks and events during migration.
+    """

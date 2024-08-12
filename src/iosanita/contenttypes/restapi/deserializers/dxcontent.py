@@ -8,6 +8,7 @@ from plone.restapi.interfaces import IDeserializeFromJson
 from zExceptions import BadRequest
 from zope.component import adapter
 from zope.interface import implementer
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 
 import json
 
@@ -31,6 +32,8 @@ class DeserializeFromJson(BaseDeserializer):
         )
 
     def validate_data_iosanita(self, data, create):
+        if IoSanitaMigrationMarker.providedBy(self.request):
+            return
         if not create:
             portal_type = self.context.portal_type
         else:

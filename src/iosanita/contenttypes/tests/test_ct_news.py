@@ -11,6 +11,8 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.testing import RelativeSession
 from zope.component import queryMultiAdapter
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -149,6 +151,12 @@ class TestNews(unittest.TestCase):
 
         self.assertEqual("Document", news["multimedia"].portal_type)
         self.assertEqual("Document", news["documenti-allegati"].portal_type)
+
+    def test_news_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(container=self.portal, type="News Item", title="xxx")
+
+        self.assertEqual(len(uo.keys()), 0)
 
     def test_news_type_title_based_on_tipologia_notizia(self):
         news = api.content.create(
