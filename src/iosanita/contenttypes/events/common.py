@@ -55,20 +55,6 @@ SUBFOLDERS_MAPPING = {
             },
         ],
     },
-    "Venue": {
-        "content": [
-            {
-                "id": "multimedia",
-                "title": "Multimedia",
-                "type": "Folder",
-                "allowed_types": (
-                    "Image",
-                    "Link",
-                ),
-                "publish": True,
-            }
-        ],
-    },
     "News Item": {
         "content": [
             {

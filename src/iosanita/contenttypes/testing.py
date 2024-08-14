@@ -5,8 +5,9 @@ from plone.testing.zope import WSGI_SERVER_FIXTURE
 from redturtle.volto.testing import RedturtleVoltoLayer
 from zope.configuration import xmlconfig
 
+import collective.address
+import collective.geolocationbehavior
 import collective.taxonomy
-import collective.venue
 import collective.volto.blocksfield
 import collective.volto.cookieconsent
 import collective.z3cform.datagridfield
@@ -23,12 +24,13 @@ class TestLayer(RedturtleVoltoLayer):
     def setUpZope(self, app, configurationContext):
         super().setUpZope(app, configurationContext)
         self.loadZCML(package=collective.taxonomy)
-        self.loadZCML(package=collective.venue)
         self.loadZCML(package=collective.volto.blocksfield)
         self.loadZCML(package=collective.z3cform.datagridfield)
         self.loadZCML(package=kitconcept.seo)
         self.loadZCML(package=plone.formwidget.geolocation)
+        self.loadZCML(package=collective.geolocationbehavior)
         self.loadZCML(package=redturtle.bandi)
+        self.loadZCML(package=collective.address)
         self.loadZCML(package=iosanita.contenttypes, context=configurationContext)
         xmlconfig.file(
             "configure.zcml",
