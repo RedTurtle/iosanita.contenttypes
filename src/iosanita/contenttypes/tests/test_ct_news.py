@@ -11,9 +11,9 @@ from plone.app.testing import TEST_USER_ID
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from zope.component import queryMultiAdapter
 from zope.interface import alsoProvides
-from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
