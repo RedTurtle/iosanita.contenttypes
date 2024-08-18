@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -101,3 +105,37 @@ class TestStepSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/Step").json()
         self.assertEqual(resp["fieldsets"][1]["fields"], ["pdc_correlato"])
+
+
+class TestStep(unittest.TestCase):
+    """"""
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+        self.come_fare = api.content.create(
+            container=self.portal, type="ComeFarePer", title="xxx"
+        )
+
+    def test_step_default_children(self):
+        step = api.content.create(container=self.come_fare, type="Step", title="xxx")
+
+        self.assertEqual(step.keys(), ["documenti"])
+
+    def test_step_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(container=self.come_fare, type="Step", title="xxx")
+
+        self.assertEqual(len(uo.keys()), 0)
+
+    def test_step_documenti_has_filtered_addable_types(self):
+        step = api.content.create(container=self.come_fare, type="Step", title="xxx")
+        documenti = ISelectableConstrainTypes(step["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])

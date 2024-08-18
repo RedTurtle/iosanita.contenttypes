@@ -13,6 +13,7 @@ from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.testing import RelativeSession
 from zope.component import queryMultiAdapter
 from zope.interface import alsoProvides
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -147,10 +148,29 @@ class TestNews(unittest.TestCase):
     def test_news_default_children(self):
         news = api.content.create(container=self.portal, type="News Item", title="xxx")
 
-        self.assertEqual(news.keys(), ["multimedia", "documenti-allegati"])
+        self.assertEqual(news.keys(), ["immagini", "video", "documenti"])
 
-        self.assertEqual("Document", news["multimedia"].portal_type)
-        self.assertEqual("Document", news["documenti-allegati"].portal_type)
+        self.assertEqual("Document", news["immagini"].portal_type)
+        self.assertEqual("Document", news["video"].portal_type)
+        self.assertEqual("Document", news["documenti"].portal_type)
+
+    def test_news_immagini_has_filtered_addable_types(self):
+        news = api.content.create(container=self.portal, type="News Item", title="xxx")
+        immagini = ISelectableConstrainTypes(news["immagini"])
+        self.assertEqual(immagini.getConstrainTypesMode(), 1)
+        self.assertEqual(immagini.getLocallyAllowedTypes(), ["Link", "Image"])
+
+    def test_news_video_has_filtered_addable_types(self):
+        news = api.content.create(container=self.portal, type="News Item", title="xxx")
+        video = ISelectableConstrainTypes(news["video"])
+        self.assertEqual(video.getConstrainTypesMode(), 1)
+        self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
+
+    def test_news_documenti_has_filtered_addable_types(self):
+        news = api.content.create(container=self.portal, type="News Item", title="xxx")
+        documenti = ISelectableConstrainTypes(news["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
 
     def test_news_default_children_disabled_with_marker_interface(self):
         alsoProvides(self.request, IoSanitaMigrationMarker)

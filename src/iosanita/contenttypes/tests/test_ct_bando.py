@@ -10,6 +10,7 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from zope.interface import alsoProvides
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -180,6 +181,16 @@ class TestBando(unittest.TestCase):
 
         self.assertEqual("Bando Folder Deepening", bando.graduatoria.portal_type)
         self.assertEqual("Bando Folder Deepening", bando.documenti.portal_type)
+
+    def test_bando_graduatoria_has_no_filtered_addable_types(self):
+        bando = api.content.create(container=self.portal, type="Bando", title="xxx")
+        graduatoria = ISelectableConstrainTypes(bando["graduatoria"])
+        self.assertEqual(graduatoria.getConstrainTypesMode(), 0)
+
+    def test_bando_documenti_has_no_filtered_addable_types(self):
+        bando = api.content.create(container=self.portal, type="Bando", title="xxx")
+        documenti = ISelectableConstrainTypes(bando["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 0)
 
     def test_bando_default_children_disabled_with_marker_interface(self):
         alsoProvides(self.request, IoSanitaMigrationMarker)

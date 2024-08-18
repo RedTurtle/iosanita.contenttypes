@@ -10,6 +10,7 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from zope.interface import alsoProvides
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -256,3 +257,27 @@ class TestEvent(unittest.TestCase):
         uo = api.content.create(container=self.portal, type="Event", title="xxx")
 
         self.assertEqual(len(uo.keys()), 0)
+
+    def test_event_immagini_has_filtered_addable_types(self):
+        event = api.content.create(container=self.portal, type="Event", title="xxx")
+        immagini = ISelectableConstrainTypes(event["immagini"])
+        self.assertEqual(immagini.getConstrainTypesMode(), 1)
+        self.assertEqual(immagini.getLocallyAllowedTypes(), ["Link", "Image"])
+
+    def test_event_video_has_filtered_addable_types(self):
+        event = api.content.create(container=self.portal, type="Event", title="xxx")
+        video = ISelectableConstrainTypes(event["video"])
+        self.assertEqual(video.getConstrainTypesMode(), 1)
+        self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
+
+    def test_event_sponsor_has_filtered_addable_types(self):
+        event = api.content.create(container=self.portal, type="Event", title="xxx")
+        sponsor = ISelectableConstrainTypes(event["sponsor-evento"])
+        self.assertEqual(sponsor.getConstrainTypesMode(), 1)
+        self.assertEqual(sponsor.getLocallyAllowedTypes(), ["Link"])
+
+    def test_event_documenti_has_filtered_addable_types(self):
+        event = api.content.create(container=self.portal, type="Event", title="xxx")
+        documenti = ISelectableConstrainTypes(event["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])

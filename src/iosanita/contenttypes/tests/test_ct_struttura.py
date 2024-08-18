@@ -10,6 +10,7 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from zope.interface import alsoProvides
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -244,10 +245,34 @@ class TestStruttura(unittest.TestCase):
             container=self.portal, type="Struttura", title="xxx"
         )
 
-        self.assertEqual(struttura.keys(), ["documenti", "multimedia"])
+        self.assertEqual(struttura.keys(), ["documenti", "immagini", "video"])
 
     def test_struttura_default_children_disabled_with_marker_interface(self):
         alsoProvides(self.request, IoSanitaMigrationMarker)
         uo = api.content.create(container=self.portal, type="Struttura", title="xxx")
 
         self.assertEqual(len(uo.keys()), 0)
+
+    def test_struttura_immagini_has_filtered_addable_types(self):
+        struttura = api.content.create(
+            container=self.portal, type="Struttura", title="xxx"
+        )
+        immagini = ISelectableConstrainTypes(struttura["immagini"])
+        self.assertEqual(immagini.getConstrainTypesMode(), 1)
+        self.assertEqual(immagini.getLocallyAllowedTypes(), ["Link", "Image"])
+
+    def test_struttura_video_has_filtered_addable_types(self):
+        struttura = api.content.create(
+            container=self.portal, type="Struttura", title="xxx"
+        )
+        video = ISelectableConstrainTypes(struttura["video"])
+        self.assertEqual(video.getConstrainTypesMode(), 1)
+        self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
+
+    def test_struttura_documenti_has_filtered_addable_types(self):
+        struttura = api.content.create(
+            container=self.portal, type="Struttura", title="xxx"
+        )
+        documenti = ISelectableConstrainTypes(struttura["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])

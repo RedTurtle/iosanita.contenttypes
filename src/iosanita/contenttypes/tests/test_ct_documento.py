@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -145,3 +147,31 @@ class TestDocumentoSchema(unittest.TestCase):
             resp["fieldsets"][3]["fields"],
             ["a_chi_si_rivolge", "a_chi_si_rivolge_tassonomia"],
         )
+
+
+class TestDocumento(unittest.TestCase):
+    """"""
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+    def test_documento_default_children(self):
+        documento = api.content.create(
+            container=self.portal, type="Documento", title="xxx"
+        )
+
+        self.assertEqual(documento.keys(), ["immagini"])
+
+    def test_documento_immagini_has_filtered_addable_types(self):
+        documento = api.content.create(
+            container=self.portal, type="Documento", title="xxx"
+        )
+        immagini = ISelectableConstrainTypes(documento["immagini"])
+        self.assertEqual(immagini.getConstrainTypesMode(), 1)
+        self.assertEqual(immagini.getLocallyAllowedTypes(), ["Link", "Image"])

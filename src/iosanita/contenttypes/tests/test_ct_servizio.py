@@ -10,6 +10,7 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from zope.interface import alsoProvides
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -252,10 +253,26 @@ class TestServizio(unittest.TestCase):
             container=self.portal, type="Servizio", title="xxx"
         )
 
-        self.assertEqual(servizio.keys(), ["modulistica", "allegati"])
+        self.assertEqual(servizio.keys(), ["modulistica", "documenti"])
 
     def test_servizio_default_children_disabled_with_marker_interface(self):
         alsoProvides(self.request, IoSanitaMigrationMarker)
         uo = api.content.create(container=self.portal, type="Servizio", title="xxx")
 
         self.assertEqual(len(uo.keys()), 0)
+
+    def test_servizio_modulistica_has_filtered_addable_types(self):
+        servizio = api.content.create(
+            container=self.portal, type="Servizio", title="xxx"
+        )
+        modulistica = ISelectableConstrainTypes(servizio["modulistica"])
+        self.assertEqual(modulistica.getConstrainTypesMode(), 1)
+        self.assertEqual(modulistica.getLocallyAllowedTypes(), ["Link"])
+
+    def test_servizio_documenti_has_filtered_addable_types(self):
+        servizio = api.content.create(
+            container=self.portal, type="Servizio", title="xxx"
+        )
+        documenti = ISelectableConstrainTypes(servizio["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])

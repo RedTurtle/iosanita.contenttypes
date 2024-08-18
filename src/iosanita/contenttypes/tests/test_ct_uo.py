@@ -10,6 +10,7 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from zope.interface import alsoProvides
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -191,7 +192,7 @@ class TestUOSchema(unittest.TestCase):
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(
             resp["fieldsets"][7]["fields"],
-            ["documenti"],
+            ["documento_correlato"],
         )
 
     def test_uo_fields_ulteriori_informazioni_fieldset(self):
@@ -219,7 +220,7 @@ class TestUO(unittest.TestCase):
             container=self.portal, type="UnitaOrganizzativa", title="xxx"
         )
 
-        self.assertEqual(uo.keys(), ["allegati"])
+        self.assertEqual(uo.keys(), ["documenti"])
 
     def test_uo_default_children_disabled_with_marker_interface(self):
         alsoProvides(self.request, IoSanitaMigrationMarker)
@@ -228,3 +229,11 @@ class TestUO(unittest.TestCase):
         )
 
         self.assertEqual(len(uo.keys()), 0)
+
+    def test_uo_documenti_has_filtered_addable_types(self):
+        uo = api.content.create(
+            container=self.portal, type="UnitaOrganizzativa", title="xxx"
+        )
+        documenti = ISelectableConstrainTypes(uo["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
