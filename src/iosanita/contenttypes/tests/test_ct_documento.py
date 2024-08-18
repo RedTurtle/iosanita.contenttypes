@@ -87,7 +87,7 @@ class TestDocumentoSchema(unittest.TestCase):
                     "title",
                     "descrizione_estesa",
                     "uo_correlata",
-                    "file_principale",
+                    "file",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test
                 ]
             ),
@@ -123,7 +123,7 @@ class TestDocumentoSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Documento").json()
         self.assertEqual(
             resp["fieldsets"][1]["fields"],
-            ["file_principale", "formato_alternativo_1", "formato_alternativo_2"],
+            ["file", "formato_alternativo_1", "formato_alternativo_2"],
         )
 
     def test_documento_cosa_e_fieldset(self):

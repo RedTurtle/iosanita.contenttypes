@@ -12,10 +12,10 @@ from zope.interface import provider
 class IMultiFileSchema(model.Schema):
     """"""
 
-    file_principale = field.NamedBlobFile(
-        title=_("file_principale_label", default="Vai al documento"),
+    file = field.NamedBlobFile(
+        title=_("file_label", default="File principale"),
         description=_(
-            "file_principale_help",
+            "file_help",
             default="Inserisci il file principale di questo contenuto.",
         ),
         required=True,
@@ -41,13 +41,13 @@ class IMultiFileSchema(model.Schema):
         required=False,
     )
 
-    model.primary("file_principale")
+    model.primary("file")
 
     model.fieldset(
         "formati",
         label=_("formati_label", default="Formati"),
         fields=[
-            "file_principale",
+            "file",
             "formato_alternativo_1",
             "formato_alternativo_2",
         ],

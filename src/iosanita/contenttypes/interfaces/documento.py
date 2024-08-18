@@ -41,15 +41,6 @@ class IDocumento(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    # formati_alternativi = BlocksField(
-    #     title=_("formati_alternativi_label", default="Formati disponibili"),
-    #     description=_(
-    #         "formati_alternativi_help",
-    #         default="Lista dei formati in cui è disponibile il documento",
-    #     ),
-    #     required=True,
-    # )
-
     servizio_procedura_riferimento = RelationList(
         title=_(
             "servizio_procedura_riferimento_label",

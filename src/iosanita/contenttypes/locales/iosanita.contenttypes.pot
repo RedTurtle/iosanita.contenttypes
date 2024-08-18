@@ -432,12 +432,12 @@ msgstr ""
 
 #. Default: "Inserisci il file principale di questo contenuto."
 #: iosanita/contenttypes/behaviors/multi_file.py:17
-msgid "file_principale_help"
+msgid "file_help"
 msgstr ""
 
 #. Default: "Vai al documento"
 #: iosanita/contenttypes/behaviors/multi_file.py:16
-msgid "file_principale_label"
+msgid "file_label"
 msgstr ""
 
 #. Default: "Formati"
