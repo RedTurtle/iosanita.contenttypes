@@ -29,6 +29,7 @@ FIELDSETS_ORDER = {
         "default",
         "formati",
         "cosa_e",
+        "riferimenti",
         "a_chi_si_rivolge",
     ],
     "Event": [

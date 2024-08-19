@@ -71,6 +71,7 @@ class TestDocumentoSchema(unittest.TestCase):
                 "default",
                 "formati",
                 "cosa_e",
+                "riferimenti",
                 "a_chi_si_rivolge",
                 "settings",
                 "ownership",
@@ -107,9 +108,6 @@ class TestDocumentoSchema(unittest.TestCase):
                 "description",
                 "protocollo",
                 "data_protocollo",
-                "servizio_procedura_riferimento",
-                "uo_correlata",
-                "autori",
                 "image",
                 "image_caption",
                 "preview_image",
@@ -138,13 +136,27 @@ class TestDocumentoSchema(unittest.TestCase):
             ["descrizione_estesa"],
         )
 
-    def test_documento_fields_a_chi_si_rivolge_fieldset(self):
+    def test_documento_riferimenti_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Documento").json()
         self.assertEqual(
             resp["fieldsets"][3]["fields"],
+            [
+                "servizio_procedura_riferimento",
+                "uo_correlata",
+                "autori",
+            ],
+        )
+
+    def test_documento_fields_a_chi_si_rivolge_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Documento").json()
+        self.assertEqual(
+            resp["fieldsets"][4]["fields"],
             ["a_chi_si_rivolge", "a_chi_si_rivolge_tassonomia"],
         )
 

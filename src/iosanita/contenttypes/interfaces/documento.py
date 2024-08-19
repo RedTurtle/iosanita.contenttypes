@@ -115,3 +115,9 @@ class IDocumento(model.Schema, IIosanitaContenttypes):
         label=_("cosa_e_fieldset", default="Cos'è"),
         fields=["descrizione_estesa"],
     )
+
+    model.fieldset(
+        "riferimenti",
+        label=_("riferimenti_fieldset", default="Riferimenti"),
+        fields=["servizio_procedura_riferimento", "uo_correlata", "autori"],
+    )
