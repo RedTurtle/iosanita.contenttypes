@@ -64,7 +64,7 @@ class TestDocumentoSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Documento").json()
-        self.assertEqual(len(resp["fieldsets"]), 9)
+        self.assertEqual(len(resp["fieldsets"]), 10)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
