@@ -6,7 +6,12 @@
 >
 
   <property name="behaviors" purge="False">
+    <element value="plone.versioning" />
+    <element value="plone.tableofcontents" />
+    <element value="iosanita.contenttypes.behavior.info_testata" />
+    <element value="iosanita.contenttypes.behavior.argomenti_document" />
     <element value="plone.translatable" />
+    <element value="iosanita.contenttypes.behavior.show_modified" />
     <element value="kitconcept.seo" />
     <element value="plone.constraintypes" />
     <element value="plone.leadimage" />

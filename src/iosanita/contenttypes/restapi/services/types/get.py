@@ -43,6 +43,16 @@ FIELDSETS_ORDER = {
         "ulteriori_informazioni",
         "contenuti_collegati",
     ],
+    "Document": [
+        "default",
+        "testata",
+        "settings",
+        "correlati",
+        "categorization",
+        "dates",
+        "ownership",
+        "seo",
+    ],
     "Struttura": [
         "default",
         "cosa_e",
