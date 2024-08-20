@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.utils import create_default_blocks
 from plone import api
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
@@ -19,10 +20,10 @@ SUBFOLDERS_MAPPING = {
     "Documento": {
         "content": [
             {
-                "id": "multimedia",
-                "title": "Multimedia",
+                "id": "immagini",
+                "title": "Immagini",
                 "type": "Document",
-                "allowed_types": ("Image",),
+                "allowed_types": ("Image", "Link"),
             },
         ],
     },
@@ -48,43 +49,28 @@ SUBFOLDERS_MAPPING = {
             },
             {
                 "id": "documenti",
-                "title": "Allegati",
+                "title": "Documenti",
                 "allowed_types": ("File",),
                 "publish": True,
             },
         ],
     },
-    "Venue": {
-        "content": [
-            {
-                "id": "multimedia",
-                "title": "Multimedia",
-                "type": "Folder",
-                "allowed_types": (
-                    "Image",
-                    "Link",
-                ),
-                "publish": True,
-            }
-        ],
-    },
     "News Item": {
         "content": [
             {
-                "id": "multimedia",
-                "title": "Multimedia",
-                "allowed_types": (
-                    "Image",
-                    "Link",
-                ),
+                "id": "immagini",
+                "title": "Immagini",
+                "allowed_types": ("Image", "Link"),
             },
             {
-                "id": "documenti-allegati",
-                "title": "Documenti allegati",
-                "allowed_types": (
-                    "File",
-                    "Image",
-                ),
+                "id": "video",
+                "title": "Video",
+                "allowed_types": ("Link",),
+            },
+            {
+                "id": "documenti",
+                "title": "Documenti",
+                "allowed_types": ("File",),
             },
         ],
     },
@@ -96,14 +82,19 @@ SUBFOLDERS_MAPPING = {
                 "allowed_types": ("File",),
             },
             {
-                "id": "multimedia",
-                "title": "Multimedia",
-                "allowed_types": ("Image",),
+                "id": "immagini",
+                "title": "Immagini",
+                "allowed_types": ("Image", "Link"),
             },
             {
-                "id": "altri-documenti",
-                "title": "Altri documenti",
-                "allowed_types": ("File", "Image", "Link"),
+                "id": "video",
+                "title": "Video",
+                "allowed_types": ("Link",),
+            },
+            {
+                "id": "documenti",
+                "title": "Documenti",
+                "allowed_types": ("File",),
             },
         ],
         "allowed_types": [],
@@ -115,12 +106,16 @@ SUBFOLDERS_MAPPING = {
                 "title": "Modulistica",
                 "allowed_types": ("Link",),
             },
-            {"id": "allegati", "title": "Allegati", "allowed_types": ("File", "Link")},
+            {
+                "id": "documenti",
+                "title": "Documenti",
+                "allowed_types": ("File",),
+            },
         ],
     },
     "UnitaOrganizzativa": {
         "content": [
-            {"id": "allegati", "title": "Allegati", "allowed_types": ("File",)},
+            {"id": "documenti", "title": "Documenti", "allowed_types": ("File",)},
         ],
     },
     "Step": {
@@ -132,8 +127,13 @@ SUBFOLDERS_MAPPING = {
         "content": [
             {"id": "documenti", "title": "Documenti", "allowed_types": ("File",)},
             {
-                "id": "multimedia",
-                "title": "Multimedia",
+                "id": "immagini",
+                "title": "Immagini",
+                "allowed_types": ("Image", "Link"),
+            },
+            {
+                "id": "video",
+                "title": "Video",
                 "allowed_types": ("Link",),
             },
         ],
@@ -155,6 +155,8 @@ def createSubfolders(context, event):
     Create subfolders structure based on a portal_type mapping
     """
     if not IIosanitaContenttypesLayer.providedBy(context.REQUEST):
+        return
+    if IoSanitaMigrationMarker.providedBy(context.REQUEST):
         return
 
     subfolders_mapping = SUBFOLDERS_MAPPING.get(context.portal_type, [])

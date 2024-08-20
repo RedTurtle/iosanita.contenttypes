@@ -57,7 +57,7 @@ Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla qu
 
 
 Strutture
--------------------
+---------
 
 Alcuni content-type tipo Servizio o Struttura, hanno una correlazione con le Strutture.
 
@@ -74,6 +74,20 @@ Questa chiamata ritorna tutti i contenuti del sito che correlano quella Struttur
 Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aumentare con determinati parametri.
 
 Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: *&portal_type=Servizio*.
+
+
+Migrazione da vecchi siti
+=========================
+
+C'è un'interfaccia (*IoSanitaMigrationMarker*) che se implementata dalla REQUEST, disattiva alcuni eventi/verifiche di sicurezza
+sui content-type appena creati.
+
+Questo serve per esempio in fase di migrazione. Basta applicare l'interfaccia alla request nella procedura di import::
+
+    from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
+
+    ...
+    alsoProvides(self.request, IoSanitaMigrationMarker)
 
 
 Installazione

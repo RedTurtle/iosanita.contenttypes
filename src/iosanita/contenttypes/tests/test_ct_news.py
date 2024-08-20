@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -7,7 +8,12 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.restapi.interfaces import ISerializeToJson
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from zope.component import queryMultiAdapter
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -133,13 +139,105 @@ class TestNews(unittest.TestCase):
     def setUp(self):
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
+        self.request["LANGUAGE"] = "it"
+
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
     def test_news_default_children(self):
         news = api.content.create(container=self.portal, type="News Item", title="xxx")
 
-        self.assertEqual(news.keys(), ["multimedia", "documenti-allegati"])
+        self.assertEqual(news.keys(), ["immagini", "video", "documenti"])
 
-        self.assertEqual("Document", news["multimedia"].portal_type)
-        self.assertEqual("Document", news["documenti-allegati"].portal_type)
+        self.assertEqual("Document", news["immagini"].portal_type)
+        self.assertEqual("Document", news["video"].portal_type)
+        self.assertEqual("Document", news["documenti"].portal_type)
+
+    def test_news_immagini_has_filtered_addable_types(self):
+        news = api.content.create(container=self.portal, type="News Item", title="xxx")
+        immagini = ISelectableConstrainTypes(news["immagini"])
+        self.assertEqual(immagini.getConstrainTypesMode(), 1)
+        self.assertEqual(immagini.getLocallyAllowedTypes(), ["Link", "Image"])
+
+    def test_news_video_has_filtered_addable_types(self):
+        news = api.content.create(container=self.portal, type="News Item", title="xxx")
+        video = ISelectableConstrainTypes(news["video"])
+        self.assertEqual(video.getConstrainTypesMode(), 1)
+        self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
+
+    def test_news_documenti_has_filtered_addable_types(self):
+        news = api.content.create(container=self.portal, type="News Item", title="xxx")
+        documenti = ISelectableConstrainTypes(news["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+
+    def test_news_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(container=self.portal, type="News Item", title="xxx")
+
+        self.assertEqual(len(uo.keys()), 0)
+
+    def test_news_type_title_based_on_tipologia_notizia(self):
+        news = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="xxx",
+            tipologia_notizia="notizia",
+        )
+
+        serializer = queryMultiAdapter((news, self.request), ISerializeToJson)()
+
+        self.assertEqual(serializer["type_title"], "Notizia")
+
+        news.tipologia_notizia = "comunicato-stampa"
+
+        serializer = queryMultiAdapter((news, self.request), ISerializeToJson)()
+
+        self.assertEqual(serializer["type_title"], "Comunicato (stampa)")
+
+    def test_news_type_title_based_on_tipologia_notizia_on_brains(self):
+        news = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="xxx",
+            tipologia_notizia="notizia",
+        )
+
+        brain = api.content.find(UID=news.UID())[0]
+        serializer = queryMultiAdapter((brain, self.request), ISerializeToJsonSummary)()
+
+        self.assertEqual(serializer["type_title"], "Notizia")
+
+        news.tipologia_notizia = "comunicato-stampa"
+        news.reindexObject()
+
+        brain = api.content.find(UID=news.UID())[0]
+        serializer = queryMultiAdapter((brain, self.request), ISerializeToJsonSummary)()
+
+        self.assertEqual(serializer["type_title"], "Comunicato (stampa)")
+
+    def test_news_type_title_default_if_wrong_tipologia_notizia(self):
+        news = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="xxx",
+            tipologia_notizia="xxx",
+        )
+
+        serializer = queryMultiAdapter((news, self.request), ISerializeToJson)()
+
+        self.assertEqual(serializer["type_title"], "Notizia")
+
+    def test_news_type_title_default_if_wrong_tipologia_notizia_on_brains(self):
+        news = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="xxx",
+            tipologia_notizia="xxx",
+        )
+
+        brain = api.content.find(UID=news.UID())[0]
+        serializer = queryMultiAdapter((brain, self.request), ISerializeToJsonSummary)()
+
+        self.assertEqual(serializer["type_title"], "Notizia")

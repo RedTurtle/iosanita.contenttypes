@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -9,6 +10,8 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.utils import createContentInContainer
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -92,7 +95,7 @@ class TestPersonaSchema(unittest.TestCase):
                     "description",
                     "incarico",
                     "nome",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                 ]
             ),
         )
@@ -110,8 +113,6 @@ class TestPersonaSchema(unittest.TestCase):
                 "titolo_persona",
                 "description",
                 "image",
-                "uo_correlata",
-                "struttura_correlata",
             ],
         )
 
@@ -143,7 +144,6 @@ class TestPersonaSchema(unittest.TestCase):
             resp["fieldsets"][3]["fields"],
             [
                 "struttura_ricevimento",
-                "luogo_correlato",
                 "nome_sede",
                 "street",
                 "zip_code",
@@ -170,7 +170,7 @@ class TestPersonaSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Persona").json()
-        self.assertEqual(resp["fieldsets"][5]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][5]["fields"], ["pdc_correlato"])
 
     def test_persona_fields_biografia_fieldset(self):
         """
@@ -195,6 +195,7 @@ class TestPersona(unittest.TestCase):
     def setUp(self):
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
@@ -219,5 +220,35 @@ class TestPersona(unittest.TestCase):
         persona = self.portal["dr-doe-john"]
 
         self.assertEqual(
-            persona.keys(), ["curriculum-vitae", "multimedia", "altri-documenti"]
+            persona.keys(), ["curriculum-vitae", "immagini", "video", "documenti"]
         )
+
+    def test_persona_immagini_has_filtered_addable_types(self):
+        persona = api.content.create(container=self.portal, type="Persona", title="xxx")
+        immagini = ISelectableConstrainTypes(persona["immagini"])
+        self.assertEqual(immagini.getConstrainTypesMode(), 1)
+        self.assertEqual(immagini.getLocallyAllowedTypes(), ["Link", "Image"])
+
+    def test_persona_video_has_filtered_addable_types(self):
+        persona = api.content.create(container=self.portal, type="Persona", title="xxx")
+        video = ISelectableConstrainTypes(persona["video"])
+        self.assertEqual(video.getConstrainTypesMode(), 1)
+        self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
+
+    def test_persona_curriculum_has_filtered_addable_types(self):
+        persona = api.content.create(container=self.portal, type="Persona", title="xxx")
+        curriculum = ISelectableConstrainTypes(persona["curriculum-vitae"])
+        self.assertEqual(curriculum.getConstrainTypesMode(), 1)
+        self.assertEqual(curriculum.getLocallyAllowedTypes(), ["File"])
+
+    def test_persona_documenti_has_filtered_addable_types(self):
+        persona = api.content.create(container=self.portal, type="Persona", title="xxx")
+        documenti = ISelectableConstrainTypes(persona["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+
+    def test_persona_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        persona = api.content.create(container=self.portal, type="Persona", title="xxx")
+
+        self.assertEqual(len(persona.keys()), 0)

@@ -17,6 +17,28 @@
       name="rassegna"
       />
   <adapter
+      factory=".common.street"
+      name="street"
+      />
+  <adapter
+      factory=".common.zip_code"
+      name="zip_code"
+      />
+  <adapter
+      factory=".common.city"
+      name="city"
+      />
+  <adapter
+      factory=".common.province"
+      name="province"
+      />
+  <adapter
+      factory=".common.geolocation"
+      name="geolocation"
+      />
+
+  <!-- relations -->
+  <adapter
       factory=".relations.uo_correlata_uid"
       name="uo_correlata_uid"
       />

@@ -58,12 +58,13 @@ setup(
         "plone.api>=1.8.4",
         "plone.app.dexterity",
         "collective.volto.blocksfield",
-        "collective.venue[geolocation]",
         "collective.z3cform.datagridfield",
         "redturtle.volto",
         "redturtle.bandi",
         "plone.restapi",
         "collective.taxonomy",
+        "collective.address",
+        "collective.geolocationbehavior",
     ],
     extras_require={
         "test": [

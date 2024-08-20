@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -8,6 +9,8 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -98,10 +101,9 @@ class TestStrutturaSchema(unittest.TestCase):
                     "come_accedere",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test
                     "orari",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                     "responsabile_correlato",
                     "title",
-                    "servizi",
                 ]
             ),
         )
@@ -153,7 +155,6 @@ class TestStrutturaSchema(unittest.TestCase):
         self.assertEqual(
             resp["fieldsets"][3]["fields"],
             [
-                "luogo_correlato",
                 "nome_sede",
                 "street",
                 "zip_code",
@@ -187,7 +188,7 @@ class TestStrutturaSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][6]["fields"], ["pdc_correlato"])
 
     def test_struttura_fields_servizi_fieldset(self):
         """
@@ -203,7 +204,7 @@ class TestStrutturaSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
             resp["fieldsets"][8]["fields"],
-            ["responsabile_correlato", "coordinatore_correlato", "personale_correlato"],
+            ["responsabile_correlato", "coordinatore_correlato"],
         )
 
     def test_struttura_fields_correlati_fieldset(self):
@@ -235,6 +236,7 @@ class TestStruttura(unittest.TestCase):
     def setUp(self):
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
@@ -243,4 +245,34 @@ class TestStruttura(unittest.TestCase):
             container=self.portal, type="Struttura", title="xxx"
         )
 
-        self.assertEqual(struttura.keys(), ["documenti", "multimedia"])
+        self.assertEqual(struttura.keys(), ["documenti", "immagini", "video"])
+
+    def test_struttura_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(container=self.portal, type="Struttura", title="xxx")
+
+        self.assertEqual(len(uo.keys()), 0)
+
+    def test_struttura_immagini_has_filtered_addable_types(self):
+        struttura = api.content.create(
+            container=self.portal, type="Struttura", title="xxx"
+        )
+        immagini = ISelectableConstrainTypes(struttura["immagini"])
+        self.assertEqual(immagini.getConstrainTypesMode(), 1)
+        self.assertEqual(immagini.getLocallyAllowedTypes(), ["Link", "Image"])
+
+    def test_struttura_video_has_filtered_addable_types(self):
+        struttura = api.content.create(
+            container=self.portal, type="Struttura", title="xxx"
+        )
+        video = ISelectableConstrainTypes(struttura["video"])
+        self.assertEqual(video.getConstrainTypesMode(), 1)
+        self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
+
+    def test_struttura_documenti_has_filtered_addable_types(self):
+        struttura = api.content.create(
+            container=self.portal, type="Struttura", title="xxx"
+        )
+        documenti = ISelectableConstrainTypes(struttura["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])

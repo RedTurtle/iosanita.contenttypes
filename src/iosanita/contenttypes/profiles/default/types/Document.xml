@@ -16,5 +16,6 @@
     <element value="plone.constraintypes" />
     <element value="plone.leadimage" />
     <element value="iosanita.contenttypes.behavior.exclude_from_search" />
+    <element value="collective.taxonomy.generated.parliamo_di" />
   </property>
 </object>

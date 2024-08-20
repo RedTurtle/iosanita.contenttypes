@@ -53,7 +53,6 @@
       provides=".dove.IDove"
       marker=".dove.IDove"
       />
-
   <plone:behavior
       name="iosanita.contenttypes.behavior.exclude_from_search"
       title="Exclude from search"
@@ -106,6 +105,14 @@
       provides=".argomenti.IArgomentiDocument"
       for="plone.dexterity.interfaces.IDexterityContent"
       marker=".argomenti.IArgomentiDocument"
+      />
+  <plone:behavior
+      name="iosanita.contenttypes.behavior.multi_file"
+      title="Multi File"
+      description="Tre campi file aggiuntivi."
+      factory=".multi_file.MultiFile"
+      provides=".multi_file.IMultiFile"
+      marker=".multi_file.IMultiFile"
       />
   <!-- to check -->
   <plone:behavior

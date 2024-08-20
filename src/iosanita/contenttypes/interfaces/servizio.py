@@ -38,7 +38,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         title=_("come_accedere_label", default="Come accedere"),
         required=True,
         description=_(
-            "come_accedere_help",
+            "come_accedere_servizio_help",
             default="Descrizione della procedura da seguire per poter"
             " usufruire del servizio.",
         ),
@@ -76,11 +76,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     struttura_correlata = RelationList(
         title=_(
             "struttura_correlata_label",
-            default="Struttura correlata",
-        ),
-        description=_(
-            "struttura_correlata_help",
-            default="Seleziona una struttura correlata.",
+            default="Struttura di riferimento",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
@@ -100,7 +96,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     )
 
     descrizione_estesa = BlocksField(
-        title=_("descrizione_estesa_label", default="Descrizione estesa"),
+        title=_("descrizione_estesa_servizio_label", default="Descrizione estesa"),
         required=False,
         description=_(
             "descrizione_estesa_servizio_help",

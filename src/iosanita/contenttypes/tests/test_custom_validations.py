@@ -9,6 +9,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from transaction import commit
 
+import json
 import unittest
 
 
@@ -40,7 +41,7 @@ class TestCustomValidation(unittest.TestCase):
             "descrizione_estesa": {"blocks": {}},
             "end": "2024-07-26T10:00:00+00:00",
             "geolocation": {"latitude": 44.821502405601, "longitude": 11.632933286779},
-            "punti_di_contatto": [{"@id": "/pdc"}],
+            "pdc_correlato": [{"@id": "/pdc"}],
             "start": "2024-07-26T09:00:00+00:00",
             "tipologia_evento": "giornata-informativa",
             "title": "titolo",
@@ -58,8 +59,12 @@ class TestCustomValidation(unittest.TestCase):
 
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(
-            resp.json()["message"],
-            "[{'field': 'organizzato_da_esterno', 'message': \"Devi compilare almeno uno dei due campi per l'organizzazione.\"}, {'field': 'organizzato_da_interno', 'message': \"Devi compilare almeno uno dei due campi per l'organizzazione.\"}]",
+            json.loads(resp.json()["message"]),
+            {
+                "error": {
+                    "message": 'Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".'
+                }
+            },
         )
 
         # organizzato_da_esterno is considered empty block
@@ -80,8 +85,12 @@ class TestCustomValidation(unittest.TestCase):
         resp = self.api_session.post(self.portal_url, json=data)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(
-            resp.json()["message"],
-            "[{'field': 'organizzato_da_esterno', 'message': \"Devi compilare almeno uno dei due campi per l'organizzazione.\"}, {'field': 'organizzato_da_interno', 'message': \"Devi compilare almeno uno dei due campi per l'organizzazione.\"}]",
+            json.loads(resp.json()["message"]),
+            {
+                "error": {
+                    "message": 'Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".'
+                }
+            },
         )
 
         # now compile only organizzato_da_interno
@@ -109,16 +118,21 @@ class TestCustomValidation(unittest.TestCase):
             "come_accedere": {"blocks": {}},
             "orari_apertura": {"blocks": {}},
             "description": "asdasd",
-            "punti_di_contatto": [{"@id": "/pdc"}],
+            "pdc_correlato": [{"@id": "/pdc"}],
             "title": "titolo",
             "@type": "Struttura",
         }
         resp = self.api_session.post(self.portal_url, json=data)
 
         self.assertEqual(resp.status_code, 400)
+
         self.assertEqual(
-            resp.json()["message"],
-            "[{'field': 'a_chi_si_rivolge', 'message': 'Devi compilare almeno uno dei due campi di \"A chi si rivolge\".'}, {'field': 'a_chi_si_rivolge_tassonomia', 'message': 'Devi compilare almeno uno dei due campi di \"A chi si rivolge\".'}]",
+            json.loads(resp.json()["message"]),
+            {
+                "error": {
+                    "message": 'Devi compilare almeno uno dei due campi del tab "A chi si rivolge".'
+                }
+            },
         )
 
         # a_chi_si_rivolge is considered empty block
@@ -139,8 +153,12 @@ class TestCustomValidation(unittest.TestCase):
         resp = self.api_session.post(self.portal_url, json=data)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(
-            resp.json()["message"],
-            "[{'field': 'a_chi_si_rivolge', 'message': 'Devi compilare almeno uno dei due campi di \"A chi si rivolge\".'}, {'field': 'a_chi_si_rivolge_tassonomia', 'message': 'Devi compilare almeno uno dei due campi di \"A chi si rivolge\".'}]",
+            json.loads(resp.json()["message"]),
+            {
+                "error": {
+                    "message": 'Devi compilare almeno uno dei due campi del tab "A chi si rivolge".'
+                }
+            },
         )
 
         # now compile only a_chi_si_rivolge_tassonomia

@@ -6,8 +6,6 @@ from plone.app.dexterity import textindexer
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
-from z3c.relationfield.schema import RelationChoice
-from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
@@ -16,17 +14,6 @@ from zope.interface import provider
 
 @provider(IFormFieldProvider)
 class IDove(IGeolocatable, IAddress):
-    luogo_correlato = RelationList(
-        title=_("luogo_correlato_label", default="Luogo correlato"),
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
-        description=_(
-            "luogo_correlato_help",
-            default="Seleziona un luogo presente sul portale. "
-            "Se non è disponibile, compila i campi successivi.",
-        ),
-    )
     nome_sede = schema.TextLine(
         title=_("nome_sede", default="Nome sede"),
         description=_(
@@ -58,7 +45,6 @@ class IDove(IGeolocatable, IAddress):
         "dove",
         label=_("dove_label", default="Dove"),
         fields=[
-            "luogo_correlato",
             "nome_sede",
             "street",
             "zip_code",

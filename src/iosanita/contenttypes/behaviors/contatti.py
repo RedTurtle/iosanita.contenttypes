@@ -12,14 +12,15 @@ from zope.interface import implementer
 from zope.interface import provider
 
 
-class IContattiSchema(model.Schema):
-    punti_di_contatto = RelationList(
+@provider(IFormFieldProvider)
+class IContatti(model.Schema):
+    pdc_correlato = RelationList(
         title=_(
-            "punti_di_contatto_label",
+            "pdc_correlato_label",
             default="Punti di contatto",
         ),
         description=_(
-            "punti_di_contatto_help",
+            "pdc_correlato_help",
             default="Seleziona una lista di punti di contatto.",
         ),
         required=True,
@@ -29,7 +30,7 @@ class IContattiSchema(model.Schema):
         ),
     )
     form.widget(
-        "punti_di_contatto",
+        "pdc_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -39,13 +40,8 @@ class IContattiSchema(model.Schema):
     model.fieldset(
         "contatti",
         label=_("contatti_label", default="Contatti"),
-        fields=["punti_di_contatto"],
+        fields=["pdc_correlato"],
     )
-
-
-@provider(IFormFieldProvider)
-class IContatti(IContattiSchema):
-    """"""
 
 
 @implementer(IContatti)

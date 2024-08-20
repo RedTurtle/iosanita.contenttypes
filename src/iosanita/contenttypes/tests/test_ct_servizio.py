@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -8,6 +9,8 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -105,7 +108,7 @@ class TestServizioSchema(unittest.TestCase):
                     "orari",
                     "uo_correlata",
                     "responsabile_correlato",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                 ]
             ),
         )
@@ -189,7 +192,7 @@ class TestServizioSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Servizio").json()
-        self.assertEqual(resp["fieldsets"][7]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][7]["fields"], ["pdc_correlato"])
 
     def test_servizio_fields_cosa_e_fieldset(self):
         """
@@ -241,6 +244,7 @@ class TestServizio(unittest.TestCase):
     def setUp(self):
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
@@ -249,4 +253,26 @@ class TestServizio(unittest.TestCase):
             container=self.portal, type="Servizio", title="xxx"
         )
 
-        self.assertEqual(servizio.keys(), ["modulistica", "allegati"])
+        self.assertEqual(servizio.keys(), ["modulistica", "documenti"])
+
+    def test_servizio_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(container=self.portal, type="Servizio", title="xxx")
+
+        self.assertEqual(len(uo.keys()), 0)
+
+    def test_servizio_modulistica_has_filtered_addable_types(self):
+        servizio = api.content.create(
+            container=self.portal, type="Servizio", title="xxx"
+        )
+        modulistica = ISelectableConstrainTypes(servizio["modulistica"])
+        self.assertEqual(modulistica.getConstrainTypesMode(), 1)
+        self.assertEqual(modulistica.getLocallyAllowedTypes(), ["Link"])
+
+    def test_servizio_documenti_has_filtered_addable_types(self):
+        servizio = api.content.create(
+            container=self.portal, type="Servizio", title="xxx"
+        )
+        documenti = ISelectableConstrainTypes(servizio["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])

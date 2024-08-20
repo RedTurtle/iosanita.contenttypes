@@ -99,8 +99,40 @@ class IEvento(model.Schema):
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
 
+    webinar = BlocksField(
+        title=_("webinar_label", default="Webinar"),
+        required=False,
+        description=_(
+            "webinar_help",
+            default="Se l'evento è un webinar, specificare che è online e includere il link alla piattaforma di streaming.",
+        ),
+    )
+    struttura_correlata = RelationList(
+        title=_("struttura_correlata_label", default="Struttura di riferimento"),
+        description=_(
+            "struttura_correlata_help",
+            default="Indicare una o più strutture che fanno a capo a questo contenuto.",
+        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        default=[],
+        required=False,
+    )
+
+    # custom order
+    form.order_after(organizzato_da_interno="pdc_correlato")
+    form.order_after(organizzato_da_esterno="organizzato_da_interno")
+    form.order_after(patrocinato_da="organizzato_da_esterno")
+
     # custom widgets
 
+    form.widget(
+        "eventi_correlati",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Event"],
+        },
+    )
     form.widget(
         "organizzato_da_interno",
         RelatedItemsFieldWidget,
@@ -116,6 +148,12 @@ class IEvento(model.Schema):
         pattern_options={
             "selectableTypes": ["Persona"],
         },
+    )
+    form.widget(
+        "struttura_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Struttura"]},
     )
 
     # custom fieldsets and order
@@ -152,6 +190,15 @@ class IEvento(model.Schema):
         fields=["eventi_correlati"],
     )
 
+    model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        description=_(
+            "dove_event_help",
+            default="Se la sede di questo contenuto non coincide con la Struttura di riferimento o non è un webinar, compilare gli altri campi.",
+        ),
+        fields=["webinar", "struttura_correlata"],
+    )
     textindexer.searchable("descrizione_estesa")
 
 

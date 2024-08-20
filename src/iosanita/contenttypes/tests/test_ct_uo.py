@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -8,6 +9,8 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -92,8 +95,9 @@ class TestUOSchema(unittest.TestCase):
                     "competenze",
                     # "description", is required from schema_tweaks.py but it doesn't apply in test
                     "orari",
-                    "punti_di_contatto",
+                    "pdc_correlato",
                     "responsabile_correlato",
+                    "struttura_correlata",
                     "title",
                 ]
             ),
@@ -155,7 +159,7 @@ class TestUOSchema(unittest.TestCase):
         self.assertEqual(
             resp["fieldsets"][4]["fields"],
             [
-                "luogo_correlato",
+                "struttura_correlata",
                 "nome_sede",
                 "street",
                 "zip_code",
@@ -179,7 +183,7 @@ class TestUOSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["punti_di_contatto"])
+        self.assertEqual(resp["fieldsets"][6]["fields"], ["pdc_correlato"])
 
     def test_uo_fields_documenti_fieldset(self):
         """
@@ -188,7 +192,7 @@ class TestUOSchema(unittest.TestCase):
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(
             resp["fieldsets"][7]["fields"],
-            ["documenti"],
+            ["documento_correlato"],
         )
 
     def test_uo_fields_ulteriori_informazioni_fieldset(self):
@@ -207,6 +211,7 @@ class TestUO(unittest.TestCase):
     def setUp(self):
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
@@ -215,4 +220,20 @@ class TestUO(unittest.TestCase):
             container=self.portal, type="UnitaOrganizzativa", title="xxx"
         )
 
-        self.assertEqual(uo.keys(), ["allegati"])
+        self.assertEqual(uo.keys(), ["documenti"])
+
+    def test_uo_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(
+            container=self.portal, type="UnitaOrganizzativa", title="xxx"
+        )
+
+        self.assertEqual(len(uo.keys()), 0)
+
+    def test_uo_documenti_has_filtered_addable_types(self):
+        uo = api.content.create(
+            container=self.portal, type="UnitaOrganizzativa", title="xxx"
+        )
+        documenti = ISelectableConstrainTypes(uo["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 1)
+        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])

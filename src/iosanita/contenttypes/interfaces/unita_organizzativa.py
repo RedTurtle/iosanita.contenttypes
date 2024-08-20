@@ -52,11 +52,11 @@ class IUnitaOrganizzativa(model.Schema):
         required=True,
     )
 
-    documenti = RelationList(
-        title=_("documenti_label", default="Documenti"),
+    documento_correlato = RelationList(
+        title=_("documento_correlato_label", default="Documenti"),
         default=[],
         description=_(
-            "documenti_help",
+            "documento_correlato_help",
             default="Seleziona dei documenti correlati.",
         ),
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
@@ -77,9 +77,20 @@ class IUnitaOrganizzativa(model.Schema):
         ),
     )
 
+    struttura_correlata = RelationList(
+        title=_("struttura_correlata_label", default="Struttura di riferimento"),
+        description=_(
+            "struttura_correlata_help",
+            default="Indicare una o più strutture che fanno a capo a questo contenuto.",
+        ),
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        default=[],
+        required=True,
+    )
+
     #  custom widgets
     form.widget(
-        "documenti",
+        "documento_correlato",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
@@ -108,6 +119,12 @@ class IUnitaOrganizzativa(model.Schema):
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["Servizio"]},
     )
+    form.widget(
+        "struttura_correlata",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Struttura"]},
+    )
 
     # custom fieldsets and order
     model.fieldset(
@@ -132,12 +149,22 @@ class IUnitaOrganizzativa(model.Schema):
     model.fieldset(
         "documenti",
         label=_("documenti_label", default="Documenti"),
-        fields=["documenti"],
+        fields=["documento_correlato"],
     )
     model.fieldset(
         "servizi",
         label=_("servizi_label", default="Servizi"),
         fields=["servizi"],
+    )
+
+    model.fieldset(
+        "dove",
+        label=_("dove_label", default="Dove"),
+        description=_(
+            "dove_uo_help",
+            default="Se la sede di questo contenuto non coincide con la Struttura di riferimento, compilare gli altri campi.",
+        ),
+        fields=["struttura_correlata"],
     )
 
     # SearchableText indexers

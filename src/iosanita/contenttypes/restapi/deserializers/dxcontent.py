@@ -1,4 +1,5 @@
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi import _
@@ -8,6 +9,8 @@ from plone.restapi.interfaces import IDeserializeFromJson
 from zExceptions import BadRequest
 from zope.component import adapter
 from zope.interface import implementer
+
+import json
 
 
 @implementer(IDeserializeFromJson)
@@ -29,6 +32,8 @@ class DeserializeFromJson(BaseDeserializer):
         )
 
     def validate_data_iosanita(self, data, create):
+        if IoSanitaMigrationMarker.providedBy(self.request):
+            return
         if not create:
             portal_type = self.context.portal_type
         else:
@@ -69,15 +74,19 @@ class DeserializeFromJson(BaseDeserializer):
             msg = api.portal.translate(
                 _(
                     "a_chi_si_rivolge_validation_error",
-                    default='Devi compilare almeno uno dei due campi di "A chi si rivolge".',
+                    default='Devi compilare almeno uno dei due campi del tab "A chi si rivolge".',
                 )
             )
-            raise BadRequest(
-                [
-                    {"field": "a_chi_si_rivolge", "message": msg},
-                    {"field": "a_chi_si_rivolge_tassonomia", "message": msg},
-                ]
-            )
+            # temporaneamente commentato perché Volto non lo gestisce bene
+            # raise BadRequest(
+            # json.dumps(
+            #     [
+            #         {"field": "a_chi_si_rivolge", "message": msg},
+            #         {"field": "a_chi_si_rivolge_tassonomia", "message": msg},
+            #     ]
+            # )
+            # )
+            raise BadRequest(json.dumps({"error": {"message": msg}}))
 
     def validate_event(self, data, create):
         # validate organizzato da
@@ -88,6 +97,13 @@ class DeserializeFromJson(BaseDeserializer):
             ):
                 return
 
+            if (
+                "webinar" not in data
+                and "struttura_correlata" not in data  # noqa
+                and "geolocation" not in data  # noqa
+            ):
+                return
+
         organizzato_da_esterno = data.get("organizzato_da_esterno", {})
         organizzato_da_interno = data.get("organizzato_da_interno", [])
 
@@ -95,15 +111,38 @@ class DeserializeFromJson(BaseDeserializer):
             msg = api.portal.translate(
                 _(
                     "organizzato_validation_error",
-                    default="Devi compilare almeno uno dei due campi per l'organizzazione.",
+                    default='Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".',
                 )
             )
-            raise BadRequest(
-                [
-                    {"field": "organizzato_da_esterno", "message": msg},
-                    {"field": "organizzato_da_interno", "message": msg},
-                ]
+            # temporaneamente commentato perché Volto non lo gestisce bene
+            # raise BadRequest(
+            #     [
+            #         {"field": "organizzato_da_esterno", "message": msg},
+            #         {"field": "organizzato_da_interno", "message": msg},
+            #     ]
+            # )
+            raise BadRequest(json.dumps({"error": {"message": msg}}))
+
+        # validate dove
+        has_webinar = not self.is_empty_blocks(data.get("webinar", {}))
+        has_struttura_correlata = data.get("struttura_correlata", [])
+        has_location_infos = self.has_location_infos(data)
+        if not has_webinar and not has_struttura_correlata and not has_location_infos:
+            msg = api.portal.translate(
+                _(
+                    "dove_event_validation_error",
+                    default='Devi compilare almeno uno tra i campi "Webinar", "Struttura di riferimento" o "Geolocation" del tab "Dove".',
+                )
             )
+            raise BadRequest(json.dumps({"error": {"message": msg}}))
+
+    def has_location_infos(self, data):
+        has_data = True
+        for fieldname in ["geolocation"]:
+            value = data.get(fieldname, None)
+            if not value or value in [{"latitude": 0, "longitude": 0}]:
+                has_data = False
+        return has_data
 
     def is_empty_blocks(self, blocks_field):
         blocks = blocks_field.get("blocks", {})

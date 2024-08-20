@@ -24,6 +24,8 @@
   <property name="allowed_content_types"
             purge="False"
   >
+    <element value="Image" />
+    <element value="File" />
     <element value="Step" />
 
   </property>

@@ -25,15 +25,22 @@ FIELDSETS_ORDER = {
         "utenti",
         "ulteriori_informazioni",
     ],
+    "Documento": [
+        "default",
+        "formati",
+        "cosa_e",
+        "riferimenti",
+        "a_chi_si_rivolge",
+    ],
     "Event": [
         "default",
         "cosa_e",
         "partecipanti",
+        "a_chi_si_rivolge",
         "dove",
         "costi",
         "contatti",
         "ulteriori_informazioni",
-        "a_chi_si_rivolge",
         "contenuti_collegati",
     ],
     "Document": [
@@ -106,15 +113,9 @@ FIELDSETS_ORDER = {
         "documenti",
         "ulteriori_informazioni",
     ],
-    "Venue": [
+    "Step": [
         "default",
-        "descrizione",
-        "accesso",
-        "dove",
-        "orari",
         "contatti",
-        "ulteriori_informazioni",
-        "contenuti_collegati",
     ],
 }
 

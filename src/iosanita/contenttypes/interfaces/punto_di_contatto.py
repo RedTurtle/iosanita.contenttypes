@@ -12,33 +12,33 @@ from zope import schema
 
 
 class IPDCValueSchema(model.Schema):
-    pdc_type = schema.Choice(
-        title=_("pdc_type_label", default="Tipo"),
-        description=_(
-            "type_help",
-            default="Tipo",
-        ),
+    tipo = schema.Choice(
+        title=_("pdc_tipo_label", default="Tipo"),
+        # description=_(
+        #     "pdc_tipo_help",
+        #     default="Tipologia di contatto",
+        # ),
         vocabulary="collective.taxonomy.tipologia_pdc",
         required=True,
         default="",
     )
-    pdc_desc = schema.TextLine(
-        title=_("pdc_desc_label", default="Descrizione"),
-        description=_(
-            "pdc_desc_help",
-            default="Descrizione",
-        ),
-        required=False,
+    valore = schema.TextLine(
+        title=_("pdc_valore_label", default="Contatto"),
+        # description=_(
+        #     "pdc_valore_help",
+        #     default="Il valore del contatto",
+        # ),
+        required=True,
         default="",
         max_length=255,
     )
-    pdc_value = schema.TextLine(
-        title=_("pdc_value_label", default="Contatto"),
-        description=_(
-            "pdc_value_help",
-            default="Contatto",
-        ),
-        required=True,
+    descrizione = schema.TextLine(
+        title=_("pdc_descrizione_label", default="Descrizione"),
+        # description=_(
+        #     "pdc_descrizione_help",
+        #     default="Eventuale descrizione per questo valore",
+        # ),
+        required=False,
         default="",
         max_length=255,
     )
@@ -47,33 +47,32 @@ class IPDCValueSchema(model.Schema):
 class IPuntoDiContatto(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type PuntoDiContatto"""
 
-    value_punto_contatto = schema.List(
-        title="Valore punto di contatto",
+    contatti = schema.List(
+        title="Contatti",
         default=[],
         value_type=DictRow(schema=IPDCValueSchema),
         description=_(
             "value_punto_contatto_help",
             default="Il valore del punto di contatto: il numero compreso di prefisso "
-            "internazionale (se telefono), l'account (se social network), l'URL (se sito o pagina web), l'indirizzo email (se email).",  # noqa
+            "internazionale (se telefono), l'account (se social network), "
+            "l'URL (se sito o pagina web), l'indirizzo email (se email).",
         ),
         required=True,
     )
-    persona = RelationList(
-        title=_(
-            "persona_incarico_label",
-            default="Persona",
-        ),
+    uo_correlata = RelationList(
+        title=_("uo_correlata_label", default="Unità Organizzativa correlata"),
         description=_(
-            "persona_incarico_help",
-            default="Se una persona è un punto di contatto di un'altra Tipologia",
+            "uo_correlata_help",
+            default="Selezionare l'Unità Organizzativa per cui questo Punto di contatto è valido. "
+            "Se il Punto di contatto è associato ad una Persona, allora quella persona avrà questi contatti nell'Unità organizzativa selezionata.",
         ),
+        default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
-        default=[],
     )
 
     form.widget(
-        "value_punto_contatto",
+        "contatti",
         DataGridFieldFactory,
         frontendOptions={
             "widget": "data_grid",
@@ -84,10 +83,10 @@ class IPuntoDiContatto(model.Schema, IIosanitaContenttypes):
     )
 
     form.widget(
-        "persona",
+        "uo_correlata",
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
-            "selectableTypes": ["Persona"],
+            "selectableTypes": ["UnitaOrganizzativa"],
         },
     )

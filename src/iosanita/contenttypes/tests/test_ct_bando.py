@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -8,6 +9,8 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from zope.interface import alsoProvides
 
 import unittest
 
@@ -167,6 +170,7 @@ class TestBando(unittest.TestCase):
     def setUp(self):
         self.app = self.layer["app"]
         self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
@@ -177,3 +181,19 @@ class TestBando(unittest.TestCase):
 
         self.assertEqual("Bando Folder Deepening", bando.graduatoria.portal_type)
         self.assertEqual("Bando Folder Deepening", bando.documenti.portal_type)
+
+    def test_bando_graduatoria_has_no_filtered_addable_types(self):
+        bando = api.content.create(container=self.portal, type="Bando", title="xxx")
+        graduatoria = ISelectableConstrainTypes(bando["graduatoria"])
+        self.assertEqual(graduatoria.getConstrainTypesMode(), 0)
+
+    def test_bando_documenti_has_no_filtered_addable_types(self):
+        bando = api.content.create(container=self.portal, type="Bando", title="xxx")
+        documenti = ISelectableConstrainTypes(bando["documenti"])
+        self.assertEqual(documenti.getConstrainTypesMode(), 0)
+
+    def test_bando_default_children_disabled_with_marker_interface(self):
+        alsoProvides(self.request, IoSanitaMigrationMarker)
+        uo = api.content.create(container=self.portal, type="Bando", title="xxx")
+
+        self.assertEqual(len(uo.keys()), 0)
