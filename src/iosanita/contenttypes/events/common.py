@@ -156,8 +156,8 @@ def createSubfolders(context, event):
     """
     if not IIosanitaContenttypesLayer.providedBy(context.REQUEST):
         return
-    if IoSanitaMigrationMarker.providedBy(context.REQUEST):
-        return
+    # if IoSanitaMigrationMarker.providedBy(context.REQUEST):
+    #     return
 
     subfolders_mapping = SUBFOLDERS_MAPPING.get(context.portal_type, [])
     if not subfolders_mapping:
