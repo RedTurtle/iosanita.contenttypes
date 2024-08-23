@@ -4,6 +4,9 @@ from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.utils import create_default_blocks
 from plone import api
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 SUBFOLDERS_MAPPING = {
@@ -166,12 +169,20 @@ def createSubfolders(context, event):
     for mapping in subfolders_mapping.get("content", {}):
         if mapping["id"] not in context.keys():
             portal_type = mapping.get("type", "Document")
-            child = api.content.create(
-                container=context,
-                type=portal_type,
-                title=mapping["title"],
-                id=mapping["id"],
-            )
+            try:
+                child = api.content.create(
+                    container=context,
+                    type=portal_type,
+                    title=mapping["title"],
+                    id=mapping["id"],
+                )
+            except:
+                # import pdb
+
+                # pdb.set_trace()
+                logger.error(context)
+                return
+
             if portal_type == "Document":
                 create_default_blocks(context=child)
 
