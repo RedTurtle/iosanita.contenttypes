@@ -9,7 +9,6 @@ from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
-from zope.interface import alsoProvides
 
 import unittest
 
