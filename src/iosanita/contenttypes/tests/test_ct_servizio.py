@@ -68,7 +68,7 @@ class TestServizioSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Servizio").json()
-        self.assertEqual(len(resp["fieldsets"]), 18)
+        self.assertEqual(len(resp["fieldsets"]), 19)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
@@ -85,6 +85,7 @@ class TestServizioSchema(unittest.TestCase):
                 "procedure_collegate_esito",
                 "responsabili",
                 "ulteriori_informazioni",
+                "contenuti_collegati",
                 "settings",
                 "ownership",
                 "dates",
@@ -109,6 +110,7 @@ class TestServizioSchema(unittest.TestCase):
                     "uo_correlata",
                     "responsabile_correlato",
                     "pdc_correlato",
+                    "struttura_correlata",
                 ]
             ),
         )
@@ -150,7 +152,7 @@ class TestServizioSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Servizio").json()
         self.assertEqual(
             resp["fieldsets"][2]["fields"],
-            ["come_accedere", "piattaforma_online_link", "piattaforma_online_label"],
+            ["come_accedere", "prenota_online_link", "prenota_online_label"],
         )
 
     def test_servizio_fields_tempi_attesa_fieldset(self):
@@ -235,6 +237,13 @@ class TestServizioSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Servizio").json()
         self.assertEqual(resp["fieldsets"][12]["fields"], ["ulteriori_informazioni"])
 
+    def test_servizio_fields_contenuti_collegati_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Servizio").json()
+        self.assertEqual(resp["fieldsets"][13]["fields"], ["servizio_correlato"])
+
 
 class TestServizio(unittest.TestCase):
     """"""
@@ -254,12 +263,6 @@ class TestServizio(unittest.TestCase):
         )
 
         self.assertEqual(servizio.keys(), ["modulistica", "documenti"])
-
-    def test_servizio_default_children_disabled_with_marker_interface(self):
-        alsoProvides(self.request, IoSanitaMigrationMarker)
-        uo = api.content.create(container=self.portal, type="Servizio", title="xxx")
-
-        self.assertEqual(len(uo.keys()), 0)
 
     def test_servizio_modulistica_has_filtered_addable_types(self):
         servizio = api.content.create(

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
@@ -251,12 +250,6 @@ class TestEvent(unittest.TestCase):
         self.assertEqual(
             event.keys(), ["immagini", "video", "sponsor-evento", "documenti"]
         )
-
-    def test_event_default_children_disabled_with_marker_interface(self):
-        alsoProvides(self.request, IoSanitaMigrationMarker)
-        uo = api.content.create(container=self.portal, type="Event", title="xxx")
-
-        self.assertEqual(len(uo.keys()), 0)
 
     def test_event_immagini_has_filtered_addable_types(self):
         event = api.content.create(container=self.portal, type="Event", title="xxx")

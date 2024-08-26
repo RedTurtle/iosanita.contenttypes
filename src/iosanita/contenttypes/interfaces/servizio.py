@@ -53,22 +53,22 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         ),
     )
 
-    piattaforma_online_link = schema.TextLine(
-        title=_("piattaforma_online_link_label", default="Piattaforma online"),
+    prenota_online_link = schema.URI(
+        title=_("prenota_online_link_label", default="Prenota online"),
         description=_(
-            "piattaforma_online_link_help",
-            default="Collegamento con l'eventuale piattaforma online del servzio.",
+            "prenota_online_link_help",
+            default="Collegamento con l'eventuale funzionalità di prenotazione online del servzio.",
         ),
         required=False,
     )
-    piattaforma_online_label = schema.TextLine(
+    prenota_online_label = schema.TextLine(
         title=_(
-            "piattaforma_online_label",
-            default="Etichetta bottone per piattaforma online",
+            "prenota_online_label_label",
+            default="Etichetta bottone per prenota online",
         ),
         description=_(
-            "piattaforma_online_help",
-            default="Testo da mostrare nel bottone del link alla piattaforma online.",
+            "prenota_online_label_help",
+            default="Testo da mostrare nel bottone del link per la prenotazione online.",
         ),
         default="Prenota online",
         required=False,
@@ -80,7 +80,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
+        required=True,
         missing_value=(),
     )
 
@@ -134,7 +134,16 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         required=True,
         missing_value=(),
     )
-
+    servizio_correlato = RelationList(
+        title=_("servizio_correlato_label", default="Servizi e prestazioni"),
+        description=_(
+            "servizio_correlato_servizio_help",
+            default="Elenco dei servizi e delle prestazioni dell'ASL correlati a questo.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+    )
     # widgets
     form.widget(
         "struttura_correlata",
@@ -162,6 +171,14 @@ class IServizio(model.Schema, IIosanitaContenttypes):
             "selectableTypes": ["Persona"],
         },
     )
+    form.widget(
+        "servizio_correlato",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Servizio"],
+        },
+    )
 
     # fieldsets
     model.fieldset(
@@ -172,7 +189,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     model.fieldset(
         "accedi_al_servizio",
         label=_("accedi_al_servizio_label", default="Accedi al servizio"),
-        fields=["come_accedere", "piattaforma_online_link", "piattaforma_online_label"],
+        fields=["come_accedere", "prenota_online_link", "prenota_online_label"],
     )
     model.fieldset(
         "tempi_attesa",
@@ -211,5 +228,9 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         label=_("responsabili_label", default="Responsabili"),
         fields=["uo_correlata", "responsabile_correlato"],
     )
-
+    model.fieldset(
+        "contenuti_collegati",
+        label=_("contenuti_collegati_label", default="Contenuti collegati"),
+        fields=["servizio_correlato"],
+    )
     textindexer.searchable("cosa_serve")

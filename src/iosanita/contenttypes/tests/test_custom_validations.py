@@ -56,7 +56,6 @@ class TestCustomValidation(unittest.TestCase):
             },
         }
         resp = self.api_session.post(self.portal_url, json=data)
-
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(
             json.loads(resp.json()["message"]),

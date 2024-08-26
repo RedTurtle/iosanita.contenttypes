@@ -222,14 +222,6 @@ class TestUO(unittest.TestCase):
 
         self.assertEqual(uo.keys(), ["documenti"])
 
-    def test_uo_default_children_disabled_with_marker_interface(self):
-        alsoProvides(self.request, IoSanitaMigrationMarker)
-        uo = api.content.create(
-            container=self.portal, type="UnitaOrganizzativa", title="xxx"
-        )
-
-        self.assertEqual(len(uo.keys()), 0)
-
     def test_uo_documenti_has_filtered_addable_types(self):
         uo = api.content.create(
             container=self.portal, type="UnitaOrganizzativa", title="xxx"

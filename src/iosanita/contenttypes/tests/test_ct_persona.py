@@ -246,9 +246,3 @@ class TestPersona(unittest.TestCase):
         documenti = ISelectableConstrainTypes(persona["documenti"])
         self.assertEqual(documenti.getConstrainTypesMode(), 1)
         self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
-
-    def test_persona_default_children_disabled_with_marker_interface(self):
-        alsoProvides(self.request, IoSanitaMigrationMarker)
-        persona = api.content.create(container=self.portal, type="Persona", title="xxx")
-
-        self.assertEqual(len(persona.keys()), 0)

@@ -191,9 +191,3 @@ class TestBando(unittest.TestCase):
         bando = api.content.create(container=self.portal, type="Bando", title="xxx")
         documenti = ISelectableConstrainTypes(bando["documenti"])
         self.assertEqual(documenti.getConstrainTypesMode(), 0)
-
-    def test_bando_default_children_disabled_with_marker_interface(self):
-        alsoProvides(self.request, IoSanitaMigrationMarker)
-        uo = api.content.create(container=self.portal, type="Bando", title="xxx")
-
-        self.assertEqual(len(uo.keys()), 0)

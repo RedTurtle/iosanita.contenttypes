@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
-from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from iosanita.contenttypes.utils import create_default_blocks
 from plone import api
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -159,8 +159,6 @@ def createSubfolders(context, event):
     """
     if not IIosanitaContenttypesLayer.providedBy(context.REQUEST):
         return
-    # if IoSanitaMigrationMarker.providedBy(context.REQUEST):
-    #     return
 
     subfolders_mapping = SUBFOLDERS_MAPPING.get(context.portal_type, [])
     if not subfolders_mapping:
@@ -177,9 +175,6 @@ def createSubfolders(context, event):
                     id=mapping["id"],
                 )
             except:
-                # import pdb
-
-                # pdb.set_trace()
                 logger.error(context)
                 return
 

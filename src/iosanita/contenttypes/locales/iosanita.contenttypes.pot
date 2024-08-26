@@ -748,17 +748,17 @@ msgstr ""
 
 #. Default: "Etichetta bottone per piattaforma online"
 #: iosanita/contenttypes/interfaces/servizio.py:65
-msgid "piattaforma_online_label"
+msgid "prenota_online_label"
 msgstr ""
 
 #. Default: "Collegamento con l'eventuale piattaforma online del servzio."
 #: iosanita/contenttypes/interfaces/servizio.py:58
-msgid "piattaforma_online_link_help"
+msgid "prenota_online_link_help"
 msgstr ""
 
 #. Default: "Piattaforma online"
 #: iosanita/contenttypes/interfaces/servizio.py:57
-msgid "piattaforma_online_link_label"
+msgid "prenota_online_link_label"
 msgstr ""
 
 #. Default: "Spiegazione relativa all'esito della procedura e dove eventualmente sarà disponibile o sarà possibile ritirare l'esito (sede dell'ufficio, orari, numero sportello, etc.)"

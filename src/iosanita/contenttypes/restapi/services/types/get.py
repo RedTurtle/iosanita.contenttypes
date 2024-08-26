@@ -99,6 +99,7 @@ FIELDSETS_ORDER = {
         "procedure_collegate_esito",
         "responsabili",
         "ulteriori_informazioni",
+        "contenuti_collegati",
     ],
     "UnitaOrganizzativa": [
         "default",

@@ -128,12 +128,6 @@ class TestStep(unittest.TestCase):
 
         self.assertEqual(step.keys(), ["documenti"])
 
-    def test_step_default_children_disabled_with_marker_interface(self):
-        alsoProvides(self.request, IoSanitaMigrationMarker)
-        uo = api.content.create(container=self.come_fare, type="Step", title="xxx")
-
-        self.assertEqual(len(uo.keys()), 0)
-
     def test_step_documenti_has_filtered_addable_types(self):
         step = api.content.create(container=self.come_fare, type="Step", title="xxx")
         documenti = ISelectableConstrainTypes(step["documenti"])

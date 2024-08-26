@@ -52,6 +52,7 @@ class TestDocumentSchema(unittest.TestCase):
                 "plone.constraintypes",
                 "plone.leadimage",
                 "iosanita.contenttypes.behavior.exclude_from_search",
+                "collective.taxonomy.generated.parliamo_di",
             ),
         )
 
@@ -97,6 +98,7 @@ class TestDocumentSchema(unittest.TestCase):
                 "preview_caption",
                 "image",
                 "image_caption",
+                "parliamo_di",
             ],
         )
 
