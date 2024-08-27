@@ -6,8 +6,10 @@ from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
+from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.testing import RelativeSession
 from transaction import commit
+from zope.component import getMultiAdapter
 
 import unittest
 
@@ -205,3 +207,18 @@ class TestSerializerSummary(unittest.TestCase):
 
         self.assertEqual(len(resp["items"]), 1)
         self.assertNotIn("has_children", resp["items"][0])
+
+    def test_pdc_summary_returns_also_contatti_data(self):
+        contatti = [{"descrizione": "xxx", "tipo": "email", "valore": "foo@bar.it"}]
+
+        pdc = api.content.create(
+            container=self.portal,
+            type="PuntoDiContatto",
+            title="pdc",
+            contatti=contatti,
+        )
+
+        serializer = getMultiAdapter((pdc, self.request), ISerializeToJsonSummary)()
+
+        self.assertIn("contatti", serializer)
+        self.assertEqual(serializer["contatti"], contatti)

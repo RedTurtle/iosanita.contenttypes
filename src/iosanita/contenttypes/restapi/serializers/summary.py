@@ -1,6 +1,7 @@
 from collective.taxonomy import PATH_SEPARATOR
 from iosanita.contenttypes.indexers.taxonomies import get_taxonomy_vocab
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from iosanita.contenttypes.interfaces.punto_di_contatto import IPuntoDiContatto
 from plone.restapi.interfaces import IJSONSummarySerializerMetadata
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from redturtle.volto.restapi.serializer.summary import DefaultJSONSummarySerializer
@@ -81,3 +82,14 @@ class IOSanitaJSONSummarySerializer(DefaultJSONSummarySerializer):
         except AttributeError:
             return False
         return False
+
+
+@implementer(ISerializeToJsonSummary)
+@adapter(IPuntoDiContatto, IIosanitaContenttypesLayer)
+class PuntoDiContattoJSONSummarySerializer(IOSanitaJSONSummarySerializer):
+    def __call__(self):
+        data = super().__call__()
+
+        data["contatti"] = getattr(self.context, "contatti", [])
+
+        return data
