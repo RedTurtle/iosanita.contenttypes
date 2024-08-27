@@ -260,15 +260,7 @@ class TestServizio(unittest.TestCase):
             container=self.portal, type="Servizio", title="xxx"
         )
 
-        self.assertEqual(servizio.keys(), ["modulistica", "documenti"])
-
-    def test_servizio_modulistica_has_filtered_addable_types(self):
-        servizio = api.content.create(
-            container=self.portal, type="Servizio", title="xxx"
-        )
-        modulistica = ISelectableConstrainTypes(servizio["modulistica"])
-        self.assertEqual(modulistica.getConstrainTypesMode(), 1)
-        self.assertEqual(modulistica.getLocallyAllowedTypes(), ["Link"])
+        self.assertEqual(servizio.keys(), ["documenti"])
 
     def test_servizio_documenti_has_filtered_addable_types(self):
         servizio = api.content.create(
