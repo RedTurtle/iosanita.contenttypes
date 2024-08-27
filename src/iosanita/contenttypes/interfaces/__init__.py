@@ -18,3 +18,9 @@ class IoSanitaMigrationMarker(Interface):
     """
     Marker interface to disable validation checks and events during migration.
     """
+
+
+class IoSanitaBackReferenceExtractor(Interface):
+    """
+    Marker interface to get the back references of a given object.
+    """

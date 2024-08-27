@@ -75,6 +75,13 @@ Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aument
 
 Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: *&portal_type=Servizio*.
 
+Expander back-references
+------------------------
+
+Oltre ai metodi indicati sopra, esiste anche un expander (*back-references*) che ritorna direttamente le back-references dei vari contenuti.
+
+A seconda del tipo di contenuto, la lista delle referenze cambia.
+
 
 Migrazione da vecchi siti
 =========================

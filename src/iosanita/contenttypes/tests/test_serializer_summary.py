@@ -175,15 +175,32 @@ class TestSerializerSummary(unittest.TestCase):
             title="Test link",
         )
         commit()
-        resp = self.api_session.get(
-            f"@search?path={'/'.join(news.getPhysicalPath())}&id=video"
+        resp = self.api_session.post(
+            "@querystring-search",
+            json={
+                "query": [
+                    {
+                        "i": "path",
+                        "o": "plone.app.querystring.operation.string.absolutePath",
+                        "v": f"{news['video'].UID()}::0",
+                    }
+                ]
+            },
         ).json()
-
         self.assertEqual(len(resp["items"]), 1)
         self.assertNotIn("has_children", resp["items"][0])
 
-        resp = self.api_session.get(
-            f"@search?path={'/'.join(news.getPhysicalPath())}&id=documenti"
+        resp = self.api_session.post(
+            "@querystring-search",
+            json={
+                "query": [
+                    {
+                        "i": "path",
+                        "o": "plone.app.querystring.operation.string.absolutePath",
+                        "v": f"{news['documenti'].UID()}::0",
+                    }
+                ]
+            },
         ).json()
 
         self.assertEqual(len(resp["items"]), 1)

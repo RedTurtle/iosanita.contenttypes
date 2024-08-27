@@ -61,10 +61,11 @@ class IOSanitaJSONSummarySerializer(DefaultJSONSummarySerializer):
         return data
 
     def is_get_call(self):
-        steps = self.request.steps
-        if not steps:
-            return False
-        return steps[-1] == "GET_application_json_"
+        if self.request.get("other", {}).get("method", "") == "GET":
+            return True
+        if getattr(self.request, "environ", {}).get("REQUEST_METHOD", "") == "GET":
+            return True
+        return False
 
     def has_children(self):
         """

@@ -4,6 +4,7 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
 
+  <include package=".back_references" />
   <include package=".types" />
 
 </configure>
