@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from iosanita.contenttypes.testing import INTEGRATION_TESTING
+# from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
 from plone import api
 from plone.app.testing import setRoles
@@ -8,7 +8,8 @@ from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.restapi.testing import RelativeSession
-from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+
+# from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
 
@@ -33,28 +34,25 @@ class TestCartellaModulisticaSchema(unittest.TestCase):
         self.api_session.close()
 
     def test_behaviors_enabled_for_cartella_modulistica(self):
-        import pdb
-
-        pdb.set_trace()
         portal_types = api.portal.get_tool(name="portal_types")
         self.assertEqual(
             portal_types["CartellaModulistica"].behaviors,
             (
-                "plone.namefromtitle"
-                "plone.allowdiscussion"
-                "plone.excludefromnavigation"
-                "plone.shortname"
-                "plone.ownership"
-                "plone.publication"
-                "plone.categorization"
-                "plone.basic"
-                "plone.leadimage"
-                "volto.preview_image"
-                "plone.locking"
-                "volto.blocks"
-                "plone.translatable"
-                "kitconcept.seo"
-                "plone.versioning"
+                "plone.namefromtitle",
+                "plone.allowdiscussion",
+                "plone.excludefromnavigation",
+                "plone.shortname",
+                "plone.ownership",
+                "plone.publication",
+                "plone.categorization",
+                "plone.basic",
+                "plone.leadimage",
+                "volto.preview_image",
+                "plone.locking",
+                "volto.blocks",
+                "plone.translatable",
+                "kitconcept.seo",
+                "plone.versioning",
             ),
         )
 
@@ -68,11 +66,11 @@ class TestCartellaModulisticaSchema(unittest.TestCase):
             [x.get("id") for x in resp["fieldsets"]],
             [
                 "default",
-                "contatti",
                 "settings",
                 "ownership",
                 "dates",
                 "categorization",
+                "layout",
                 "seo",
             ],
         )
@@ -88,41 +86,20 @@ class TestCartellaModulisticaSchema(unittest.TestCase):
             ),
         )
 
-    # def test_cartella_modulistica_fields_default_fieldset(self):
-    #     """
-    #     Get the list from restapi
-    #     """
-    #     resp = self.api_session.get("@types/CartellaModulistica").json()
-    #     self.assertEqual(
-    #         resp["fieldsets"][0]["fields"],
-    #         [
-    #             "title",
-    #             "testo",
-    #             "uo_correlata",
-    #         ],
-    #     )
-
-
-class TestCartellaModulistica(unittest.TestCase):
-    """"""
-
-    layer = INTEGRATION_TESTING
-
-    def setUp(self):
-        self.app = self.layer["app"]
-        self.portal = self.layer["portal"]
-        self.request = self.layer["request"]
-        self.portal_url = self.portal.absolute_url()
-        setRoles(self.portal, TEST_USER_ID, ["Manager"])
-
-        self.pagina = api.content.create(
-            container=self.portal, type="Document", title="xxx"
+    def test_cartella_modulistica_fields_default_fieldset(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/CartellaModulistica").json()
+        self.assertEqual(
+            resp["fieldsets"][0]["fields"],
+            [
+                "title",
+                "description",
+                "anteprima_file",
+                "image",
+                "image_caption",
+                "preview_image",
+                "preview_caption",
+            ],
         )
-
-    def test_cartella_modulistica_documenti_has_filtered_addable_types(self):
-        cartella_modulistica = api.content.create(
-            container=self.pagina, type="CartellaModulistica", title="xxx"
-        )
-        documenti = ISelectableConstrainTypes(cartella_modulistica["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
