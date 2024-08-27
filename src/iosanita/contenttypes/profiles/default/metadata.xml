@@ -4,7 +4,6 @@
   <dependencies>
     <dependency>profile-redturtle.volto:default</dependency>
     <dependency>profile-collective.taxonomy:default</dependency>
-    <dependency>profile-collective.venue:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-redturtle.bandi:default</dependency>
     <dependency>profile-collective.geolocationbehavior:default</dependency>

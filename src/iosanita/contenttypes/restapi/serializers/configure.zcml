@@ -5,10 +5,6 @@
 
   <adapter factory=".news.NewsItemSerializeToJson" />
   <adapter factory=".summary.IOSanitaJSONSummarySerializer" />
-  <adapter factory=".cartella_modulistica.CartellaModulisticaSerializer" />
-  <adapter factory=".related_news_serializer.ServizioSerializer" />
-  <adapter factory=".dxcontent.SerializeFolderToJson" />
-  <adapter factory=".dxcontent.SerializeToJson" />
 
   <!-- Summary Serializer Metadata -->
   <utility

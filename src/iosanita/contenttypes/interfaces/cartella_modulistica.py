@@ -8,10 +8,10 @@ from zope import schema
 class ICartellaModulistica(model.Schema, IIosanitaContenttypes):
     """Cartella Modulistica"""
 
-    visualize_files = schema.Bool(
-        title=_("visualize_files_title", default="Mostra i PDF in anteprima"),
+    anteprima_file = schema.Bool(
+        title=_("anteprima_file_title", default="Mostra i PDF in anteprima"),
         description=_(
-            "visulize_files_description",
+            "anteprima_file_description",
             default="Permette di aprire l'anteprima di tutti i PDF di questa cartella"
             " in una tab separata, altrimenti i PDF vengono scaricati",
         ),
