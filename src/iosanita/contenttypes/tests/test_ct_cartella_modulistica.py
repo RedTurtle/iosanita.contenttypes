@@ -12,6 +12,7 @@ from plone.restapi.testing import RelativeSession
 # from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 import unittest
+from transaction import commit
 
 
 class TestCartellaModulisticaSchema(unittest.TestCase):
@@ -29,6 +30,11 @@ class TestCartellaModulisticaSchema(unittest.TestCase):
         self.api_session = RelativeSession(self.portal_url)
         self.api_session.headers.update({"Accept": "application/json"})
         self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
+        
+        self.cartella_modulistica = api.content.create(
+            container=self.portal, type="CartellaModulistica", title="cm"
+        )
+        commit()
 
     def tearDown(self):
         self.api_session.close()
@@ -103,3 +109,13 @@ class TestCartellaModulisticaSchema(unittest.TestCase):
                 "preview_caption",
             ],
         )
+
+    def test_cartella_modulistica_expander(self):
+        file_ct = api.content.create(container=self.cartella_modulistica, type="File", title="xxx")
+        commit()
+       
+        resp = self.api_session.get("/cm/@modulistica-items").json()["items"][0]
+        self.assertEqual(resp["@type"], "File")
+        self.assertEqual(resp["id"], "xxx")
+
+
