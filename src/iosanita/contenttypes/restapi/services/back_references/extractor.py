@@ -1,31 +1,30 @@
 # -*- coding: utf-8 -*-
-from zope.component import adapter
-from zope.interface import implementer
-from zope.interface import Interface
+from Acquisition import aq_inner
+from iosanita.contenttypes.interfaces import IoSanitaBackReferenceExtractor
+from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.servizio import IServizio
 from iosanita.contenttypes.interfaces.struttura import IStruttura
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
-from iosanita.contenttypes.interfaces.persona import IPersona
 from plone import api
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from zope.component import queryMultiAdapter
-from iosanita.contenttypes.interfaces import IoSanitaBackReferenceExtractor
 from zc.relation.interfaces import ICatalog
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.component import queryMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
 from zope.security import checkPermission
-from Acquisition import aq_inner
+
+
+LIMIT = 25
 
 
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(Interface, Interface)
 class BackReferencesExtractor(object):
-
     def __init__(self, context, request):
         self.context = context
         self.request = request
@@ -47,7 +46,7 @@ class BackReferencesExtractor(object):
             "sort_on": "Date",
             "sort_order": "reverse",
         }
-        brains = api.content.find(**query)[:15]
+        brains = api.content.find(**query)[:LIMIT]
 
         return [
             queryMultiAdapter((brain, self.request), ISerializeToJsonSummary)()
@@ -71,7 +70,7 @@ class BackReferencesExtractor(object):
                     (obj, getRequest()), ISerializeToJsonSummary
                 )()
                 data.append(summary)
-        return sorted(data, key=lambda k: k["title"])
+        return sorted(data, key=lambda k: k["title"])[:LIMIT]
 
 
 @implementer(IoSanitaBackReferenceExtractor)

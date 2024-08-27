@@ -1,18 +1,32 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-    xmlns:plone="http://namespaces.plone.org/plone"
+<configure
+    xmlns="http://namespaces.zope.org/zope"
     xmlns:cache="http://namespaces.zope.org/cache"
-    xmlns:zcml="http://namespaces.zope.org/zcml">
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
 
-    <plone:service method="GET" name="@back-references" for="zope.interface.Interface" factory=".get.BackReferencesGet" permission="zope2.View" />
+  <plone:service
+      method="GET"
+      factory=".get.BackReferencesGet"
+      for="zope.interface.Interface"
+      permission="zope2.View"
+      name="@back-references"
+      />
 
-    <adapter factory=".get.BackReferences" name="back-references"/>
-    
-    <adapter factory=".extractor.BackReferencesExtractor"/>
-    <adapter factory=".extractor.BackReferencesExtractorServizio"/>
-    <adapter factory=".extractor.BackReferencesExtractorStruttura"/>
-    <adapter factory=".extractor.BackReferencesExtractorUnitaOrganizzativa"/>
-    <adapter factory=".extractor.BackReferencesExtractorPersona"/>
+  <adapter
+      factory=".get.BackReferences"
+      name="back-references"
+      />
 
-    <cache:ruleset ruleset="plone.content.dynamic" for=".get.BackReferencesGet" />
+  <adapter factory=".extractor.BackReferencesExtractor" />
+  <adapter factory=".extractor.BackReferencesExtractorServizio" />
+  <adapter factory=".extractor.BackReferencesExtractorStruttura" />
+  <adapter factory=".extractor.BackReferencesExtractorUnitaOrganizzativa" />
+  <adapter factory=".extractor.BackReferencesExtractorPersona" />
+
+  <cache:ruleset
+      for=".get.BackReferencesGet"
+      ruleset="plone.content.dynamic"
+      />
 
 </configure>

@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
+from iosanita.contenttypes.interfaces import IoSanitaBackReferenceExtractor
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services import Service
 from zope.component import adapter
+from zope.component import queryMultiAdapter
 from zope.interface import implementer
 from zope.interface import Interface
-from zope.component import queryMultiAdapter
-from iosanita.contenttypes.interfaces import IoSanitaBackReferenceExtractor
 
 
 @implementer(IExpandableElement)
 @adapter(Interface, Interface)
 class BackReferences(object):
-
     def __init__(self, context, request):
         self.context = context
         self.request = request

@@ -82,6 +82,9 @@ Oltre ai metodi indicati sopra, esiste anche un expander (*back-references*) che
 
 A seconda del tipo di contenuto, la lista delle referenze cambia.
 
+Questo expander ritorna però solamente al massimo 25 elementi.
+Se il contenuto ne ha di più, c'è da usare il metodo indicato sopra, e fare una chiamata a parte con la ricerca e la paginazione.
+
 
 Migrazione da vecchi siti
 =========================
