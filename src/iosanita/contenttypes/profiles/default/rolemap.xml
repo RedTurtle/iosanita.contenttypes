@@ -65,5 +65,12 @@
     <role name="Owner" />
     <role name="Contributor" />
   </permission>
+  <permission acquire="True"
+                name="iosanita.contenttypes: Add CartellaModulistica">
+    <role name="Manager" />
+    <role name="Site Administrator" />
+    <role name="Owner" />
+    <role name="Contributor" />
+  </permission>
 </permissions>
 </rolemap>

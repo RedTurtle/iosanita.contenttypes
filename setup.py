@@ -57,6 +57,7 @@ setup(
         "z3c.jbot",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
+        "collective.venue[geolocation]",
         "collective.volto.blocksfield",
         "collective.z3cform.datagridfield",
         "redturtle.volto",
