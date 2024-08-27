@@ -12,7 +12,6 @@ from transaction import commit
 from z3c.relationfield import RelationValue
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-from zope.event import notify
 from zope.intid.interfaces import IIntIds
 
 import unittest
