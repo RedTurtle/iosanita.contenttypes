@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.serializer.dxcontent import SerializeFolderToJson
 from redturtle.bandi.interfaces import IBando
-from plone.restapi.interfaces import ISerializeToJson
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
@@ -10,7 +10,6 @@ from zope.interface import Interface
 @implementer(ISerializeToJson)
 @adapter(IBando, Interface)
 class BandoSerializeToJson(SerializeFolderToJson):
-
     def get_approfondimenti(self, bando_view):
         """ """
         folders = bando_view.retrieveFolderDeepening()
@@ -32,6 +31,6 @@ class BandoSerializeToJson(SerializeFolderToJson):
     def __call__(self, version=None, include_items=True):
         result = super().__call__(version=version, include_items=include_items)
         bando_view = self.context.restrictedTraverse("bando_view")
-        result["approfondimento"] = self.get_approfondimenti(bando_view)
-        result["bando_state"] = bando_view.getBandoState()
+        result["approfondimenti"] = self.get_approfondimenti(bando_view)
+        result["stato_bando"] = bando_view.getBandoState()
         return result
