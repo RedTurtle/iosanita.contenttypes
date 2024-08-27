@@ -13,4 +13,7 @@
       factory=".summary.JSONSummarySerializerMetadata"
       name="iosanita.contenttypes.summary_serializer_metadata"
       />
+
+  <adapter factory=".relationfield.RelationListFieldSerializer" />
+
 </configure>
