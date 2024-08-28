@@ -2,18 +2,12 @@
 """Setup tests for this package."""
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import SITE_OWNER_NAME
-from plone.app.testing import SITE_OWNER_PASSWORD
-from plone.app.testing import TEST_USER_ID
-from plone.namedfile.file import NamedBlobFile
-from plone.restapi.interfaces import ISerializeToJson
-from plone.restapi.testing import RelativeSession
-from zope.component import getMultiAdapter
-from zope.event import notify
-from zope.lifecycleevent import ObjectModifiedEvent
 from plone.app.dexterity.behaviors.metadata import IDublinCore
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from zope.event import notify
 from zope.lifecycleevent import Attributes
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
 
