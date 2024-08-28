@@ -29,8 +29,9 @@ class JSONSummarySerializerMetadata:
             "street",
             "zip_code",
             "city",
-            "province",
+            "provincia",
             "geolocation",
+            "servizio_attivo",
         }
 
 

@@ -29,12 +29,16 @@
       name="city"
       />
   <adapter
-      factory=".common.province"
-      name="province"
+      factory=".common.provincia"
+      name="provincia"
       />
   <adapter
       factory=".common.geolocation"
       name="geolocation"
+      />
+  <adapter
+      factory=".common.has_geolocation"
+      name="has_geolocation"
       />
 
   <!-- relations -->

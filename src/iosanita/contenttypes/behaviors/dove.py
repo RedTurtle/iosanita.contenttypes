@@ -24,9 +24,9 @@ class IDove(IGeolocatable, IAddress):
         required=False,
     )
 
-    quartiere = schema.TextLine(
-        title=_("quartiere", default="Quartiere"),
-        description=_("help_quartiere", default=""),
+    provincia = schema.TextLine(
+        title=_("provincia", default="Provincia"),
+        description=_("help_provincia", default=""),
         required=False,
     )
 
@@ -38,8 +38,11 @@ class IDove(IGeolocatable, IAddress):
 
     # searchabletext indexer
     textindexer.searchable("nome_sede")
-    textindexer.searchable("quartiere")
+    textindexer.searchable("provincia")
     textindexer.searchable("circoscrizione")
+    textindexer.searchable("zip_code")
+    textindexer.searchable("city")
+    textindexer.searchable("country")
 
     model.fieldset(
         "dove",
@@ -49,7 +52,7 @@ class IDove(IGeolocatable, IAddress):
             "street",
             "zip_code",
             "city",
-            "quartiere",
+            "provincia",
             "circoscrizione",
             "country",
             "geolocation",

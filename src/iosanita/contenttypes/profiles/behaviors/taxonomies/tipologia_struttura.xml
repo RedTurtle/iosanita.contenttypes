@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vdex xmlns="http://www.imsglobal.org/xsd/imsvdex_v1p0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      language="it"
+      orderSignificant="false"
+      profileType="hierarchicalTokenTerms"
+      xsi:schemaLocation="http://www.imsglobal.org/xsd/imsvdex_v1p0 imsvdex_v1p0.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd"
+>
+  <vocabName>
+    <langstring language="it">Tipologia struttura</langstring>
+  </vocabName>
+  <vocabIdentifier>tipologia_struttura</vocabIdentifier>
+  <term>
+    <termIdentifier>Ambulatori</termIdentifier>
+    <caption>
+      <langstring language="it">Ambulatori</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Case della salute</termIdentifier>
+    <caption>
+      <langstring language="it">Case della salute</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Centri per la salute mentale</termIdentifier>
+    <caption>
+      <langstring language="it">Centri per la salute mentale</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Consultori</termIdentifier>
+    <caption>
+      <langstring language="it">Consultori</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Farmacie</termIdentifier>
+    <caption>
+      <langstring language="it">Farmacie</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Hospice</termIdentifier>
+    <caption>
+      <langstring language="it">Hospice</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Laboratori</termIdentifier>
+    <caption>
+      <langstring language="it">Laboratori</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>Poliambulatori</termIdentifier>
+    <caption>
+      <langstring language="it">Poliambulatori</langstring>
+    </caption>
+  </term>
+  <term>
+    <termIdentifier>RSA</termIdentifier>
+    <caption>
+      <langstring language="it">RSA</langstring>
+    </caption>
+  </term>
+</vdex>

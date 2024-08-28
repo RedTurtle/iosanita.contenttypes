@@ -171,7 +171,7 @@ class TestEventSchema(unittest.TestCase):
                 "street",
                 "zip_code",
                 "city",
-                "quartiere",
+                "provincia",
                 "circoscrizione",
                 "country",
                 "geolocation",

@@ -123,7 +123,7 @@ class TestServizioSchema(unittest.TestCase):
             [
                 "title",
                 "description",
-                "stato_servizio",
+                "servizio_attivo",
                 "sottotitolo",
                 "image",
                 "image_caption",

@@ -890,12 +890,12 @@ msgstr ""
 
 #. Default: "Indica se il servizio è effettivamente fruibile o meno. Spuntare se non è fruibile."
 #: iosanita/contenttypes/interfaces/servizio.py:21
-msgid "stato_servizio_help"
+msgid "servizio_attivo_help"
 msgstr ""
 
 #. Default: "Stato servzio"
 #: iosanita/contenttypes/interfaces/servizio.py:19
-msgid "stato_servizio_label"
+msgid "servizio_attivo_label"
 msgstr ""
 
 #. Default: "Indicare una o più strutture che fanno a capo a questo contenuto."

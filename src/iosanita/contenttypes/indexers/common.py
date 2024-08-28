@@ -35,10 +35,20 @@ def city(context):
 
 
 @indexer(IDexterityContent)
-def province(context):
-    return getattr(context.aq_base, "province", None)
+def provincia(context):
+    return getattr(context.aq_base, "provincia", None)
 
 
 @indexer(IDexterityContent)
 def geolocation(context):
     return getattr(context.aq_base, "geolocation", None)
+
+
+@indexer(IDexterityContent)
+def has_geolocation(context):
+    data = getattr(context.aq_base, "geolocation", None)
+    if not data:
+        return False
+    if data.latitude == 0.0 and data.longitude == 0.0:
+        return False
+    return True

@@ -139,6 +139,26 @@ class TestSerializerSummary(unittest.TestCase):
         self.assertIn("tipologia_notizia", resp["items"][0])
         self.assertEqual(resp["items"][0]["tipologia_notizia"], ["notizia"])
 
+    def test_summary_serializer_always_return_servizio_attivo_metadata(self):
+        """ """
+        servizio = api.content.create(
+            container=self.portal,
+            type="Servizio",
+            title="Test",
+        )
+        commit()
+
+        resp = self.api_session.get(f"@search?UID={servizio.UID()}").json()
+        self.assertEqual(resp["items_total"], 1)
+        self.assertIn("servizio_attivo", resp["items"][0])
+        self.assertTrue(resp["items"][0]["servizio_attivo"])
+
+        servizio.servizio_attivo = False
+        servizio.reindexObject()
+        commit()
+        resp = self.api_session.get(f"@search?UID={servizio.UID()}").json()
+        self.assertFalse(resp["items"][0]["servizio_attivo"])
+
     def test_summary_serializer_return_has_children_info_in_GET_calls(self):
         """ """
         news = api.content.create(

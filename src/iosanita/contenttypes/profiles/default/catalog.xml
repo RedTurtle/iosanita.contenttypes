@@ -25,6 +25,12 @@
 <index name="struttura_correlata_uid" meta_type="KeywordIndex">
   <indexed_attr value="struttura_correlata_uid"/>
 </index>
+<index name="has_geolocation" meta_type="BooleanIndex">
+  <indexed_attr value="has_geolocation"/>
+</index>
+<index name="servizio_attivo" meta_type="BooleanIndex">
+  <indexed_attr value="servizio_attivo"/>
+</index>
 
   <!-- metadata -->
   <column value="event_location" />
@@ -34,9 +40,7 @@
   <column value="street"/>
   <column value="zip_code"/>
   <column value="city"/>
-  <column value="province"/>
+  <column value="provincia"/>
   <column value="geolocation"/>
-
-
-
+  <column value="servizio_attivo"/>
 </object>

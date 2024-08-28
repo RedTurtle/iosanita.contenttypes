@@ -15,13 +15,14 @@ from zope import schema
 class IServizio(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type"""
 
-    stato_servizio = schema.Bool(
-        title=_("stato_servizio_label", default="Stato servzio"),
+    servizio_attivo = schema.Bool(
+        title=_("servizio_attivo_label", default="Servzio attivo"),
         required=False,
+        default=True,
         description=_(
-            "stato_servizio_help",
+            "servizio_attivo_help",
             default="Indica se il servizio è effettivamente fruibile o meno. "
-            "Spuntare se non è fruibile.",
+            "Deselezionare se il servizio non è più attivo.",
         ),
     )
 
