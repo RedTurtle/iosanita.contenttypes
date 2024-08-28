@@ -16,7 +16,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     """Marker interface for content type"""
 
     servizio_attivo = schema.Bool(
-        title=_("servizio_attivo_label", default="Servzio attivo"),
+        title=_("servizio_attivo_label", default="Servizio attivo"),
         required=False,
         default=True,
         description=_(
@@ -58,7 +58,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         title=_("prenota_online_link_label", default="Prenota online"),
         description=_(
             "prenota_online_link_help",
-            default="Collegamento con l'eventuale funzionalità di prenotazione online del servzio.",
+            default="Collegamento con l'eventuale funzionalità di prenotazione online del servizio.",
         ),
         required=False,
     )

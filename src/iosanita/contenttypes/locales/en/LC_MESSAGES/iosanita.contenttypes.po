@@ -749,7 +749,7 @@ msgstr ""
 msgid "prenota_online_label"
 msgstr ""
 
-#. Default: "Collegamento con l'eventuale piattaforma online del servzio."
+#. Default: "Collegamento con l'eventuale piattaforma online del servizio."
 #: iosanita/contenttypes/interfaces/servizio.py:58
 msgid "prenota_online_link_help"
 msgstr ""
@@ -891,7 +891,7 @@ msgstr ""
 msgid "servizio_attivo_help"
 msgstr ""
 
-#. Default: "Stato servzio"
+#. Default: "Stato servizio"
 #: iosanita/contenttypes/interfaces/servizio.py:19
 msgid "servizio_attivo_label"
 msgstr ""

@@ -43,4 +43,6 @@
   <column value="provincia"/>
   <column value="geolocation"/>
   <column value="servizio_attivo"/>
+  <column value="parent"/>
+
 </object>
