@@ -53,6 +53,7 @@ class TestStrutturaSchema(unittest.TestCase):
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
+                "collective.taxonomy.generated.tipologia_struttura",
                 "iosanita.contenttypes.behavior.dove",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
@@ -121,6 +122,7 @@ class TestStrutturaSchema(unittest.TestCase):
                 "image_caption",
                 "preview_image",
                 "preview_caption",
+                "tipologia_struttura",
                 "parliamo_di",
             ],
         )
