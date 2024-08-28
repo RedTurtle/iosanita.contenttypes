@@ -6,5 +6,6 @@
 
   <include package=".back_references" />
   <include package=".types" />
+  <include package=".modulistica_items" />
 
 </configure>

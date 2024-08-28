@@ -43,6 +43,10 @@
         id="iosanita.contenttypes.AddDocumento"
         title="iosanita.contenttypes: Add Documento"
         />
+    <permission
+        id="iosanita.contenttypes.AddCartellaModulistica"
+        title="iosanita.contenttypes: Add CartellaModulistica"
+        />
   </configure>
 
 </configure>

@@ -22,4 +22,14 @@
       type="plone"
       />
 
+  <configure package="plone.app.dexterity.browser">
+    <browser:page
+        name="modulistica_view"
+        for="iosanita.contenttypes.interfaces.cartella_modulistica.ICartellaModulistica"
+        class="plone.app.dexterity.browser.folder_listing.FolderView"
+        template="folder_listing.pt"
+        permission="zope2.View"
+        />
+  </configure>
+
 </configure>
