@@ -42,7 +42,9 @@ class ModulisticaItems(object):
             context = self.context
         res = []
         for brain in context.getFolderContents():
-            if brain.portal_type == "Document" and brain.getId == "multimedia":
+            if brain.portal_type == "Document" and (
+                brain.getId == "immagini" or brain.getId == "documenti"
+            ):
                 continue
             child = brain.getObject()
             serializer = queryMultiAdapter(
