@@ -159,6 +159,25 @@ class TestSerializerSummary(unittest.TestCase):
         resp = self.api_session.get(f"@search?UID={servizio.UID()}").json()
         self.assertFalse(resp["items"][0]["servizio_attivo"])
 
+    def test_summary_serializer_always_return_parent_metadata(self):
+        """ """
+        parent = api.content.create(
+            container=self.portal,
+            type="Document",
+            title="Parent",
+        )
+        child = api.content.create(
+            container=parent,
+            type="Document",
+            title="Child",
+        )
+        commit()
+
+        resp = self.api_session.get(f"@search?UID={child.UID()}").json()
+        self.assertIn("parent", resp["items"][0])
+        self.assertEqual(resp["items"][0]["parent"]["title"], "Parent")
+        self.assertEqual(resp["items"][0]["parent"]["UID"], parent.UID())
+
     def test_summary_serializer_return_has_children_info_in_GET_calls(self):
         """ """
         news = api.content.create(

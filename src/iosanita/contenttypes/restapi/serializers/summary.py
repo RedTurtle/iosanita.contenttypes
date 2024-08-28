@@ -32,6 +32,7 @@ class JSONSummarySerializerMetadata:
             "provincia",
             "geolocation",
             "servizio_attivo",
+            "parent",
         }
 
 
