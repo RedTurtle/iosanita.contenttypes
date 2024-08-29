@@ -18,7 +18,16 @@ SUBFOLDERS_MAPPING = {
                 "title": "Graduatoria",
                 "type": "Bando Folder Deepening",
             },
-            {"id": "documenti", "title": "Documenti", "type": "Bando Folder Deepening"},
+            {
+                "id": "altri-allegati",
+                "title": "Altri allegati",
+                "type": "Bando Folder Deepening",
+            },
+            {
+                "id": "adempimenti-consequenziali",
+                "title": "Adempimenti consequenziali",
+                "type": "Bando Folder Deepening",
+            },
         ],
     },
     "Documento": {
@@ -173,9 +182,10 @@ def createSubfolders(context, event):
             if portal_type == "Document":
                 create_default_blocks(context=child)
 
-            if portal_type in ["Folder", "Document"]:
+            if portal_type in ["Folder", "Document", "Bando Folder Deepening"]:
                 child.exclude_from_search = True
                 child.reindexObject(idxs=["exclude_from_search"])
+
             # select constraints
             if mapping.get("allowed_types", ()):
                 constraints_child = ISelectableConstrainTypes(child)
