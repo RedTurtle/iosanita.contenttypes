@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        meta_type="Dexterity FTI"
+        name="Bando Folder Deepening"
+        i18n:domain="plone"
+>
+
+  <property name="behaviors" purge="False">
+    <element value="iosanita.contenttypes.behavior.exclude_from_search" />
+  </property>
+</object>
