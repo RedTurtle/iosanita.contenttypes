@@ -25,6 +25,9 @@
 <index name="struttura_correlata_uid" meta_type="KeywordIndex">
   <indexed_attr value="struttura_correlata_uid"/>
 </index>
+<index name="servizio_correlato_uid" meta_type="KeywordIndex">
+  <indexed_attr value="servizio_correlato_uid"/>
+</index>
 <index name="has_geolocation" meta_type="BooleanIndex">
   <indexed_attr value="has_geolocation"/>
 </index>
@@ -35,6 +38,7 @@
   <!-- metadata -->
   <column value="event_location" />
   <column value="rassegna" />
+  <column value="incarico_metadata" />
   <column value="parliamo_di_metadata" />
   <column value="a_chi_si_rivolge_tassonomia_metadata" />
   <column value="street"/>

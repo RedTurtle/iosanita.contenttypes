@@ -37,6 +37,7 @@ class IDove(IGeolocatable, IAddress):
     )
 
     # searchabletext indexer
+    textindexer.searchable("street")
     textindexer.searchable("nome_sede")
     textindexer.searchable("provincia")
     textindexer.searchable("circoscrizione")

@@ -70,3 +70,20 @@ class TestTaxonomiesCustomMetadata(unittest.TestCase):
                 {"title": "Imprese", "token": "imprese"},
             ],
         )
+
+    def test_incarico_has_last_taxonomy_leaf_value(self):
+        """ """
+        persona = api.content.create(
+            container=self.portal,
+            type="Persona",
+            title="john doe",
+            incarico=[
+                "primari",
+            ],
+        )
+        res = api.content.find(UID=persona.UID())[0]
+
+        self.assertEqual(
+            res.incarico_metadata,
+            [{"title": "Primari", "token": "primari"}],
+        )

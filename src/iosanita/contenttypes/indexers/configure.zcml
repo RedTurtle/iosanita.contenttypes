@@ -50,7 +50,10 @@
       factory=".relations.struttura_correlata_uid"
       name="struttura_correlata_uid"
       />
-
+  <adapter
+      factory=".relations.servizio_correlato_uid"
+      name="servizio_correlato_uid"
+      />
 
   <!-- only metadata -->
   <adapter
@@ -61,5 +64,8 @@
       factory=".taxonomies.a_chi_si_rivolge_tassonomia_metadata"
       name="a_chi_si_rivolge_tassonomia_metadata"
       />
-
+  <adapter
+      factory=".taxonomies.incarico_metadata"
+      name="incarico_metadata"
+      />
 </configure>

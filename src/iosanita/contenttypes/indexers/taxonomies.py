@@ -13,17 +13,27 @@ def get_taxonomy_vocab(field):
     return taxonomy.makeVocabulary(request.get("LANGUAGE"))
 
 
-def extract_taxonomies(context, field):
+def extract_taxonomies(context, field, only_leaf=False):
     taxonomy_voc = get_taxonomy_vocab(field)
     data = []
-    for key in getattr(context, field, []) or []:
-        value = taxonomy_voc.inv_data.get(key, None)
-
-        if not value:
+    value = getattr(context, field, []) or []
+    if not isinstance(value, list):
+        value = [value]
+    for key in value:
+        taxonomy_value = taxonomy_voc.inv_data.get(key, None)
+        if not taxonomy_value:
             continue
-        if value.startswith(PATH_SEPARATOR):
-            value = value.replace(PATH_SEPARATOR, "", 1)
-        data.append({"title": value.replace(PATH_SEPARATOR, "", 1), "token": key})
+        if taxonomy_value.startswith(PATH_SEPARATOR):
+            taxonomy_value = taxonomy_value.replace(PATH_SEPARATOR, "", 1)
+
+        if only_leaf:
+            data.append(
+                {"title": taxonomy_value.split(PATH_SEPARATOR)[-1], "token": key}
+            )
+        else:
+            data.append(
+                {"title": taxonomy_value.replace(PATH_SEPARATOR, "", 1), "token": key}
+            )
     return data
 
 
@@ -37,3 +47,9 @@ def parliamo_di_metadata(context, **kw):
 def a_chi_si_rivolge_tassonomia_metadata(context, **kw):
     """ """
     return extract_taxonomies(context=context, field="a_chi_si_rivolge_tassonomia")
+
+
+@indexer(IDexterityContent)
+def incarico_metadata(context, **kw):
+    """ """
+    return extract_taxonomies(context=context, field="incarico", only_leaf=True)

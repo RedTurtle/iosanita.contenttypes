@@ -78,7 +78,7 @@ class BackReferencesExtractor(object):
 class BackReferencesExtractorServizio(BackReferencesExtractor):
     def __call__(self):
         return {
-            "news": self.get_related_news(reference_field="servizio_correlato"),
+            "news": self.get_related_news(reference_field="servizio_correlato_uid"),
             "documenti": self.get_back_reference(
                 reference_id="servizio_procedura_riferimento"
             ),
@@ -90,7 +90,7 @@ class BackReferencesExtractorServizio(BackReferencesExtractor):
 class BackReferencesExtractorStruttura(BackReferencesExtractor):
     def __call__(self):
         return {
-            "news": self.get_related_news(reference_field="struttura_correlata"),
+            "news": self.get_related_news(reference_field="struttura_correlata_uid"),
         }
 
 
@@ -99,7 +99,7 @@ class BackReferencesExtractorStruttura(BackReferencesExtractor):
 class BackReferencesExtractorUnitaOrganizzativa(BackReferencesExtractor):
     def __call__(self):
         return {
-            "news": self.get_related_news(reference_field="uo_correlata"),
+            "news": self.get_related_news(reference_field="uo_correlata_uid"),
         }
 
 

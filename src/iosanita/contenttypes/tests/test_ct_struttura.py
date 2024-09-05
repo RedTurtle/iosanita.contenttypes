@@ -68,7 +68,7 @@ class TestStrutturaSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(len(resp["fieldsets"]), 16)
+        self.assertEqual(len(resp["fieldsets"]), 15)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
@@ -79,7 +79,6 @@ class TestStrutturaSchema(unittest.TestCase):
                 "come_accedere",
                 "orari",
                 "contatti",
-                "servizi",
                 "persone_struttura",
                 "contenuti_collegati",
                 "ulteriori_informazioni",
@@ -190,20 +189,13 @@ class TestStrutturaSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(resp["fieldsets"][6]["fields"], ["pdc_correlato"])
 
-    def test_struttura_fields_servizi_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Struttura").json()
-        self.assertEqual(resp["fieldsets"][7]["fields"], ["servizi"])
-
     def test_struttura_fields_persone_struttura_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
-            resp["fieldsets"][8]["fields"],
+            resp["fieldsets"][7]["fields"],
             ["responsabile_correlato", "coordinatore_correlato"],
         )
 
@@ -213,7 +205,7 @@ class TestStrutturaSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
-            resp["fieldsets"][9]["fields"],
+            resp["fieldsets"][8]["fields"],
             ["uo_correlata", "struttura_correlata"],
         )
 
@@ -223,7 +215,7 @@ class TestStrutturaSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
-            resp["fieldsets"][10]["fields"],
+            resp["fieldsets"][9]["fields"],
             ["ulteriori_informazioni"],
         )
 
