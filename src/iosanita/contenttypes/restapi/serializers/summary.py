@@ -33,6 +33,8 @@ class JSONSummarySerializerMetadata:
             "geolocation",
             "servizio_attivo",
             "parent",
+            "Date",
+            "incarico_metadata",
         }
 
 
