@@ -5,13 +5,11 @@ from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.servizio import IServizio
 from iosanita.contenttypes.interfaces.struttura import IStruttura
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
-from plone import api
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from zc.relation.interfaces import ICatalog
 from zope.component import adapter
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-from zope.component import queryMultiAdapter
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 from zope.interface import Interface
@@ -25,6 +23,9 @@ LIMIT = 25
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(Interface, Interface)
 class BackReferencesExtractor(object):
+
+    reference_id = None
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
@@ -33,83 +34,95 @@ class BackReferencesExtractor(object):
         """
         By default does not return anything
         """
-        return {}
+        if not self.reference_id:
+            return {}
+        return self.get_back_references(reference_id=self.reference_id)
 
-    def get_related_news(self, reference_field):
+    def get_back_references(self, reference_id):
         """
-        We use portal_catalog to return back references because we want news in
-        order of effective date
+        Return a mapping of back references splitted by portal_type.
+        News Items are sorted by date, other are sorted by title
         """
-        query = {
-            "portal_type": "News Item",
-            reference_field: self.context.UID(),
-            "sort_on": "Date",
-            "sort_order": "reverse",
-        }
-        brains = api.content.find(**query)[:LIMIT]
 
-        return [
-            queryMultiAdapter((brain, self.request), ISerializeToJsonSummary)()
-            for brain in brains
-        ]
-
-    def get_back_reference(self, reference_id):
         catalog = getUtility(ICatalog)
         intids = getUtility(IIntIds)
         relations = catalog.findRelations(
-            dict(
-                to_id=intids.getId(aq_inner(self.context)),
-                from_attribute=reference_id,
-            )
+            {
+                "to_id": intids.getId(aq_inner(self.context)),
+                "from_attribute": reference_id,
+            }
         )
-        data = []
+        data = {}
         for rel in relations:
             obj = intids.queryObject(rel.from_id)
-            if obj is not None and checkPermission("zope2.View", obj):
+            if obj is None:
+                continue
+            portal_type = obj.portal_type
+            if checkPermission("zope2.View", obj):
+                if portal_type not in data:
+                    data[portal_type] = []
                 summary = getMultiAdapter(
                     (obj, getRequest()), ISerializeToJsonSummary
                 )()
-                data.append(summary)
-        return sorted(data, key=lambda k: k["title"])[:LIMIT]
+                data[portal_type].append(summary)
+        for portal_type, values in data.items():
+            if portal_type == "News Item":
+                data[portal_type] = sorted(
+                    values, key=lambda k: k["Date"], reverse=True
+                )[:LIMIT]
+            else:
+                data[portal_type] = sorted(values, key=lambda k: k["title"])[:LIMIT]
+        return data
 
 
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(IServizio, Interface)
 class BackReferencesExtractorServizio(BackReferencesExtractor):
+
+    reference_id = "servizio_correlato"
+
     def __call__(self):
-        return {
-            "news": self.get_related_news(reference_field="servizio_correlato_uid"),
-            "documenti": self.get_back_reference(
-                reference_id="servizio_procedura_riferimento"
-            ),
-        }
+        """
+        Servizio can also be referenced by a custom field
+        """
+
+        data = super().__call__()
+
+        data.update(
+            self.get_back_references(reference_id="servizio_procedura_riferimento")
+        )
+        return data
 
 
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(IStruttura, Interface)
 class BackReferencesExtractorStruttura(BackReferencesExtractor):
-    def __call__(self):
-        return {
-            "news": self.get_related_news(reference_field="struttura_correlata_uid"),
-        }
+    reference_id = "struttura_correlata"
 
 
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(IUnitaOrganizzativa, Interface)
 class BackReferencesExtractorUnitaOrganizzativa(BackReferencesExtractor):
-    def __call__(self):
-        return {
-            "news": self.get_related_news(reference_field="uo_correlata_uid"),
-        }
+    reference_id = "uo_correlata"
 
 
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(IPersona, Interface)
 class BackReferencesExtractorPersona(BackReferencesExtractor):
+    reference_id = "persona_correlata"
+
     def __call__(self):
-        return {
-            "responsabile": self.get_back_reference(
-                reference_id="responsabile_correlato"
-            ),
-            "personale": self.get_back_reference(reference_id="personale_correlato"),
-        }
+        data = super().__call__()
+
+        # append additional references
+        data.update(
+            {
+                "responsabile": self.get_back_references(
+                    reference_id="responsabile_correlato"
+                ),
+                "personale": self.get_back_references(
+                    reference_id="personale_correlato"
+                ),
+            }
+        )
+        return data
