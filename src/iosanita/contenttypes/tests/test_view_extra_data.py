@@ -11,8 +11,10 @@ from transaction import commit
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
+from plone.namedfile.file import NamedBlobFile
 
 import unittest
+import os
 
 
 class TestBackReferences(unittest.TestCase):
@@ -37,9 +39,9 @@ class TestBackReferences(unittest.TestCase):
     def test_expander_called_on_generic_content_does_not_return_anything(self):
         link = api.content.create(container=self.portal, type="Link", title="Link")
         commit()
-        resp = self.api_session.get(f"{link.absolute_url()}/@back-references").json()
+        resp = self.api_session.get(f"{link.absolute_url()}/@view-extra-data").json()
 
-        self.assertEqual(["@id"], list(resp.keys()))
+        self.assertNotIn("back-references", resp)
 
     def test_expander_on_registered_ct_return_nothing_if_no_relations_are_set(self):
         servizio = api.content.create(
@@ -47,10 +49,11 @@ class TestBackReferences(unittest.TestCase):
         )
         commit()
         resp = self.api_session.get(
-            f"{servizio.absolute_url()}/@back-references"
+            f"{servizio.absolute_url()}/@view-extra-data"
         ).json()
 
-        self.assertEqual(["@id"], list(resp.keys()))
+        back_references = resp["back-references"]
+        self.assertEqual([], list(back_references.keys()))
 
     def test_expander_return_related_news_sorted_by_Date(self):
         """
@@ -95,13 +98,14 @@ class TestBackReferences(unittest.TestCase):
         commit()
 
         resp = self.api_session.get(
-            f"{servizio.absolute_url()}/@back-references"
+            f"{servizio.absolute_url()}/@view-extra-data"
         ).json()
+        back_references = resp["back-references"]
 
-        self.assertEqual(len(resp["News Item"]), 3)
-        self.assertEqual(resp["News Item"][0]["@id"], news1.absolute_url())
-        self.assertEqual(resp["News Item"][1]["@id"], news3.absolute_url())
-        self.assertEqual(resp["News Item"][2]["@id"], news2.absolute_url())
+        self.assertEqual(len(back_references["News Item"]), 3)
+        self.assertEqual(back_references["News Item"][0]["@id"], news1.absolute_url())
+        self.assertEqual(back_references["News Item"][1]["@id"], news3.absolute_url())
+        self.assertEqual(back_references["News Item"][2]["@id"], news2.absolute_url())
 
     # SERVIZIO
 
@@ -127,18 +131,18 @@ class TestBackReferences(unittest.TestCase):
         commit()
 
         resp = self.api_session.get(
-            f"{servizio.absolute_url()}/@back-references"
+            f"{servizio.absolute_url()}/@view-extra-data"
         ).json()
 
-        self.assertEqual(["@id", "Documento", "Servizio"], list(resp.keys()))
-        self.assertEqual(len(resp["Documento"]), 1)
-        self.assertEqual(len(resp["Servizio"]), 1)
+        back_references = resp["back-references"]
+        self.assertEqual(len(back_references["Documento"]), 1)
+        self.assertEqual(len(back_references["Servizio"]), 1)
         self.assertEqual(
-            resp["Documento"][0]["@id"],
+            back_references["Documento"][0]["@id"],
             documento.absolute_url(),
         )
         self.assertEqual(
-            resp["Servizio"][0]["@id"],
+            back_references["Servizio"][0]["@id"],
             servizio2.absolute_url(),
         )
 
@@ -175,23 +179,26 @@ class TestBackReferences(unittest.TestCase):
         commit()
 
         resp = self.api_session.get(
-            f"{struttura.absolute_url()}/@back-references"
+            f"{struttura.absolute_url()}/@view-extra-data"
         ).json()
+        back_references = resp["back-references"]
 
         self.assertEqual(
-            list(resp.keys()),
-            ["@id", "Event", "News Item", "Servizio", "UnitaOrganizzativa"],
+            list(back_references.keys()),
+            ["Event", "News Item", "Servizio", "UnitaOrganizzativa"],
         )
 
-        self.assertEqual(len(resp["Event"]), 1)
-        self.assertEqual(len(resp["News Item"]), 1)
-        self.assertEqual(len(resp["Servizio"]), 1)
-        self.assertEqual(len(resp["UnitaOrganizzativa"]), 1)
+        self.assertEqual(len(back_references["Event"]), 1)
+        self.assertEqual(len(back_references["News Item"]), 1)
+        self.assertEqual(len(back_references["Servizio"]), 1)
+        self.assertEqual(len(back_references["UnitaOrganizzativa"]), 1)
 
-        self.assertEqual(resp["Event"][0]["@id"], event.absolute_url())
-        self.assertEqual(resp["News Item"][0]["@id"], news.absolute_url())
-        self.assertEqual(resp["Servizio"][0]["@id"], service.absolute_url())
-        self.assertEqual(resp["UnitaOrganizzativa"][0]["@id"], uo.absolute_url())
+        self.assertEqual(back_references["Event"][0]["@id"], event.absolute_url())
+        self.assertEqual(back_references["News Item"][0]["@id"], news.absolute_url())
+        self.assertEqual(back_references["Servizio"][0]["@id"], service.absolute_url())
+        self.assertEqual(
+            back_references["UnitaOrganizzativa"][0]["@id"], uo.absolute_url()
+        )
 
     def test_uo_expander_return_related_contents_splitted_by_portal_type(self):
         uo = api.content.create(
@@ -232,12 +239,12 @@ class TestBackReferences(unittest.TestCase):
 
         commit()
 
-        resp = self.api_session.get(f"{uo.absolute_url()}/@back-references").json()
+        resp = self.api_session.get(f"{uo.absolute_url()}/@view-extra-data").json()
+        back_references = resp["back-references"]
 
         self.assertEqual(
-            list(resp.keys()),
+            list(back_references.keys()),
             [
-                "@id",
                 "Documento",
                 "News Item",
                 "PuntoDiContatto",
@@ -246,17 +253,23 @@ class TestBackReferences(unittest.TestCase):
             ],
         )
 
-        self.assertEqual(len(resp["Documento"]), 1)
-        self.assertEqual(len(resp["News Item"]), 1)
-        self.assertEqual(len(resp["PuntoDiContatto"]), 1)
-        self.assertEqual(len(resp["Servizio"]), 1)
-        self.assertEqual(len(resp["Struttura"]), 1)
+        self.assertEqual(len(back_references["Documento"]), 1)
+        self.assertEqual(len(back_references["News Item"]), 1)
+        self.assertEqual(len(back_references["PuntoDiContatto"]), 1)
+        self.assertEqual(len(back_references["Servizio"]), 1)
+        self.assertEqual(len(back_references["Struttura"]), 1)
 
-        self.assertEqual(resp["Documento"][0]["@id"], documento.absolute_url())
-        self.assertEqual(resp["News Item"][0]["@id"], news.absolute_url())
-        self.assertEqual(resp["Servizio"][0]["@id"], servizio.absolute_url())
-        self.assertEqual(resp["PuntoDiContatto"][0]["@id"], pdc.absolute_url())
-        self.assertEqual(resp["Struttura"][0]["@id"], struttura.absolute_url())
+        self.assertEqual(
+            back_references["Documento"][0]["@id"], documento.absolute_url()
+        )
+        self.assertEqual(back_references["News Item"][0]["@id"], news.absolute_url())
+        self.assertEqual(back_references["Servizio"][0]["@id"], servizio.absolute_url())
+        self.assertEqual(
+            back_references["PuntoDiContatto"][0]["@id"], pdc.absolute_url()
+        )
+        self.assertEqual(
+            back_references["Struttura"][0]["@id"], struttura.absolute_url()
+        )
 
     def test_persona_expander_return_related_contents_splitted_by_portal_type(self):
         persona = api.content.create(
@@ -279,18 +292,19 @@ class TestBackReferences(unittest.TestCase):
 
         commit()
 
-        resp = self.api_session.get(f"{persona.absolute_url()}/@back-references").json()
+        resp = self.api_session.get(f"{persona.absolute_url()}/@view-extra-data").json()
+        back_references = resp["back-references"]
 
         self.assertEqual(
-            list(resp.keys()),
-            ["@id", "Event", "News Item", "personale", "responsabile"],
+            list(back_references.keys()),
+            ["Event", "News Item", "personale", "responsabile"],
         )
 
-        self.assertEqual(len(resp["News Item"]), 1)
-        self.assertEqual(len(resp["Event"]), 1)
+        self.assertEqual(len(back_references["News Item"]), 1)
+        self.assertEqual(len(back_references["Event"]), 1)
 
-        self.assertEqual(resp["News Item"][0]["@id"], news.absolute_url())
-        self.assertEqual(resp["Event"][0]["@id"], evento.absolute_url())
+        self.assertEqual(back_references["News Item"][0]["@id"], news.absolute_url())
+        self.assertEqual(back_references["Event"][0]["@id"], evento.absolute_url())
 
     def test_persona_expander_return_responsabile_and_personale_splitted_by_type(self):
         persona = api.content.create(
@@ -320,19 +334,19 @@ class TestBackReferences(unittest.TestCase):
 
         commit()
 
-        resp = self.api_session.get(f"{persona.absolute_url()}/@back-references").json()
+        resp = self.api_session.get(f"{persona.absolute_url()}/@view-extra-data").json()
+        back_references = resp["back-references"]
 
         self.assertEqual(
-            list(resp.keys()),
+            list(back_references.keys()),
             [
-                "@id",
                 "personale",
                 "responsabile",
             ],
         )
 
-        responsabile = resp["responsabile"]
-        personale = resp["personale"]
+        responsabile = back_references["responsabile"]
+        personale = back_references["personale"]
 
         self.assertEqual(
             list(responsabile.keys()),
@@ -354,3 +368,73 @@ class TestBackReferences(unittest.TestCase):
 
         self.assertEqual(len(personale["UnitaOrganizzativa"]), 1)
         self.assertEqual(personale["UnitaOrganizzativa"][0]["@id"], uo.absolute_url())
+
+
+class TestBandoExtraData(unittest.TestCase):
+    """"""
+
+    layer = RESTAPI_TESTING
+
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+        self.api_session = RelativeSession(self.portal_url)
+        self.api_session.headers.update({"Accept": "application/json"})
+        self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
+
+        self.bando = api.content.create(
+            container=self.portal, type="Bando", title="Bando"
+        )
+
+        commit()
+
+    def tearDown(self):
+        self.api_session.close()
+
+    def test_stato_bando_info_in_expander(self):
+        resp = self.api_session.get(
+            f"{self.bando.absolute_url()}/@view-extra-data"
+        ).json()
+
+        self.assertIn("stato_bando", resp)
+
+    def test_approfondimenti_info_in_expander(self):
+        resp = self.api_session.get(
+            f"{self.bando.absolute_url()}/@view-extra-data"
+        ).json()
+
+        self.assertIn("approfondimenti", resp)
+
+    def test_approfondimenti_data(self):
+        # empty if no files in some bando children
+        resp = self.api_session.get(
+            f"{self.bando.absolute_url()}/@view-extra-data"
+        ).json()
+        self.assertEqual(resp["approfondimenti"], [])
+
+        # now fill one folder
+        filename = os.path.join(os.path.dirname(__file__), "example.txt")
+        api.content.create(
+            container=self.bando["altri-allegati"],
+            type="File",
+            title="attachment",
+            file=NamedBlobFile(
+                data=open(filename, "rb").read(),
+                filename="example.txt",
+                contentType="text/plain",
+            ),
+        )
+        commit()
+
+        resp = self.api_session.get(
+            f"{self.bando.absolute_url()}/@view-extra-data"
+        ).json()
+
+        self.assertEqual(len(resp["approfondimenti"]), 1)
+        self.assertEqual(resp["approfondimenti"][0]["title"], "Altri allegati")
+        self.assertEqual(len(resp["approfondimenti"][0]["items"]), 1)
+        self.assertEqual(resp["approfondimenti"][0]["items"][0]["title"], "attachment")

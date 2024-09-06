@@ -45,7 +45,7 @@ Da un'Unità organizzativa, è possibile sapere quali contenuti la correlano fac
 
 Ad esempio::
 
-    > http://localhost:8080/Plone/++api++/@search?uo_correlata=xxx
+    > http://localhost:8080/Plone/++api++/@search?uo_correlata_uid=xxx
 
 
 Dove xxx è l'uid di una Unità organizzativa.
@@ -65,7 +65,7 @@ Da una Struttura, è possibile sapere quali contenuti la correlano facendo una r
 
 Ad esempio::
 
-    > http://localhost:8080/Plone/++api++/@search?struttura_correlata=xxx
+    > http://localhost:8080/Plone/++api++/@search?struttura_correlata_uid=xxx
 
 
 Dove xxx è l'uid di una Struttura.
@@ -75,15 +75,28 @@ Essendo una ricerca, il risultato è paginato a 25 di default, ma si può aument
 
 Si può anche filtrare per un determinato tipo di contenuto, aggiungendo alla query per esempio: *&portal_type=Servizio*.
 
-Expander back-references
-------------------------
+Expander view-extra-data
+========================
 
-Oltre ai metodi indicati sopra, esiste anche un expander (*back-references*) che ritorna direttamente le back-references dei vari contenuti.
+E' un expander che aggiunge dei dati extra alla serializzazione di un content-type.
 
-A seconda del tipo di contenuto, la lista delle referenze cambia.
+A seconda del tipo di contenuto, possono esserci dei dati differenti, a seconda di quello che serve al frontend.
+
+back-references
+---------------
+
+Lista delle back-references dei vari contenuti suddivise per tipo di contenuto.
 
 Questo expander ritorna però solamente al massimo 25 elementi.
 Se il contenuto ne ha di più, c'è da usare il metodo indicato sopra, e fare una chiamata a parte con la ricerca e la paginazione.
+
+Bando
+-----
+
+Per i bandi, ci sono due info aggiuntive:
+
+- approfondimenti
+- stato_bando
 
 
 Migrazione da vecchi siti

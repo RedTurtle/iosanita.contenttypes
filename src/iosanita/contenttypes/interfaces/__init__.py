@@ -20,7 +20,7 @@ class IoSanitaMigrationMarker(Interface):
     """
 
 
-class IoSanitaBackReferenceExtractor(Interface):
+class IoSanitaViewExtraData(Interface):
     """
     Marker interface to get the back references of a given object.
     """

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-from iosanita.contenttypes.interfaces import IoSanitaBackReferenceExtractor
+from iosanita.contenttypes.interfaces import IoSanitaViewExtraData
 from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.servizio import IServizio
 from iosanita.contenttypes.interfaces.struttura import IStruttura
@@ -15,14 +15,18 @@ from zope.interface import implementer
 from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
 from zope.security import checkPermission
-
+from redturtle.bandi.interfaces.bando import IBando
+from plone.restapi.interfaces import ISerializeToJsonSummary
+from zope.component import getMultiAdapter
+from plone import api
+from plone.restapi.serializer.utils import uid_to_url
 
 LIMIT = 25
 
 
-@implementer(IoSanitaBackReferenceExtractor)
+@implementer(IoSanitaViewExtraData)
 @adapter(Interface, Interface)
-class BackReferencesExtractor(object):
+class ViewExtraDataExtractor(object):
     reference_id = None
 
     def __init__(self, context, request):
@@ -33,9 +37,7 @@ class BackReferencesExtractor(object):
         """
         By default does not return anything
         """
-        if not self.reference_id:
-            return {}
-        return self.get_back_references(reference_id=self.reference_id)
+        return {}
 
     def get_back_references(self, reference_id):
         """
@@ -74,43 +76,52 @@ class BackReferencesExtractor(object):
         return data
 
 
-@implementer(IoSanitaBackReferenceExtractor)
+@implementer(IoSanitaViewExtraData)
 @adapter(IServizio, Interface)
-class BackReferencesExtractorServizio(BackReferencesExtractor):
-    reference_id = "servizio_correlato"
+class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
 
     def __call__(self):
         """
         Servizio can also be referenced by a custom field
         """
 
-        data = super().__call__()
+        data = self.get_back_references(reference_id="servizio_correlato")
 
         data.update(
             self.get_back_references(reference_id="servizio_procedura_riferimento")
         )
-        return data
+        return {"back-references": data}
 
 
-@implementer(IoSanitaBackReferenceExtractor)
+@implementer(IoSanitaViewExtraData)
 @adapter(IStruttura, Interface)
-class BackReferencesExtractorStruttura(BackReferencesExtractor):
-    reference_id = "struttura_correlata"
+class ViewExtraDataExtractorStruttura(ViewExtraDataExtractor):
+    def __call__(self):
+        """ """
+        return {
+            "back-references": self.get_back_references(
+                reference_id="struttura_correlata"
+            )
+        }
 
 
-@implementer(IoSanitaBackReferenceExtractor)
+@implementer(IoSanitaViewExtraData)
 @adapter(IUnitaOrganizzativa, Interface)
-class BackReferencesExtractorUnitaOrganizzativa(BackReferencesExtractor):
-    reference_id = "uo_correlata"
-
-
-@implementer(IoSanitaBackReferenceExtractor)
-@adapter(IPersona, Interface)
-class BackReferencesExtractorPersona(BackReferencesExtractor):
-    reference_id = "persona_correlata"
+class ViewExtraDataExtractorUnitaOrganizzativa(ViewExtraDataExtractor):
 
     def __call__(self):
-        data = super().__call__()
+        """ """
+        return {
+            "back-references": self.get_back_references(reference_id="uo_correlata")
+        }
+
+
+@implementer(IoSanitaViewExtraData)
+@adapter(IPersona, Interface)
+class ViewExtraDataExtractorPersona(ViewExtraDataExtractor):
+
+    def __call__(self):
+        data = self.get_back_references(reference_id="persona_correlata")
 
         # append additional references
         data.update(
@@ -123,4 +134,49 @@ class BackReferencesExtractorPersona(BackReferencesExtractor):
                 ),
             }
         )
-        return data
+        return {"back-references": data}
+
+
+@implementer(IoSanitaViewExtraData)
+@adapter(IBando, Interface)
+class ViewExtraDataExtractorBando(ViewExtraDataExtractor):
+
+    def __call__(self):
+        bando_view = self.context.restrictedTraverse("bando_view")
+        return {
+            "approfondimenti": self.get_approfondimenti(),
+            "stato_bando": bando_view.getBandoState(),
+        }
+
+    def get_approfondimenti(self):
+        """ """
+        folders = self.context.listFolderContents(
+            contentFilter={"portal_type": "Bando Folder Deepening"}
+        )
+
+        result = []
+
+        for folder in folders:
+            if folder.exclude_from_nav:
+                continue
+            folder_data = getMultiAdapter(
+                (folder, self.request), ISerializeToJsonSummary
+            )()
+            items = []
+            for child in folder.listFolderContents():
+                if child.exclude_from_nav:
+                    continue
+                child_data = getMultiAdapter(
+                    (child, self.request), ISerializeToJsonSummary
+                )()
+                if child.portal_type == "Link":
+                    url = getattr(child, "remoteUrl", "") or ""
+
+                    if url.startswith("${portal_url}/resolveuid/"):
+                        uid = url.replace("${portal_url}/", "")
+                        child_data["@id"] = uid_to_url(uid)
+                items.append(child_data)
+            if items:
+                folder_data["items"] = items
+                result.append(folder_data)
+        return result
