@@ -94,6 +94,20 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         ),
         required=False,
     )
+    struttura_in_cui_opera = RelationList(
+        title=_(
+            "struttura_in_cui_opera_label",
+            default="Strutture in cui opera",
+        ),
+        description=_(
+            "struttura_in_cui_opera_help",
+            default="Seleziona una lista di strutture in cui opera la persona. Necessario per le persone interne all'ASL, mentre è opzionale per i medici di base e pediatri.",
+        ),
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+        required=False,
+        missing_value=(),
+    )
     struttura_ricevimento = RelationList(
         title=_(
             "struttura_ricevimento_label",
@@ -125,6 +139,14 @@ class IPersona(model.Schema, IIosanitaContenttypes):
             "selectableTypes": ["Struttura"],
         },
     )
+    form.widget(
+        "struttura_in_cui_opera",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "selectableTypes": ["Struttura"],
+        },
+    )
 
     # custom fieldsets
     model.fieldset(
@@ -150,7 +172,7 @@ class IPersona(model.Schema, IIosanitaContenttypes):
             default="Se la persona fa ricevimento, indicare dove. "
             "Questo elemento è necessario per i medici di base e pediatri.",
         ),
-        fields=["struttura_ricevimento"],
+        fields=["struttura_ricevimento", "struttura_in_cui_opera"],
     )
 
     model.fieldset(

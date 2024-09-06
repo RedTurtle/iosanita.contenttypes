@@ -142,6 +142,7 @@ class TestPersonaSchema(unittest.TestCase):
             resp["fieldsets"][3]["fields"],
             [
                 "struttura_ricevimento",
+                "struttura_in_cui_opera",
                 "nome_sede",
                 "street",
                 "zip_code",
