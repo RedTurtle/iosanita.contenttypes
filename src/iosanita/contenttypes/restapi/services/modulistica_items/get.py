@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from iosanita.contenttypes.interfaces.cartella_modulistica import (
-    ICartellaModulistica,
-)
+from iosanita.contenttypes.interfaces.cartella_modulistica import ICartellaModulistica
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.interfaces import IFieldSerializer

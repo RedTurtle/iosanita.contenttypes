@@ -23,7 +23,6 @@ LIMIT = 25
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(Interface, Interface)
 class BackReferencesExtractor(object):
-
     reference_id = None
 
     def __init__(self, context, request):
@@ -78,7 +77,6 @@ class BackReferencesExtractor(object):
 @implementer(IoSanitaBackReferenceExtractor)
 @adapter(IServizio, Interface)
 class BackReferencesExtractorServizio(BackReferencesExtractor):
-
     reference_id = "servizio_correlato"
 
     def __call__(self):
