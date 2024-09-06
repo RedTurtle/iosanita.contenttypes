@@ -175,17 +175,28 @@ class TestBando(unittest.TestCase):
     def test_bando_default_children(self):
         bando = api.content.create(container=self.portal, type="Bando", title="xxx")
 
-        self.assertEqual(bando.keys(), ["graduatoria", "documenti"])
+        self.assertEqual(
+            bando.keys(),
+            ["graduatoria", "altri-allegati", "adempimenti-consequenziali"],
+        )
 
         self.assertEqual("Bando Folder Deepening", bando.graduatoria.portal_type)
-        self.assertEqual("Bando Folder Deepening", bando.documenti.portal_type)
+        self.assertEqual("Bando Folder Deepening", bando["altri-allegati"].portal_type)
+        self.assertEqual(
+            "Bando Folder Deepening", bando["adempimenti-consequenziali"].portal_type
+        )
 
     def test_bando_graduatoria_has_no_filtered_addable_types(self):
         bando = api.content.create(container=self.portal, type="Bando", title="xxx")
         graduatoria = ISelectableConstrainTypes(bando["graduatoria"])
         self.assertEqual(graduatoria.getConstrainTypesMode(), 0)
 
-    def test_bando_documenti_has_no_filtered_addable_types(self):
+    def test_bando_altri_allegati_has_no_filtered_addable_types(self):
         bando = api.content.create(container=self.portal, type="Bando", title="xxx")
-        documenti = ISelectableConstrainTypes(bando["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 0)
+        allegati = ISelectableConstrainTypes(bando["altri-allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 0)
+
+    def test_bando_adempimenti_has_no_filtered_addable_types(self):
+        bando = api.content.create(container=self.portal, type="Bando", title="xxx")
+        adempimenti = ISelectableConstrainTypes(bando["adempimenti-consequenziali"])
+        self.assertEqual(adempimenti.getConstrainTypesMode(), 0)

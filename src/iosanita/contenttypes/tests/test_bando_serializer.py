@@ -57,7 +57,7 @@ class TestBandoSerializer(unittest.TestCase):
         # now fill one folder
         filename = os.path.join(os.path.dirname(__file__), "example.txt")
         api.content.create(
-            container=self.bando["documenti"],
+            container=self.bando["altri-allegati"],
             type="File",
             title="attachment",
             file=NamedBlobFile(
@@ -70,7 +70,7 @@ class TestBandoSerializer(unittest.TestCase):
         serializer = getMultiAdapter((self.bando, self.request), ISerializeToJson)()
 
         self.assertEqual(len(serializer["approfondimenti"]), 1)
-        self.assertEqual(serializer["approfondimenti"][0]["title"], "Documenti")
+        self.assertEqual(serializer["approfondimenti"][0]["title"], "Altri allegati")
         self.assertEqual(len(serializer["approfondimenti"][0]["children"]), 1)
         self.assertEqual(
             serializer["approfondimenti"][0]["children"][0]["title"], "attachment"

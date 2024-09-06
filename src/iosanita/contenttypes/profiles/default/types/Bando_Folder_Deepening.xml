@@ -8,4 +8,10 @@
   <property name="behaviors" purge="False">
     <element value="iosanita.contenttypes.behavior.exclude_from_search" />
   </property>
+  <property name="filter_content_types">True</property>
+  <property name="allowed_content_types">
+    <element value="File" />
+    <element value="Link" />
+    <element value="Modulo" />
+  </property>
 </object>
