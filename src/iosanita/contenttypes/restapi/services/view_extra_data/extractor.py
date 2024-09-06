@@ -166,12 +166,12 @@ class ViewExtraDataExtractorBando(ViewExtraDataExtractor):
                 child_data = getMultiAdapter(
                     (child, self.request), ISerializeToJsonSummary
                 )()
-                if child.portal_type == "Link":
-                    url = getattr(child, "remoteUrl", "") or ""
+                # if child.portal_type == "Link":
+                #     url = getattr(child, "remoteUrl", "") or ""
 
-                    if url.startswith("${portal_url}/resolveuid/"):
-                        uid = url.replace("${portal_url}/", "")
-                        child_data["@id"] = uid_to_url(uid)
+                #     if url.startswith("${portal_url}/resolveuid/"):
+                #         uid = url.replace("${portal_url}/", "")
+                #         child_data["@id"] = uid_to_url(uid)
                 items.append(child_data)
             if items:
                 folder_data["items"] = items
