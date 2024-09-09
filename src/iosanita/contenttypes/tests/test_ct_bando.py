@@ -107,6 +107,7 @@ class TestBandoSchema(unittest.TestCase):
                 "description",
                 "riferimenti_bando",
                 "apertura_bando",
+                "scadenza_domande_bando",
                 "chiusura_procedimento_bando",
                 "scadenza_bando",
                 "ente_bando",
@@ -114,6 +115,8 @@ class TestBandoSchema(unittest.TestCase):
                 "tipologia_bando",
                 "preview_image",
                 "preview_caption",
+                "uo_correlata",
+                "note_aggiornamento",
                 "parliamo_di",
             ],
         )

@@ -33,9 +33,5 @@ class SchemaTweaks(object):
         IBandoSchema["destinatari"].required = False
         IBandoSchema.setTaggedValue(
             OMITTED_KEY,
-            [
-                (Interface, "riferimenti_bando", "true"),
-                (Interface, "ente_bando", "true"),
-                (Interface, "destinatari", "true"),
-            ],
+            [(Interface, "destinatari", "true")],
         )

@@ -118,6 +118,7 @@ FIELDSETS_ORDER = {
         "default",
         "contatti",
     ],
+    "Modulo": ["default", "formati"],
 }
 
 

@@ -47,6 +47,10 @@
         id="iosanita.contenttypes.AddCartellaModulistica"
         title="iosanita.contenttypes: Add CartellaModulistica"
         />
+    <permission
+        id="iosanita.contenttypes.AddModulo"
+        title="iosanita.contenttypes: Add Modulo"
+        />
   </configure>
 
 </configure>
