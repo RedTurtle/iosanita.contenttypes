@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from iosanita.contenttypes import _
 from iosanita.contenttypes.interfaces import IIosanitaContenttypes
 from plone.supermodel import model
 
