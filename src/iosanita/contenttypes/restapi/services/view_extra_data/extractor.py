@@ -6,7 +6,6 @@ from iosanita.contenttypes.interfaces.servizio import IServizio
 from iosanita.contenttypes.interfaces.struttura import IStruttura
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.serializer.utils import uid_to_url
 from redturtle.bandi.interfaces.bando import IBando
 from zc.relation.interfaces import ICatalog
 from zope.component import adapter
