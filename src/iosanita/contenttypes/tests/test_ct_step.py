@@ -124,10 +124,10 @@ class TestStep(unittest.TestCase):
     def test_step_default_children(self):
         step = api.content.create(container=self.come_fare, type="Step", title="xxx")
 
-        self.assertEqual(step.keys(), ["documenti"])
+        self.assertEqual(step.keys(), ["allegati"])
 
-    def test_step_documenti_has_filtered_addable_types(self):
+    def test_step_allegati_has_filtered_addable_types(self):
         step = api.content.create(container=self.come_fare, type="Step", title="xxx")
-        documenti = ISelectableConstrainTypes(step["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+        allegati = ISelectableConstrainTypes(step["allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 1)
+        self.assertEqual(allegati.getLocallyAllowedTypes(), ["File"])

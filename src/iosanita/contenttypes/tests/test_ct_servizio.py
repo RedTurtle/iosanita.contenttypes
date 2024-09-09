@@ -260,12 +260,12 @@ class TestServizio(unittest.TestCase):
             container=self.portal, type="Servizio", title="xxx"
         )
 
-        self.assertEqual(servizio.keys(), ["documenti"])
+        self.assertEqual(servizio.keys(), ["allegati"])
 
-    def test_servizio_documenti_has_filtered_addable_types(self):
+    def test_servizio_allegati_has_filtered_addable_types(self):
         servizio = api.content.create(
             container=self.portal, type="Servizio", title="xxx"
         )
-        documenti = ISelectableConstrainTypes(servizio["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+        allegati = ISelectableConstrainTypes(servizio["allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 1)
+        self.assertEqual(allegati.getLocallyAllowedTypes(), ["File"])

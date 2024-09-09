@@ -237,7 +237,7 @@ class TestStruttura(unittest.TestCase):
             container=self.portal, type="Struttura", title="xxx"
         )
 
-        self.assertEqual(struttura.keys(), ["documenti", "immagini", "video"])
+        self.assertEqual(struttura.keys(), ["allegati", "immagini", "video"])
 
     def test_struttura_immagini_has_filtered_addable_types(self):
         struttura = api.content.create(
@@ -255,10 +255,10 @@ class TestStruttura(unittest.TestCase):
         self.assertEqual(video.getConstrainTypesMode(), 1)
         self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
 
-    def test_struttura_documenti_has_filtered_addable_types(self):
+    def test_struttura_allegati_has_filtered_addable_types(self):
         struttura = api.content.create(
             container=self.portal, type="Struttura", title="xxx"
         )
-        documenti = ISelectableConstrainTypes(struttura["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+        allegati = ISelectableConstrainTypes(struttura["allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 1)
+        self.assertEqual(allegati.getLocallyAllowedTypes(), ["File"])

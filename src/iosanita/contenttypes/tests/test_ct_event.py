@@ -247,7 +247,7 @@ class TestEvent(unittest.TestCase):
         event = api.content.create(container=self.portal, type="Event", title="xxx")
 
         self.assertEqual(
-            event.keys(), ["immagini", "video", "sponsor-evento", "documenti"]
+            event.keys(), ["immagini", "video", "sponsor-evento", "allegati"]
         )
 
     def test_event_immagini_has_filtered_addable_types(self):
@@ -268,8 +268,8 @@ class TestEvent(unittest.TestCase):
         self.assertEqual(sponsor.getConstrainTypesMode(), 1)
         self.assertEqual(sponsor.getLocallyAllowedTypes(), ["Link"])
 
-    def test_event_documenti_has_filtered_addable_types(self):
+    def test_event_allegati_has_filtered_addable_types(self):
         event = api.content.create(container=self.portal, type="Event", title="xxx")
-        documenti = ISelectableConstrainTypes(event["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+        allegati = ISelectableConstrainTypes(event["allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 1)
+        self.assertEqual(allegati.getLocallyAllowedTypes(), ["File"])

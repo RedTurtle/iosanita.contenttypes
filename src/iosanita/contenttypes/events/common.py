@@ -61,8 +61,8 @@ SUBFOLDERS_MAPPING = {
                 "publish": True,
             },
             {
-                "id": "documenti",
-                "title": "Documenti",
+                "id": "allegati",
+                "title": "Allegati",
                 "allowed_types": ("File",),
                 "publish": True,
             },
@@ -81,8 +81,8 @@ SUBFOLDERS_MAPPING = {
                 "allowed_types": ("Link",),
             },
             {
-                "id": "documenti",
-                "title": "Documenti",
+                "id": "allegati",
+                "title": "Allegati",
                 "allowed_types": ("File",),
             },
         ],
@@ -105,8 +105,8 @@ SUBFOLDERS_MAPPING = {
                 "allowed_types": ("Link",),
             },
             {
-                "id": "documenti",
-                "title": "Documenti",
+                "id": "allegati",
+                "title": "Allegati",
                 "allowed_types": ("File",),
             },
         ],
@@ -115,25 +115,25 @@ SUBFOLDERS_MAPPING = {
     "Servizio": {
         "content": [
             {
-                "id": "documenti",
-                "title": "Documenti",
+                "id": "allegati",
+                "title": "Allegati",
                 "allowed_types": ("File",),
             },
         ],
     },
     "UnitaOrganizzativa": {
         "content": [
-            {"id": "documenti", "title": "Documenti", "allowed_types": ("File",)},
+            {"id": "allegati", "title": "Allegati", "allowed_types": ("File",)},
         ],
     },
     "Step": {
         "content": [
-            {"id": "documenti", "title": "Documenti", "allowed_types": ("File",)},
+            {"id": "allegati", "title": "Allegati", "allowed_types": ("File",)},
         ],
     },
     "Struttura": {
         "content": [
-            {"id": "documenti", "title": "Documenti", "allowed_types": ("File",)},
+            {"id": "allegati", "title": "Allegati", "allowed_types": ("File",)},
             {
                 "id": "immagini",
                 "title": "Immagini",

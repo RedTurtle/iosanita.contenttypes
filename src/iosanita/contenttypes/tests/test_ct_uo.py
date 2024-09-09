@@ -183,7 +183,7 @@ class TestUOSchema(unittest.TestCase):
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(resp["fieldsets"][6]["fields"], ["pdc_correlato"])
 
-    def test_uo_fields_documenti_fieldset(self):
+    def test_uo_fields_allegati_fieldset(self):
         """
         Get the list from restapi
         """
@@ -218,12 +218,12 @@ class TestUO(unittest.TestCase):
             container=self.portal, type="UnitaOrganizzativa", title="xxx"
         )
 
-        self.assertEqual(uo.keys(), ["documenti"])
+        self.assertEqual(uo.keys(), ["allegati"])
 
-    def test_uo_documenti_has_filtered_addable_types(self):
+    def test_uo_allegati_has_filtered_addable_types(self):
         uo = api.content.create(
             container=self.portal, type="UnitaOrganizzativa", title="xxx"
         )
-        documenti = ISelectableConstrainTypes(uo["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+        allegati = ISelectableConstrainTypes(uo["allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 1)
+        self.assertEqual(allegati.getLocallyAllowedTypes(), ["File"])

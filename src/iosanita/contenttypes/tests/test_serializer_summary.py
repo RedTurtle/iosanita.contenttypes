@@ -238,7 +238,7 @@ class TestSerializerSummary(unittest.TestCase):
                     {
                         "i": "path",
                         "o": "plone.app.querystring.operation.string.absolutePath",
-                        "v": f"{news['documenti'].UID()}::0",
+                        "v": f"{news['allegati'].UID()}::0",
                     }
                 ]
             },

@@ -219,7 +219,7 @@ class TestPersona(unittest.TestCase):
         persona = self.portal["dr-doe-john"]
 
         self.assertEqual(
-            persona.keys(), ["curriculum-vitae", "immagini", "video", "documenti"]
+            persona.keys(), ["curriculum-vitae", "immagini", "video", "allegati"]
         )
 
     def test_persona_immagini_has_filtered_addable_types(self):
@@ -240,8 +240,8 @@ class TestPersona(unittest.TestCase):
         self.assertEqual(curriculum.getConstrainTypesMode(), 1)
         self.assertEqual(curriculum.getLocallyAllowedTypes(), ["File"])
 
-    def test_persona_documenti_has_filtered_addable_types(self):
+    def test_persona_allegati_has_filtered_addable_types(self):
         persona = api.content.create(container=self.portal, type="Persona", title="xxx")
-        documenti = ISelectableConstrainTypes(persona["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+        allegati = ISelectableConstrainTypes(persona["allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 1)
+        self.assertEqual(allegati.getLocallyAllowedTypes(), ["File"])

@@ -146,11 +146,11 @@ class TestNews(unittest.TestCase):
     def test_news_default_children(self):
         news = api.content.create(container=self.portal, type="News Item", title="xxx")
 
-        self.assertEqual(news.keys(), ["immagini", "video", "documenti"])
+        self.assertEqual(news.keys(), ["immagini", "video", "allegati"])
 
         self.assertEqual("Document", news["immagini"].portal_type)
         self.assertEqual("Document", news["video"].portal_type)
-        self.assertEqual("Document", news["documenti"].portal_type)
+        self.assertEqual("Document", news["allegati"].portal_type)
 
     def test_news_immagini_has_filtered_addable_types(self):
         news = api.content.create(container=self.portal, type="News Item", title="xxx")
@@ -164,11 +164,11 @@ class TestNews(unittest.TestCase):
         self.assertEqual(video.getConstrainTypesMode(), 1)
         self.assertEqual(video.getLocallyAllowedTypes(), ["Link"])
 
-    def test_news_documenti_has_filtered_addable_types(self):
+    def test_news_allegati_has_filtered_addable_types(self):
         news = api.content.create(container=self.portal, type="News Item", title="xxx")
-        documenti = ISelectableConstrainTypes(news["documenti"])
-        self.assertEqual(documenti.getConstrainTypesMode(), 1)
-        self.assertEqual(documenti.getLocallyAllowedTypes(), ["File"])
+        allegati = ISelectableConstrainTypes(news["allegati"])
+        self.assertEqual(allegati.getConstrainTypesMode(), 1)
+        self.assertEqual(allegati.getLocallyAllowedTypes(), ["File"])
 
     def test_news_type_title_based_on_tipologia_notizia(self):
         news = api.content.create(
