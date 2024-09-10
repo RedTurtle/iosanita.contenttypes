@@ -6,6 +6,8 @@ from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
 
+import os
+
 
 @implementer(ISchemaPlugin)
 @adapter(IFormFieldProvider)
@@ -25,6 +27,8 @@ class SchemaTweaks(object):
 
     def set_description_required(self):
         """fix Documento fields"""
+        if os.environ["DISABLE_DESCRIPTION_VALIDATION"]:
+            return
         if self.schema.getName() == "IBasic":
             self.schema["description"].required = True
 
