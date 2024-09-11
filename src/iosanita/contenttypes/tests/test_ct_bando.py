@@ -115,7 +115,6 @@ class TestBandoSchema(unittest.TestCase):
                 "tipologia_bando",
                 "preview_image",
                 "preview_caption",
-                "uo_correlata",
                 "note_aggiornamento",
                 "parliamo_di",
             ],

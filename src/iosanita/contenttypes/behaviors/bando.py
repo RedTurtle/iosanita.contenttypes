@@ -9,10 +9,7 @@ from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
 from zope import schema
-from z3c.relationfield.schema import RelationChoice
-from z3c.relationfield.schema import RelationList
 from plone.app.z3cform.widget import DatetimeFieldWidget
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.app.event.base import default_timezone
 
@@ -60,19 +57,6 @@ class IBando(model.Schema):
         required=False,
     )
 
-    uo_correlata = RelationList(
-        title=_(
-            "uo_correlata_bando_label",
-            default="Unità Organizzativa correlata",
-        ),
-        description=_(
-            "uo_correlata_bando_help",
-            default="Seleziona l'unità organizzativa associata a questo bando.",
-        ),
-        required=False,
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-    )
     note_aggiornamento = schema.TextLine(
         title=_("note_aggiornamento_label", default="Note di aggiornamento"),
         description=_(
@@ -113,15 +97,6 @@ class IBando(model.Schema):
         "scadenza_domande_bando",
         DatetimeFieldWidget,
         default_timezone=default_timezone,
-    )
-    form.widget(
-        "uo_correlata",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "maximumSelectionSize": 1,
-            "selectableTypes": ["UnitaOrganizzativa"],
-        },
     )
 
     # custom order
