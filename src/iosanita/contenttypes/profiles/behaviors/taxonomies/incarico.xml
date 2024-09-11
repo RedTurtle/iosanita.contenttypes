@@ -15,9 +15,21 @@
         <langstring language="it">Dirigenza medica</langstring>
       </caption>
       <term>
-        <termIdentifier>primari</termIdentifier>
+        <termIdentifier>direttore-sanitario</termIdentifier>
         <caption>
-          <langstring language="it">Primari</langstring>
+          <langstring language="it">Direttore Sanitario</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>direttore-attivita-socio-sanitarie</termIdentifier>
+        <caption>
+          <langstring language="it">Direttore Attività Socio Sanitarie</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>dirigente-medico</termIdentifier>
+        <caption>
+          <langstring language="it">Dirigente Medico</langstring>
         </caption>
       </term>
     </term>
@@ -27,9 +39,63 @@
         <langstring language="it">Dirigenza non medica</langstring>
       </caption>
       <term>
-        <termIdentifier>dirigenti-amministrativi</termIdentifier>
+        <termIdentifier>dirigente-amministrativo</termIdentifier>
         <caption>
-          <langstring language="it">Dirigenti amministrativi</langstring>
+          <langstring language="it">Dirigente amministrativo</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>direttore-amministrativo</termIdentifier>
+        <caption>
+          <langstring language="it">Direttore Amministrativo</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>dirigente-analista</termIdentifier>
+        <caption>
+          <langstring language="it">Dirigente Analista</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>dirigente-biologo</termIdentifier>
+        <caption>
+          <langstring language="it">Dirigente Biologo</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>dirigente-veterinario</termIdentifier>
+        <caption>
+          <langstring language="it">Dirigente Veterinario</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>direttore-generale</termIdentifier>
+        <caption>
+          <langstring language="it">Direttore Generale</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>posizione-organizzativa</termIdentifier>
+        <caption>
+          <langstring language="it">Posizione Organizzativa</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>direttore</termIdentifier>
+        <caption>
+          <langstring language="it">Direttore</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>direttrice</termIdentifier>
+        <caption>
+          <langstring language="it">Direttrice</langstring>
+        </caption>
+      </term>
+      <term>
+        <termIdentifier>direttore-di-direzione-assistenziale</termIdentifier>
+        <caption>
+          <langstring language="it">Direttore di Direzione Assistenziale</langstring>
         </caption>
       </term>
     </term>
@@ -40,15 +106,45 @@
       <langstring language="it">Professionale</langstring>
     </caption>
     <term>
-      <termIdentifier>medici-di-base</termIdentifier>
+      <termIdentifier>medico</termIdentifier>
       <caption>
-        <langstring language="it">Medici di base</langstring>
+        <langstring language="it">Medico</langstring>
       </caption>
     </term>
     <term>
-      <termIdentifier>medici-specialisti</termIdentifier>
+      <termIdentifier>farmacista</termIdentifier>
       <caption>
-        <langstring language="it">Medici specialisti</langstring>
+        <langstring language="it">Farmacista</langstring>
+      </caption>
+    </term>
+    <term>
+      <termIdentifier>psicologo</termIdentifier>
+      <caption>
+        <langstring language="it">Psicologo</langstring>
+      </caption>
+    </term>
+    <term>
+      <termIdentifier>collaboratore-professionale-amministrativo</termIdentifier>
+      <caption>
+        <langstring language="it">Collaboratore professionale amministrativo</langstring>
+      </caption>
+    </term>
+    <term>
+      <termIdentifier>responsabile-del-programma</termIdentifier>
+      <caption>
+        <langstring language="it">Responsabile del Programma</langstring>
+      </caption>
+    </term>
+    <term>
+      <termIdentifier>incarico-libero-professionale</termIdentifier>
+      <caption>
+        <langstring language="it">Incarico libero professionale</langstring>
+      </caption>
+    </term>
+    <term>
+      <termIdentifier>altro-tipo</termIdentifier>
+      <caption>
+        <langstring language="it">Altro tipo</langstring>
       </caption>
     </term>
   </term>
