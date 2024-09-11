@@ -27,7 +27,7 @@ class SchemaTweaks(object):
 
     def set_description_required(self):
         """fix Documento fields"""
-        if os.environ["DISABLE_DESCRIPTION_VALIDATION"]:
+        if os.environ.get("DISABLE_DESCRIPTION_VALIDATION", False):
             return
         if self.schema.getName() == "IBasic":
             self.schema["description"].required = True
