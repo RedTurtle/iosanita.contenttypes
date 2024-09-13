@@ -78,12 +78,12 @@ class TestTaxonomiesCustomMetadata(unittest.TestCase):
             type="Persona",
             title="john doe",
             incarico=[
-                "primari",
+                "medico",
             ],
         )
         res = api.content.find(UID=persona.UID())[0]
 
         self.assertEqual(
             res.incarico_metadata,
-            [{"title": "Primari", "token": "primari"}],
+            [{"title": "Medico", "token": "medico"}],
         )

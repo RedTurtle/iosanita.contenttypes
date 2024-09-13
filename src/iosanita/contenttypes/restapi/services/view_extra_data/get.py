@@ -21,9 +21,6 @@ class ViewExtraData(object):
                 "@id": f"{self.context.absolute_url()}/@view-extra-data"
             }
         }
-        if not expand:
-            return result
-
         data = queryMultiAdapter((self.context, self.request), IoSanitaViewExtraData)()
         result["view-extra-data"].update(data)
 

@@ -17,6 +17,34 @@ import unittest
 import os
 
 
+class TestExpander(unittest.TestCase):
+    """"""
+
+    layer = RESTAPI_TESTING
+
+    def setUp(self):
+        self.app = self.layer["app"]
+        self.portal = self.layer["portal"]
+        self.request = self.layer["request"]
+        self.portal_url = self.portal.absolute_url()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+
+        self.api_session = RelativeSession(self.portal_url)
+        self.api_session.headers.update({"Accept": "application/json"})
+        self.api_session.auth = (SITE_OWNER_NAME, SITE_OWNER_PASSWORD)
+
+    def tearDown(self):
+        self.api_session.close()
+
+    def test_expander_always_expanded(self):
+        servizio = api.content.create(
+            container=self.portal, type="Servizio", title="Servizio"
+        )
+        commit()
+        resp = self.api_session.get(f"{servizio.absolute_url()}").json()
+        self.assertIn("back-references", resp["@components"]["view-extra-data"])
+
+
 class TestBackReferences(unittest.TestCase):
     """"""
 
