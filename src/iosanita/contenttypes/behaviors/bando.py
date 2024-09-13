@@ -2,16 +2,16 @@
 from collective.volto.blocksfield.field import BlocksField
 from iosanita.contenttypes import _
 from plone.app.dexterity import textindexer
+from plone.app.event.base import default_timezone
+from plone.app.z3cform.widget import DatetimeFieldWidget
+from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
+from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
-from zope import schema
-from plone.app.z3cform.widget import DatetimeFieldWidget
-from plone.autoform import directives as form
-from plone.app.event.base import default_timezone
 
 
 @provider(IFormFieldProvider)

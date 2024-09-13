@@ -17,6 +17,7 @@ from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
 from zope.security import checkPermission
 
+
 LIMIT = 25
 
 
@@ -75,7 +76,6 @@ class ViewExtraDataExtractor(object):
 @implementer(IoSanitaViewExtraData)
 @adapter(IServizio, Interface)
 class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
-
     def __call__(self):
         """
         Servizio can also be referenced by a custom field
@@ -104,7 +104,6 @@ class ViewExtraDataExtractorStruttura(ViewExtraDataExtractor):
 @implementer(IoSanitaViewExtraData)
 @adapter(IUnitaOrganizzativa, Interface)
 class ViewExtraDataExtractorUnitaOrganizzativa(ViewExtraDataExtractor):
-
     def __call__(self):
         """ """
         return {
@@ -115,7 +114,6 @@ class ViewExtraDataExtractorUnitaOrganizzativa(ViewExtraDataExtractor):
 @implementer(IoSanitaViewExtraData)
 @adapter(IPersona, Interface)
 class ViewExtraDataExtractorPersona(ViewExtraDataExtractor):
-
     def __call__(self):
         data = self.get_back_references(reference_id="persona_correlata")
 
@@ -136,7 +134,6 @@ class ViewExtraDataExtractorPersona(ViewExtraDataExtractor):
 @implementer(IoSanitaViewExtraData)
 @adapter(IBando, Interface)
 class ViewExtraDataExtractorBando(ViewExtraDataExtractor):
-
     def __call__(self):
         bando_view = self.context.restrictedTraverse("bando_view")
         return {
