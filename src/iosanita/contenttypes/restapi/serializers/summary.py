@@ -35,6 +35,7 @@ class JSONSummarySerializerMetadata:
             "parent",
             "Date",
             "incarico_metadata",
+            "modified",
         }
 
 
