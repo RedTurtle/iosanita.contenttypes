@@ -197,12 +197,6 @@ class TestBackReferences(unittest.TestCase):
             title="Servizio",
             struttura_correlata=[RelationValue(intids.getId(struttura))],
         )
-        uo = api.content.create(
-            container=self.portal,
-            type="UnitaOrganizzativa",
-            title="uo",
-            struttura_correlata=[RelationValue(intids.getId(struttura))],
-        )
 
         commit()
 
@@ -213,20 +207,16 @@ class TestBackReferences(unittest.TestCase):
 
         self.assertEqual(
             list(back_references.keys()),
-            ["Event", "News Item", "Servizio", "UnitaOrganizzativa"],
+            ["Event", "News Item", "Servizio"],
         )
 
         self.assertEqual(len(back_references["Event"]), 1)
         self.assertEqual(len(back_references["News Item"]), 1)
         self.assertEqual(len(back_references["Servizio"]), 1)
-        self.assertEqual(len(back_references["UnitaOrganizzativa"]), 1)
 
         self.assertEqual(back_references["Event"][0]["@id"], event.absolute_url())
         self.assertEqual(back_references["News Item"][0]["@id"], news.absolute_url())
         self.assertEqual(back_references["Servizio"][0]["@id"], service.absolute_url())
-        self.assertEqual(
-            back_references["UnitaOrganizzativa"][0]["@id"], uo.absolute_url()
-        )
 
     def test_uo_expander_return_related_contents_splitted_by_portal_type(self):
         uo = api.content.create(

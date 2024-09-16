@@ -63,14 +63,13 @@ class TestUOSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(len(resp["fieldsets"]), 14)
+        self.assertEqual(len(resp["fieldsets"]), 13)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
                 "default",
                 "cosa_fa",
                 "persone_uo",
-                "servizi",
                 "dove",
                 "orari",
                 "contatti",
@@ -95,7 +94,6 @@ class TestUOSchema(unittest.TestCase):
                     "orari",
                     "pdc_correlato",
                     "responsabile_correlato",
-                    "struttura_correlata",
                     "title",
                 ]
             ),
@@ -139,25 +137,14 @@ class TestUOSchema(unittest.TestCase):
             ["responsabile_correlato", "personale_correlato"],
         )
 
-    def test_uo_fields_servizi_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(
-            resp["fieldsets"][3]["fields"],
-            ["servizi"],
-        )
-
     def test_uo_fields_dove_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(
-            resp["fieldsets"][4]["fields"],
+            resp["fieldsets"][3]["fields"],
             [
-                "struttura_correlata",
                 "nome_sede",
                 "street",
                 "zip_code",
@@ -174,14 +161,14 @@ class TestUOSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][5]["fields"], ["orari"])
+        self.assertEqual(resp["fieldsets"][4]["fields"], ["orari"])
 
     def test_uo_fields_contatti_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][6]["fields"], ["pdc_correlato"])
+        self.assertEqual(resp["fieldsets"][5]["fields"], ["pdc_correlato"])
 
     def test_uo_fields_allegati_fieldset(self):
         """
@@ -189,7 +176,7 @@ class TestUOSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(
-            resp["fieldsets"][7]["fields"],
+            resp["fieldsets"][6]["fields"],
             ["documento_correlato"],
         )
 
@@ -198,7 +185,7 @@ class TestUOSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
-        self.assertEqual(resp["fieldsets"][8]["fields"], ["ulteriori_informazioni"])
+        self.assertEqual(resp["fieldsets"][7]["fields"], ["ulteriori_informazioni"])
 
 
 class TestUO(unittest.TestCase):
