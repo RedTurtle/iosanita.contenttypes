@@ -115,6 +115,11 @@ SUBFOLDERS_MAPPING = {
     "Servizio": {
         "content": [
             {
+                "id": "modulistica",
+                "title": "Modulistica",
+                "allowed_types": ("Link",),
+            },
+            {
                 "id": "allegati",
                 "title": "Allegati",
                 "allowed_types": ("File",),
