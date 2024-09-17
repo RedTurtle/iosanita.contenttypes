@@ -34,10 +34,10 @@ class DeserializeFromJson(BaseDeserializer):
     def validate_data_iosanita(self, data, create):
         if IoSanitaMigrationMarker.providedBy(self.request):
             return
-        if not create:
-            portal_type = self.context.portal_type
-        else:
+        if create:
             portal_type = data.get("@type", "")
+        else:
+            portal_type = self.context.portal_type
 
         self.validate_a_chi_si_rivolge(
             portal_type=portal_type, data=data, create=create
@@ -60,16 +60,17 @@ class DeserializeFromJson(BaseDeserializer):
         if not has_behaviors:
             # skip check
             return
-        if not create:
-            if (
-                "a_chi_si_rivolge" not in data
-                and "a_chi_si_rivolge_tassonomia" not in data  # noqa
-            ):
-                return
 
         a_chi_si_rivolge = data.get("a_chi_si_rivolge", {})
         a_chi_si_rivolge_tassonomia = data.get("a_chi_si_rivolge_tassonomia", [])
 
+        if not create:
+            if not a_chi_si_rivolge:
+                a_chi_si_rivolge = getattr(self.context, "a_chi_si_rivolge", {})
+            if not a_chi_si_rivolge_tassonomia:
+                a_chi_si_rivolge_tassonomia = getattr(
+                    self.context, "a_chi_si_rivolge_tassonomia", []
+                )
         if self.is_empty_blocks(a_chi_si_rivolge) and not a_chi_si_rivolge_tassonomia:
             msg = api.portal.translate(
                 _(
@@ -149,7 +150,8 @@ class DeserializeFromJson(BaseDeserializer):
         if not blocks:
             return True
         blocks_data = list(blocks.values())
-        if len(blocks_data) == 1:
-            if blocks_data[0] == {"@type": "slate"}:
-                return True
-        return False
+        for block in blocks_data:
+            if block.get("plaintext", ""):
+                # there is some text
+                return False
+        return True

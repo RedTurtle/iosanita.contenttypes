@@ -50,7 +50,7 @@ class TestCustomValidation(unittest.TestCase):
                 "blocks": {
                     "b8850749-4d5f-4b5f-b842-c050bcf7fd6f": {
                         "@type": "slate",
-                        "text": "xxx",
+                        "plaintext": "xxx",
                     }
                 },
             },
@@ -103,7 +103,7 @@ class TestCustomValidation(unittest.TestCase):
             "blocks": {
                 "b8850749-4d5f-4b5f-b842-c050bcf7fd6f": {
                     "@type": "slate",
-                    "text": "xxx",
+                    "plaintext": "xxx",
                 }
             },
         }
@@ -171,7 +171,7 @@ class TestCustomValidation(unittest.TestCase):
             "blocks": {
                 "b8850749-4d5f-4b5f-b842-c050bcf7fd6f": {
                     "@type": "slate",
-                    "text": "xxx",
+                    "plaintext": "xxx",
                 }
             },
         }
