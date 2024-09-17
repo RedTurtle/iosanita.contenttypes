@@ -59,11 +59,19 @@ class TestCustomValidation(unittest.TestCase):
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(
             json.loads(resp.json()["message"]),
-            {
-                "error": {
+            [
+                {
+                    "field": "organizzato_da_esterno",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
+                    "field": "organizzato_da_interno",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
                     "message": 'Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".'
-                }
-            },
+                },
+            ],
         )
 
         # organizzato_da_esterno is considered empty block
@@ -85,11 +93,19 @@ class TestCustomValidation(unittest.TestCase):
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(
             json.loads(resp.json()["message"]),
-            {
-                "error": {
+            [
+                {
+                    "field": "organizzato_da_esterno",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
+                    "field": "organizzato_da_interno",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
                     "message": 'Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".'
-                }
-            },
+                },
+            ],
         )
 
         # now compile only organizzato_da_interno
@@ -124,14 +140,21 @@ class TestCustomValidation(unittest.TestCase):
         resp = self.api_session.post(self.portal_url, json=data)
 
         self.assertEqual(resp.status_code, 400)
-
         self.assertEqual(
             json.loads(resp.json()["message"]),
-            {
-                "error": {
+            [
+                {
+                    "field": "a_chi_si_rivolge",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
+                    "field": "a_chi_si_rivolge_tassonomia",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
                     "message": 'Devi compilare almeno uno dei due campi del tab "A chi si rivolge".'
-                }
-            },
+                },
+            ],
         )
 
         # a_chi_si_rivolge is considered empty block

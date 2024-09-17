@@ -1,7 +1,9 @@
+from copy import deepcopy
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
 from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
+from plone.formwidget.geolocation.geolocation import Geolocation
 from plone.restapi import _
 from plone.restapi.deserializer import json_body
 from plone.restapi.deserializer.dxcontent import DeserializeFromJson as BaseDeserializer
@@ -29,6 +31,15 @@ class DeserializeFromJson(BaseDeserializer):
             data=data,
             create=create,
             mask_validation_errors=mask_validation_errors,
+        )
+
+    @property
+    def mutual_required_msg(self):
+        return api.portal.translate(
+            _(
+                "mutual_required_field_msg",
+                default="Compila almeno uno di questi campi.",
+            )
         )
 
     def validate_data_iosanita(self, data, create):
@@ -61,97 +72,145 @@ class DeserializeFromJson(BaseDeserializer):
             # skip check
             return
 
-        a_chi_si_rivolge = data.get("a_chi_si_rivolge", {})
-        a_chi_si_rivolge_tassonomia = data.get("a_chi_si_rivolge_tassonomia", [])
+        has_a_chi_si_rivolge = self.has_field_value(
+            data=data, create=create, field_id="a_chi_si_rivolge", is_block_field=True
+        )
+        has_a_chi_si_rivolge_tassonomia = self.has_field_value(
+            data=data, create=create, field_id="a_chi_si_rivolge_tassonomia"
+        )
 
-        if not create:
-            if not a_chi_si_rivolge:
-                a_chi_si_rivolge = getattr(self.context, "a_chi_si_rivolge", {})
-            if not a_chi_si_rivolge_tassonomia:
-                a_chi_si_rivolge_tassonomia = getattr(
-                    self.context, "a_chi_si_rivolge_tassonomia", []
-                )
-        if self.is_empty_blocks(a_chi_si_rivolge) and not a_chi_si_rivolge_tassonomia:
-            msg = api.portal.translate(
-                _(
-                    "a_chi_si_rivolge_validation_error",
-                    default='Devi compilare almeno uno dei due campi del tab "A chi si rivolge".',
+        if not has_a_chi_si_rivolge and not has_a_chi_si_rivolge_tassonomia:
+            raise BadRequest(
+                json.dumps(
+                    [
+                        {
+                            "field": "a_chi_si_rivolge",
+                            "message": self.mutual_required_msg,
+                        },
+                        {
+                            "field": "a_chi_si_rivolge_tassonomia",
+                            "message": self.mutual_required_msg,
+                        },
+                        {
+                            "message": api.portal.translate(
+                                _(
+                                    "a_chi_si_rivolge_validation_error",
+                                    default='Devi compilare almeno uno dei due campi del tab "A chi si rivolge".',
+                                )
+                            )
+                        },
+                    ]
                 )
             )
-            # temporaneamente commentato perché Volto non lo gestisce bene
-            # raise BadRequest(
-            # json.dumps(
-            #     [
-            #         {"field": "a_chi_si_rivolge", "message": msg},
-            #         {"field": "a_chi_si_rivolge_tassonomia", "message": msg},
-            #     ]
-            # )
-            # )
-            raise BadRequest(json.dumps({"error": {"message": msg}}))
 
     def validate_event(self, data, create):
         # validate organizzato da
-        if not create:
-            if (
-                "organizzato_da_esterno" not in data
-                and "organizzato_da_interno" not in data  # noqa
-            ):
-                return
 
-            if (
-                "webinar" not in data
-                and "struttura_correlata" not in data  # noqa
-                and "geolocation" not in data  # noqa
-            ):
-                return
+        has_organizzato_da_esterno = self.has_field_value(
+            data=data,
+            create=create,
+            field_id="organizzato_da_esterno",
+            is_block_field=True,
+        )
+        has_organizzato_da_interno = self.has_field_value(
+            data=data, create=create, field_id="organizzato_da_interno"
+        )
 
-        organizzato_da_esterno = data.get("organizzato_da_esterno", {})
-        organizzato_da_interno = data.get("organizzato_da_interno", [])
-
-        if self.is_empty_blocks(organizzato_da_esterno) and not organizzato_da_interno:
-            msg = api.portal.translate(
-                _(
-                    "organizzato_validation_error",
-                    default='Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".',
+        if not has_organizzato_da_esterno and not has_organizzato_da_interno:
+            raise BadRequest(
+                json.dumps(
+                    [
+                        {
+                            "field": "organizzato_da_esterno",
+                            "message": self.mutual_required_msg,
+                        },
+                        {
+                            "field": "organizzato_da_interno",
+                            "message": self.mutual_required_msg,
+                        },
+                        {
+                            "message": api.portal.translate(
+                                _(
+                                    "organizzato_validation_error",
+                                    default='Devi compilare almeno uno dei due campi per "Organizzato da" nel tab "Contatti".',
+                                )
+                            )
+                        },
+                    ]
                 )
             )
-            # temporaneamente commentato perché Volto non lo gestisce bene
-            # raise BadRequest(
-            #     [
-            #         {"field": "organizzato_da_esterno", "message": msg},
-            #         {"field": "organizzato_da_interno", "message": msg},
-            #     ]
-            # )
-            raise BadRequest(json.dumps({"error": {"message": msg}}))
 
         # validate dove
-        has_webinar = not self.is_empty_blocks(data.get("webinar", {}))
-        has_struttura_correlata = data.get("struttura_correlata", [])
-        has_location_infos = self.has_location_infos(data)
+        has_webinar = self.has_field_value(
+            data=data, create=create, field_id="webinar", is_block_field=True
+        )
+        has_struttura_correlata = self.has_field_value(
+            data=data, create=create, field_id="struttura_correlata"
+        )
+
+        has_location_infos = self.has_location_infos(data=data, create=create)
         if not has_webinar and not has_struttura_correlata and not has_location_infos:
-            msg = api.portal.translate(
-                _(
-                    "dove_event_validation_error",
-                    default='Devi compilare almeno uno tra i campi "Webinar", "Struttura di riferimento" o "Geolocation" del tab "Dove".',
+            raise BadRequest(
+                json.dumps(
+                    [
+                        {
+                            "field": "webinar",
+                            "message": self.mutual_required_msg,
+                        },
+                        {
+                            "field": "struttura_correlata",
+                            "message": self.mutual_required_msg,
+                        },
+                        {
+                            "field": "geolocation",
+                            "message": self.mutual_required_msg,
+                        },
+                        {
+                            "message": api.portal.translate(
+                                _(
+                                    "dove_validation_error",
+                                    default='Devi compilare almeno uno dei campi obbligatori nel tab "Dove".',
+                                )
+                            )
+                        },
+                    ]
                 )
             )
-            raise BadRequest(json.dumps({"error": {"message": msg}}))
 
-    def has_location_infos(self, data):
-        has_data = True
-        for fieldname in ["geolocation"]:
-            value = data.get(fieldname, None)
-            if not value or value in [{"latitude": 0, "longitude": 0}]:
-                has_data = False
-        return has_data
-
-    def is_empty_blocks(self, blocks_field):
-        blocks = blocks_field.get("blocks", {})
-        if not blocks:
-            return True
-        blocks_data = list(blocks.values())
-        for block in blocks_data:
-            if block.get("plaintext", ""):
-                # there is some text
-                return False
+    def has_location_infos(self, data, create):
+        value = self.get_field_value(data, create, "geolocation")
+        if not value:
+            return False
+        if isinstance(value, Geolocation):
+            geolocation = {
+                "latitude": getattr(value, "latitude", 0),
+                "longitude": getattr(value, "longitude", 0),
+            }
+        else:
+            geolocation = deepcopy(value)
+        if geolocation in [{"latitude": 0, "longitude": 0}]:
+            return False
         return True
+
+    def has_field_value(self, data, create, field_id, is_block_field=False):
+        value = self.get_field_value(data, create, field_id)
+        if not value:
+            return False
+        if is_block_field:
+            blocks = value.get("blocks", {})
+            if not blocks:
+                return False
+            blocks_data = list(blocks.values())
+            for block in blocks_data:
+                if block.get("plaintext", ""):
+                    # there is some text
+                    return True
+            return False
+        return True
+
+    def get_field_value(self, data, create, field_id):
+        if field_id in data:
+            return data[field_id]
+        if not create:
+            return getattr(self.context, field_id, None)
+        return None
