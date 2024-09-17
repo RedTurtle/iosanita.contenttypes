@@ -12,9 +12,7 @@ import os
 @implementer(ISchemaPlugin)
 @adapter(IFormFieldProvider)
 class SchemaTweaks(object):
-    """
-    Fix fields for content-types to be like v2 of design.plone.contenttypes
-    """
+    """ """
 
     order = 99999
 
@@ -34,8 +32,11 @@ class SchemaTweaks(object):
 
     def fix_bando(self):
         """fix Bando fields"""
-        IBandoSchema["destinatari"].required = False
-        IBandoSchema.setTaggedValue(
-            OMITTED_KEY,
-            [(Interface, "destinatari", "true")],
-        )
+        if self.schema.getName() == "IBando":
+            # set it only once
+            IBandoSchema["destinatari"].required = False
+            IBandoSchema["scadenza_bando"].required = True
+            IBandoSchema.setTaggedValue(
+                OMITTED_KEY,
+                [(Interface, "destinatari", "true")],
+            )
