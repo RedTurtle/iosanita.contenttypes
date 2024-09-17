@@ -90,7 +90,7 @@ class TestUOSchema(unittest.TestCase):
             sorted(
                 [
                     "competenze",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                     "orari",
                     "pdc_correlato",
                     "responsabile_correlato",

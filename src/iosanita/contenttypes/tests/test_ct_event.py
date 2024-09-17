@@ -102,7 +102,7 @@ class TestEventSchema(unittest.TestCase):
                     "start",
                     "tipologia_evento",
                     "title",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                 ]
             ),
         )

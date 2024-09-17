@@ -72,7 +72,6 @@ class TestModuloSchema(unittest.TestCase):
                 [
                     "title",
                     "file",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
                 ]
             ),
         )

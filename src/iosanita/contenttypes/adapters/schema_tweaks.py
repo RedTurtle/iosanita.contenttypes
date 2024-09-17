@@ -20,7 +20,7 @@ class SchemaTweaks(object):
         self.schema = schema
 
     def __call__(self):
-        self.set_description_required()
+        # self.set_description_required()
         self.fix_bando()
 
     def set_description_required(self):

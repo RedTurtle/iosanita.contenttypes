@@ -86,7 +86,7 @@ class TestNewsSchema(unittest.TestCase):
                     "descrizione_estesa",
                     "title",
                     "uo_correlata",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                 ]
             ),
         )

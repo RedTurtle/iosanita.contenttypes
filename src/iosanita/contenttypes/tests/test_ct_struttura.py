@@ -97,7 +97,7 @@ class TestStrutturaSchema(unittest.TestCase):
             sorted(
                 [
                     "come_accedere",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                     "orari",
                     "pdc_correlato",
                     "responsabile_correlato",

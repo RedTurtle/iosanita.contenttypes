@@ -103,7 +103,7 @@ class TestServizioSchema(unittest.TestCase):
                     "come_accedere",
                     "tempi_attesa",
                     "costi",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                     "orari",
                     "uo_correlata",
                     "responsabile_correlato",
@@ -260,7 +260,7 @@ class TestServizio(unittest.TestCase):
             container=self.portal, type="Servizio", title="xxx"
         )
 
-        self.assertEqual(servizio.keys(), ["allegati"])
+        self.assertEqual(servizio.keys(), ["modulistica", "allegati"])
 
     def test_servizio_allegati_has_filtered_addable_types(self):
         servizio = api.content.create(

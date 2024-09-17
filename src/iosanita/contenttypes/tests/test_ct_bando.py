@@ -90,7 +90,7 @@ class TestBandoSchema(unittest.TestCase):
                     "descrizione_estesa",
                     "come_partecipare",
                     "modalita_selezione",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                 ]
             ),
         )

@@ -91,7 +91,7 @@ class TestDocumentoSchema(unittest.TestCase):
                     "descrizione_estesa",
                     "uo_correlata",
                     "file",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                 ]
             ),
         )

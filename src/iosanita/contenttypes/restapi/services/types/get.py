@@ -2,6 +2,7 @@
 from plone.restapi.services.types.get import TypesGet as BaseGet
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
+from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 
 
 class FieldsetsMismatchError(Exception):
@@ -139,7 +140,28 @@ class TypesGet(BaseGet):
                 if fieldset.get("id") == "settings" and found:
                     fieldset["fields"].append(field)
 
-        return result
+        # return result
+
+    def set_description_required(self, result):
+        if IoSanitaMigrationMarker.providedBy(self.request):
+            return
+        portal_types = [
+            "Servizio",
+            "ComeFarePer",
+            "Struttura",
+            "News Item",
+            "Event",
+            "UnitaOrganizzativa",
+            "Documento",
+            "Bando",
+        ]
+
+        if (
+            self.request.steps[-1] in portal_types
+            and "description" in result["properties"]  # noqa
+            and "description" not in result["required"]  # noqa
+        ):
+            result["required"].append("description")
 
     def reply(self):
         result = super(TypesGet, self).reply()
@@ -147,7 +169,8 @@ class TypesGet(BaseGet):
             result["fieldsets"] = self.reorder_fieldsets(schema=result)
 
         if "title" in result:
-            result = self.customize_versioning_fields_fieldset(result)
+            self.customize_versioning_fields_fieldset(result)
+            self.set_description_required(result)
         return result
 
     def get_order_by_type(self, portal_type):

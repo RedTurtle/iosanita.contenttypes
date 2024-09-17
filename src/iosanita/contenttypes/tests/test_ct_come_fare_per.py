@@ -86,7 +86,7 @@ class TestComeFarePerSchema(unittest.TestCase):
                 [
                     "panoramica",
                     "title",
-                    # "description", is required from schema_tweaks.py but it doesn't apply in test
+                    "description",
                 ]
             ),
         )
