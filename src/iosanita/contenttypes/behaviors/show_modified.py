@@ -12,9 +12,14 @@ from zope.interface import provider
 
 
 def showModifiedDefaultValue(context=None):
-    return api.portal.get_registry_record(
-        "show_modified_default", interface=IIoSanitaContenttypesSettings, default=False
-    )
+    try:
+        return api.portal.get_registry_record(
+            "show_modified_default",
+            interface=IIoSanitaContenttypesSettings,
+            default=False,
+        )
+    except KeyError:
+        return True
 
 
 @provider(IFormFieldProvider)
