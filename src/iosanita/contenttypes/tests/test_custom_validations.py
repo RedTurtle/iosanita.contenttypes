@@ -174,13 +174,22 @@ class TestCustomValidation(unittest.TestCase):
 
         resp = self.api_session.post(self.portal_url, json=data)
         self.assertEqual(resp.status_code, 400)
+
         self.assertEqual(
             json.loads(resp.json()["message"]),
-            {
-                "error": {
+            [
+                {
+                    "field": "a_chi_si_rivolge",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
+                    "field": "a_chi_si_rivolge_tassonomia",
+                    "message": "Compila almeno uno di questi campi.",
+                },
+                {
                     "message": 'Devi compilare almeno uno dei due campi del tab "A chi si rivolge".'
-                }
-            },
+                },
+            ],
         )
 
         # now compile only a_chi_si_rivolge_tassonomia
