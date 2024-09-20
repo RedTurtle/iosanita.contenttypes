@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes import _
-from iosanita.contenttypes.controlpanels.settings import IIoSanitaSettings
+from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
 from plone import api
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
@@ -13,7 +13,7 @@ from zope.interface import provider
 
 def showModifiedDefaultValue(context=None):
     return api.portal.get_registry_record(
-        "show_modified_default", interface=IIoSanitaSettings, default=False
+        "show_modified_default", interface=IIoSanitaContenttypesSettings, default=False
     )
 
 

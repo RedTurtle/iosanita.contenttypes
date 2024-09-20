@@ -14,4 +14,10 @@
 
   <adapter factory=".converters.geolocation_converter" />
 
+  <!-- enable controlpanel on plone.restapi -->
+  <adapter
+      factory=".controlpanel.IoSanitaContenttypesSettingsControlpanel"
+      provides="iosanita.contenttypes.interfaces.settings.IIoSanitaContenttypesSettingsControlpanel"
+      name="iosanita-contenttypes-settings"
+      />
 </configure>

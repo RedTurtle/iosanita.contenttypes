@@ -2,7 +2,7 @@
 <registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
           i18n:domain="plone"
 >
-  <records interface="iosanita.contenttypes.controlpanels.settings.IIoSanitaSettings" />
+  <records interface="iosanita.contenttypes.interfaces.settings.IIoSanitaContenttypesSettings" />
 
   <!-- custom values -->
   <record field="allowed_sizes"
