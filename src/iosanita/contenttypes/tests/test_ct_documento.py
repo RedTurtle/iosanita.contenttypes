@@ -55,7 +55,6 @@ class TestDocumentoSchema(unittest.TestCase):
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
                 "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",
                 "collective.taxonomy.generated.parliamo_di",
-                "iosanita.contenttypes.behavior.multi_file",
             ),
         )
 
@@ -64,12 +63,11 @@ class TestDocumentoSchema(unittest.TestCase):
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Documento").json()
-        self.assertEqual(len(resp["fieldsets"]), 10)
+        self.assertEqual(len(resp["fieldsets"]), 9)
         self.assertEqual(
             [x.get("id") for x in resp["fieldsets"]],
             [
                 "default",
-                "formati",
                 "cosa_e",
                 "riferimenti",
                 "a_chi_si_rivolge",
@@ -116,23 +114,13 @@ class TestDocumentoSchema(unittest.TestCase):
             ],
         )
 
-    def test_documento_formati_fieldset(self):
-        """
-        Get the list from restapi
-        """
-        resp = self.api_session.get("@types/Documento").json()
-        self.assertEqual(
-            resp["fieldsets"][1]["fields"],
-            ["file", "formato_alternativo_1", "formato_alternativo_2"],
-        )
-
     def test_documento_cosa_e_fieldset(self):
         """
         Get the list from restapi
         """
         resp = self.api_session.get("@types/Documento").json()
         self.assertEqual(
-            resp["fieldsets"][2]["fields"],
+            resp["fieldsets"][1]["fields"],
             ["descrizione_estesa"],
         )
 
@@ -142,7 +130,7 @@ class TestDocumentoSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/Documento").json()
         self.assertEqual(
-            resp["fieldsets"][3]["fields"],
+            resp["fieldsets"][2]["fields"],
             [
                 "servizio_procedura_riferimento",
                 "uo_correlata",
@@ -156,7 +144,7 @@ class TestDocumentoSchema(unittest.TestCase):
         """
         resp = self.api_session.get("@types/Documento").json()
         self.assertEqual(
-            resp["fieldsets"][4]["fields"],
+            resp["fieldsets"][3]["fields"],
             ["a_chi_si_rivolge", "a_chi_si_rivolge_tassonomia"],
         )
 
