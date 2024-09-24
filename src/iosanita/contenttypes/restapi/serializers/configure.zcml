@@ -6,6 +6,7 @@
   <adapter factory=".news.NewsItemSerializeToJson" />
   <adapter factory=".summary.IOSanitaJSONSummarySerializer" />
   <adapter factory=".summary.PuntoDiContattoJSONSummarySerializer" />
+  <adapter factory=".modulo.SerializeModuloToJsonSummary" />
 
 
   <!-- Summary Serializer Metadata -->

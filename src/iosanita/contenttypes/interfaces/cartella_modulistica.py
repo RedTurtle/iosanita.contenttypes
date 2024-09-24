@@ -18,3 +18,13 @@ class ICartellaModulistica(model.Schema, IIosanitaContenttypes):
         required=False,
         default=False,
     )
+
+    ricerca_in_testata = schema.Bool(
+        title=_("ricerca_in_testata_label", default="Ricerca in testata"),
+        default=False,
+        required=False,
+        description=_(
+            "ricerca_in_testata_help",
+            default="Seleziona se mostrare o meno il campo di ricerca in testata.",
+        ),
+    )
