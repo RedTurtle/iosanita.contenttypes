@@ -25,6 +25,7 @@ class TestLayer(RedturtleVoltoLayer):
         super().setUpZope(app, configurationContext)
         self.loadZCML(package=collective.taxonomy)
         self.loadZCML(package=collective.volto.blocksfield)
+        self.loadZCML(package=collective.volto.enhancedlinks)
         self.loadZCML(package=collective.z3cform.datagridfield)
         self.loadZCML(package=kitconcept.seo)
         self.loadZCML(package=plone.formwidget.geolocation)
