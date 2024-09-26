@@ -7,7 +7,7 @@
   <adapter factory=".summary.IOSanitaJSONSummarySerializer" />
   <adapter factory=".summary.PuntoDiContattoJSONSummarySerializer" />
   <adapter factory=".modulo.SerializeModuloToJsonSummary" />
-
+  <adapter factory=".dxfields.FileFieldViewModeSerializer" />
 
   <!-- Summary Serializer Metadata -->
   <utility
