@@ -44,12 +44,16 @@ class ViewExtraDataExtractor(object):
 
         catalog = getUtility(ICatalog)
         intids = getUtility(IIntIds)
-        relations = catalog.findRelations(
-            {
-                "to_id": intids.getId(aq_inner(self.context)),
-                "from_attribute": reference_id,
-            }
-        )
+        relations = []
+        for ref_id in reference_id:
+            relations.extend(
+                catalog.findRelations(
+                    {
+                        "to_id": intids.getId(aq_inner(self.context)),
+                        "from_attribute": ref_id,
+                    }
+                )
+            )
         data = {}
         for rel in relations:
             obj = intids.queryObject(rel.from_id)
@@ -62,7 +66,8 @@ class ViewExtraDataExtractor(object):
                 summary = getMultiAdapter(
                     (obj, getRequest()), ISerializeToJsonSummary
                 )()
-                data[portal_type].append(summary)
+                if summary not in data[portal_type]:
+                    data[portal_type].append(summary)
         for portal_type, values in data.items():
             if portal_type == "News Item":
                 data[portal_type] = sorted(
@@ -81,10 +86,10 @@ class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
         Servizio can also be referenced by a custom field
         """
 
-        data = self.get_back_references(reference_id="servizio_correlato")
+        data = self.get_back_references(reference_id=["servizio_correlato"])
 
         data.update(
-            self.get_back_references(reference_id="servizio_procedura_riferimento")
+            self.get_back_references(reference_id=["servizio_procedura_riferimento"])
         )
         return {"back-references": data}
 
@@ -96,7 +101,7 @@ class ViewExtraDataExtractorStruttura(ViewExtraDataExtractor):
         """ """
         return {
             "back-references": self.get_back_references(
-                reference_id="struttura_correlata"
+                reference_id=["struttura_correlata"]
             )
         }
 
@@ -107,7 +112,9 @@ class ViewExtraDataExtractorUnitaOrganizzativa(ViewExtraDataExtractor):
     def __call__(self):
         """ """
         return {
-            "back-references": self.get_back_references(reference_id="uo_correlata")
+            "back-references": self.get_back_references(
+                reference_id=["uo_correlata", "struttura_correlata"]
+            )
         }
 
 
@@ -115,16 +122,16 @@ class ViewExtraDataExtractorUnitaOrganizzativa(ViewExtraDataExtractor):
 @adapter(IPersona, Interface)
 class ViewExtraDataExtractorPersona(ViewExtraDataExtractor):
     def __call__(self):
-        data = self.get_back_references(reference_id="persona_correlata")
+        data = self.get_back_references(reference_id=["persona_correlata"])
 
         # append additional references
         data.update(
             {
                 "responsabile": self.get_back_references(
-                    reference_id="responsabile_correlato"
+                    reference_id=["responsabile_correlato"]
                 ),
                 "personale": self.get_back_references(
-                    reference_id="personale_correlato"
+                    reference_id=["personale_correlato"]
                 ),
             }
         )

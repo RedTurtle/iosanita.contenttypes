@@ -76,8 +76,12 @@ class IServizio(model.Schema, IIosanitaContenttypes):
     )
     struttura_correlata = RelationList(
         title=_(
-            "struttura_correlata_label",
+            "struttura_correlata_servizio_label",
             default="Struttura di riferimento",
+        ),
+        description=_(
+            "struttura_correlata_servizio_help",
+            default="Seleziona una Struttura o Unità organizzativa di riferimento.",
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
@@ -151,7 +155,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
-            "selectableTypes": ["Struttura"],
+            "selectableTypes": ["Struttura", "UnitaOrganizzativa"],
         },
     )
     form.widget(
