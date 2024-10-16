@@ -39,7 +39,7 @@ class FileFieldSerializerTest(unittest.TestCase):
             container=self.document,
             type="Modulo",
             title="Modulo",
-            file_principale=NamedBlobFile("some data", filename="file.pdf"),
+            file=NamedBlobFile("some data", filename="file.pdf"),
         )
         commit()
 
@@ -49,7 +49,7 @@ class FileFieldSerializerTest(unittest.TestCase):
     def test_if_anteprima_file_false_so_download(self):
         response = self.api_session.get(self.modulo.absolute_url()).json()
 
-        self.assertIn("@@download", response["file_principale"]["download"])
+        self.assertIn("@@download", response["file"]["download"])
 
     def test_if_anteprima_file_true_so_dsiplay(self):
         self.cartella_modulistica.anteprima_file = True
@@ -57,13 +57,13 @@ class FileFieldSerializerTest(unittest.TestCase):
         commit()
 
         response = self.api_session.get(self.modulo.absolute_url()).json()
-        self.assertIn("@@display-file", response["file_principale"]["download"])
+        self.assertIn("@@display-file", response["file"]["download"])
 
     def test_if_enhancedlinks_behavior_active_has_human_readable_obj_size_in_data(self):
         response = self.api_session.get(self.modulo.absolute_url()).json()
-        self.assertEqual("1 KB", response["file_principale"]["getObjSize"])
+        self.assertEqual("1 KB", response["file"]["getObjSize"])
 
     def test_if_enhancedlinks_behavior_active_has_flag_in_data(self):
         response = self.api_session.get(self.modulo.absolute_url()).json()
-        self.assertIn("enhanced_links_enabled", response["file_principale"])
-        self.assertTrue(response["file_principale"]["enhanced_links_enabled"])
+        self.assertIn("enhanced_links_enabled", response["file"])
+        self.assertTrue(response["file"]["enhanced_links_enabled"])
