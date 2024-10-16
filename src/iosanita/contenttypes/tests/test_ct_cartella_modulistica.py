@@ -104,6 +104,7 @@ class TestCartellaModulisticaSchema(unittest.TestCase):
                 "title",
                 "description",
                 "anteprima_file",
+                "ricerca_in_testata",
                 "image",
                 "image_caption",
                 "preview_image",

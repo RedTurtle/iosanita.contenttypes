@@ -65,6 +65,7 @@ setup(
         "collective.taxonomy",
         "collective.address",
         "collective.geolocationbehavior",
+        "collective.volto.enhancedlinks",
     ],
     extras_require={
         "test": [
