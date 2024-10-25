@@ -197,6 +197,9 @@ def createSubfolders(context, event):
             if portal_type in ["Folder", "Document", "Bando Folder Deepening"]:
                 child.exclude_from_search = True
                 child.reindexObject(idxs=["exclude_from_search"])
+                if portal_type != "Bando Folder Deepening":
+                    child.exclude_from_nav = True
+                    child.reindexObject(idxs=["exclude_from_nav"])
 
             # select constraints
             if mapping.get("allowed_types", ()):
