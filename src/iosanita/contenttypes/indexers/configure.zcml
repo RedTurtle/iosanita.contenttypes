@@ -72,4 +72,8 @@
       factory=".taxonomies.tipologia_notizia_metadata"
       name="tipologia_notizia_metadata"
       />
+  <adapter
+      factory=".taxonomies.tipologia_servizio_metadata"
+      name="tipologia_servizio_metadata"
+      />
 </configure>

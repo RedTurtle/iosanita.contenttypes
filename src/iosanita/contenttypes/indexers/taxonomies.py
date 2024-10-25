@@ -61,3 +61,11 @@ def tipologia_notizia_metadata(context, **kw):
     return extract_taxonomies(
         context=context, field="tipologia_notizia", only_leaf=True
     )
+
+
+@indexer(IDexterityContent)
+def tipologia_servizio_metadata(context, **kw):
+    """ """
+    return extract_taxonomies(
+        context=context, field="tipologia_servizio", only_leaf=True
+    )

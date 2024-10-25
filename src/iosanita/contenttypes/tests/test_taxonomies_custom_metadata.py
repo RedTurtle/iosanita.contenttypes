@@ -104,3 +104,20 @@ class TestTaxonomiesCustomMetadata(unittest.TestCase):
             res.tipologia_notizia_metadata,
             [{"title": "Comunicato (stampa)", "token": "comunicato-stampa"}],
         )
+
+    def test_tipologia_servizio_has_last_taxonomy_leaf_value(self):
+        """ """
+        servizio = api.content.create(
+            container=self.portal,
+            type="Servizio",
+            title="xxx",
+            tipologia_servizio=[
+                "prevenzione-e-vaccini",
+            ],
+        )
+        res = api.content.find(UID=servizio.UID())[0]
+
+        self.assertEqual(
+            res.tipologia_servizio_metadata,
+            [{"title": "Prevenzione e vaccini", "token": "prevenzione-e-vaccini"}],
+        )
