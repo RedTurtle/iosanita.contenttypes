@@ -49,7 +49,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
             "responsabile_correlato_struttura_help",
             default="La persona che dirige la struttura.",
         ),
-        required=True,
+        required=False,
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )

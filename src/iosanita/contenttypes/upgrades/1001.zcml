@@ -4,7 +4,7 @@
   <gs:registerProfile name="1001"
     title="Exclude from nav service folders"
     directory="1001"
-    description='Configuration for version 1001'
+    description=''
     for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
     provides="Products.GenericSetup.interfaces.EXTENSION" />
 
@@ -15,10 +15,6 @@
     <gs:upgradeStep title="Exclude from nav service folders"
       description=""
       handler=".v1001.upgrade" />
-
-    <gs:upgradeDepends title="Exclude from nav service folders (GS profile)"
-      description=""
-      import_profile="iosanita.contenttypes.upgrades:1001" />
 
   </gs:upgradeSteps>
 

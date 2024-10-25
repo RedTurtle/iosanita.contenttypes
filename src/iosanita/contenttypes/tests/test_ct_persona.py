@@ -88,11 +88,10 @@ class TestPersonaSchema(unittest.TestCase):
             sorted(resp["required"]),
             sorted(
                 [
-                    "cognome",
-                    "competenze",
-                    "description",
-                    "incarico",
                     "nome",
+                    "cognome",
+                    "incarico",
+                    "competenze",
                     "pdc_correlato",
                 ]
             ),

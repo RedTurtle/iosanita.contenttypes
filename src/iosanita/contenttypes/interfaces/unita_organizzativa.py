@@ -29,7 +29,7 @@ class IUnitaOrganizzativa(model.Schema):
         ),
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
         default=[],
-        required=True,
+        required=False,
     )
 
     personale_correlato = RelationList(

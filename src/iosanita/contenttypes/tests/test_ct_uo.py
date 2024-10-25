@@ -87,16 +87,7 @@ class TestUOSchema(unittest.TestCase):
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(
             sorted(resp["required"]),
-            sorted(
-                [
-                    "competenze",
-                    "description",
-                    "orari",
-                    "pdc_correlato",
-                    "responsabile_correlato",
-                    "title",
-                ]
-            ),
+            sorted(["title", "description", "competenze", "orari", "pdc_correlato"]),
         )
 
     def test_uo_fields_default_fieldset(self):

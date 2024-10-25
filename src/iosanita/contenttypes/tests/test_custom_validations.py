@@ -136,6 +136,7 @@ class TestCustomValidation(unittest.TestCase):
             "pdc_correlato": [{"@id": "/pdc"}],
             "title": "titolo",
             "@type": "Struttura",
+            "geolocation": {"latitude": 1.0, "longitude": 1.0},
         }
         resp = self.api_session.post(self.portal_url, json=data)
 
@@ -209,3 +210,35 @@ class TestCustomValidation(unittest.TestCase):
         }
         resp = self.api_session.post(self.portal_url, json=data)
         self.assertEqual(resp.status_code, 201)
+
+    def test_raise_bad_request_on_struttura_if_missing_dove_fields(self):
+        api.content.create(type="PuntoDiContatto", title="pdc", container=self.portal)
+        commit()
+        data = {
+            "come_accedere": {"blocks": {}},
+            "orari_apertura": {"blocks": {}},
+            "description": "asdasd",
+            "pdc_correlato": [{"@id": "/pdc"}],
+            "title": "titolo",
+            "@type": "Struttura",
+            "a_chi_si_rivolge_tassonomia": ["anziani"],
+        }
+        resp = self.api_session.post(self.portal_url, json=data)
+
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(
+            json.loads(resp.json()["message"]),
+            [
+                {
+                    "field": "street",
+                    "message": "Devi compilare questi campi per poter cercare la posizione in mappa.",
+                },
+                {
+                    "field": "city",
+                    "message": "Devi compilare questi campi per poter cercare la posizione in mappa.",
+                },
+                {
+                    "message": 'Devi compilare almeno uno dei due campi del tab "Dove" e impostare la Geolocation.'
+                },
+            ],
+        )

@@ -100,16 +100,12 @@ class TestServizioSchema(unittest.TestCase):
             sorted(
                 [
                     "title",
+                    "description",
                     "cosa_serve",
                     "come_accedere",
-                    "tempi_attesa",
-                    "costi",
-                    "description",
-                    "orari",
-                    "uo_correlata",
-                    "responsabile_correlato",
-                    "pdc_correlato",
                     "struttura_correlata",
+                    "orari",
+                    "pdc_correlato",
                 ]
             ),
         )

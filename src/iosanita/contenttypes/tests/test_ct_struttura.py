@@ -94,16 +94,7 @@ class TestStrutturaSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
             sorted(resp["required"]),
-            sorted(
-                [
-                    "come_accedere",
-                    "description",
-                    "orari",
-                    "pdc_correlato",
-                    "responsabile_correlato",
-                    "title",
-                ]
-            ),
+            sorted(["title", "description", "come_accedere", "orari", "pdc_correlato"]),
         )
 
     def test_struttura_fields_default_fieldset(self):

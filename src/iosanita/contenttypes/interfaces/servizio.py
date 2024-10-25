@@ -91,12 +91,12 @@ class IServizio(model.Schema, IIosanitaContenttypes):
 
     tempi_attesa = BlocksField(
         title=_("tempi_attesa_label", default="Tempi di attesa"),
-        required=True,
+        required=False,
         description=_("tempi_attesa_help", default=""),
     )
     costi = BlocksField(
         title=_("costi_label", default="Costi"),
-        required=True,
+        required=False,
         description=_("costi_help", default=""),
     )
 
@@ -127,7 +127,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=True,
+        required=False,
         missing_value=(),
     )
     responsabile_correlato = RelationList(
@@ -136,7 +136,7 @@ class IServizio(model.Schema, IIosanitaContenttypes):
         ),
         default=[],
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
-        required=True,
+        required=False,
         missing_value=(),
     )
     servizio_correlato = RelationList(

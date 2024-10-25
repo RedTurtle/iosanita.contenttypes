@@ -49,13 +49,14 @@ class DeserializeFromJson(BaseDeserializer):
             portal_type = data.get("@type", "")
         else:
             portal_type = self.context.portal_type
-
         self.validate_a_chi_si_rivolge(
             portal_type=portal_type, data=data, create=create
         )
 
         if portal_type == "Event":
             self.validate_event(data=data, create=create)
+        if portal_type in ["Struttura", "UnitaOrganizzativa"]:
+            self.validate_dove(data=data, create=create)
 
     def validate_a_chi_si_rivolge(self, portal_type, data, create):
         portal_types = api.portal.get_tool(name="portal_types")
@@ -170,6 +171,31 @@ class DeserializeFromJson(BaseDeserializer):
                                 _(
                                     "dove_validation_error",
                                     default='Devi compilare almeno uno dei campi obbligatori nel tab "Dove".',
+                                )
+                            )
+                        },
+                    ]
+                )
+            )
+
+    def validate_dove(self, data, create):
+        if not self.has_location_infos(data=data, create=create):
+            msg = api.portal.translate(
+                _(
+                    "dove_validation_error",
+                    default="Devi compilare questi campi per poter cercare la posizione in mappa.",
+                )
+            )
+            raise BadRequest(
+                json.dumps(
+                    [
+                        {"field": "street", "message": msg},
+                        {"field": "city", "message": msg},
+                        {
+                            "message": api.portal.translate(
+                                _(
+                                    "dove_validation_error",
+                                    default='Devi compilare almeno uno dei due campi del tab "Dove" e impostare la Geolocation.',
                                 )
                             )
                         },

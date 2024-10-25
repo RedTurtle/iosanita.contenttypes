@@ -54,7 +54,7 @@ class IPersona(model.Schema, IIosanitaContenttypes):
             "help_description",
             default="Usato nell'elenco degli elementi e nei risultati delle ricerche.",
         ),
-        required=True,
+        required=False,
         missing_value="",
     )
 
