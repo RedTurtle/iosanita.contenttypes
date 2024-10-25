@@ -53,6 +53,7 @@ class TestServizioSchema(unittest.TestCase):
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
+                "collective.taxonomy.generated.tipologia_servizio",
                 "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
                 "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",
@@ -129,6 +130,7 @@ class TestServizioSchema(unittest.TestCase):
                 "image_caption",
                 "preview_image",
                 "preview_caption",
+                "tipologia_servizio",
                 "parliamo_di",
             ],
         )
