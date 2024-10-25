@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from . import logger
-from .base import reload_gs_profile
 from iosanita.contenttypes.events.common import SUBFOLDERS_MAPPING
 from plone import api
 
