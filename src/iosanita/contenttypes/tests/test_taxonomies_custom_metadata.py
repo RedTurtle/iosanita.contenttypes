@@ -87,3 +87,20 @@ class TestTaxonomiesCustomMetadata(unittest.TestCase):
             res.incarico_metadata,
             [{"title": "Medico", "token": "medico"}],
         )
+
+    def test_tipologia_notizia_has_last_taxonomy_leaf_value(self):
+        """ """
+        news = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="xxx",
+            tipologia_notizia=[
+                "comunicato-stampa",
+            ],
+        )
+        res = api.content.find(UID=news.UID())[0]
+
+        self.assertEqual(
+            res.tipologia_notizia_metadata,
+            [{"title": "Comunicato (stampa)", "token": "comunicato-stampa"}],
+        )

@@ -53,3 +53,11 @@ def a_chi_si_rivolge_tassonomia_metadata(context, **kw):
 def incarico_metadata(context, **kw):
     """ """
     return extract_taxonomies(context=context, field="incarico", only_leaf=True)
+
+
+@indexer(IDexterityContent)
+def tipologia_notizia_metadata(context, **kw):
+    """ """
+    return extract_taxonomies(
+        context=context, field="tipologia_notizia", only_leaf=True
+    )

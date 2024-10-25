@@ -44,6 +44,7 @@
   <column value="incarico_metadata" />
   <column value="parliamo_di_metadata" />
   <column value="a_chi_si_rivolge_tassonomia_metadata" />
+  <column value="tipologia_notizia_metadata" />
   <column value="street"/>
   <column value="zip_code"/>
   <column value="city"/>

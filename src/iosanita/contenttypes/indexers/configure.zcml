@@ -68,4 +68,8 @@
       factory=".taxonomies.incarico_metadata"
       name="incarico_metadata"
       />
+  <adapter
+      factory=".taxonomies.tipologia_notizia_metadata"
+      name="tipologia_notizia_metadata"
+      />
 </configure>
