@@ -20,8 +20,9 @@ class SchemaTweaks(object):
         self.schema = schema
 
     def __call__(self):
-        # self.set_description_required()
+        self.set_description_required()
         self.fix_bando()
+        self.set_dove_fields_required()
 
     def set_description_required(self):
         """fix Documento fields"""
@@ -40,3 +41,14 @@ class SchemaTweaks(object):
                 OMITTED_KEY,
                 [(Interface, "destinatari", "true")],
             )
+
+    def set_dove_fields_required(self):
+        """fix Dove fields"""
+        if os.environ.get("DISABLE_DESCRIPTION_VALIDATION", False):
+            return
+
+        if self.schema.getName() == "IAddress":
+            self.schema["street"].required = True
+            self.schema["zip_code"].required = True
+            self.schema["city"].required = True
+            self.schema["country"].required = True

@@ -27,7 +27,7 @@ class IDove(IGeolocatable, IAddress):
     provincia = schema.TextLine(
         title=_("provincia", default="Provincia"),
         description=_("help_provincia", default=""),
-        required=False,
+        required=True,
     )
 
     circoscrizione = schema.TextLine(

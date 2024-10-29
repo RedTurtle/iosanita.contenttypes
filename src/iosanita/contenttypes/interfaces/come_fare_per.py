@@ -24,7 +24,7 @@ class IComeFarePer(model.Schema, IIosanitaContenttypes):
             default="Descrizione generale del processo da seguire per effettuare la procedura."
             ' Se il processo è composto da più step, allora vanno creati dei contenuti di tipo "Step" con informazioni dettagliate.',
         ),
-        required=False,
+        required=True,
     )
     form.order_after(panoramica="sottotitolo")
 
