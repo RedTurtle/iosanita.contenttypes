@@ -46,7 +46,6 @@ class SchemaTweaks(object):
         """fix Dove fields"""
         if os.environ.get("DISABLE_DESCRIPTION_VALIDATION", False):
             return
-
         if self.schema.getName() == "IAddress":
             self.schema["street"].required = True
             self.schema["zip_code"].required = True

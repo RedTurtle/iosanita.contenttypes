@@ -42,11 +42,11 @@ class JSONSummarySerializerMetadata:
 @implementer(ISerializeToJsonSummary)
 @adapter(Interface, IIosanitaContenttypesLayer)
 class IOSanitaJSONSummarySerializer(DefaultJSONSummarySerializer):
-    def __call__(self):
+    def __call__(self, force_all_metadata=False):
         """
         Customize type_title for News Items
         """
-        data = super().__call__()
+        data = super().__call__(force_all_metadata=force_all_metadata)
         if self.is_get_call():
             data["has_children"] = self.has_children()
 
