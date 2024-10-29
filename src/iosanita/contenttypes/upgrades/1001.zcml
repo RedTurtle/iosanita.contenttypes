@@ -1,20 +1,28 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-  xmlns:gs="http://namespaces.zope.org/genericsetup">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    >
 
-  <gs:registerProfile name="1001"
-    title="Exclude from nav service folders"
-    directory="1001"
-    description=''
-    for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
-    provides="Products.GenericSetup.interfaces.EXTENSION" />
-
-  <gs:upgradeSteps source="1000"
-    destination="1001"
-    profile="iosanita.contenttypes:default">
-
-    <gs:upgradeStep title="Exclude from nav service folders"
+  <gs:registerProfile
+      name="1001"
+      title="Exclude from nav service folders"
       description=""
-      handler=".v1001.upgrade" />
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="1001"
+      />
+
+  <gs:upgradeSteps
+      profile="iosanita.contenttypes:default"
+      source="1000"
+      destination="1001"
+      >
+
+    <gs:upgradeStep
+        title="Exclude from nav service folders"
+        description=""
+        handler=".v1001.upgrade"
+        />
 
   </gs:upgradeSteps>
 

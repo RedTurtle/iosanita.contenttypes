@@ -1,8 +1,9 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="iosanita.contenttypes">
+    i18n_domain="iosanita.contenttypes"
+    >
 
- <!-- -*- extra stuff goes here -*- -->
+  <!-- -*- extra stuff goes here -*- -->
 
   <include file="1001.zcml" />
 
