@@ -11,6 +11,11 @@ logger = logging.getLogger(__name__)
 
 
 SUBFOLDERS_MAPPING = {
+    "ComeFarePer": {
+        "content": [
+            {"id": "allegati", "title": "Allegati", "allowed_types": ("File",)},
+        ],
+    },
     "Bando": {
         "content": [
             {
