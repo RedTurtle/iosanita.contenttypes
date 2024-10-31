@@ -14,7 +14,7 @@ import os
 class SchemaTweaks(object):
     """ """
 
-    order = 99999
+    order = 999999
 
     def __init__(self, schema):
         self.schema = schema
