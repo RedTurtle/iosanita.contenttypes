@@ -7,5 +7,7 @@
 
   <property name="behaviors" purge="False">
     <element value="collective.taxonomy.generated.parliamo_di" />
+    <element value="plone.leadimage" />
+    <element value="volto.preview_image" />
   </property>
 </object>
