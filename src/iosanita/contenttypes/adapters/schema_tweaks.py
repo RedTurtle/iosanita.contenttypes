@@ -26,13 +26,15 @@ class SchemaTweaks(object):
 
     def set_description_required(self):
         """fix Documento fields"""
-        if os.environ.get("DISABLE_DESCRIPTION_VALIDATION", False):
+        if os.environ.get("DISABLE_VALIDATION_DURING_IMPORT") in ["1", "true", "True"]:
             return
         if self.schema.getName() == "IBasic":
             self.schema["description"].required = True
 
     def fix_bando(self):
         """fix Bando fields"""
+        if os.environ.get("DISABLE_VALIDATION_DURING_IMPORT") in ["1", "true", "True"]:
+            return
         if self.schema.getName() == "IBando":
             # set it only once
             IBandoSchema["destinatari"].required = False
@@ -44,6 +46,8 @@ class SchemaTweaks(object):
 
     def set_dove_fields_required(self):
         """fix Dove fields"""
+        if os.environ.get("DISABLE_VALIDATION_DURING_IMPORT") in ["1", "true", "True"]:
+            return
         if self.schema.getName() == "IAddress":
             self.schema["street"].required = True
             self.schema["zip_code"].required = True
