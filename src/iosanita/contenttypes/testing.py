@@ -9,7 +9,6 @@ import collective.address
 import collective.geolocationbehavior
 import collective.taxonomy
 import collective.volto.blocksfield
-import collective.volto.cookieconsent
 import collective.volto.enhancedlinks
 import collective.z3cform.datagridfield
 import iosanita.contenttypes
