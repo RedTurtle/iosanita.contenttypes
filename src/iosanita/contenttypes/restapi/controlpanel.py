@@ -1,6 +1,8 @@
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
 from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
-from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettingsControlpanel
+from iosanita.contenttypes.interfaces.settings import (
+    IIoSanitaContenttypesSettingsControlpanel,
+)
 from plone.restapi.controlpanels import RegistryConfigletPanel
 from zope.component import adapter
 from zope.interface import implementer
