@@ -99,6 +99,7 @@ class TestEventSchema(unittest.TestCase):
                     "descrizione_estesa",
                     "end",
                     "pdc_correlato",
+                    "provincia",
                     "start",
                     "tipologia_evento",
                     "title",

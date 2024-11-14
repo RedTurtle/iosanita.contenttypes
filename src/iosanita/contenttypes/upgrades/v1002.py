@@ -3,10 +3,8 @@
 from . import logger
 from iosanita.contenttypes.events.common import SUBFOLDERS_MAPPING
 from iosanita.contenttypes.utils import create_default_blocks
-from Products.CMFPlone.interfaces import ISelectableConstrainTypes
-
-
 from plone import api
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 
 def upgrade(setup_tool=None):

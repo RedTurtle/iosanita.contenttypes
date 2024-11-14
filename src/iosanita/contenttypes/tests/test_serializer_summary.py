@@ -261,3 +261,15 @@ class TestSerializerSummary(unittest.TestCase):
 
         self.assertIn("contatti", serializer)
         self.assertEqual(serializer["contatti"], contatti)
+
+    def test_summary_returns_bando_state_for_bandi_if_required_in_metadata_field(self):
+        bando = api.content.create(container=self.portal, type="Bando", title="bando")
+
+        serializer = getMultiAdapter((bando, self.request), ISerializeToJsonSummary)()
+
+        self.assertNotIn("bando_state", serializer)
+
+        self.request.form["metadata_fields"] = "bando_state"
+        serializer = getMultiAdapter((bando, self.request), ISerializeToJsonSummary)()
+
+        self.assertIn("bando_state", serializer)

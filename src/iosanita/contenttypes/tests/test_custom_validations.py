@@ -45,6 +45,7 @@ class TestCustomValidation(unittest.TestCase):
             "start": "2024-07-26T09:00:00+00:00",
             "tipologia_evento": "giornata-informativa",
             "title": "titolo",
+            "provincia": "xxx",
             "@type": "Event",
             "a_chi_si_rivolge": {
                 "blocks": {
@@ -134,6 +135,7 @@ class TestCustomValidation(unittest.TestCase):
             "orari_apertura": {"blocks": {}},
             "description": "asdasd",
             "pdc_correlato": [{"@id": "/pdc"}],
+            "provincia": "xxx",
             "title": "titolo",
             "@type": "Struttura",
             "geolocation": {"latitude": 1.0, "longitude": 1.0},

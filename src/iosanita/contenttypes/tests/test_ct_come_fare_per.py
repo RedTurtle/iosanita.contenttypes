@@ -84,6 +84,7 @@ class TestComeFarePerSchema(unittest.TestCase):
             sorted(resp["required"]),
             sorted(
                 [
+                    "come_fare",
                     "title",
                     "description",
                     "panoramica",
