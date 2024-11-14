@@ -88,7 +88,6 @@ class TestDocumentoSchema(unittest.TestCase):
                     "title",
                     "descrizione_estesa",
                     "uo_correlata",
-                    "description",
                 ]
             ),
         )

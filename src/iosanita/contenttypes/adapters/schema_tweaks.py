@@ -20,16 +20,8 @@ class SchemaTweaks(object):
         self.schema = schema
 
     def __call__(self):
-        self.set_description_required()
         self.fix_bando()
         self.set_dove_fields_required()
-
-    def set_description_required(self):
-        """fix Documento fields"""
-        if os.environ.get("DISABLE_VALIDATION_DURING_IMPORT") in ["1", "true", "True"]:
-            return
-        if self.schema.getName() == "IBasic":
-            self.schema["description"].required = True
 
     def fix_bando(self):
         """fix Bando fields"""

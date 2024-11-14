@@ -139,29 +139,6 @@ class TypesGet(BaseGet):
                 if fieldset.get("id") == "settings" and found:
                     fieldset["fields"].append(field)
 
-        # return result
-
-    def set_description_required(self, result):
-        if IoSanitaMigrationMarker.providedBy(self.request):
-            return
-        portal_types = [
-            "Servizio",
-            "ComeFarePer",
-            "Struttura",
-            "News Item",
-            "Event",
-            "UnitaOrganizzativa",
-            "Documento",
-            "Bando",
-        ]
-
-        if (
-            self.request.steps[-1] in portal_types
-            and "description" in result["properties"]  # noqa
-            and "description" not in result["required"]  # noqa
-        ):
-            result["required"].append("description")
-
     def reply(self):
         result = super(TypesGet, self).reply()
         if "fieldsets" in result:
@@ -169,7 +146,6 @@ class TypesGet(BaseGet):
 
         if "title" in result:
             self.customize_versioning_fields_fieldset(result)
-            self.set_description_required(result)
         return result
 
     def get_order_by_type(self, portal_type):

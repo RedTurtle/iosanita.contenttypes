@@ -45,7 +45,7 @@
     <element value="plone.ownership" />
     <element value="plone.publication" />
     <element value="plone.categorization" />
-    <element value="plone.basic" />
+    <element value="iosanita.basic" />
     <element value="iosanita.contenttypes.behavior.sottotitolo" />
     <element value="plone.locking" />
     <element value="plone.constraintypes" />

@@ -58,7 +58,7 @@ class TestNewsSchema(unittest.TestCase):
             ),
         )
 
-    def test_bando_fieldsets(self):
+    def test_news_fieldsets(self):
         """
         Get the list from restapi
         """
@@ -77,7 +77,7 @@ class TestNewsSchema(unittest.TestCase):
             ],
         )
 
-    def test_bando_required_fields(self):
+    def test_news_required_fields(self):
         resp = self.api_session.get("@types/News Item").json()
         self.assertEqual(
             sorted(resp["required"]),
@@ -86,12 +86,11 @@ class TestNewsSchema(unittest.TestCase):
                     "descrizione_estesa",
                     "title",
                     "uo_correlata",
-                    "description",
                 ]
             ),
         )
 
-    def test_bando_fields_default_fieldset(self):
+    def test_news_fields_default_fieldset(self):
         """
         Get the list from restapi
         """
@@ -112,7 +111,7 @@ class TestNewsSchema(unittest.TestCase):
             ],
         )
 
-    def test_bando_fields_correlati_fieldset(self):
+    def test_news_fields_correlati_fieldset(self):
         """
         Get the list from restapi
         """

@@ -90,7 +90,6 @@ class TestBandoSchema(unittest.TestCase):
                     "descrizione_estesa",
                     "come_partecipare",
                     "modalita_selezione",
-                    "description",
                 ]
             ),
         )

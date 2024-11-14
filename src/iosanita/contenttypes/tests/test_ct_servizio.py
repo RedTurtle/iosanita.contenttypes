@@ -42,7 +42,7 @@ class TestServizioSchema(unittest.TestCase):
                 "plone.ownership",
                 "plone.publication",
                 "plone.categorization",
-                "plone.basic",
+                "iosanita.basic",
                 "iosanita.contenttypes.behavior.sottotitolo",
                 "plone.locking",
                 "plone.constraintypes",

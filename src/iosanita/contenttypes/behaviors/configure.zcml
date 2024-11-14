@@ -11,6 +11,14 @@
 
   <!-- common -->
   <plone:behavior
+      name="iosanita.basic"
+      title="IO-Sanità Basic metadata"
+      description="Adds title and description fields."
+      factory=".metadata.IoSanitaBasic"
+      provides=".metadata.IIoSanitaBasic"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+  <plone:behavior
       name="iosanita.contenttypes.behavior.sottotitolo"
       title="Sottotitolo"
       description=""

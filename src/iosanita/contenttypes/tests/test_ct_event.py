@@ -103,7 +103,6 @@ class TestEventSchema(unittest.TestCase):
                     "start",
                     "tipologia_evento",
                     "title",
-                    "description",
                 ]
             ),
         )
