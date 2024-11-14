@@ -1,13 +1,13 @@
 from plone.app.dexterity import _
+from plone.app.dexterity import textindexer
 from plone.app.dexterity.behaviors.metadata import Basic
-from zope import schema
-from plone.autoform.interfaces import IFormFieldProvider
-from zope.interface import provider
-from plone.supermodel import model
 from plone.autoform import directives
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.supermodel import model
 from z3c.form.interfaces import IAddForm
 from z3c.form.interfaces import IEditForm
-from plone.app.dexterity import textindexer
+from zope import schema
+from zope.interface import provider
 
 
 @provider(IFormFieldProvider)

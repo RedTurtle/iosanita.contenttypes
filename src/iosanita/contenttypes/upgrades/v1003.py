@@ -18,7 +18,6 @@ def upgrade(setup_tool=None):
         "Struttura",
         "UnitaOrganizzativa",
     ]:
-
         behaviors = []
         for behavior in portal_types[ptype].behaviors:
             if behavior == "plone.basic":
