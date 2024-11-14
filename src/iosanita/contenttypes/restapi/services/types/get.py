@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from iosanita.contenttypes.interfaces import IoSanitaMigrationMarker
 from plone.restapi.services.types.get import TypesGet as BaseGet
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse

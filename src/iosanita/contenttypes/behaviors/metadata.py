@@ -7,6 +7,7 @@ from plone.supermodel import model
 from plone.autoform import directives
 from z3c.form.interfaces import IAddForm
 from z3c.form.interfaces import IEditForm
+from plone.app.dexterity import textindexer
 
 
 @provider(IFormFieldProvider)
@@ -33,6 +34,9 @@ class IIoSanitaBasic(model.Schema):
     directives.omitted("title", "description")
     directives.no_omit(IEditForm, "title", "description")
     directives.no_omit(IAddForm, "title", "description")
+
+    textindexer.searchable("title")
+    textindexer.searchable("description")
 
 
 class IoSanitaBasic(Basic):

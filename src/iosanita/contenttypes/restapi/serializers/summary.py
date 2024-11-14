@@ -3,7 +3,6 @@ from iosanita.contenttypes.indexers.taxonomies import get_taxonomy_vocab
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
 from iosanita.contenttypes.interfaces.punto_di_contatto import IPuntoDiContatto
 from plone import api
-from plone.memoize import view
 from plone.restapi.interfaces import IJSONSummarySerializerMetadata
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from redturtle.volto.restapi.serializer.summary import DefaultJSONSummarySerializer

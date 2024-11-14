@@ -3,15 +3,6 @@
     xmlns:gs="http://namespaces.zope.org/genericsetup"
     >
 
-  <gs:registerProfile
-      name="1002"
-      title="Add allegati folder to ComeFarePer ct"
-      description=""
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
-      directory="1002"
-      />
-
   <gs:upgradeSteps
       profile="iosanita.contenttypes:default"
       source="1001"
