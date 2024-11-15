@@ -135,7 +135,7 @@ class IPersona(model.Schema, IIosanitaContenttypes):
         RelatedItemsFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
-            "maximumSelectionSize": 1,
+            # "maximumSelectionSize": 1,
             "selectableTypes": ["Struttura"],
         },
     )

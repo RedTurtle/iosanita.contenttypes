@@ -51,6 +51,7 @@ class TestPersonaSchema(unittest.TestCase):
                 "plone.versioning",
                 "plone.constraintypes",
                 "collective.taxonomy.generated.incarico",
+                "iosanita.contenttypes.behavior.dove",
                 "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
             ),
@@ -139,7 +140,18 @@ class TestPersonaSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Persona").json()
         self.assertEqual(
             resp["fieldsets"][3]["fields"],
-            ["struttura_ricevimento", "struttura_in_cui_opera"],
+            [
+                "struttura_ricevimento",
+                "struttura_in_cui_opera",
+                "nome_sede",
+                "street",
+                "zip_code",
+                "city",
+                "provincia",
+                "circoscrizione",
+                "country",
+                "geolocation",
+            ],
         )
 
     def test_persona_fields_orari_ricevimento_fieldset(self):

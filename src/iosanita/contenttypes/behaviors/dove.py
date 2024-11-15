@@ -10,10 +10,12 @@ from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
+from collective.address import _ as _addresmf
 
 
 @provider(IFormFieldProvider)
 class IDove(IGeolocatable, IAddress):
+
     nome_sede = schema.TextLine(
         title=_("nome_sede", default="Nome sede"),
         description=_(
@@ -27,7 +29,7 @@ class IDove(IGeolocatable, IAddress):
     provincia = schema.TextLine(
         title=_("provincia", default="Provincia"),
         description=_("help_provincia", default=""),
-        required=True,
+        required=False,
     )
 
     circoscrizione = schema.TextLine(
@@ -61,9 +63,52 @@ class IDove(IGeolocatable, IAddress):
     )
 
 
+@provider(IFormFieldProvider)
+class IDoveRequired(IDove):
+    """redefine some required fields"""
+
+    provincia = schema.TextLine(
+        title=_("provincia", default="Provincia"),
+        description=_("help_provincia", default=""),
+        required=True,
+    )
+    street = schema.TextLine(
+        title=_addresmf("label_street", default="Street"),
+        description=_addresmf("help_street", default=""),
+        required=True,
+    )
+    zip_code = schema.TextLine(
+        title=_addresmf("label_zip_code", default="Zip Code"),
+        description=_addresmf("help_zip_code", default=""),
+        required=True,
+    )
+    city = schema.TextLine(
+        title=_addresmf("label_city", default="City"),
+        description=_addresmf("help_city", default=""),
+        required=True,
+    )
+    country = schema.Choice(
+        title=_addresmf("label_country", default="Country"),
+        description=_addresmf(
+            "help_country", default="Select the country from the list."
+        ),
+        required=True,
+        vocabulary="collective.address.CountryVocabulary",
+    )
+
+
 @implementer(IDove)
 @adapter(IDexterityContent)
 class Dove(object):
+    """ """
+
+    def __init__(self, context):
+        self.context = context
+
+
+@implementer(IDoveRequired)
+@adapter(IDexterityContent)
+class DoveRequired(object):
     """ """
 
     def __init__(self, context):

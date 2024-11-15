@@ -57,7 +57,7 @@
     <element value="kitconcept.seo" />
     <element value="plone.versioning" />
     <element value="collective.taxonomy.generated.tipologia_struttura" />
-    <element value="iosanita.contenttypes.behavior.dove" />
+    <element value="iosanita.contenttypes.behavior.dove_required" />
     <element value="iosanita.contenttypes.behavior.ulteriori_informazioni" />
     <element value="iosanita.contenttypes.behavior.a_chi_si_rivolge" />
     <element value="collective.taxonomy.generated.a_chi_si_rivolge_tassonomia" />

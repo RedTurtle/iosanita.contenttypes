@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone.dexterity.interfaces import IDexterityContent
 from plone.indexer.decorator import indexer
+from iosanita.contenttypes.interfaces.persona import IPersona
 
 
 @indexer(IDexterityContent)
@@ -46,6 +47,23 @@ def geolocation(context):
 
 @indexer(IDexterityContent)
 def has_geolocation(context):
+    data = getattr(context.aq_base, "geolocation", None)
+    if not data:
+        return False
+    if data.latitude == 0.0 and data.longitude == 0.0:
+        return False
+    return True
+
+
+@indexer(IPersona)
+def has_geolocation_persona(context):
+    """
+    Persona can have several locations
+    """
+    struttura_in_cui_opera = getattr(context.aq_base, "struttura_in_cui_opera", [])
+    struttura_ricevimento = getattr(context.aq_base, "struttura_ricevimento", [])
+    if struttura_in_cui_opera or struttura_ricevimento:
+        return True
     data = getattr(context.aq_base, "geolocation", None)
     if not data:
         return False

@@ -40,7 +40,10 @@
       factory=".common.has_geolocation"
       name="has_geolocation"
       />
-
+  <adapter
+      factory=".common.has_geolocation_persona"
+      name="has_geolocation"
+      />
   <!-- relations -->
   <adapter
       factory=".relations.uo_correlata_uid"

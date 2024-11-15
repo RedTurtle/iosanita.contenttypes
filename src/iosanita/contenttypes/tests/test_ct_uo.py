@@ -52,7 +52,7 @@ class TestUOSchema(unittest.TestCase):
                 "plone.translatable",
                 "kitconcept.seo",
                 "plone.versioning",
-                "iosanita.contenttypes.behavior.dove",
+                "iosanita.contenttypes.behavior.dove_required",
                 "iosanita.contenttypes.behavior.contatti",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
             ),
@@ -89,12 +89,16 @@ class TestUOSchema(unittest.TestCase):
             sorted(resp["required"]),
             sorted(
                 [
-                    "title",
-                    "description",
+                    "city",
                     "competenze",
+                    "country",
+                    "description",
                     "orari",
                     "pdc_correlato",
                     "provincia",
+                    "street",
+                    "title",
+                    "zip_code",
                 ]
             ),
         )

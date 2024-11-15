@@ -21,7 +21,6 @@ class SchemaTweaks(object):
 
     def __call__(self):
         self.fix_bando()
-        self.set_dove_fields_required()
 
     def fix_bando(self):
         """fix Bando fields"""
@@ -35,13 +34,3 @@ class SchemaTweaks(object):
                 OMITTED_KEY,
                 [(Interface, "destinatari", "true")],
             )
-
-    def set_dove_fields_required(self):
-        """fix Dove fields"""
-        if os.environ.get("DISABLE_VALIDATION_DURING_IMPORT") in ["1", "true", "True"]:
-            return
-        if self.schema.getName() == "IAddress":
-            self.schema["street"].required = True
-            self.schema["zip_code"].required = True
-            self.schema["city"].required = True
-            self.schema["country"].required = True

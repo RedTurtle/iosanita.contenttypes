@@ -54,7 +54,7 @@ class TestStrutturaSchema(unittest.TestCase):
                 "kitconcept.seo",
                 "plone.versioning",
                 "collective.taxonomy.generated.tipologia_struttura",
-                "iosanita.contenttypes.behavior.dove",
+                "iosanita.contenttypes.behavior.dove_required",
                 "iosanita.contenttypes.behavior.ulteriori_informazioni",
                 "iosanita.contenttypes.behavior.a_chi_si_rivolge",
                 "collective.taxonomy.generated.a_chi_si_rivolge_tassonomia",
@@ -96,12 +96,16 @@ class TestStrutturaSchema(unittest.TestCase):
             sorted(resp["required"]),
             sorted(
                 [
-                    "title",
-                    "description",
+                    "city",
                     "come_accedere",
+                    "country",
+                    "description",
                     "orari",
                     "pdc_correlato",
                     "provincia",
+                    "street",
+                    "title",
+                    "zip_code",
                 ]
             ),
         )
