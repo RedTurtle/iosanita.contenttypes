@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
 from iosanita.contenttypes.interfaces.modulo import IModulo
-from iosanita.contenttypes.restapi.serializers.summary import DefaultJSONSummarySerializer
+from iosanita.contenttypes.restapi.serializers.summary import (
+    DefaultJSONSummarySerializer,
+)
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.interfaces import ISerializeToJsonSummary

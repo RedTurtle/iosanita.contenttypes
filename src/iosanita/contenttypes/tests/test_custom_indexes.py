@@ -5,16 +5,14 @@ from plone import api
 from plone.app.dexterity.behaviors.metadata import IDublinCore
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from zope.event import notify
-from zope.lifecycleevent import Attributes
-from zope.lifecycleevent import ObjectModifiedEvent
-from plone.indexer.interfaces import IIndexableObject
-from zope.component import queryMultiAdapter
 from plone.formwidget.geolocation.geolocation import Geolocation
+from plone.indexer.interfaces import IIndexableObject
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
+from zope.component import queryMultiAdapter
 from zope.event import notify
 from zope.intid.interfaces import IIntIds
+from zope.lifecycleevent import Attributes
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
