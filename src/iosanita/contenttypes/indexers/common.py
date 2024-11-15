@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from iosanita.contenttypes.interfaces.persona import IPersona
 from plone.dexterity.interfaces import IDexterityContent
 from plone.indexer.decorator import indexer
-from iosanita.contenttypes.interfaces.persona import IPersona
 
 
 @indexer(IDexterityContent)

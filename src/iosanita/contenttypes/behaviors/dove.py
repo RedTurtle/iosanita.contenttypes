@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.address import _ as _addresmf
 from collective.address.behaviors import IAddress
 from collective.geolocationbehavior.geolocation import IGeolocatable
 from iosanita.contenttypes import _
@@ -10,12 +11,10 @@ from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
-from collective.address import _ as _addresmf
 
 
 @provider(IFormFieldProvider)
 class IDove(IGeolocatable, IAddress):
-
     nome_sede = schema.TextLine(
         title=_("nome_sede", default="Nome sede"),
         description=_(
