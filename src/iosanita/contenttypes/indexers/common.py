@@ -3,8 +3,6 @@ from iosanita.contenttypes.interfaces.persona import IPersona
 from plone.dexterity.interfaces import IDexterityContent
 from plone.indexer.decorator import indexer
 
-import re
-
 
 def get_geolocation_data(context):
     geolocation = getattr(context.aq_base, "geolocation", None)
