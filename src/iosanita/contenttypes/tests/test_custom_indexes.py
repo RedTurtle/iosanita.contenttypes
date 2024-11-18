@@ -208,7 +208,7 @@ class TestCustomIndexes(unittest.TestCase):
         )
 
         brain = api.content.find(UID=struttura.UID())[0]
-        self.assertEqual(brain.geolocation, [])
+        self.assertEqual(brain.geolocation, {})
 
     def test_geolocation_metadata_has_geolocation_data(self):
         struttura = api.content.create(
@@ -219,90 +219,7 @@ class TestCustomIndexes(unittest.TestCase):
         )
 
         brain = api.content.find(UID=struttura.UID())[0]
-        self.assertEqual(len(brain.geolocation), 1)
+        self.assertEqual(brain.geolocation["latitude"], struttura.geolocation.latitude)
         self.assertEqual(
-            brain.geolocation[0]["latitude"], struttura.geolocation.latitude
+            brain.geolocation["longitude"], struttura.geolocation.longitude
         )
-        self.assertEqual(
-            brain.geolocation[0]["longitude"], struttura.geolocation.longitude
-        )
-
-    def test_geolocation_metadata_has_content_address_with_street_city_provincia(self):
-        struttura = api.content.create(
-            container=self.portal,
-            type="Struttura",
-            title="Struttura",
-            street="Elm Street, 4",
-            city="Springwood",
-            provincia="FE",
-            geolocation=Geolocation(latitude=10, longitude=20),
-        )
-
-        brain = api.content.find(UID=struttura.UID())[0]
-        self.assertEqual(len(brain.geolocation), 1)
-        self.assertEqual(
-            brain.geolocation[0]["address"], "Elm Street, 4 Springwood (FE)"
-        )
-
-    def test_geolocation_metadata_has_content_nome_sede_or_title(self):
-        struttura = api.content.create(
-            container=self.portal,
-            type="Struttura",
-            title="Struttura",
-            geolocation=Geolocation(latitude=10, longitude=20),
-        )
-
-        brain = api.content.find(UID=struttura.UID())[0]
-        self.assertEqual(len(brain.geolocation), 1)
-        self.assertEqual(brain.geolocation[0]["title"], struttura.title)
-
-        struttura.nome_sede = "Nightmare, inc."
-        struttura.reindexObject()
-
-        brain = api.content.find(UID=struttura.UID())[0]
-        self.assertEqual(brain.geolocation[0]["title"], struttura.nome_sede)
-
-    def test_geolocation_metadata_for_persona_has_a_list_of_values_if_set(self):
-        struttura1 = api.content.create(
-            container=self.portal,
-            type="Struttura",
-            title="Struttura",
-            geolocation=Geolocation(latitude=11, longitude=11),
-        )
-        struttura2 = api.content.create(
-            container=self.portal,
-            type="Struttura",
-            title="Struttura",
-            geolocation=Geolocation(latitude=22, longitude=22),
-        )
-        struttura3 = api.content.create(
-            container=self.portal,
-            type="Struttura",
-            title="Struttura",
-            geolocation=Geolocation(latitude=33, longitude=33),
-        )
-
-        persona = api.content.create(
-            container=self.portal,
-            type="Persona",
-            title="persona",
-            geolocation=Geolocation(latitude=99, longitude=99),
-            struttura_ricevimento=[
-                RelationValue(self.intids.getId(struttura1)),
-                RelationValue(self.intids.getId(struttura2)),
-            ],
-            struttura_in_cui_opera=[RelationValue(self.intids.getId(struttura3))],
-        )
-
-        brain = api.content.find(UID=persona.UID())[0]
-
-        geolocations = brain.geolocation
-        self.assertEqual(len(geolocations), 4)
-        self.assertEqual(geolocations[0]["latitude"], persona.geolocation.latitude)
-        self.assertEqual(geolocations[0]["longitude"], persona.geolocation.longitude)
-        self.assertEqual(geolocations[1]["latitude"], struttura3.geolocation.latitude)
-        self.assertEqual(geolocations[1]["longitude"], struttura3.geolocation.longitude)
-        self.assertEqual(geolocations[2]["latitude"], struttura1.geolocation.latitude)
-        self.assertEqual(geolocations[2]["longitude"], struttura1.geolocation.longitude)
-        self.assertEqual(geolocations[3]["latitude"], struttura2.geolocation.latitude)
-        self.assertEqual(geolocations[3]["longitude"], struttura2.geolocation.longitude)

@@ -37,10 +37,6 @@
       name="geolocation"
       />
   <adapter
-      factory=".common.geolocation_persona"
-      name="geolocation"
-      />
-  <adapter
       factory=".common.has_geolocation"
       name="has_geolocation"
       />

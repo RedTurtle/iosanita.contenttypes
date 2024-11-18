@@ -10,26 +10,9 @@ def get_geolocation_data(context):
     geolocation = getattr(context.aq_base, "geolocation", None)
     if not geolocation:
         return {}
-
-    title = getattr(context.aq_base, "nome_sede", "") or context.title
-    street = getattr(context.aq_base, "street", "")
-    city = getattr(context.aq_base, "city", "")
-    provincia = getattr(context.aq_base, "provincia", "")
-
-    address = ""
-
-    if street:
-        address += f"{street}"
-    if city:
-        address += f" {city}"
-    if provincia:
-        address += f" ({provincia})"
-
     return {
         "latitude": geolocation.latitude,
         "longitude": geolocation.longitude,
-        "title": title,
-        "address": re.sub(r"\s+", " ", address),
     }
 
 
@@ -71,33 +54,7 @@ def provincia(context):
 
 @indexer(IDexterityContent)
 def geolocation(context):
-    data = get_geolocation_data(context)
-    if data:
-        return [data]
-    return []
-
-
-@indexer(IPersona)
-def geolocation_persona(context):
-    """
-    Persona can have multiple locations
-    """
-    res = []
-    local_data = get_geolocation_data(context)
-    if local_data:
-        res.append(local_data)
-
-    for field in ["struttura_in_cui_opera", "struttura_ricevimento"]:
-        value = getattr(context.aq_base, field, [])
-        if not value:
-            continue
-        for ref in value:
-            ref_obj = ref.to_object
-            if ref_obj:
-                data = get_geolocation_data(ref_obj)
-                if data:
-                    res.append(data)
-    return res
+    return get_geolocation_data(context)
 
 
 @indexer(IDexterityContent)
