@@ -5,7 +5,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix package name.
+  [daniele]
 
 
 1.0.0 (2024-11-19)
