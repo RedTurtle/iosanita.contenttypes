@@ -90,7 +90,6 @@ class TestPersonaSchema(unittest.TestCase):
                 [
                     "nome",
                     "cognome",
-                    "description",
                     "incarico",
                     "competenze",
                     "pdc_correlato",
