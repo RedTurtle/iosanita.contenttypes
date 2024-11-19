@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.1 (unreleased)
+1.0.1 (2024-11-19)
 ------------------
 
 - Fix package name.
