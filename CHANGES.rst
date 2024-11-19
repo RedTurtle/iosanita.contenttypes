@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.0a1 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
 - Initial release.
-  []
+  [daniele]
