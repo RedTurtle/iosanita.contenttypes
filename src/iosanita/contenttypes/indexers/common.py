@@ -7,7 +7,7 @@ from plone.indexer.decorator import indexer
 def get_geolocation_data(context):
     geolocation = getattr(context.aq_base, "geolocation", None)
     if not geolocation:
-        return {}
+        return None
     return {
         "latitude": geolocation.latitude,
         "longitude": geolocation.longitude,

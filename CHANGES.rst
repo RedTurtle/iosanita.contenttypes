@@ -5,8 +5,8 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- geolocation metadata return None if not set and not an empty dict.
+  [cekk]
 
 1.0.2 (2024-11-20)
 ------------------
