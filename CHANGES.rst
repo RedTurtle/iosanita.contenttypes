@@ -5,7 +5,8 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add NewsItem summary serializer, to return always metadata infos about tipologia_notizia and tipologia_notizia_metadata.
+  [cekk]
 
 
 1.0.1 (2024-11-19)

@@ -9,6 +9,9 @@ from redturtle.volto.restapi.serializer.summary import DefaultJSONSummarySeriali
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
+from plone.app.contenttypes.interfaces import INewsItem
+from zope.component import queryMultiAdapter
+from plone.indexer.interfaces import IIndexableObject
 
 import logging
 
@@ -27,6 +30,7 @@ class JSONSummarySerializerMetadata:
             "a_chi_si_rivolge_tassonomia_metadata",
             "id",
             "tipologia_notizia",
+            "tipologia_notizia_metadata",
             "start",
             "end",
             "recurrence",
@@ -115,4 +119,18 @@ class PuntoDiContattoJSONSummarySerializer(IOSanitaJSONSummarySerializer):
 
         data["contatti"] = getattr(self.context, "contatti", [])
 
+        return data
+
+
+@implementer(ISerializeToJsonSummary)
+@adapter(INewsItem, IIosanitaContenttypesLayer)
+class NewsItemJSONSummarySerializer(IOSanitaJSONSummarySerializer):
+    def __call__(self):
+        data = super().__call__()
+
+        catalog = api.portal.get_tool(name="portal_catalog")
+        adapter = queryMultiAdapter((self.context, catalog), IIndexableObject)
+
+        for metadata in ["tipologia_notizia", "tipologia_notizia_metadata"]:
+            data[metadata] = getattr(adapter, metadata, data.get(metadata, ""))
         return data
