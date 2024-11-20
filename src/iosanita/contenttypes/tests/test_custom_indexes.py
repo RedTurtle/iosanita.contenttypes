@@ -208,7 +208,7 @@ class TestCustomIndexes(unittest.TestCase):
         )
 
         brain = api.content.find(UID=struttura.UID())[0]
-        self.assertEqual(brain.geolocation, {})
+        self.assertEqual(brain.geolocation, None)
 
     def test_geolocation_metadata_has_geolocation_data(self):
         struttura = api.content.create(
