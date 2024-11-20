@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.3 (unreleased)
+1.0.3 (2024-11-20)
 ------------------
 
 - geolocation metadata return None if not set and not an empty dict.
