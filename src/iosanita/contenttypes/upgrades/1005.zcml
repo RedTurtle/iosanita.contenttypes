@@ -1,0 +1,25 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+  xmlns:gs="http://namespaces.zope.org/genericsetup">
+
+  <gs:registerProfile name="1005"
+    title="Add Subject_bando index"
+    directory="1005"
+    description='Configuration for version 1005'
+    for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+    provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <gs:upgradeSteps source="1004"
+    destination="1005"
+    profile="iosanita.contenttypes:default">
+
+    <gs:upgradeStep title="Add Subject_bando index"
+      description=""
+      handler=".v1005.upgrade" />
+
+    <gs:upgradeDepends title="Add Subject_bando index (GS profile)"
+      description=""
+      import_profile="iosanita.contenttypes.upgrades:1005" />
+
+  </gs:upgradeSteps>
+
+</configure>

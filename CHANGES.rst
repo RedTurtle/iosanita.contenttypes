@@ -5,7 +5,8 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Subject_bando index.
+  [cekk]
 
 
 1.0.3 (2024-11-20)
