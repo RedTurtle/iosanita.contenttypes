@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from . import logger
-from plone.app.upgrade.utils import loadMigrationProfile
 from plone import api
+from plone.app.upgrade.utils import loadMigrationProfile
 
 
 def upgrade(setup_tool=None):

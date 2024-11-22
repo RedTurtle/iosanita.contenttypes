@@ -80,7 +80,7 @@
       name="tipologia_servizio_metadata"
       />
   <!-- end only metadata -->
-  
+
   <adapter
       factory=".bando.Subject_bando"
       name="Subject_bando"

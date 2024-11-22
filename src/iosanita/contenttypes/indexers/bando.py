@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from redturtle.bandi.interfaces import IBando
 from plone.indexer.decorator import indexer
+from redturtle.bandi.interfaces import IBando
 
 
 @indexer(IBando)
