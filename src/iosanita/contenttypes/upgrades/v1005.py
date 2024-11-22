@@ -8,7 +8,7 @@ from plone.app.upgrade.utils import loadMigrationProfile
 def upgrade(setup_tool=None):
     """ """
     logger.info("Running upgrade (Python): Add Subject_bando index")
-    loadMigrationProfile(api.portal.get(), "profile-iosanita.contenttypes:default")
+    loadMigrationProfile(api.portal.get(), "iosanita.contenttypes.upgrades:1005")
 
     brains = api.content.find(portal_type="Bando")
     i = 0
