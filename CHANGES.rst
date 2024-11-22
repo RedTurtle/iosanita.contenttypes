@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.4 (unreleased)
+1.0.4 (2024-11-22)
 ------------------
 
 - Add Subject_bando index.
