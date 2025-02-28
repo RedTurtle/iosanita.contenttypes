@@ -9,7 +9,7 @@ from zope.interface import Interface
 
 @implementer(ISerializeToJson)
 @adapter(IBandoSchema, Interface)
-class BandoSerializer(SerializeFolderToJson):
+class BandoSerializeToJson(SerializeFolderToJson):
     def get_approfondimenti(self, bando_view):
         """ """
         folders = bando_view.retrieveFolderDeepening()
