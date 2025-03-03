@@ -5,7 +5,8 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Bando serializer to return bando_state and approfondimento.
+  [cekk]
 
 
 1.0.4 (2024-11-22)
