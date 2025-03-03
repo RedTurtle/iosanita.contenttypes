@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.serializer.dxcontent import SerializeFolderToJson
 from redturtle.bandi.interfaces.bandoSchema import IBandoSchema
-from plone.restapi.interfaces import ISerializeToJson
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
