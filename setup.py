@@ -57,7 +57,7 @@ setup(
         "z3c.jbot",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
-        "collective.volto.blocksfield",
+        "collective.volto.blocksfield>=2.2.0",
         "collective.z3cform.datagridfield",
         "redturtle.volto",
         "redturtle.bandi",
