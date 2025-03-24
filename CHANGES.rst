@@ -5,7 +5,10 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Install collective.volto.formblocks.
+  [cekk]
+- Temp disabled tests because there is a private dependency: auslfe.farmacie.
+  [cekk]
 
 
 1.0.4 (2024-11-22)
