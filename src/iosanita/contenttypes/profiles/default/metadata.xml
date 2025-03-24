@@ -7,6 +7,7 @@
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-redturtle.bandi:default</dependency>
     <dependency>profile-collective.geolocationbehavior:default</dependency>
-    <dependency>profile-collective.volto.blocksfield:taxonomy</dependency>
+    <dependency>profile-iosanita.contenttypes:taxonomy</dependency>
+    <dependency>profile-collective.volto.blocksfield:default</dependency>
   </dependencies>
 </metadata>
