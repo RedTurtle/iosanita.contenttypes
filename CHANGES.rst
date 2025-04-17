@@ -5,7 +5,8 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed help label id. Added missing trnslation for related items.
+  [daniele]
 
 
 1.0.4 (2024-11-22)
