@@ -5,6 +5,10 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
+- Install collective.volto.formblocks.
+  [cekk]
+- Temporary disabled tests because there is a private dependency: auslfe.farmacie.
+  [cekk]
 - Fixed help label id. Added missing trnslation for related items.
   [daniele]
 
