@@ -11,7 +11,8 @@ Changelog
   [cekk]
 - Fixed help label id. Added missing trnslation for related items.
   [daniele]
-
+- Enable kitconcept.seo for plone site.
+  [cekk]
 
 1.0.4 (2024-11-22)
 ------------------
