@@ -7,8 +7,10 @@ Changelog
 
 - Install collective.volto.formblocks.
   [cekk]
-- Temp disabled tests because there is a private dependency: auslfe.farmacie.
+- Temporary disabled tests because there is a private dependency: auslfe.farmacie.
   [cekk]
+- Fixed help label id. Added missing trnslation for related items.
+  [daniele]
 
 
 1.0.4 (2024-11-22)
