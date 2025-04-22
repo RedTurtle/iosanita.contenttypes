@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.5 (unreleased)
+1.0.5 (2025-04-22)
 ------------------
 
 - Install collective.volto.formblocks.
