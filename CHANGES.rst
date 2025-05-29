@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.6 (unreleased)
+1.0.6 (2025-05-29)
 ------------------
 
 - Remove dependency with auslfe.farmacie.
