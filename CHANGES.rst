@@ -5,7 +5,8 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- CT Struttura: added new relation field "Personale della struttura".
+  [daniele]
 
 
 1.0.6 (2025-05-29)
