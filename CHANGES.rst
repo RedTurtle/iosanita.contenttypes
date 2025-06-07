@@ -5,8 +5,8 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Struttura CT: return related people as backreferences.
+  [daniele]
 
 1.0.6 (2025-05-29)
 ------------------
