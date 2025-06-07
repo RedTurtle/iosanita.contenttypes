@@ -24,7 +24,7 @@ class StrutturaSerializer(BaseSerializer):
         catalog = getUtility(ICatalog)
         intids = getUtility(IIntIds)
         people = []
-        objs_unique = [] 
+        objs_unique = []
         for attr in ["struttura_ricevimento", "struttura_in_cui_opera"]:
             relations = catalog.findRelations(
                 dict(
@@ -47,7 +47,6 @@ class StrutturaSerializer(BaseSerializer):
                     people.append(summary)
                     objs_unique.append(obj.UID())
 
-        
         return sorted(people, key=lambda k: k["title"])
 
     def __call__(self, version=None, include_items=True):
