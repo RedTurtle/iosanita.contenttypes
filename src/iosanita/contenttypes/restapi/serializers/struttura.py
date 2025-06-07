@@ -37,7 +37,7 @@ class StrutturaSerializer(BaseSerializer):
                 obj = intids.queryObject(rel.from_id)
                 if (
                     obj is not None
-                    and obj.UID() not in objs_unique
+                    and obj.UID() not in objs_unique  # noqa
                     and checkPermission("zope2.View", obj)  # noqa
                     and obj.portal_type == "Persona"  # noqa
                 ):
