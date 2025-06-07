@@ -5,9 +5,8 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- CT Struttura: added new relation field "Personale della struttura".
+- Struttura CT: return related people as backreferences.
   [daniele]
-
 
 1.0.6 (2025-05-29)
 ------------------
