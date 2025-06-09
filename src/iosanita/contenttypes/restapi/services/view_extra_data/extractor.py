@@ -16,6 +16,8 @@ from zope.interface import implementer
 from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
 from zope.security import checkPermission
+from plone import api
+from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
 
 
 LIMIT = 25
@@ -99,11 +101,20 @@ class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
 class ViewExtraDataExtractorStruttura(ViewExtraDataExtractor):
     def __call__(self):
         """ """
-        return {
-            "back-references": self.get_back_references(
-                reference_id=["struttura_correlata"]
+
+        data = self.get_back_references(reference_id=["struttura_correlata"])
+        view_related_people = api.portal.get_registry_record(
+            "enable_struttura_related_people", interface=IIoSanitaContenttypesSettings
+        )
+        if view_related_people:
+            data.update(
+                {
+                    "personale": self.get_back_references(
+                        reference_id=["struttura_ricevimento", "struttura_in_cui_opera"]
+                    ),
+                }
             )
-        }
+        return {"back-references": data}
 
 
 @implementer(IoSanitaViewExtraData)

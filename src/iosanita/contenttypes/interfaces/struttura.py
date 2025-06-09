@@ -68,6 +68,20 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
     )
 
+    personale_struttura = RelationList(
+        title=_(
+            "personale_struttura_struttura_label",
+            default="Personale",
+        ),
+        description=_(
+            "personale_struttura_struttura_help",
+            default='Utilizza questo campo per definire manualmente una lista delle persone da mostrare come personale della struttura. Se le impostazioni del sito lo prevedono, a questo elenco verranno aggiunte le Persone che hanno referenziato questa struttura nei campi "dove opera" o "dove riceve"',
+        ),
+        required=False,
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.vocabularies.Catalog"),
+    )
+
     uo_correlata = RelationList(
         title=_(
             "uo_correlata_struttura_label",
@@ -120,6 +134,12 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={"selectableTypes": ["UnitaOrganizzativa"]},
     )
+    form.widget(
+        "personale_struttura",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={"selectableTypes": ["Persona"]},
+    )
 
     # fieldsets
     model.fieldset(
@@ -145,6 +165,7 @@ class IStruttura(model.Schema, IIosanitaContenttypes):
         fields=[
             "responsabile_correlato",
             "coordinatore_correlato",
+            "personale_struttura",
         ],
     )
     model.fieldset(

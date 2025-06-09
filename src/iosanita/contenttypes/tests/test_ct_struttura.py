@@ -200,7 +200,7 @@ class TestStrutturaSchema(unittest.TestCase):
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
             resp["fieldsets"][7]["fields"],
-            ["responsabile_correlato", "coordinatore_correlato"],
+            ["responsabile_correlato", "coordinatore_correlato", "personale_struttura"],
         )
 
     def test_struttura_fields_correlati_fieldset(self):

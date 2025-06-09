@@ -9,7 +9,6 @@
   <adapter factory=".summary.NewsItemJSONSummarySerializer" />
   <adapter factory=".modulo.SerializeModuloToJsonSummary" />
   <adapter factory=".dxfields.FileFieldViewModeSerializer" />
-  <adapter factory=".struttura.StrutturaSerializer" />
 
   <!-- Summary Serializer Metadata -->
   <utility

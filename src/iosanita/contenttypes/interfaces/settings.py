@@ -25,3 +25,18 @@ class IIoSanitaContenttypesSettings(Interface):
         default=True,
         required=False,
     )
+
+    enable_struttura_related_people = Bool(
+        title=_(
+            "enable_struttura_related_people_label",
+            default="Abilita la visualizzazione delle Persone correlate ad una Struttura",
+        ),
+        description=_(
+            "enable_struttura_related_people_help",
+            default="Questo è il valore di default per decidere se mostrare "
+            "o meno i contenuti Persona correlati con i contenuti Struttura "
+            'tramite i campi "dove opera" o "dove riceve".',
+        ),
+        default=False,
+        required=False,
+    )
