@@ -109,7 +109,8 @@ class ViewExtraDataExtractorStruttura(ViewExtraDataExtractor):
         if view_related_people:
             data.update(
                 self.get_back_references(
-                    reference_id=["struttura_ricevimento", "struttura_in_cui_opera"])
+                    reference_id=["struttura_ricevimento", "struttura_in_cui_opera"]
+                )
             )
         return {"back-references": data}
 
