@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.7 (unreleased)
+1.0.7 (2025-06-18)
 ------------------
 
 - Struttura CT: return related people as backreferences if flag is enabled in controlpanel. Re-added new "personale_correlato" field to link Persona cts manually.
