@@ -1,11 +1,11 @@
+from plone import api
 from plone.restapi.behaviors import IBlocks
 from plone.restapi.interfaces import IBlockFieldSerializationTransformer
+from plone.restapi.types.utils import get_info_for_type
 from zope.component import adapter
+from zope.component import queryMultiAdapter
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
-from plone.restapi.types.utils import get_info_for_type
-from zope.component import queryMultiAdapter
-from plone import api
 
 
 @implementer(IBlockFieldSerializationTransformer)
@@ -37,7 +37,7 @@ class SearchTableVariationBlockSerialize:
                 if not col.get("ct") or not col.get("field"):
                     continue
                 if col["ct"] not in schemas:
-                    # get schema as plone.restapi /@types/Schema                    
+                    # get schema as plone.restapi /@types/Schema
                     schemas[col["ct"]] = self._get_schema(col["ct"])
                 if not schemas[col["ct"]]:
                     continue
@@ -46,4 +46,3 @@ class SearchTableVariationBlockSerialize:
                     # TODO: ma servono veramente tutte le info o solo una parte ?
                     col["field_properties"] = schema["properties"][col["field"]]
         return value
-
