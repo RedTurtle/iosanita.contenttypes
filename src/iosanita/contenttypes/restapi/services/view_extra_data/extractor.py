@@ -3,8 +3,10 @@ from Acquisition import aq_inner
 from iosanita.contenttypes.interfaces import IoSanitaViewExtraData
 from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.servizio import IServizio
+from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
 from iosanita.contenttypes.interfaces.struttura import IStruttura
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
+from plone import api
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from redturtle.bandi.interfaces.bando import IBando
 from zc.relation.interfaces import ICatalog
@@ -16,8 +18,6 @@ from zope.interface import implementer
 from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
 from zope.security import checkPermission
-from plone import api
-from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
 
 
 LIMIT = 25
