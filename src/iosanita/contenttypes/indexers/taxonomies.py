@@ -3,18 +3,23 @@ from collective.taxonomy import PATH_SEPARATOR
 from collective.taxonomy.interfaces import ITaxonomy
 from plone.dexterity.interfaces import IDexterityContent
 from plone.indexer.decorator import indexer
-from zope.component import getUtility
+from zope.component import getSiteManager
 from zope.globalrequest import getRequest
 
 
 def get_taxonomy_vocab(field):
     request = getRequest()
-    taxonomy = getUtility(ITaxonomy, name=f"collective.taxonomy.{field}")
-    return taxonomy.makeVocabulary(request.get("LANGUAGE"))
+    sm = getSiteManager()
+    utility = sm.queryUtility(ITaxonomy, name=f"collective.taxonomy.{field}")
+    if not utility:
+        return None
+    return utility.makeVocabulary(request.get("LANGUAGE"))
 
 
 def extract_taxonomies(context, field, only_leaf=False):
     taxonomy_voc = get_taxonomy_vocab(field)
+    if not taxonomy_voc:
+        return []
     data = []
     value = getattr(context, field, []) or []
     if not isinstance(value, list):
