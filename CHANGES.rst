@@ -7,7 +7,8 @@ Changelog
 
 - Blocco search / variante table - aggiunte le proprietà dei campi nella colonna nel serializer
   [mamico]
-
+- get_taxonomy_vocab non si rompe se non è presente la tassonomia richiesta.
+  [cekk]
 
 1.0.7 (2025-06-18)
 ------------------
