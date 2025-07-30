@@ -29,4 +29,20 @@
       permission="cmf.ManagePortal"
       layer="iosanita.contenttypes.interfaces.IIosanitaContenttypesLayer"
       />
+
+
+  <!-- SEARCH BLOCK DOWNLOAD -->
+  <browser:page
+      name="searchblock"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      class=".searchblock.SearchBlockTraverser"
+      permission="zope2.View"
+      />
+  <browser:page
+      name="download"
+      for=".searchblock.ISearchBlockTraverser"
+      class=".searchblock.SearchBlockDownload"
+      permission="zope2.View"
+      />
+
 </configure>

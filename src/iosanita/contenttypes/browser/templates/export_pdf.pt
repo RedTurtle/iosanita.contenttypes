@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="iosanita.contenttypes">
+
+<head>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            font-size: 10pt;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 9pt;
+        }
+        th {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+            font-weight: bold;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .generated-on {
+            font-size: 8pt;
+            color: #666;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div metal:fill-slot="main">
+        <div class="header">
+            <h1>Export Results</h1>
+        </div>
+        
+        <div class="generated-on" tal:condition="view/timestamp">
+            Generated on: <span tal:replace="view/timestamp" />
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th tal:repeat="column view/columns" 
+                        tal:content="column" />
+                </tr>
+            </thead>
+            <tbody>
+                <tr tal:repeat="result view/results">
+                    <td tal:repeat="column view/columns"
+                        tal:content="python: str(result.get(column, ''))" />
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
