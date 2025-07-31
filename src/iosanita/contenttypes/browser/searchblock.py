@@ -68,14 +68,14 @@ class SearchBlockDownload(BrowserView):
         # sort_order = block_data.get("sort_order", "ascending")
 
         # 3. Update/Add filters and sorting from query string
-        for key, value in self.request.form.items():
-            if key in ("sort_on", "sort_order"):
-                if key == "sort_on":
-                    sort_on = value
-                else:
-                    sort_order = value
-            else:
-                query[key] = value
+        # for key, value in self.request.form.items():
+        #     if key in ("sort_on", "sort_order"):
+        #         if key == "sort_on":
+        #             sort_on = value
+        #         else:
+        #             sort_order = value
+        #     else:
+        #         query[key] = value
 
         # 4. Execute the search
         catalog = self.context.portal_catalog
