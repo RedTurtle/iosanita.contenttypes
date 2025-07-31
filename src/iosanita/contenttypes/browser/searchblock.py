@@ -10,9 +10,6 @@ from io import StringIO
 # from reportlab.lib import colors
 
 
-import os.path
-
-
 class ISearchBlockTraverser(IPublishTraverse):
     pass
 
