@@ -1,11 +1,9 @@
-from io import FileIO
 from Products.Five.browser import BrowserView
 from zExceptions import NotFound
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 import csv
 from io import StringIO
-from io import BytesIO
 
 # from reportlab.lib.pagesizes import letter
 # from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
@@ -69,8 +67,8 @@ class SearchBlockDownload(BrowserView):
         # 2. Get columns, base filters and sorting
         columns = block_data.get("columns", [])
         query = block_data.get("query", {})
-        sort_on = block_data.get("sort_on", "")
-        sort_order = block_data.get("sort_order", "ascending")
+        # sort_on = block_data.get("sort_on", "")
+        # sort_order = block_data.get("sort_order", "ascending")
 
         # 3. Update/Add filters and sorting from query string
         for key, value in self.request.form.items():
