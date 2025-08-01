@@ -2,15 +2,16 @@ from datetime import datetime
 from io import BytesIO
 from io import StringIO
 from iosanita.contenttypes import _
+from plone import api
 from Products.Five.browser import BrowserView
 from weasyprint import HTML
 from zExceptions import BadRequest
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-from plone import api
 
 import csv
 import six
+
 
 CONTENT_TYPES_MAPPING = {
     "csv": '"text/comma-separated-values"',
@@ -61,7 +62,6 @@ class ExportViewDownload(BrowserView):
                 )
             )
         self.set_headers()
-
         data = self.get_data()
         if not data:
             return ""
@@ -71,8 +71,6 @@ class ExportViewDownload(BrowserView):
         elif self.export_type == "pdf":
             resp_data = self.get_pdf(data)
 
-        if isinstance(resp_data, six.text_type):
-            resp_data = resp_data.encode("utf-8")
         return resp_data
 
     def get_filename(self):
@@ -90,7 +88,7 @@ class ExportViewDownload(BrowserView):
             "Content-Disposition", f"attachment;filename={self.get_filename()}"
         )
         self.request.response.setHeader(
-            "Content-Type", CONTENT_TYPES_MAPPING.get(self.export_type, "text/csv")
+            "Content-Type", CONTENT_TYPES_MAPPING[self.export_type]
         )
 
     def get_csv(self, data):
@@ -105,7 +103,7 @@ class ExportViewDownload(BrowserView):
 
         for item in data:
             csv_writer.writerow(self.format_row(item))
-        return csv_data.getvalue()
+        return csv_data.getvalue().encode("utf-8")
 
     def get_pdf(self, data):
         html_str = self.get_html_for_pdf(data=data)
@@ -123,7 +121,22 @@ class ExportViewDownload(BrowserView):
 
     def get_headers(self, data):
         """
-        Implement it into your view
+        Should be implemented in your view.
+
+        Args:
+            data: The input data used to determine headers
+                  (type depends on implementation).
+
+        Returns:
+            list of dict: A list of header definitions, each represented as a dictionary with:
+                - "title" (str): The display name of the column.
+                - "key" (str): The corresponding field name in the data.
+
+            Example:
+                [
+                    {"title": "Name", "key": "name"},
+                    {"title": "Age", "key": "age"}
+                ]
         """
         raise NotImplementedError()
 
