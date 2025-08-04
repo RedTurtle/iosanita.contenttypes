@@ -36,7 +36,33 @@
       for=".export_view.IExportViewTraverser"
       class=".export_view.ExportViewDownload"
       permission="zope2.View"
+      layer="iosanita.contenttypes.interfaces.IIosanitaContenttypesLayer"
       />
 
+  <!-- for=".export_view.IExportViewDownload" -->
+  <browser:page
+      name="export_pdf"
+      for="*"
+      template="templates/export_pdf.pt"
+      permission="zope2.View"
+      layer="iosanita.contenttypes.interfaces.IIosanitaContenttypesLayer"
+      />
+
+  <!-- export searchblock -->
+  <browser:page
+      name="searchblock"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      class=".searchblock.SearchBlockTraverser"
+      permission="zope2.View"
+      layer="iosanita.contenttypes.interfaces.IIosanitaContenttypesLayer"
+      />
+
+  <browser:page
+      name="download"
+      for=".searchblock.ISearchBlockTraverser"
+      class=".searchblock.SearchBlockDownload"
+      permission="zope2.View"
+      layer="iosanita.contenttypes.interfaces.IIosanitaContenttypesLayer"
+      />
 
 </configure>
