@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="iosanita.contenttypes",
-    version="1.0.5.dev0",
+    version="1.0.8.dev0",
     description="An add-on for Plone",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
@@ -54,10 +54,9 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
-        "z3c.jbot",
         "plone.api>=1.8.4",
         "plone.app.dexterity",
-        "collective.volto.blocksfield",
+        "collective.volto.blocksfield>=2.2.0",
         "collective.z3cform.datagridfield",
         "redturtle.volto",
         "redturtle.bandi",

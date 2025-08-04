@@ -18,4 +18,9 @@
 
   <adapter factory=".relationfield.RelationListFieldSerializer" />
 
+  <subscriber
+      factory=".blocks.SearchTableVariationBlockSerialize"
+      provides="plone.restapi.interfaces.IBlockFieldSerializationTransformer"
+      />
+
 </configure>

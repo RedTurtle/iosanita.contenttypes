@@ -3,8 +3,10 @@ from Acquisition import aq_inner
 from iosanita.contenttypes.interfaces import IoSanitaViewExtraData
 from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.servizio import IServizio
+from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
 from iosanita.contenttypes.interfaces.struttura import IStruttura
 from iosanita.contenttypes.interfaces.unita_organizzativa import IUnitaOrganizzativa
+from plone import api
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from redturtle.bandi.interfaces.bando import IBando
 from zc.relation.interfaces import ICatalog
@@ -99,11 +101,18 @@ class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
 class ViewExtraDataExtractorStruttura(ViewExtraDataExtractor):
     def __call__(self):
         """ """
-        return {
-            "back-references": self.get_back_references(
-                reference_id=["struttura_correlata"]
+
+        data = self.get_back_references(reference_id=["struttura_correlata"])
+        view_related_people = api.portal.get_registry_record(
+            "enable_struttura_related_people", interface=IIoSanitaContenttypesSettings
+        )
+        if view_related_people:
+            data.update(
+                self.get_back_references(
+                    reference_id=["struttura_ricevimento", "struttura_in_cui_opera"]
+                )
             )
-        }
+        return {"back-references": data}
 
 
 @implementer(IoSanitaViewExtraData)

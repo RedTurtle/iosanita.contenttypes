@@ -2,12 +2,39 @@ Changelog
 =========
 
 
-1.0.5 (unreleased)
+1.0.8 (unreleased)
 ------------------
 
 - Add Bando serializer to return bando_state and approfondimento.
   [cekk]
+- Blocco search / variante table - aggiunte le proprietà dei campi nella colonna nel serializer
+  [mamico]
+- get_taxonomy_vocab non si rompe se non è presente la tassonomia richiesta.
+  [cekk]
 
+1.0.7 (2025-06-18)
+------------------
+
+- Struttura CT: return related people as backreferences if flag is enabled in controlpanel. Re-added new "personale_correlato" field to link Persona cts manually.
+  [daniele]
+
+1.0.6 (2025-05-29)
+------------------
+
+- Remove dependency with auslfe.farmacie.
+  [cekk]
+
+1.0.5 (2025-04-22)
+------------------
+
+- Install collective.volto.formblocks.
+  [cekk]
+- Temporary disabled tests because there is a private dependency: auslfe.farmacie.
+  [cekk]
+- Fixed help label id. Added missing trnslation for related items.
+  [daniele]
+- Enable kitconcept.seo for plone site.
+  [cekk]
 
 1.0.4 (2024-11-22)
 ------------------

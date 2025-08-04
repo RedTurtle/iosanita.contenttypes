@@ -71,7 +71,7 @@ class IPersona(model.Schema, IIosanitaContenttypes):
     altri_incarichi = BlocksField(
         title=_("altri_incarichi_label", default="Altri incarichi"),
         description=_(
-            "altri incarichi_help",
+            "altri_incarichi_help",
             default="Indicazione degli altri incarichi della persona all'interno dell'ASL.",
         ),
         required=False,
