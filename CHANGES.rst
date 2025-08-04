@@ -9,6 +9,10 @@ Changelog
   [mamico]
 - get_taxonomy_vocab non si rompe se non è presente la tassonomia richiesta.
   [cekk]
+- Base implementation for CSV/PDF export of tabular data
+  [cekk] [mamico]
+- Implementation for CSV/PDF export for search block
+  [mamico]
 
 1.0.7 (2025-06-18)
 ------------------
