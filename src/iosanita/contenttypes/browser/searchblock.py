@@ -70,7 +70,7 @@ class SearchBlockDownload(ExportViewDownload):
 
     def _query_from_facets(self):
         query = []
-        for facet in self.block_data["facets"]:
+        for facet in self.block_data.get("facets") or []:
             if facet["field"]["value"] in self.request.form:
                 if self.request.form[facet["field"]["value"]] in ["null"]:
                     continue
