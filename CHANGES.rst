@@ -5,6 +5,8 @@ Changelog
 1.0.8 (unreleased)
 ------------------
 
+- Add Bando serializer to return bando_state and approfondimento.
+  [cekk]
 - Blocco search / variante table - aggiunte le proprietà dei campi nella colonna nel serializer
   [mamico]
 - get_taxonomy_vocab non si rompe se non è presente la tassonomia richiesta.
