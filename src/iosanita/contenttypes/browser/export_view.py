@@ -197,7 +197,8 @@ class ExportViewDownload(BrowserView):
         # XXX: this is a guess
         if value.startswith("https://"):
             return {"type": "url", "url": value, "value": column["title"]}
+        # XXX: this is a guess
         # 2025-05-21T00:00:00 -> isoformat date YYYY-MM-DD
         if re.match(r"^\d{4}-\d{2}-\d{2}T00:00:00$", value):
-            value = value.split("T")[0]
+            return {"type": "str", "value": value.split("T")[0]}
         return {"type": "str", "value": str(value)}
