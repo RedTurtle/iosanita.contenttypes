@@ -179,7 +179,9 @@ class ExportViewDownload(BrowserView):
         return view(rows=data, columns=columns)
 
     def pdf_styles(self):
-        return importlib.resources.read_text("iosanita.contenttypes.browser.static", "export_pdf.css")
+        return importlib.resources.read_text(
+            "iosanita.contenttypes.browser.static", "export_pdf.css"
+        )
 
     def pdf_title(self):
         return None

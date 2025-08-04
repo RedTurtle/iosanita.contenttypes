@@ -65,6 +65,7 @@ setup(
         "collective.address",
         "collective.geolocationbehavior",
         "collective.volto.enhancedlinks",
+        "weasyprint",
     ],
     extras_require={
         "test": [
