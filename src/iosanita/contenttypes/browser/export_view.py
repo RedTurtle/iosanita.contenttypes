@@ -10,6 +10,7 @@ from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
 import csv
+import importlib.resources
 import logging
 import re
 
@@ -178,8 +179,7 @@ class ExportViewDownload(BrowserView):
         return view(rows=data, columns=columns)
 
     def pdf_styles(self):
-        portal_url = api.portal.get().absolute_url()
-        return [f"{portal_url}/++plone++iosanita.contenttypes/export_pdf.css"]
+        return importlib.resources.read_text("iosanita.contenttypes.browser", "static/export_pdf.css")
 
     def pdf_title(self):
         return None
