@@ -7,7 +7,7 @@
         columns python: options.get('columns', []);
       ">
     <head>
-        <styles tal:content="context/pdf_styles|nothing" />
+        <style tal:content="context/pdf_styles|nothing" />
     </head>
     <body>
         <header class="header" tal:define="title context/pdf_title|nothing" tal:condition="title">
