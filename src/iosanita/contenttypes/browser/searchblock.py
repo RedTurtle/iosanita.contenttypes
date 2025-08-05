@@ -181,6 +181,7 @@ class SearchBlockDownload(ExportViewDownload):
         #      chiedere qualsiasi atttributo degli oggetti, senza un controllo fine
         #      sullo schema
         fullobjects = True
+        self.request.form["b_size"] = 9999
         results = getMultiAdapter((results, self.request), ISerializeToJson)(
             fullobjects=fullobjects
         )
