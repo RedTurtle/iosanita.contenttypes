@@ -193,10 +193,8 @@ class ExportViewDownload(BrowserView):
         if value is None:
             return {"type": "str", "value": value}
         if isinstance(value, dict):
-            # {'token': 'in_corso', 'title': 'In corso'}
+            # e.g. {'token': 'in_corso', 'title': 'In corso'}
             return {"type": "str", "value": value.get("token")}
-        # if not isinstance(value, str):
-        #     import pdb; pdb.set_trace()
         # XXX: this is a guess
         if value.startswith("https://"):
             return {"type": "url", "url": value, "value": column["title"]}

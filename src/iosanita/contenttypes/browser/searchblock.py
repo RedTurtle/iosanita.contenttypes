@@ -182,7 +182,7 @@ class SearchBlockDownload(ExportViewDownload):
 
         # XXX: potrebbe essere overkilling serializzare, forse basta la ricerca al
         #      catalogo
-        # XXX: consideriamo però che senza usarre il serializzatore un utente potrebbe
+        # XXX: consideriamo però che senza usare il serializzatore un utente potrebbe
         #      chiedere qualsiasi atttributo degli oggetti, senza un controllo fine
         #      sullo schema
         fullobjects = True
