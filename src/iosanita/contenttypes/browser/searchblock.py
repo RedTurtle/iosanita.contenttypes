@@ -4,12 +4,10 @@ from .export_view import IExportViewDownload
 from .export_view import IExportViewTraverser
 from copy import deepcopy
 from iosanita.contenttypes import _
-from plone.protect.interfaces import IDisableCSRFProtection
 from plone.restapi.interfaces import ISerializeToJson
 from zExceptions import BadRequest
 from zExceptions import NotFound
 from zope.component import getMultiAdapter
-from zope.interface import alsoProvides
 from zope.interface import implementer
 
 import logging
@@ -130,8 +128,6 @@ class SearchBlockDownload(ExportViewDownload):
         # 4. fare la ricerca
         # 5. fare export in csv/pdf a seconda del formato
         """
-        # TODO: chi/cosa scrive sul db ? questa è da togliere a regime
-        # alsoProvides(self.request, IDisableCSRFProtection)
 
         # 2. Get columns, base filters and sorting
         columns = self.block_data.get("columns", [])
