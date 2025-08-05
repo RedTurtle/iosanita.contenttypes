@@ -71,14 +71,23 @@ class SearchBlockDownload(ExportViewDownload):
     def _query_from_facets(self):
         query = []
         for facet in self.block_data.get("facets") or []:
-            if "field" not in facet or "type" not in facet:
+            if "field" not in facet:
                 logger.warning("invalid facet %s", facet)
                 continue
             if facet["field"]["value"] in self.request.form:
                 if self.request.form[facet["field"]["value"]] in ["null"]:
                     continue
 
-                if facet["type"] == "daterangeFacet":
+                if not facet.get("type"):
+                    # default
+                    query.append(
+                        {
+                            "i": facet["field"]["value"],
+                            "o": "plone.app.querystring.operation.selection.is",
+                            "v": self.request.form[facet["field"]["value"]],
+                        }
+                    )
+                elif facet["type"] == "daterangeFacet":
                     query.append(
                         {
                             "i": facet["field"]["value"],
