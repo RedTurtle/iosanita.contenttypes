@@ -71,18 +71,27 @@ class SearchBlockDownload(ExportViewDownload):
     def _query_from_facets(self):
         query = []
         for facet in self.block_data.get("facets") or []:
-            if "field" not in facet:
+            if "field" not in facet or "type" not in facet:
                 logger.warning("invalid facet %s", facet)
                 continue
             if facet["field"]["value"] in self.request.form:
                 if self.request.form[facet["field"]["value"]] in ["null"]:
                     continue
+
                 if facet["type"] == "daterangeFacet":
                     query.append(
                         {
                             "i": facet["field"]["value"],
                             "o": "plone.app.querystring.operation.date.between",
                             "v": self.request.form[facet["field"]["value"]].split(","),
+                        }
+                    )
+                elif facet["type"] == "selectFacet" and not facet["multiple"]:
+                    query.append(
+                        {
+                            "i": facet["field"]["value"],
+                            "o": "plone.app.querystring.operation.selection.is",
+                            "v": self.request.form[facet["field"]["value"]],
                         }
                     )
                 elif facet["type"] == "checkboxFacet" and not facet["multiple"]:
@@ -95,8 +104,13 @@ class SearchBlockDownload(ExportViewDownload):
                     )
                 else:
                     logger.warning("DEBUG: filter %s not implemnted", facet)
-            # else:
-            #     logger.info("DEBUG: skip %s", facet)
+                    query.append(
+                        {
+                            "i": facet["field"]["value"],
+                            "o": "plone.app.querystring.operation.selection.is",
+                            "v": self.request.form[facet["field"]["value"]],
+                        }
+                    )
         return query
 
     def get_data(self):
@@ -133,8 +147,8 @@ class SearchBlockDownload(ExportViewDownload):
         querybuilder_parameters = dict(
             query=query,
             brains=True,
-            # b_start=b_start,
-            # b_size=b_size,
+            b_start=0,
+            b_size=9999,
             # sort_on=sort_on,
             # sort_order=sort_order,
             # limit=limit,
