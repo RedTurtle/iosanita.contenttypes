@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal" xml:lang="en" tal:define="
+        rows python: options.get('rows', []);
+        columns python: options.get('columns', []);
+      ">
+    <head>
+        <style tal:content="context/pdf_styles|nothing" />
+    </head>
+    <body>
+        <header class="header" tal:define="title context/pdf_title|nothing" tal:condition="title">
+            <h1 class="title">${title}</h1>
+        </header>
+        <section>
+            <p tal:define="description context/pdf_description|nothing"
+               tal:condition="description"
+               class="description">${description}</p>
+            <table class="export-table">
+                <thead>
+                    <tr>
+                        <tal:headers repeat="col python:columns">
+                            <th tal:content="col/title"></th>
+                        </tal:headers>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr tal:repeat="row rows"
+                        tal:attributes="class python:'row-' + (repeat['row'].even() and 'even' or 'odd')">
+                        <!-- <td tal:define="item_url python:item[0];
+                                        item_title python:item[1]">
+                            <a href="${item_url}" title="{item_title}">${item_title}</a>
+                        </td> -->
+                        <tal:td tal:repeat="value row">                            
+                            <td tal:define="
+                                    idx repeat/value/index; 
+                                    formatted python:context.pdf_cell_format(columns[idx], value)">
+                                <tal:str tal:condition="python:formatted.get('type', 'str') == 'str'" tal:content="formatted/value"></tal:str>
+                                <tal:url tal:condition="python:formatted.get('type') == 'url'">
+                                    <a tal:attributes="href formatted/url" tal:content="formatted/value"></a>
+                                </tal:url>
+                            </td>
+                        </tal:td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </body>
+</html>
