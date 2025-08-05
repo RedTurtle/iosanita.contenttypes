@@ -85,7 +85,6 @@ class SearchBlockDownload(ExportViewDownload):
                             "v": self.request.form[facet["field"]["value"]].split(","),
                         }
                     )
-                # {'@id': 'e1ba4f25-09a7-4329-9d12-05e6e8a354f7', 'field': {'label': 'Stato del bando', 'value': 'bando_state'}, 'hidden': False, 'multiple': False, 'type': 'checkboxFacet'}
                 elif facet["type"] == "checkboxFacet" and not facet["multiple"]:
                     query.append(
                         {
@@ -96,8 +95,8 @@ class SearchBlockDownload(ExportViewDownload):
                     )
                 else:
                     logger.warning("DEBUG: filter %s not implemnted", facet)
-            else:
-                logger.info("DEBUG: skip %s", facet)
+            # else:
+            #     logger.info("DEBUG: skip %s", facet)
         return query
 
     def get_data(self):
@@ -109,7 +108,7 @@ class SearchBlockDownload(ExportViewDownload):
         # 5. fare export in csv/pdf a seconda del formato
         """
         # TODO: chi/cosa scrive sul db ? questa è da togliere a regime
-        alsoProvides(self.request, IDisableCSRFProtection)
+        # alsoProvides(self.request, IDisableCSRFProtection)
 
         # 2. Get columns, base filters and sorting
         columns = self.block_data.get("columns", [])
@@ -118,10 +117,6 @@ class SearchBlockDownload(ExportViewDownload):
         query = query_data["query"]
         sort_on = query_data.get("sort_on")
         sort_order = query_data.get("sort_order")
-
-        import logging
-
-        logging.info("DEBUG %s", self.request.form)
 
         # 3. Update/Add filters and sorting from query string
         for key, value in self.request.form.items():
@@ -134,8 +129,6 @@ class SearchBlockDownload(ExportViewDownload):
             #     query[key] = value
         query += self._query_from_facets()
         query += self._query_from_searchtext()
-
-        logging.info("DEBUG %s", query)
 
         querybuilder_parameters = dict(
             query=query,
@@ -170,11 +163,13 @@ class SearchBlockDownload(ExportViewDownload):
 
         # XXX: potrebbe essere overkilling serializzare, forse basta la ricerca al
         #      catalogo
+        # XXX: consideriamo però che senza usarre il serializzatore un utente potrebbe
+        #      chiedere qualsiasi atttributo degli oggetti, senza un controllo fine
+        #      sullo schema
         fullobjects = True
         results = getMultiAdapter((results, self.request), ISerializeToJson)(
             fullobjects=fullobjects
         )
-
         for obj in results["items"]:
             yield [obj["title"]] + [obj.get(c["field"]) for c in columns]
 

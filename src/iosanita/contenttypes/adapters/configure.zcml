@@ -10,4 +10,6 @@
       name="schema.tweaks_iosanita"
       />
 
+  <adapter factory=".extractor.ViewExtraDataExtractorAT" />
+
 </configure>
