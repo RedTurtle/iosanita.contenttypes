@@ -50,6 +50,8 @@ class ExportViewDownload(BrowserView):
 
     """
 
+    with_footer = True
+
     def __init__(self, context, request):
         super().__init__(context, request)
         self.export_type = "csv"
@@ -184,7 +186,8 @@ class ExportViewDownload(BrowserView):
         )
 
     def pdf_title(self):
-        return None
+        context = self.context.context
+        return context.Title()
 
     def pdf_description(self):
         return None
@@ -203,3 +206,13 @@ class ExportViewDownload(BrowserView):
         if re.match(r"^\d{4}-\d{2}-\d{2}T00:00:00$", value):
             return {"type": "str", "value": value.split("T")[0]}
         return {"type": "str", "value": str(value)}
+
+    def pdf_logob64(self):
+        """
+        TODO
+        """
+        return None
+
+    def pdf_last_update(self):
+        # TODO: valutare localizzazione della data
+        return datetime.now().strftime("%d/%m/%Y %H:%M")

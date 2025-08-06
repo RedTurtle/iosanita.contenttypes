@@ -86,11 +86,16 @@ class SearchBlockDownload(ExportViewDownload):
                         }
                     )
                 elif facet["type"] == "daterangeFacet":
+                    daterange = self.request.form[facet["field"]["value"]].split(",")
+                    if not daterange[0]:
+                        daterange[0] = "1970-01-01"
+                    if not daterange[1]:
+                        daterange[1] = "2500-01-01"
                     query.append(
                         {
                             "i": facet["field"]["value"],
                             "o": "plone.app.querystring.operation.date.between",
-                            "v": self.request.form[facet["field"]["value"]].split(","),
+                            "v": daterange,
                         }
                     )
                 elif facet["type"] == "selectFacet" and not facet["multiple"]:
@@ -110,7 +115,7 @@ class SearchBlockDownload(ExportViewDownload):
                         }
                     )
                 else:
-                    logger.warning("DEBUG: filter %s not implemnted", facet)
+                    logger.warning("DEBUG: filter %s not implemented", facet)
                     query.append(
                         {
                             "i": facet["field"]["value"],
@@ -200,3 +205,26 @@ class SearchBlockDownload(ExportViewDownload):
         return [{"key": "title", "title": _("Titolo")}] + [
             {"key": c["field"], "title": c["title"]} for c in columns
         ]
+
+    # TODO: valutare eventuale titolo impostato sul blocco
+    # def pdf_title(self):
+
+    def pdf_description(self):
+        query = []
+        searchtext = self._query_from_searchtext()
+        if searchtext and searchtext[0].get("v"):
+            # TODO: translate
+            query.append(f"Ricerca per: {searchtext[0]['v']}")
+        for facet in self.block_data.get("facets") or []:
+            if "field" not in facet:
+                logger.warning("invalid facet %s", facet)
+                continue
+            if facet["field"]["value"] in self.request.form:
+                if self.request.form[facet["field"]["value"]] in ["null"]:
+                    continue
+                # TODO: tonare la label anzichè il value del campo
+                # TODO: gestire campi particoolari come: multipli, date, ...
+                query.append(
+                    f'{facet["field"]["label"]}: {self.request.form[facet["field"]["value"]]}'
+                )
+        return ",\n".join(query)
