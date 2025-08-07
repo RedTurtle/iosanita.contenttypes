@@ -21,13 +21,6 @@ fontools_logger = logging.getLogger("fontTools.subset")
 fontools_logger.setLevel(logging.WARNING)
 
 
-CONTENT_TYPES_MAPPING = {
-    "csv": "text/comma-separated-values",
-    "pdf": "application/pdf",
-    "html": "text/html",
-}
-
-
 class IExportViewTraverser(IPublishTraverse):
     """
     Marker interface for Download views
@@ -76,17 +69,21 @@ class ExportViewDownload(BrowserView):
                     )
                 )
             )
-        self.set_headers()
         data = self.get_data()
-        if not data:
-            return ""
-        resp_data = ""
         if self.export_type == "csv":
-            resp_data = self.get_csv(data)
+            # default per locales di riferimento (perr l'encoding, al momento, lasciamo
+            # il generico utf-8 con BOM che potrebbe funzionare per tutti,
+            # MS Excel incluso)
+            lang = api.portal.get_current_language(self.context)
+            if lang == "it":
+                sep = ";"
+            else:
+                sep = ","
+            return self.get_csv(data, sep=sep)
         elif self.export_type == "pdf":
-            resp_data = self.get_pdf(data)
+            return self.get_pdf(data)
         elif self.export_type == "html":
-            resp_data = self.get_html_for_pdf(data)
+            return self.get_html_for_pdf(data)
         return resp_data
 
     def get_filename(self):
@@ -96,37 +93,42 @@ class ExportViewDownload(BrowserView):
         now = datetime.now().strftime("%Y_%m_%d_%H_%M")
         return f"export_{now}.{self.export_type}"
 
-    def set_headers(self):
-        """
-        Set the headers for the response.
-        """
-        if self.export_type in ["pdf", "csv"]:
-            self.request.response.setHeader(
-                "Content-Disposition", f"attachment;filename={self.get_filename()}"
-            )
-        self.request.response.setHeader(
-            "Content-Type", CONTENT_TYPES_MAPPING[self.export_type]
-        )
-
-    def get_csv(self, data):
+    def get_csv(self, data, encoding="utf-8-sig", sep=","):
         """
         Generate CSV data from the provided data.
         """
+        # 1. Crea uno StringIO per il CSV
+        csv_buffer = StringIO()
+        # 2. Aggiungi l'header per il separatore (specifico per Excel)
+        # In Libreoffice viene aggiunta una riga, per ora evitiamo
+        # csv_buffer.write(f"sep={sep}\n")
+        # 3. Scrittura dei dati CSV
         columns = self.get_columns(data)
-
-        csv_data = StringIO()
-        csv_writer = csv.writer(csv_data, quoting=csv.QUOTE_ALL)
+        csv_writer = csv.writer(csv_buffer, delimiter=sep, quoting=csv.QUOTE_ALL)
         csv_writer.writerow([c["title"] for c in columns])
-
         for item in data:
             csv_writer.writerow(self.format_row(item))
-        return csv_data.getvalue().encode("utf-8")
+        # 4. Prepara i bytes con BOM (UTF-8-sig)
+        csv_data = csv_buffer.getvalue()
+        if encoding == "utf-8-sig":
+            csv_bytes = b'\xef\xbb\xbf' + csv_data.encode('utf-8')  # Aggiunge BOM
+        else:
+            csv_bytes = cvs_data.encode(encoding)
+        # 5. Crea la risposta con gli header corretti
+        response = self.request.response
+        response.setHeader("Content-Disposition", f"attachment;filename={self.get_filename()}")
+        response.setHeader("Content-Type", f"text/csv; charset={encoding}")
+        return csv_bytes
 
     def get_pdf(self, data):
         html_str = self.get_html_for_pdf(data=data)
         pdf_file = BytesIO()
         HTML(string=html_str).write_pdf(pdf_file)
         pdf_file.seek(0)
+        # 5. Crea la risposta con gli header corretti
+        response = self.request.response
+        response.setHeader("Content-Disposition", f"attachment;filename={self.get_filename()}")
+        response.setHeader("Content-Type", f"application/pdf")
         return pdf_file.read()
 
     def get_data(self):
@@ -178,6 +180,7 @@ class ExportViewDownload(BrowserView):
             context=self,
             request=self.request,
         )
+
         return view(rows=data, columns=columns)
 
     def pdf_styles(self):

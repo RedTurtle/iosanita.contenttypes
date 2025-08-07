@@ -34,7 +34,6 @@ body {
 }
 header {
     position: running(header);
-    margin-left: 1em;
     width: 20em;
 }
 
