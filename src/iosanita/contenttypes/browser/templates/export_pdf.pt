@@ -14,9 +14,9 @@
     </head>
     <body>
         <header class="header" 
-                tal:define="title context/pdf_title|nothing; logob64 context/pdf_logob64|nothing" 
+                tal:define="title context/pdf_title|nothing; logo context/pdf_logo|nothing" 
                 tal:condition="title">
-            <img id="logo" tal:condition="logob64" tal:attributes="src logob64"/>
+            <div id="logo" taal:condition="logo" tal:content="structure logo"/>
             <h1 class="title">${title}</h1>
         </header>
 

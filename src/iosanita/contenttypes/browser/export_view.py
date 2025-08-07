@@ -8,17 +8,71 @@ from weasyprint import HTML
 from zExceptions import NotFound
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-
+from plone.memoize import forever
 import csv
 import importlib.resources
 import logging
 import re
-
+from PIL import Image
+import base64
+import imghdr
 
 logger = logging.getLogger(__name__)
 
 fontools_logger = logging.getLogger("fontTools.subset")
 fontools_logger.setLevel(logging.WARNING)
+
+
+# @forever.memoize
+def image_to_html(input_string):
+    """
+    Convert image data to a base64 string formatted for HTML.
+
+    Args:
+    - input_string: The string containing the filename and base64 encoded image data.
+
+    Returns:
+    - HTML.
+    """
+
+    if not input_string:
+        return ""
+
+    # Split the input string to extract the filename and base64 data
+    parts = input_string.split(";")
+    datab64 = parts[1].split(":")[1]
+
+    # Decode the image data from base64
+    image_data = base64.b64decode(datab64)
+
+    if image_data[:5] == b"<?xml":
+        # https://github.com/Kozea/WeasyPrint/issues/75
+        # anche se il ticket risulta chiuso gli svg non risultano correttamente gestiti
+        # return image_data
+        # return f'<img src="data:image/svg+xml;charset=utf-8;base64,{datab64}">'
+        # XXX: se non si va decode/encode il b64 non risulta corretto (!)
+        return f'<img src="data:image/svg+xml;charset=utf-8;base64,{base64.b64encode(image_data).decode()}">'
+
+    # Guess the image format
+    image_format = imghdr.what(None, image_data)
+
+    if not image_format:
+        # raise ValueError("Unable to determine image format")
+        logger.warning("site logo, unable to determine image format")
+        return ""
+
+    # Open the image from the decoded data
+    img = Image.open(BytesIO(image_data))
+
+    # Create a buffer to hold the image data
+    buffered = BytesIO()
+    img.save(buffered, format=image_format)
+
+    # Encode the image data to base64
+    img_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
+
+    # Format the base64 string for HTML
+    return f'<img class="logo" src="data:{image_format};base64,{img_base64}">'
 
 
 class IExportViewTraverser(IPublishTraverse):
@@ -193,6 +247,9 @@ class ExportViewDownload(BrowserView):
 
     def pdf_title(self):
         context = self.context.context
+        site_title = api.portal.get_registry_record("plone.site_title")
+        if site_title:
+            return f"{site_title}: {context.Title()}"
         return context.Title()
 
     def pdf_description(self):
@@ -213,10 +270,10 @@ class ExportViewDownload(BrowserView):
             return {"type": "str", "value": value.split("T")[0]}
         return {"type": "str", "value": str(value)}
 
-    def pdf_logob64(self):
-        """
-        TODO
-        """
+    def pdf_logo(self):
+        site_logo = api.portal.get_registry_record("plone.site_logo")
+        if site_logo:
+            return image_to_html(site_logo.decode())
         return None
 
     def pdf_last_update(self):

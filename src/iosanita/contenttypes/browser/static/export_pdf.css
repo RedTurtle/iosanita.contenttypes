@@ -34,7 +34,9 @@ body {
 }
 header {
     position: running(header);
-    width: 20em;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 /* header .site_data {
@@ -60,7 +62,11 @@ a {
     color: #235295
 }
 h1 {
-    font-weight: 700;
+    font-weight: 500;
+    font-size: 18px;
+}
+#logo {
+    padding-right: 1em;
 }
 
 /* p.description {
