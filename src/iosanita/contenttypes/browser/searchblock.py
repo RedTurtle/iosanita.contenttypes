@@ -4,16 +4,16 @@ from .export_view import IExportViewDownload
 from .export_view import IExportViewTraverser
 from copy import deepcopy
 from iosanita.contenttypes import _
+from plone.app.querystring.interfaces import IQuerystringRegistryReader
+from plone.intelligenttext.transforms import convertWebIntelligentPlainTextToHtml
+from plone.memoize import view
+from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import ISerializeToJson
 from zExceptions import BadRequest
 from zExceptions import NotFound
 from zope.component import getMultiAdapter
-from zope.interface import implementer
-from plone.intelligenttext.transforms import convertWebIntelligentPlainTextToHtml
-from plone.app.querystring.interfaces import IQuerystringRegistryReader
-from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
-from plone.memoize import view
+from zope.interface import implementer
 
 import logging
 
@@ -247,8 +247,12 @@ class SearchBlockDownload(ExportViewDownload):
                     if "values" in index:
                         # TODO: per i valori multipli ?
                         # TODO: facciamo constraint o fallback come ora?
-                        if value in index["values"] and index["values"][value].get("title"):
-                            query.append(f'{facet["field"]["label"]}: {index["values"][value]["title"]}')
+                        if value in index["values"] and index["values"][value].get(
+                            "title"
+                        ):
+                            query.append(
+                                f'{facet["field"]["label"]}: {index["values"][value]["title"]}'
+                            )
                             continue
                 query.append(f'{facet["field"]["label"]}: {value}')
         if query:
