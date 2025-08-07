@@ -16,7 +16,7 @@
         <header class="header" 
                 tal:define="title context/pdf_title|nothing; logo context/pdf_logo|nothing" 
                 tal:condition="title">
-            <div id="logo" taal:condition="logo" tal:content="structure logo"/>
+            <div id="logo" tal:condition="logo" tal:content="structure logo"/>
             <h1 class="title">${title}</h1>
         </header>
 
