@@ -5,18 +5,18 @@
     @bottom-right {
         content: counter(page);
         font-size: 75%;
-        width: 50%;
+        width: 20%;
     }
     @bottom-left {
         content: element(footer);
-        width: 50%;
+        width: 80%;
     }
     .description.first-page {
         display: none;
     }
 }
 
-@page :first {
+@page:first {
     margin-top: 2cm;
     @top-left {
         content: element(header);

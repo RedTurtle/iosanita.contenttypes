@@ -9,6 +9,11 @@ from zExceptions import BadRequest
 from zExceptions import NotFound
 from zope.component import getMultiAdapter
 from zope.interface import implementer
+from plone.intelligenttext.transforms import convertWebIntelligentPlainTextToHtml
+from plone.app.querystring.interfaces import IQuerystringRegistryReader
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+from plone.memoize import view
 
 import logging
 
@@ -206,11 +211,24 @@ class SearchBlockDownload(ExportViewDownload):
             {"key": c["field"], "title": c["title"]} for c in columns
         ]
 
+    @view.memoize
+    def _get_querystring(self):
+        # @querystring endpoint
+        context = self.context.context
+        registry = getUtility(IRegistry)
+        reader = getMultiAdapter((registry, self.request), IQuerystringRegistryReader)
+        reader.vocab_context = context
+        result = reader()
+        return result
+
     # TODO: valutare eventuale titolo impostato sul blocco
     # def pdf_title(self):
 
-    def pdf_description(self):
+    pdf_description_as_html = True
+
+    def pdf_description(self) -> str:
         query = []
+        querystring_registry = self._get_querystring()
         searchtext = self._query_from_searchtext()
         if searchtext and searchtext[0].get("v"):
             # TODO: translate
@@ -220,11 +238,20 @@ class SearchBlockDownload(ExportViewDownload):
                 logger.warning("invalid facet %s", facet)
                 continue
             if facet["field"]["value"] in self.request.form:
-                if self.request.form[facet["field"]["value"]] in ["null"]:
+                value = self.request.form[facet["field"]["value"]]
+                if value in ["null"]:
                     continue
-                # TODO: tonare la label anzichè il value del campo
-                # TODO: gestire campi particoolari come: multipli, date, ...
-                query.append(
-                    f'{facet["field"]["label"]}: {self.request.form[facet["field"]["value"]]}'
-                )
-        return ",\n".join(query)
+                # TODO: gestire campi particolari come: multipli, date, ...
+                index = querystring_registry["indexes"].get(facet["field"]["value"])
+                if index:
+                    if "values" in index:
+                        # TODO: per i valori multipli ?
+                        # TODO: facciamo constraint o fallback come ora?
+                        if value in index["values"] and index["values"][value].get("title"):
+                            query.append(f'{facet["field"]["label"]}: {index["values"][value]["title"]}')
+                            continue
+                query.append(f'{facet["field"]["label"]}: {value}')
+        if query:
+            # TODO: translate
+            txt = "Filtri applicati:\n- " + ",\n- ".join(query)
+            return convertWebIntelligentPlainTextToHtml(txt)

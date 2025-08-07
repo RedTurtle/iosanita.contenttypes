@@ -21,9 +21,13 @@
         </header>
 
         <p class="description first-page"
-           tal:define="description context/pdf_description|nothing"
+           tal:define="description context/pdf_description|nothing;
+                       as_html context/pdf_description_as_html|nothing"
            tal:condition="description"
-        >${description}</p>
+        >
+            <tal:d tal:condition="as_html" tal:content="structure description" />
+            <tal:d tal:condition="not:as_html" tal:content="description" />
+        </p>
 
         <!-- il footer deve trovarsi in questa posizione per essere presente in tutte le pagine,
              non va spostato in fondo
