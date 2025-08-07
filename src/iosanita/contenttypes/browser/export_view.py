@@ -5,7 +5,7 @@ from iosanita.contenttypes import _
 from plone import api
 from Products.Five.browser import BrowserView
 from weasyprint import HTML
-from zExceptions import BadRequest
+from zExceptions import NotFound
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
@@ -60,7 +60,7 @@ class ExportViewDownload(BrowserView):
     def __call__(self):
         """ """
         if self.export_type not in ["csv", "pdf", "html"]:
-            raise BadRequest(
+            raise NotFound(
                 api.portal.translate(
                     _(
                         "invalid_export_type",
@@ -84,7 +84,6 @@ class ExportViewDownload(BrowserView):
             return self.get_pdf(data)
         elif self.export_type == "html":
             return self.get_html_for_pdf(data)
-        return resp_data
 
     def get_filename(self):
         """
@@ -111,12 +110,14 @@ class ExportViewDownload(BrowserView):
         # 4. Prepara i bytes con BOM (UTF-8-sig)
         csv_data = csv_buffer.getvalue()
         if encoding == "utf-8-sig":
-            csv_bytes = b'\xef\xbb\xbf' + csv_data.encode('utf-8')  # Aggiunge BOM
+            csv_bytes = b"\xef\xbb\xbf" + csv_data.encode("utf-8")  # Aggiunge BOM
         else:
-            csv_bytes = cvs_data.encode(encoding)
+            csv_bytes = csv_data.encode(encoding)
         # 5. Crea la risposta con gli header corretti
         response = self.request.response
-        response.setHeader("Content-Disposition", f"attachment;filename={self.get_filename()}")
+        response.setHeader(
+            "Content-Disposition", f"attachment;filename={self.get_filename()}"
+        )
         response.setHeader("Content-Type", f"text/csv; charset={encoding}")
         return csv_bytes
 
@@ -127,8 +128,10 @@ class ExportViewDownload(BrowserView):
         pdf_file.seek(0)
         # 5. Crea la risposta con gli header corretti
         response = self.request.response
-        response.setHeader("Content-Disposition", f"attachment;filename={self.get_filename()}")
-        response.setHeader("Content-Type", f"application/pdf")
+        response.setHeader(
+            "Content-Disposition", f"attachment;filename={self.get_filename()}"
+        )
+        response.setHeader("Content-Type", "application/pdf")
         return pdf_file.read()
 
     def get_data(self):
