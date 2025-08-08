@@ -39,3 +39,5 @@ reports/
 venv/
 # excludes
 .python-version
+*.bak
+nohup.out

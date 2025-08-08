@@ -2,14 +2,18 @@ from datetime import datetime
 from io import BytesIO
 from io import StringIO
 from iosanita.contenttypes import _
+from PIL import Image
 from plone import api
+from plone.memoize import forever
 from Products.Five.browser import BrowserView
 from weasyprint import HTML
-from zExceptions import BadRequest
+from zExceptions import NotFound
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 
+import base64
 import csv
+import imghdr
 import importlib.resources
 import logging
 import re
@@ -21,11 +25,58 @@ fontools_logger = logging.getLogger("fontTools.subset")
 fontools_logger.setLevel(logging.WARNING)
 
 
-CONTENT_TYPES_MAPPING = {
-    "csv": "text/comma-separated-values",
-    "pdf": "application/pdf",
-    "html": "text/html",
-}
+@forever.memoize
+def image_to_html(input_string):
+    """
+    Convert image data to a base64 string formatted for HTML.
+
+    Args:
+    - input_string: The string containing the filename and base64 encoded image data.
+
+    Returns:
+    - HTML.
+    """
+
+    if not input_string:
+        return ""
+
+    # Split the input string to extract the filename and base64 data
+    parts = input_string.split(";")
+    datab64 = parts[1].split(":")[1]
+
+    # Decode the image data from base64
+    image_data = base64.b64decode(datab64)
+
+    if image_data[:5] == b"<?xml":
+        # https://github.com/Kozea/WeasyPrint/issues/75
+        # anche se il ticket risulta chiuso gli svg non risultano correttamente gestiti
+        # return image_data
+        # return f'<img src="data:image/svg+xml;charset=utf-8;base64,{datab64}">'
+        # XXX: se non si va decode/encode il b64 non risulta corretto (!)
+        # return f'<img src="data:image/svg+xml;charset=utf-8;base64,{base64.b64encode(image_data).decode()}">'
+        # weasyprint gli svg non li gestisce comunque correttamente
+        return None
+
+    # Guess the image format
+    image_format = imghdr.what(None, image_data)
+
+    if not image_format:
+        # raise ValueError("Unable to determine image format")
+        logger.warning("site logo, unable to determine image format")
+        return ""
+
+    # Open the image from the decoded data
+    img = Image.open(BytesIO(image_data))
+
+    # Create a buffer to hold the image data
+    buffered = BytesIO()
+    img.save(buffered, format=image_format)
+
+    # Encode the image data to base64
+    img_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
+
+    # Format the base64 string for HTML
+    return f'<img class="logo" src="data:{image_format};base64,{img_base64}">'
 
 
 class IExportViewTraverser(IPublishTraverse):
@@ -50,6 +101,8 @@ class ExportViewDownload(BrowserView):
 
     """
 
+    with_footer = True
+
     def __init__(self, context, request):
         super().__init__(context, request)
         self.export_type = "csv"
@@ -65,7 +118,7 @@ class ExportViewDownload(BrowserView):
     def __call__(self):
         """ """
         if self.export_type not in ["csv", "pdf", "html"]:
-            raise BadRequest(
+            raise NotFound(
                 api.portal.translate(
                     _(
                         "invalid_export_type",
@@ -74,18 +127,21 @@ class ExportViewDownload(BrowserView):
                     )
                 )
             )
-        self.set_headers()
         data = self.get_data()
-        if not data:
-            return ""
-        resp_data = ""
         if self.export_type == "csv":
-            resp_data = self.get_csv(data)
+            # default per locales di riferimento (perr l'encoding, al momento, lasciamo
+            # il generico utf-8 con BOM che potrebbe funzionare per tutti,
+            # MS Excel incluso)
+            lang = api.portal.get_current_language(self.context)
+            if lang == "it":
+                sep = ";"
+            else:
+                sep = ","
+            return self.get_csv(data, sep=sep)
         elif self.export_type == "pdf":
-            resp_data = self.get_pdf(data)
+            return self.get_pdf(data)
         elif self.export_type == "html":
-            resp_data = self.get_html_for_pdf(data)
-        return resp_data
+            return self.get_html_for_pdf(data)
 
     def get_filename(self):
         """
@@ -94,37 +150,46 @@ class ExportViewDownload(BrowserView):
         now = datetime.now().strftime("%Y_%m_%d_%H_%M")
         return f"export_{now}.{self.export_type}"
 
-    def set_headers(self):
-        """
-        Set the headers for the response.
-        """
-        if self.export_type in ["pdf", "csv"]:
-            self.request.response.setHeader(
-                "Content-Disposition", f"attachment;filename={self.get_filename()}"
-            )
-        self.request.response.setHeader(
-            "Content-Type", CONTENT_TYPES_MAPPING[self.export_type]
-        )
-
-    def get_csv(self, data):
+    def get_csv(self, data, encoding="utf-8-sig", sep=","):
         """
         Generate CSV data from the provided data.
         """
+        # 1. Crea uno StringIO per il CSV
+        csv_buffer = StringIO()
+        # 2. Aggiungi l'header per il separatore (specifico per Excel)
+        # In Libreoffice viene aggiunta una riga, per ora evitiamo
+        # csv_buffer.write(f"sep={sep}\n")
+        # 3. Scrittura dei dati CSV
         columns = self.get_columns(data)
-
-        csv_data = StringIO()
-        csv_writer = csv.writer(csv_data, quoting=csv.QUOTE_ALL)
+        csv_writer = csv.writer(csv_buffer, delimiter=sep, quoting=csv.QUOTE_ALL)
         csv_writer.writerow([c["title"] for c in columns])
-
         for item in data:
             csv_writer.writerow(self.format_row(item))
-        return csv_data.getvalue().encode("utf-8")
+        # 4. Prepara i bytes con BOM (UTF-8-sig)
+        csv_data = csv_buffer.getvalue()
+        if encoding == "utf-8-sig":
+            csv_bytes = b"\xef\xbb\xbf" + csv_data.encode("utf-8")  # Aggiunge BOM
+        else:
+            csv_bytes = csv_data.encode(encoding)
+        # 5. Crea la risposta con gli header corretti
+        response = self.request.response
+        response.setHeader(
+            "Content-Disposition", f"attachment;filename={self.get_filename()}"
+        )
+        response.setHeader("Content-Type", f"text/csv; charset={encoding}")
+        return csv_bytes
 
     def get_pdf(self, data):
         html_str = self.get_html_for_pdf(data=data)
         pdf_file = BytesIO()
         HTML(string=html_str).write_pdf(pdf_file)
         pdf_file.seek(0)
+        # 5. Crea la risposta con gli header corretti
+        response = self.request.response
+        response.setHeader(
+            "Content-Disposition", f"attachment;filename={self.get_filename()}"
+        )
+        response.setHeader("Content-Type", "application/pdf")
         return pdf_file.read()
 
     def get_data(self):
@@ -176,6 +241,7 @@ class ExportViewDownload(BrowserView):
             context=self,
             request=self.request,
         )
+
         return view(rows=data, columns=columns)
 
     def pdf_styles(self):
@@ -184,7 +250,11 @@ class ExportViewDownload(BrowserView):
         )
 
     def pdf_title(self):
-        return None
+        context = self.context.context
+        site_title = api.portal.get_registry_record("plone.site_title")
+        if site_title:
+            return f"{site_title}: {context.Title()}"
+        return context.Title()
 
     def pdf_description(self):
         return None
@@ -203,3 +273,13 @@ class ExportViewDownload(BrowserView):
         if re.match(r"^\d{4}-\d{2}-\d{2}T00:00:00$", value):
             return {"type": "str", "value": value.split("T")[0]}
         return {"type": "str", "value": str(value)}
+
+    def pdf_logo(self):
+        site_logo = api.portal.get_registry_record("plone.site_logo")
+        if site_logo:
+            return image_to_html(site_logo.decode())
+        return None
+
+    def pdf_datetime(self):
+        # TODO: valutare localizzazione della data
+        return datetime.now().strftime("%d/%m/%Y %H:%M")

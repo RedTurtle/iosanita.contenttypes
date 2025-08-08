@@ -4,10 +4,15 @@ from .export_view import IExportViewDownload
 from .export_view import IExportViewTraverser
 from copy import deepcopy
 from iosanita.contenttypes import _
+from plone.app.querystring.interfaces import IQuerystringRegistryReader
+from plone.intelligenttext.transforms import convertWebIntelligentPlainTextToHtml
+from plone.memoize import view
+from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import ISerializeToJson
 from zExceptions import BadRequest
 from zExceptions import NotFound
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.interface import implementer
 
 import logging
@@ -86,11 +91,16 @@ class SearchBlockDownload(ExportViewDownload):
                         }
                     )
                 elif facet["type"] == "daterangeFacet":
+                    daterange = self.request.form[facet["field"]["value"]].split(",")
+                    if not daterange[0]:
+                        daterange[0] = "1970-01-01"
+                    if not daterange[1]:
+                        daterange[1] = "2500-01-01"
                     query.append(
                         {
                             "i": facet["field"]["value"],
                             "o": "plone.app.querystring.operation.date.between",
-                            "v": self.request.form[facet["field"]["value"]].split(","),
+                            "v": daterange,
                         }
                     )
                 elif facet["type"] == "selectFacet" and not facet["multiple"]:
@@ -110,7 +120,7 @@ class SearchBlockDownload(ExportViewDownload):
                         }
                     )
                 else:
-                    logger.warning("DEBUG: filter %s not implemnted", facet)
+                    logger.warning("DEBUG: filter %s not implemented", facet)
                     query.append(
                         {
                             "i": facet["field"]["value"],
@@ -128,7 +138,6 @@ class SearchBlockDownload(ExportViewDownload):
         # 4. fare la ricerca
         # 5. fare export in csv/pdf a seconda del formato
         """
-
         # 2. Get columns, base filters and sorting
         columns = self.block_data.get("columns", [])
 
@@ -185,13 +194,14 @@ class SearchBlockDownload(ExportViewDownload):
         # XXX: consideriamo però che senza usare il serializzatore un utente potrebbe
         #      chiedere qualsiasi atttributo degli oggetti, senza un controllo fine
         #      sullo schema
-        fullobjects = True
-        self.request.form["b_size"] = 9999
-        results = getMultiAdapter((results, self.request), ISerializeToJson)(
-            fullobjects=fullobjects
-        )
-        for obj in results["items"]:
-            yield [obj["title"]] + [obj.get(c["field"]) for c in columns]
+        if results:
+            fullobjects = True
+            self.request.form["b_size"] = 9999
+            results = getMultiAdapter((results, self.request), ISerializeToJson)(
+                fullobjects=fullobjects
+            )
+            for obj in results["items"]:
+                yield [obj["title"]] + [obj.get(c["field"]) for c in columns]
 
     def get_columns(self, data):
         # Il titolo va aggiunto di default come prima colonna ?
@@ -200,3 +210,52 @@ class SearchBlockDownload(ExportViewDownload):
         return [{"key": "title", "title": _("Titolo")}] + [
             {"key": c["field"], "title": c["title"]} for c in columns
         ]
+
+    @view.memoize
+    def _get_querystring(self):
+        # @querystring endpoint
+        context = self.context.context
+        registry = getUtility(IRegistry)
+        reader = getMultiAdapter((registry, self.request), IQuerystringRegistryReader)
+        reader.vocab_context = context
+        result = reader()
+        return result
+
+    # TODO: valutare eventuale titolo impostato sul blocco
+    # def pdf_title(self):
+
+    pdf_description_as_html = True
+
+    def pdf_description(self) -> str:
+        query = []
+        querystring_registry = self._get_querystring()
+        searchtext = self._query_from_searchtext()
+        if searchtext and searchtext[0].get("v"):
+            # TODO: translate
+            query.append(f"Ricerca per: {searchtext[0]['v']}")
+        for facet in self.block_data.get("facets") or []:
+            if "field" not in facet:
+                logger.warning("invalid facet %s", facet)
+                continue
+            if facet["field"]["value"] in self.request.form:
+                value = self.request.form[facet["field"]["value"]]
+                if value in ["null"]:
+                    continue
+                # TODO: gestire campi particolari come: multipli, date, ...
+                index = querystring_registry["indexes"].get(facet["field"]["value"])
+                if index:
+                    if "values" in index:
+                        # TODO: per i valori multipli ?
+                        # TODO: facciamo constraint o fallback come ora?
+                        if value in index["values"] and index["values"][value].get(
+                            "title"
+                        ):
+                            query.append(
+                                f'{facet["field"]["label"]}: {index["values"][value]["title"]}'
+                            )
+                            continue
+                query.append(f'{facet["field"]["label"]}: {value}')
+        if query:
+            # TODO: translate
+            txt = "Filtri applicati:\n- " + ",\n- ".join(query)
+            return convertWebIntelligentPlainTextToHtml(txt)
