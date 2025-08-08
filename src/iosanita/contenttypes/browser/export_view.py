@@ -2,20 +2,22 @@ from datetime import datetime
 from io import BytesIO
 from io import StringIO
 from iosanita.contenttypes import _
+from PIL import Image
 from plone import api
+from plone.memoize import forever
 from Products.Five.browser import BrowserView
 from weasyprint import HTML
 from zExceptions import NotFound
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
-from plone.memoize import forever
+
+import base64
 import csv
+import imghdr
 import importlib.resources
 import logging
 import re
-from PIL import Image
-import base64
-import imghdr
+
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +25,7 @@ fontools_logger = logging.getLogger("fontTools.subset")
 fontools_logger.setLevel(logging.WARNING)
 
 
-# @forever.memoize
+@forever.memoize
 def image_to_html(input_string):
     """
     Convert image data to a base64 string formatted for HTML.

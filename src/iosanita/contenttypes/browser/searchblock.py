@@ -138,7 +138,6 @@ class SearchBlockDownload(ExportViewDownload):
         # 4. fare la ricerca
         # 5. fare export in csv/pdf a seconda del formato
         """
-
         # 2. Get columns, base filters and sorting
         columns = self.block_data.get("columns", [])
 
@@ -195,13 +194,14 @@ class SearchBlockDownload(ExportViewDownload):
         # XXX: consideriamo però che senza usare il serializzatore un utente potrebbe
         #      chiedere qualsiasi atttributo degli oggetti, senza un controllo fine
         #      sullo schema
-        fullobjects = True
-        self.request.form["b_size"] = 9999
-        results = getMultiAdapter((results, self.request), ISerializeToJson)(
-            fullobjects=fullobjects
-        )
-        for obj in results["items"]:
-            yield [obj["title"]] + [obj.get(c["field"]) for c in columns]
+        if results:
+            fullobjects = True
+            self.request.form["b_size"] = 9999
+            results = getMultiAdapter((results, self.request), ISerializeToJson)(
+                fullobjects=fullobjects
+            )
+            for obj in results["items"]:
+                yield [obj["title"]] + [obj.get(c["field"]) for c in columns]
 
     def get_columns(self, data):
         # Il titolo va aggiunto di default come prima colonna ?
