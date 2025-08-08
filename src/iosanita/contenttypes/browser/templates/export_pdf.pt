@@ -33,9 +33,7 @@
              non va spostato in fondo
         -->
         <footer class="footer" tal:condition="context/with_footer|nothing">
-            <span i18n:translate="last_update_footer">Ultimo aggiornamento: 
-                <tal:dd i18n:name="date" tal:content="context/pdf_last_update|nothing" />
-            </span>
+            <span i18n:name="date" tal:content="context/pdf_datetime|nothing" />
         </footer>
 
         <section>

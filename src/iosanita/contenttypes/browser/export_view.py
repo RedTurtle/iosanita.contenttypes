@@ -276,6 +276,6 @@ class ExportViewDownload(BrowserView):
             return image_to_html(site_logo.decode())
         return None
 
-    def pdf_last_update(self):
+    def pdf_datetime(self):
         # TODO: valutare localizzazione della data
         return datetime.now().strftime("%d/%m/%Y %H:%M")
