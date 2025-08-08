@@ -53,7 +53,9 @@ def image_to_html(input_string):
         # return image_data
         # return f'<img src="data:image/svg+xml;charset=utf-8;base64,{datab64}">'
         # XXX: se non si va decode/encode il b64 non risulta corretto (!)
-        return f'<img src="data:image/svg+xml;charset=utf-8;base64,{base64.b64encode(image_data).decode()}">'
+        # return f'<img src="data:image/svg+xml;charset=utf-8;base64,{base64.b64encode(image_data).decode()}">'
+        # weasyprint gli svg non li gestisce comunque correttamente
+        return None
 
     # Guess the image format
     image_format = imghdr.what(None, image_data)
