@@ -2,15 +2,15 @@
    If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
    This text does not appear on PyPI or github. It is a comment.
 
-.. image:: https://github.com/collective/iosanita.contenttypes/actions/workflows/plone-package.yml/badge.svg
-    :target: https://github.com/collective/iosanita.contenttypes/actions/workflows/plone-package.yml
+.. image:: https://github.com/RedTurtle/iosanita.contenttypes/actions/workflows/plone-package.yml/badge.svg
+    :target: https://github.com/RedTurtle/iosanita.contenttypes/actions/workflows/plone-package.yml
 
-.. image:: https://coveralls.io/repos/github/collective/iosanita.contenttypes/badge.svg?branch=main
-    :target: https://coveralls.io/github/collective/iosanita.contenttypes?branch=main
+.. image:: https://coveralls.io/repos/github/RedTurtle/iosanita.contenttypes/badge.svg?branch=main
+    :target: https://coveralls.io/github/RedTurtle/iosanita.contenttypes?branch=main
     :alt: Coveralls
 
-.. image:: https://codecov.io/gh/collective/iosanita.contenttypes/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/collective/iosanita.contenttypes
+.. image:: https://codecov.io/gh/RedTurtle/iosanita.contenttypes/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/RedTurtle/iosanita.contenttypes
 
 .. image:: https://img.shields.io/pypi/v/iosanita.contenttypes.svg
     :target: https://pypi.python.org/pypi/iosanita.contenttypes/
