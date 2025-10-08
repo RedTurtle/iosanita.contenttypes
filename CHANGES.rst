@@ -2,7 +2,13 @@ Changelog
 =========
 
 
-1.0.8 (unreleased)
+1.0.9 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.0.8 (2025-08-29)
 ------------------
 
 - Blocco search / variante table - aggiunte le proprietà dei campi nella colonna nel serializer
