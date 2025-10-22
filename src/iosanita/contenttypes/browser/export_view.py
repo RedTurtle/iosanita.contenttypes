@@ -265,11 +265,14 @@ class ExportViewDownload(BrowserView):
         if isinstance(value, dict):
             # e.g. {'token': 'in_corso', 'title': 'In corso'}
             return {"type": "str", "value": value.get("title")}
-        if isinstance(value, list): 
+        if isinstance(value, list):
             if not value:
                 return {"type": "str", "value": ""}
             elif isinstance(value[0], dict):
-                return {"type": "str", "value": ", ".join([v.get("title", str(v)) for v in value])}
+                return {
+                    "type": "str",
+                    "value": ", ".join([v.get("title", str(v)) for v in value]),
+                }
         # XXX: this is a guess
         if isinstance(value, str):
             if value.startswith("https://"):
