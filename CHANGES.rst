@@ -5,7 +5,8 @@ Changelog
 1.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Stampa pdf, aggiunta gestione campi lista
+  [mamico]
 
 
 1.0.8 (2025-08-29)

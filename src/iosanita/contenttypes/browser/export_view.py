@@ -264,14 +264,20 @@ class ExportViewDownload(BrowserView):
             return {"type": "str", "value": value}
         if isinstance(value, dict):
             # e.g. {'token': 'in_corso', 'title': 'In corso'}
-            return {"type": "str", "value": value.get("token")}
+            return {"type": "str", "value": value.get("title")}
+        if isinstance(value, list): 
+            if not value:
+                return {"type": "str", "value": ""}
+            elif isinstance(value[0], dict):
+                return {"type": "str", "value": ", ".join([v.get("title", str(v)) for v in value])}
         # XXX: this is a guess
-        if value.startswith("https://"):
-            return {"type": "url", "url": value, "value": column["title"]}
-        # XXX: this is a guess
-        # 2025-05-21T00:00:00 -> isoformat date YYYY-MM-DD
-        if re.match(r"^\d{4}-\d{2}-\d{2}T00:00:00$", value):
-            return {"type": "str", "value": value.split("T")[0]}
+        if isinstance(value, str):
+            if value.startswith("https://"):
+                return {"type": "url", "url": value, "value": column["title"]}
+            # XXX: this is a guess
+            # 2025-05-21T00:00:00 -> isoformat date YYYY-MM-DD
+            if re.match(r"^\d{4}-\d{2}-\d{2}T00:00:00$", value):
+                return {"type": "str", "value": value.split("T")[0]}
         return {"type": "str", "value": str(value)}
 
     def pdf_logo(self):
