@@ -19,7 +19,6 @@ from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
 from zope.security import checkPermission
 
-
 LIMIT = 25
 
 

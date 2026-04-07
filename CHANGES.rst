@@ -5,6 +5,8 @@ Changelog
 1.0.9 (unreleased)
 ------------------
 
+- deprecate getFolderContents
+  [mamico]
 - Stampa pdf, aggiunta gestione campi lista
   [mamico]
 

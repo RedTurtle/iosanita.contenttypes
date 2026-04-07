@@ -11,8 +11,8 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python: ["3.10", "3.11"]
-        plone: ["60"]
+        python: ["3.11", "3.12"]
+        plone: ["60", "61"]
     steps:
       - uses: actions/checkout@v3
       - name: Cache eggs
@@ -26,7 +26,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt -c constraints_plone${{ matrix.plone }}.txt
+          pip install -r requirements_plone${{ matrix.plone }}.txt
           cp test_plone${{ matrix.plone }}.cfg buildout.cfg
       - name: Install buildout
         run: |
