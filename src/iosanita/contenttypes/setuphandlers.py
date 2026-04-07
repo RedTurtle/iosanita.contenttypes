@@ -8,7 +8,6 @@ from zope.interface import implementer
 
 import logging
 
-
 logger = logging.getLogger(__name__)
 DEFAULT_PROFILE = "profile-iosanita.contenttypes:default"
 
