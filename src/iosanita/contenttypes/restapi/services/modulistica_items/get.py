@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from iosanita.contenttypes.interfaces.cartella_modulistica import ICartellaModulistica
+from plone import api
 from plone.dexterity.utils import iterSchemata
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.interfaces import IFieldSerializer
@@ -39,7 +40,7 @@ class ModulisticaItems(object):
         if context is None:
             context = self.context
         res = []
-        for brain in context.getFolderContents():
+        for brain in api.content.find(context=context, depth=1):
             if brain.portal_type == "Document" and (
                 brain.getId == "immagini" or brain.getId == "documenti"
             ):
