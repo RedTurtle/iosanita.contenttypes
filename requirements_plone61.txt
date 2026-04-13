@@ -1,3 +1,4 @@
 -c constraints_plone61.txt
 setuptools
 zc.buildout
+horse-with-no-namespace
