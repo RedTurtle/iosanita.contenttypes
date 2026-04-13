@@ -1,4 +1,7 @@
+from ..browser.export_view import image_to_html
 from ..testing import INTEGRATION_TESTING
+from io import BytesIO
+from PIL import Image
 from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
@@ -9,6 +12,7 @@ from plone.testing.z2 import Browser
 from transaction import commit
 from zope.component import getMultiAdapter
 
+import base64
 import csv
 import unittest
 import uuid
@@ -122,3 +126,53 @@ class TestExport(unittest.TestCase):
         reader = csv.DictReader(self.browser.contents)
         self.assertEqual(reader.fieldnames, ["Titolo"])
         self.assertEqual([row for row in reader], [{"Titolo": "Test Document"}])
+
+
+def _make_logo_str(img_bytes):
+    """Build the input string expected by image_to_html from raw image bytes."""
+    b64 = base64.b64encode(img_bytes).decode()
+    return f"logo.test;base64:{b64}"
+
+
+def _make_png_bytes():
+    buf = BytesIO()
+    img = Image.new("RGB", (10, 10), color=(255, 0, 0))
+    img.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def _make_jpeg_bytes():
+    buf = BytesIO()
+    img = Image.new("RGB", (10, 10), color=(0, 255, 0))
+    img.save(buf, format="JPEG")
+    return buf.getvalue()
+
+
+class TestImageToHtml(unittest.TestCase):
+    """Unit tests for image_to_html — no Plone layer needed."""
+
+    def test_returns_empty_string_for_empty_input(self):
+        self.assertEqual(image_to_html(""), "")
+
+    def test_returns_none_for_svg(self):
+        # SVG images are not supported by weasyprint; the function returns None
+        svg_bytes = b"<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg'/>"
+        result = image_to_html(_make_logo_str(svg_bytes))
+        self.assertIsNone(result)
+
+    def test_returns_empty_string_for_unknown_format(self):
+        garbage = b"\x00\x01\x02\x03" * 20
+        result = image_to_html(_make_logo_str(garbage))
+        self.assertEqual(result, "")
+
+    def test_png_produces_valid_img_tag(self):
+        result = image_to_html(_make_logo_str(_make_png_bytes()))
+        self.assertIsNotNone(result)
+        self.assertIn('class="logo"', result)
+        self.assertIn("data:image/png;base64,", result)
+
+    def test_jpeg_produces_valid_img_tag(self):
+        result = image_to_html(_make_logo_str(_make_jpeg_bytes()))
+        self.assertIsNotNone(result)
+        self.assertIn('class="logo"', result)
+        self.assertIn("data:image/jpeg;base64,", result)

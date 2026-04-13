@@ -5,6 +5,8 @@ Changelog
 1.0.9 (unreleased)
 ------------------
 
+- deprecate imghdr (python>=3.12)
+  [mamico]
 - deprecate getFolderContents
   [mamico]
 - Stampa pdf, aggiunta gestione campi lista
