@@ -1,6 +1,5 @@
 -c https://dist.plone.org/release/6.1-latest/constraints.txt
 
-setuptools==75.8.2
 tox==4.3.5
 isort>=5
 black==22.8.0
