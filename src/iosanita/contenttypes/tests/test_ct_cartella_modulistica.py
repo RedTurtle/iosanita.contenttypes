@@ -13,7 +13,6 @@ from transaction import commit
 
 import unittest
 
-
 # from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 
 

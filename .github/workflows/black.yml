@@ -27,7 +27,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       # install black
-      - name: install black
+      - name: install black==25.12.2
         run: pip install black
 
       # run black
