@@ -4,6 +4,7 @@ from . import logger
 from iosanita.contenttypes.events.common import SUBFOLDERS_MAPPING
 from plone import api
 
+
 # from plone import api
 
 

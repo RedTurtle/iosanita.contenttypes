@@ -18,6 +18,7 @@ import importlib.resources
 import logging
 import re
 
+
 logger = logging.getLogger(__name__)
 
 fontools_logger = logging.getLogger("fontTools.subset")

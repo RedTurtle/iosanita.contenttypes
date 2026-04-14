@@ -1,4 +1,5 @@
 from iosanita.contenttypes.interfaces import IIosanitaContenttypesLayer
+from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.serializer.relationfield import (
@@ -7,7 +8,6 @@ from plone.restapi.serializer.relationfield import (
 from z3c.relationfield.interfaces import IRelationList
 from zope.component import adapter
 from zope.interface import implementer
-from plone import api
 
 
 @adapter(IRelationList, IDexterityContent, IIosanitaContenttypesLayer)
@@ -23,7 +23,6 @@ class RelationListFieldSerializer(BaseSerializer):
             # Only include relations that still resolve (skip broken relations
             # e.g. when the target content was deleted). Avoids [null] in JSON.
             relations = []
-            user = api.user.get_current().getId()
             # THIS IS THE PATCH (plone.restapi >= 10.0.0rc1 introduced the to_object check)
             for rel in value:
                 rel_object = rel.to_object
