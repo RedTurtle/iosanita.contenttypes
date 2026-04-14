@@ -27,6 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements_plone${{ matrix.plone }}.txt
+          pip install setuptools==75.8.2
           cp test_plone${{ matrix.plone }}.cfg buildout.cfg
       - name: Install buildout
         run: |
