@@ -9,7 +9,8 @@ Changelog
   [mamico]
 - Stampa pdf, aggiunta gestione campi lista
   [mamico]
-
+- relationfield seralizer: return only relations that user can view.
+  [cekk]
 
 1.0.8 (2025-08-29)
 ------------------
