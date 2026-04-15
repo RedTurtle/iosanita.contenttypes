@@ -94,6 +94,10 @@ class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
         )
         return {"back-references": data}
 
+@implementer(IoSanitaViewExtraData)
+@adapter(IComeFarePer, Interface)
+class ViewExtraDataExtractorComeFarePer(ViewExtraDataExtractorServizio):
+    pass
 
 @implementer(IoSanitaViewExtraData)
 @adapter(IStruttura, Interface)

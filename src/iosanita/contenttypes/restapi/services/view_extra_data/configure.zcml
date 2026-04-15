@@ -21,6 +21,7 @@
   <!-- back references -->
   <adapter factory=".extractor.ViewExtraDataExtractor" />
   <adapter factory=".extractor.ViewExtraDataExtractorServizio" />
+  <adapter factory=".extractor.ViewExtraDataExtractorComeFarePer" />
   <adapter factory=".extractor.ViewExtraDataExtractorStruttura" />
   <adapter factory=".extractor.ViewExtraDataExtractorUnitaOrganizzativa" />
   <adapter factory=".extractor.ViewExtraDataExtractorPersona" />
