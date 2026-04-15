@@ -100,7 +100,7 @@ class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
 @adapter(IComeFarePer, Interface)
 class ViewExtraDataExtractorComeFarePer(ViewExtraDataExtractorServizio):
     def __call__(self):
-        pass
+        return super(ViewExtraDataExtractorComeFarePer, self).__call__()
 
 
 @implementer(IoSanitaViewExtraData)
