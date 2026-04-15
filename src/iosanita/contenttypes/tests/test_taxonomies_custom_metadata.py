@@ -36,7 +36,8 @@ class TestTaxonomiesCustomMetadata(unittest.TestCase):
 
         self.assertEqual(len(res), 1)
         self.assertEqual(
-            res[0].parliamo_di, sorted(["ticket-ed-esenzioni", "igiene-pubblica"])
+            sorted(res[0].parliamo_di),
+            sorted(["ticket-ed-esenzioni", "igiene-pubblica"]),
         )
         self.assertEqual(
             res[0].parliamo_di_metadata,

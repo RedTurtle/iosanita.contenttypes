@@ -3,6 +3,7 @@
 
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.tests.helpers import HAS_VOLTO_PREVIEW_FIELDSET
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -64,6 +65,7 @@ class TestStrutturaSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Fieldsets cambiati in Plone 6.1")
     def test_struttura_fieldsets(self):
         """
         Get the list from restapi
@@ -91,6 +93,35 @@ class TestStrutturaSchema(unittest.TestCase):
             ],
         )
 
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_struttura_fieldsets_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Struttura").json()
+        self.assertEqual(len(resp["fieldsets"]), 16)
+        self.assertEqual(
+            [x.get("id") for x in resp["fieldsets"]],
+            [
+                "default",
+                "cosa_e",
+                "a_chi_si_rivolge",
+                "dove",
+                "come_accedere",
+                "orari",
+                "contatti",
+                "persone_struttura",
+                "contenuti_collegati",
+                "ulteriori_informazioni",
+                "seo",
+                "settings",
+                "ownership",
+                "dates",
+                "categorization",
+                "preview_image",
+            ],
+        )
+
     def test_struttura_required_fields(self):
         resp = self.api_session.get("@types/Struttura").json()
         self.assertEqual(
@@ -111,6 +142,9 @@ class TestStrutturaSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(
+        HAS_VOLTO_PREVIEW_FIELDSET, "Campi default fieldset diversi in Plone 6.1"
+    )
     def test_struttura_fields_default_fieldset(self):
         """
         Get the list from restapi
@@ -126,6 +160,25 @@ class TestStrutturaSchema(unittest.TestCase):
                 "image_caption",
                 "preview_image",
                 "preview_caption",
+                "tipologia_struttura",
+                "parliamo_di",
+            ],
+        )
+
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_struttura_fields_default_fieldset_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Struttura").json()
+        self.assertEqual(
+            resp["fieldsets"][0]["fields"],
+            [
+                "title",
+                "description",
+                "sottotitolo",
+                "image",
+                "image_caption",
                 "tipologia_struttura",
                 "parliamo_di",
             ],

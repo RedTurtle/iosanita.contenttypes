@@ -3,6 +3,7 @@
 
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.tests.helpers import HAS_VOLTO_PREVIEW_FIELDSET
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -57,6 +58,7 @@ class TestBandoSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Fieldsets cambiati in Plone 6.1")
     def test_bando_fieldsets(self):
         """
         Get the list from restapi
@@ -79,6 +81,30 @@ class TestBandoSchema(unittest.TestCase):
             ],
         )
 
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_bando_fieldsets_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Bando").json()
+        self.assertEqual(len(resp["fieldsets"]), 11)
+        self.assertEqual(
+            [x.get("id") for x in resp["fieldsets"]],
+            [
+                "default",
+                "cosa_e",
+                "a_chi_si_rivolge",
+                "come_partecipare",
+                "modalita_selezione",
+                "settings",
+                "categorization",
+                "dates",
+                "ownership",
+                "seo",
+                "preview_image",
+            ],
+        )
+
     def test_bando_required_fields(self):
         resp = self.api_session.get("@types/Bando").json()
         self.assertEqual(
@@ -95,6 +121,9 @@ class TestBandoSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(
+        HAS_VOLTO_PREVIEW_FIELDSET, "Campi default fieldset diversi in Plone 6.1"
+    )
     def test_bando_fields_default_fieldset(self):
         """
         Get the list from restapi
@@ -115,6 +144,30 @@ class TestBandoSchema(unittest.TestCase):
                 "tipologia_bando",
                 "preview_image",
                 "preview_caption",
+                "note_aggiornamento",
+                "parliamo_di",
+            ],
+        )
+
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_bando_fields_default_fieldset_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Bando").json()
+        self.assertEqual(
+            resp["fieldsets"][0]["fields"],
+            [
+                "title",
+                "description",
+                "riferimenti_bando",
+                "apertura_bando",
+                "scadenza_domande_bando",
+                "chiusura_procedimento_bando",
+                "scadenza_bando",
+                "ente_bando",
+                "destinatari",
+                "tipologia_bando",
                 "note_aggiornamento",
                 "parliamo_di",
             ],
