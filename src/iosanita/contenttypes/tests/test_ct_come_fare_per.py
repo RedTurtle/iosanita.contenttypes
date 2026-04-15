@@ -2,6 +2,7 @@
 """Setup tests for this package."""
 
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.tests.helpers import HAS_VOLTO_PREVIEW_FIELDSET
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -58,6 +59,7 @@ class TestComeFarePerSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Fieldsets cambiati in Plone 6.1")
     def test_come_fare_per_fieldsets(self):
         """
         Get the list from restapi
@@ -79,6 +81,29 @@ class TestComeFarePerSchema(unittest.TestCase):
             ],
         )
 
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_come_fare_per_fieldsets_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/ComeFarePer").json()
+        self.assertEqual(len(resp["fieldsets"]), 10)
+        self.assertEqual(
+            [x.get("id") for x in resp["fieldsets"]],
+            [
+                "default",
+                "a_chi_si_rivolge",
+                "come_fare",
+                "ulteriori_informazioni",
+                "settings",
+                "ownership",
+                "dates",
+                "categorization",
+                "preview_image",
+                "seo",
+            ],
+        )
+
     def test_come_fare_per_required_fields(self):
         resp = self.api_session.get("@types/ComeFarePer").json()
         self.assertEqual(
@@ -93,6 +118,9 @@ class TestComeFarePerSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(
+        HAS_VOLTO_PREVIEW_FIELDSET, "Campi default fieldset diversi in Plone 6.1"
+    )
     def test_come_fare_per_fields_default_fieldset(self):
         """
         Get the list from restapi
@@ -109,6 +137,25 @@ class TestComeFarePerSchema(unittest.TestCase):
                 "image_caption",
                 "preview_image",
                 "preview_caption",
+                "parliamo_di",
+            ],
+        )
+
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_come_fare_per_fields_default_fieldset_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/ComeFarePer").json()
+        self.assertEqual(
+            resp["fieldsets"][0]["fields"],
+            [
+                "title",
+                "description",
+                "sottotitolo",
+                "panoramica",
+                "image",
+                "image_caption",
                 "parliamo_di",
             ],
         )

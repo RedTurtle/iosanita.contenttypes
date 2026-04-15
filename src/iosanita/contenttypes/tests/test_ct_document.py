@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.tests.helpers import HAS_VOLTO_PREVIEW_FIELDSET
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -28,6 +29,7 @@ class TestDocumentSchema(unittest.TestCase):
     def tearDown(self):
         self.api_session.close()
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Behaviors cambiati in Plone 6.1")
     def test_behaviors_enabled_for_document(self):
         portal_types = api.portal.get_tool(name="portal_types")
         self.assertEqual(
@@ -56,6 +58,7 @@ class TestDocumentSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Fieldsets cambiati in Plone 6.1")
     def test_document_fieldsets(self):
         """
         Get the list from restapi
@@ -77,6 +80,29 @@ class TestDocumentSchema(unittest.TestCase):
             ],
         )
 
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_document_fieldsets_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Document").json()
+        self.assertEqual(len(resp["fieldsets"]), 10)
+        self.assertEqual(
+            [x.get("id") for x in resp["fieldsets"]],
+            [
+                "default",
+                "testata",
+                "settings",
+                "correlati",
+                "categorization",
+                "dates",
+                "ownership",
+                "seo",
+                "preview_image",
+                "layout",
+            ],
+        )
+
     def test_document_required_fields(self):
         resp = self.api_session.get("@types/Document").json()
         self.assertEqual(
@@ -84,6 +110,9 @@ class TestDocumentSchema(unittest.TestCase):
             sorted(["title"]),
         )
 
+    @unittest.skipIf(
+        HAS_VOLTO_PREVIEW_FIELDSET, "Campi default fieldset diversi in Plone 6.1"
+    )
     def test_document_fields_default_fieldset(self):
         """
         Get the list from restapi
@@ -96,6 +125,23 @@ class TestDocumentSchema(unittest.TestCase):
                 "description",
                 "preview_image",
                 "preview_caption",
+                "image",
+                "image_caption",
+                "parliamo_di",
+            ],
+        )
+
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_document_fields_default_fieldset_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Document").json()
+        self.assertEqual(
+            resp["fieldsets"][0]["fields"],
+            [
+                "title",
+                "description",
                 "image",
                 "image_caption",
                 "parliamo_di",
@@ -116,6 +162,9 @@ class TestDocumentSchema(unittest.TestCase):
             ],
         )
 
+    @unittest.skipIf(
+        HAS_VOLTO_PREVIEW_FIELDSET, "Settings fieldset cambiato in Plone 6.1"
+    )
     def test_document_fields_settings_fieldset(self):
         """
         Get the list from restapi
@@ -127,6 +176,26 @@ class TestDocumentSchema(unittest.TestCase):
                 "allow_discussion",
                 "exclude_from_nav",
                 "id",
+                "versioning_enabled",
+                "table_of_contents",
+                "show_modified",
+                "exclude_from_search",
+                "changeNote",
+            ],
+        )
+
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_document_fields_settings_fieldset_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/Document").json()
+        self.assertEqual(
+            resp["fieldsets"][2]["fields"],
+            [
+                "exclude_from_nav",
+                "id",
+                "nav_title",
                 "versioning_enabled",
                 "table_of_contents",
                 "show_modified",
