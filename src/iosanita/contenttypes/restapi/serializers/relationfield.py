@@ -19,6 +19,7 @@ class RelationListFieldSerializer(BaseSerializer):
         Return a list of relations that the user has permission to view.
         """
         value = super().get_value()
+        can_edit = api.user.has_permission("Modify portal content", obj=self.context)
         if value:
             # Only include relations that still resolve (skip broken relations
             # e.g. when the target content was deleted). Avoids [null] in JSON.
@@ -28,7 +29,8 @@ class RelationListFieldSerializer(BaseSerializer):
                 rel_object = rel.to_object
                 if not rel_object:
                     continue
-                if api.user.has_permission("View", obj=rel_object):
+                can_view_rel = api.user.has_permission("View", obj=rel_object)
+                if can_edit or can_view_rel:
                     relations.append(rel)
             return relations
             # END OF PATCH
