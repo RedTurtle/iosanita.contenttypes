@@ -163,19 +163,19 @@ class TestBackReferences(unittest.TestCase):
             container=self.portal,
             type="News Item",
             title="News 1",
-            comefareper_correlato=[RelationValue(intids.getId(comefareper))],
+            servizio_correlato=[RelationValue(intids.getId(comefareper))],
         )
         news2 = api.content.create(
             container=self.portal,
             type="News Item",
             title="News 2",
-            comefareper_correlato=[RelationValue(intids.getId(comefareper))],
+            servizio_correlato=[RelationValue(intids.getId(comefareper))],
         )
         news3 = api.content.create(
             container=self.portal,
             type="News Item",
             title="News 3",
-            comefareper_correlato=[RelationValue(intids.getId(comefareper))],
+            servizio_correlato=[RelationValue(intids.getId(comefareper))],
         )
 
         api.content.transition(obj=news2, transition="publish")

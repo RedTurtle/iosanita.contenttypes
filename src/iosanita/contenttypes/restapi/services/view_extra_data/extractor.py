@@ -98,10 +98,8 @@ class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
 
 @implementer(IoSanitaViewExtraData)
 @adapter(IComeFarePer, Interface)
-class ViewExtraDataExtractorComeFarePer(ViewExtraDataExtractor):
-    def __call__(self):
-        data = self.get_back_references(reference_id=["comefareper_correlato"])
-        return {"back-references": data}
+class ViewExtraDataExtractorComeFarePer(ViewExtraDataExtractorServizio):
+    pass
 
 
 @implementer(IoSanitaViewExtraData)
