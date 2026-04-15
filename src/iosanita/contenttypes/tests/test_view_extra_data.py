@@ -84,6 +84,20 @@ class TestBackReferences(unittest.TestCase):
         back_references = resp["back-references"]
         self.assertEqual([], list(back_references.keys()))
 
+    def test_expander_on_comefareper_on_registered_ct_return_nothing_if_no_relations_are_set(
+        self,
+    ):
+        comefareper = api.content.create(
+            container=self.portal, type="ComeFarePer", title="ComeFarePer"
+        )
+        commit()
+        resp = self.api_session.get(
+            f"{comefareper.absolute_url()}/@view-extra-data"
+        ).json()
+
+        back_references = resp["back-references"]
+        self.assertEqual([], list(back_references.keys()))
+
     def test_expander_return_related_news_sorted_by_Date(self):
         """
         Date metadata is modifified date for contents not yet published, or
@@ -128,6 +142,58 @@ class TestBackReferences(unittest.TestCase):
 
         resp = self.api_session.get(
             f"{servizio.absolute_url()}/@view-extra-data"
+        ).json()
+        back_references = resp["back-references"]
+
+        self.assertEqual(len(back_references["News Item"]), 3)
+        self.assertEqual(back_references["News Item"][0]["@id"], news1.absolute_url())
+        self.assertEqual(back_references["News Item"][1]["@id"], news3.absolute_url())
+        self.assertEqual(back_references["News Item"][2]["@id"], news2.absolute_url())
+
+    def test_expander_on_comefareper_return_related_news_sorted_by_Date(self):
+        """
+        Date metadata is modifified date for contents not yet published, or
+        effective date for published contents
+        """
+        comefareper = api.content.create(
+            container=self.portal, type="ComeFarePer", title="ComeFarePer"
+        )
+        intids = getUtility(IIntIds)
+        news1 = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="News 1",
+            comefareper_correlato=[RelationValue(intids.getId(comefareper))],
+        )
+        news2 = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="News 2",
+            comefareper_correlato=[RelationValue(intids.getId(comefareper))],
+        )
+        news3 = api.content.create(
+            container=self.portal,
+            type="News Item",
+            title="News 3",
+            comefareper_correlato=[RelationValue(intids.getId(comefareper))],
+        )
+
+        api.content.transition(obj=news2, transition="publish")
+        api.content.transition(obj=news3, transition="publish")
+        api.content.transition(obj=news1, transition="publish")
+
+        news2.setEffectiveDate(news2.effective() + 1)
+        news3.setEffectiveDate(news3.effective() + 2)
+        news1.setEffectiveDate(news1.effective() + 3)
+
+        news1.reindexObject()
+        news2.reindexObject()
+        news3.reindexObject()
+
+        commit()
+
+        resp = self.api_session.get(
+            f"{comefareper.absolute_url()}/@view-extra-data"
         ).json()
         back_references = resp["back-references"]
 
