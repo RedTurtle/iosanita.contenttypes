@@ -13,7 +13,7 @@ from zope.publisher.interfaces import IPublishTraverse
 
 import base64
 import csv
-import imghdr
+import filetype
 import importlib.resources
 import logging
 import re
@@ -57,9 +57,9 @@ def image_to_html(input_string):
         return None
 
     # Guess the image format
-    image_format = imghdr.what(None, image_data)
+    kind = filetype.guess(image_data)
 
-    if not image_format:
+    if not kind:
         # raise ValueError("Unable to determine image format")
         logger.warning("site logo, unable to determine image format")
         return ""
@@ -69,13 +69,13 @@ def image_to_html(input_string):
 
     # Create a buffer to hold the image data
     buffered = BytesIO()
-    img.save(buffered, format=image_format)
+    img.save(buffered, format=img.format)
 
     # Encode the image data to base64
     img_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
     # Format the base64 string for HTML
-    return f'<img class="logo" src="data:{image_format};base64,{img_base64}">'
+    return f'<img class="logo" src="data:{kind.mime};base64,{img_base64}">'
 
 
 class IExportViewTraverser(IPublishTraverse):
