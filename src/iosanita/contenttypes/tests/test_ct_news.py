@@ -3,6 +3,7 @@
 
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.tests.helpers import HAS_VOLTO_PREVIEW_FIELDSET
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -34,6 +35,7 @@ class TestNewsSchema(unittest.TestCase):
     def tearDown(self):
         self.api_session.close()
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Behaviors cambiati in Plone 6.1")
     def test_behaviors_enabled_for_bando(self):
         portal_types = api.portal.get_tool(name="portal_types")
         self.assertEqual(
@@ -59,6 +61,7 @@ class TestNewsSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Fieldsets cambiati in Plone 6.1")
     def test_news_fieldsets(self):
         """
         Get the list from restapi
@@ -78,6 +81,27 @@ class TestNewsSchema(unittest.TestCase):
             ],
         )
 
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_news_fieldsets_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/News Item").json()
+        self.assertEqual(len(resp["fieldsets"]), 8)
+        self.assertEqual(
+            [x.get("id") for x in resp["fieldsets"]],
+            [
+                "default",
+                "correlati",
+                "dates",
+                "categorization",
+                "ownership",
+                "settings",
+                "preview_image",
+                "seo",
+            ],
+        )
+
     def test_news_required_fields(self):
         resp = self.api_session.get("@types/News Item").json()
         self.assertEqual(
@@ -91,6 +115,9 @@ class TestNewsSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(
+        HAS_VOLTO_PREVIEW_FIELDSET, "Campi default fieldset diversi in Plone 6.1"
+    )
     def test_news_fields_default_fieldset(self):
         """
         Get the list from restapi
@@ -107,6 +134,26 @@ class TestNewsSchema(unittest.TestCase):
                 "image_caption",
                 "preview_image",
                 "preview_caption",
+                "tipologia_notizia",
+                "parliamo_di",
+            ],
+        )
+
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_news_fields_default_fieldset_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/News Item").json()
+        self.assertEqual(
+            resp["fieldsets"][0]["fields"],
+            [
+                "title",
+                "description",
+                "numero_progressivo_cs",
+                "descrizione_estesa",
+                "image",
+                "image_caption",
                 "tipologia_notizia",
                 "parliamo_di",
             ],

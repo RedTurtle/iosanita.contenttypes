@@ -3,6 +3,7 @@
 
 from iosanita.contenttypes.testing import INTEGRATION_TESTING
 from iosanita.contenttypes.testing import RESTAPI_TESTING
+from iosanita.contenttypes.tests.helpers import HAS_VOLTO_PREVIEW_FIELDSET
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
@@ -59,6 +60,7 @@ class TestUOSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(HAS_VOLTO_PREVIEW_FIELDSET, "Fieldsets cambiati in Plone 6.1")
     def test_uo_fieldsets(self):
         """
         Get the list from restapi
@@ -84,6 +86,33 @@ class TestUOSchema(unittest.TestCase):
             ],
         )
 
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_uo_fieldsets_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
+        self.assertEqual(len(resp["fieldsets"]), 14)
+        self.assertEqual(
+            [x.get("id") for x in resp["fieldsets"]],
+            [
+                "default",
+                "cosa_fa",
+                "persone_uo",
+                "dove",
+                "orari",
+                "contatti",
+                "documenti",
+                "ulteriori_informazioni",
+                "settings",
+                "ownership",
+                "dates",
+                "categorization",
+                "preview_image",
+                "seo",
+            ],
+        )
+
     def test_uo_required_fields(self):
         resp = self.api_session.get("@types/UnitaOrganizzativa").json()
         self.assertEqual(
@@ -104,6 +133,9 @@ class TestUOSchema(unittest.TestCase):
             ),
         )
 
+    @unittest.skipIf(
+        HAS_VOLTO_PREVIEW_FIELDSET, "Campi default fieldset diversi in Plone 6.1"
+    )
     def test_uo_fields_default_fieldset(self):
         """
         Get the list from restapi
@@ -119,6 +151,23 @@ class TestUOSchema(unittest.TestCase):
                 "image_caption",
                 "preview_image",
                 "preview_caption",
+            ],
+        )
+
+    @unittest.skipUnless(HAS_VOLTO_PREVIEW_FIELDSET, "Solo Plone >= 6.1")
+    def test_uo_fields_default_fieldset_plone61(self):
+        """
+        Get the list from restapi
+        """
+        resp = self.api_session.get("@types/UnitaOrganizzativa").json()
+        self.assertEqual(
+            resp["fieldsets"][0]["fields"],
+            [
+                "title",
+                "description",
+                "sottotitolo",
+                "image",
+                "image_caption",
             ],
         )
 

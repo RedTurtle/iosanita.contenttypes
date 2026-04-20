@@ -2,7 +2,13 @@ Changelog
 =========
 
 
-1.0.9 (unreleased)
+1.0.10 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+1.0.9 (2026-04-15)
 ------------------
 
 - deprecate imghdr (python>=3.12)
@@ -11,7 +17,8 @@ Changelog
   [mamico]
 - Stampa pdf, aggiunta gestione campi lista
   [mamico]
-
+- relationfield seralizer: return only relations that user can view.
+  [cekk]
 
 1.0.8 (2025-08-29)
 ------------------
