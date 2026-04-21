@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from iosanita.contenttypes.interfaces import IoSanitaViewExtraData
+from iosanita.contenttypes.interfaces.come_fare_per import IComeFarePer
 from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.servizio import IServizio
 from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
@@ -93,6 +94,12 @@ class ViewExtraDataExtractorServizio(ViewExtraDataExtractor):
             self.get_back_references(reference_id=["servizio_procedura_riferimento"])
         )
         return {"back-references": data}
+
+
+@implementer(IoSanitaViewExtraData)
+@adapter(IComeFarePer, Interface)
+class ViewExtraDataExtractorComeFarePer(ViewExtraDataExtractorServizio):
+    pass
 
 
 @implementer(IoSanitaViewExtraData)

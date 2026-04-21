@@ -5,7 +5,8 @@ Changelog
 1.0.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Aggiunto un adapter per il ct ComeFarePer che estende IoSanitaViewExtraData
+  [fedevancin]
 
 
 1.0.9 (2026-04-15)
