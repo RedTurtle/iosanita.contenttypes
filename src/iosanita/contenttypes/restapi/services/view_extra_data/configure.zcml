@@ -24,6 +24,7 @@
   <adapter factory=".extractor.ViewExtraDataExtractorComeFarePer" />
   <adapter factory=".extractor.ViewExtraDataExtractorStruttura" />
   <adapter factory=".extractor.ViewExtraDataExtractorUnitaOrganizzativa" />
+  <adapter factory=".extractor.ViewExtraDataExtractorDocumento" />
   <adapter factory=".extractor.ViewExtraDataExtractorPersona" />
   <adapter factory=".extractor.ViewExtraDataExtractorBando" />
 

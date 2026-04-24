@@ -2,6 +2,7 @@
 from Acquisition import aq_inner
 from iosanita.contenttypes.interfaces import IoSanitaViewExtraData
 from iosanita.contenttypes.interfaces.come_fare_per import IComeFarePer
+from iosanita.contenttypes.interfaces.documento import IDocumento
 from iosanita.contenttypes.interfaces.persona import IPersona
 from iosanita.contenttypes.interfaces.servizio import IServizio
 from iosanita.contenttypes.interfaces.settings import IIoSanitaContenttypesSettings
@@ -129,6 +130,17 @@ class ViewExtraDataExtractorUnitaOrganizzativa(ViewExtraDataExtractor):
         return {
             "back-references": self.get_back_references(
                 reference_id=["uo_correlata", "struttura_correlata"]
+            )
+        }
+
+
+@implementer(IoSanitaViewExtraData)
+@adapter(IDocumento, Interface)
+class ViewExtraDataExtractorDocumento(ViewExtraDataExtractor):
+    def __call__(self):
+        return {
+            "back-references": self.get_back_references(
+                reference_id=["documento_correlato"]
             )
         }
 

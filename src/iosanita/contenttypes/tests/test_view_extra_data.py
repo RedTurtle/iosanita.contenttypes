@@ -356,6 +356,33 @@ class TestBackReferences(unittest.TestCase):
             back_references["Struttura"][0]["@id"], struttura.absolute_url()
         )
 
+    def test_documento_expander_return_related_contents_splitted_by_portal_type(self):
+        documento = api.content.create(
+            container=self.portal, type="Documento", title="Documento"
+        )
+        intids = getUtility(IIntIds)
+
+        uo = api.content.create(
+            container=self.portal,
+            type="UnitaOrganizzativa",
+            title="uo",
+            documento_correlato=[RelationValue(intids.getId(documento))],
+        )
+
+        commit()
+
+        resp = self.api_session.get(
+            f"{documento.absolute_url()}/@view-extra-data"
+        ).json()
+        back_references = resp["back-references"]
+
+        self.assertEqual(list(back_references.keys()), ["UnitaOrganizzativa"])
+        self.assertEqual(len(back_references["UnitaOrganizzativa"]), 1)
+        self.assertEqual(
+            back_references["UnitaOrganizzativa"][0]["@id"],
+            uo.absolute_url(),
+        )
+
     def test_persona_expander_return_related_contents_splitted_by_portal_type(self):
         persona = api.content.create(
             container=self.portal, type="Persona", title="persona"
