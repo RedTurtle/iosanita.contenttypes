@@ -5,7 +5,8 @@ Changelog
 1.0.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Aggiunto un adapter per il ct Documento che implementa IoSanitaViewExtraData
+  [fedevancin]
 
 
 1.0.10 (2026-04-24)
