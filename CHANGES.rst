@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.10 (unreleased)
+1.0.10 (2026-04-24)
 -------------------
 
 - Aggiunto un adapter per il ct ComeFarePer che estende IoSanitaViewExtraData
