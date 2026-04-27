@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.11 (unreleased)
+1.0.11 (2026-04-27)
 -------------------
 
 - Aggiunto un adapter per il ct Documento che implementa IoSanitaViewExtraData
