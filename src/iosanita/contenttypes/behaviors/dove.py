@@ -31,6 +31,12 @@ class IDove(IGeolocatable, IAddress):
         required=False,
     )
 
+    distretto = schema.TextLine(
+        title=_("distretto", default="Distretto"),
+        description=_("help_distretto", default=""),
+        required=False,
+    )
+
     circoscrizione = schema.TextLine(
         title=_("circoscrizione", default="Circoscrizione"),
         description=_("help_circoscrizione", default=""),
