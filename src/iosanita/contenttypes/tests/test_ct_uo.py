@@ -204,7 +204,7 @@ class TestUOSchema(unittest.TestCase):
                 "zip_code",
                 "city",
                 "provincia",
-                "circoscrizione",
+                "distretto",
                 "country",
                 "geolocation",
             ],

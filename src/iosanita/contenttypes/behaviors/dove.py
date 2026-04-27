@@ -37,11 +37,11 @@ class IDove(IGeolocatable, IAddress):
         required=False,
     )
 
-    circoscrizione = schema.TextLine(
-        title=_("circoscrizione", default="Circoscrizione"),
-        description=_("help_circoscrizione", default=""),
-        required=False,
-    )
+    # circoscrizione = schema.TextLine(
+    #     title=_("circoscrizione", default="Circoscrizione"),
+    #     description=_("help_circoscrizione", default=""),
+    #     required=False,
+    # )
 
     # searchabletext indexer
     textindexer.searchable("street")
