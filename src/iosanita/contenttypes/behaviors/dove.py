@@ -31,17 +31,23 @@ class IDove(IGeolocatable, IAddress):
         required=False,
     )
 
-    circoscrizione = schema.TextLine(
-        title=_("circoscrizione", default="Circoscrizione"),
-        description=_("help_circoscrizione", default=""),
+    distretto = schema.TextLine(
+        title=_("distretto", default="Distretto"),
+        description=_("help_distretto", default=""),
         required=False,
     )
+
+    # circoscrizione = schema.TextLine(
+    #     title=_("circoscrizione", default="Circoscrizione"),
+    #     description=_("help_circoscrizione", default=""),
+    #     required=False,
+    # )
 
     # searchabletext indexer
     textindexer.searchable("street")
     textindexer.searchable("nome_sede")
     textindexer.searchable("provincia")
-    textindexer.searchable("circoscrizione")
+    textindexer.searchable("distretto")
     textindexer.searchable("zip_code")
     textindexer.searchable("city")
     textindexer.searchable("country")
@@ -55,7 +61,7 @@ class IDove(IGeolocatable, IAddress):
             "zip_code",
             "city",
             "provincia",
-            "circoscrizione",
+            "distretto",
             "country",
             "geolocation",
         ],

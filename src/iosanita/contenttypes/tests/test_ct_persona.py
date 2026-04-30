@@ -148,7 +148,7 @@ class TestPersonaSchema(unittest.TestCase):
                 "zip_code",
                 "city",
                 "provincia",
-                "circoscrizione",
+                "distretto",
                 "country",
                 "geolocation",
             ],
