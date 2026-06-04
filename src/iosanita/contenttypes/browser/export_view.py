@@ -6,6 +6,7 @@ from PIL import Image
 from plone import api
 from plone.memoize import forever
 from Products.Five.browser import BrowserView
+from weasyprint import HTML
 from zExceptions import NotFound
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
@@ -178,19 +179,6 @@ class ExportViewDownload(BrowserView):
         return csv_bytes
 
     def get_pdf(self, data):
-        try:
-            from weasyprint import HTML
-        except Exception:
-            logger.exception("Unable to import WeasyPrint while rendering PDF export")
-            raise NotFound(
-                api.portal.translate(
-                    _(
-                        "pdf_export_not_available",
-                        default="PDF export is not available on this server.",
-                    )
-                )
-            )
-
         html_str = self.get_html_for_pdf(data=data)
         pdf_file = BytesIO()
         HTML(string=html_str).write_pdf(pdf_file)
