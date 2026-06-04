@@ -218,6 +218,26 @@ class TestCustomValidation(unittest.TestCase):
         resp = self.api_session.post(self.portal_url, json=data)
         self.assertEqual(resp.status_code, 201)
 
+        # block types without a plaintext key should still be considered filled
+        data["a_chi_si_rivolge"] = {
+            "blocks": {
+                "b8850749-4d5f-4b5f-b842-c050bcf7fd6f": {
+                    "@type": "callout",
+                    "text": [
+                        {
+                            "type": "p",
+                            "children": [{"text": "Contenuto nel callout"}],
+                        }
+                    ],
+                }
+            },
+            "blocks_layout": {
+                "items": ["b8850749-4d5f-4b5f-b842-c050bcf7fd6f"],
+            },
+        }
+        resp = self.api_session.post(self.portal_url, json=data)
+        self.assertEqual(resp.status_code, 201)
+
     def test_raise_bad_request_on_struttura_if_missing_dove_fields(self):
         api.content.create(type="PuntoDiContatto", title="pdc", container=self.portal)
         commit()

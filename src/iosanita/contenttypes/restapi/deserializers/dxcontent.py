@@ -228,11 +228,33 @@ class DeserializeFromJson(BaseDeserializer):
                 return False
             blocks_data = list(blocks.values())
             for block in blocks_data:
-                if block.get("plaintext", ""):
-                    # there is some text
+                if self._has_non_empty_payload(block, ignored_keys={"@type"}):
                     return True
             return False
         return True
+
+    def _has_non_empty_payload(self, value, ignored_keys=None):
+        if value is None:
+            return False
+
+        if isinstance(value, str):
+            return bool(value.strip())
+
+        if isinstance(value, (list, tuple, set)):
+            return any(
+                self._has_non_empty_payload(item, ignored_keys=ignored_keys)
+                for item in value
+            )
+
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if ignored_keys and key in ignored_keys:
+                    continue
+                if self._has_non_empty_payload(item, ignored_keys=ignored_keys):
+                    return True
+            return False
+
+        return bool(value)
 
     def get_field_value(self, data, create, field_id):
         if field_id in data:
