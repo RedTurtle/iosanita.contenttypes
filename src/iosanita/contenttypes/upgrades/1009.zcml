@@ -1,0 +1,42 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    >
+
+  <gs:registerProfile
+      name="1009"
+      title="Add distretto and city catalog indexes"
+      description="Configuration for version 1009"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+      directory="1009"
+      />
+
+  <gs:upgradeSteps
+      profile="iosanita.contenttypes:default"
+      source="1008"
+      destination="1009"
+      >
+
+    <gs:upgradeStep
+        title="Add distretto and city catalog indexes"
+        description=""
+        handler=".v1009.upgrade"
+        />
+
+    <gs:upgradeDepends
+        title="Add distretto and city catalog indexes (GS profile)"
+        description=""
+        import_profile="iosanita.contenttypes.upgrades:1009"
+        />
+
+    <gs:upgradeDepends
+        title="Update querystring registry (distretto, city criteria)"
+        description=""
+        import_profile="iosanita.contenttypes:default"
+        steps="plone.app.registry"
+        />
+
+  </gs:upgradeSteps>
+
+</configure>

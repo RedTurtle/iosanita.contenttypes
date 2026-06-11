@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="distretto" meta_type="FieldIndex">
+    <indexed_attr value="distretto"/>
+  </index>
+  <index name="city" meta_type="FieldIndex">
+    <indexed_attr value="city"/>
+  </index>
+
+  <column value="distretto" />
+
+</object>

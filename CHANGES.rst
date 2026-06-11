@@ -5,7 +5,9 @@ Changelog
 1.0.12 (unreleased)
 -------------------
 
-- Aggiunto field distretto
+- Aggiunto indice catalogo ``distretto`` e ``city`` per ricerche per luogo.
+  Aggiunto querystring criteria per ``distretto`` e ``city`` (Comune).
+  Upgrade step 1009.
   [mamico]
 
 
