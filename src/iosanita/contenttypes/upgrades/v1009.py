@@ -4,7 +4,6 @@ from . import logger
 from plone import api
 from plone.app.upgrade.utils import loadMigrationProfile
 
-
 def upgrade(setup_tool=None):
     """ """
     logger.info("Running upgrade: Add distretto and city catalog indexes")

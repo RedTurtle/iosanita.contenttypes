@@ -30,13 +30,6 @@
         import_profile="iosanita.contenttypes.upgrades:1009"
         />
 
-    <gs:upgradeDepends
-        title="Update querystring registry (distretto, city criteria)"
-        description=""
-        import_profile="iosanita.contenttypes:default"
-        steps="plone.app.registry"
-        />
-
   </gs:upgradeSteps>
 
 </configure>
