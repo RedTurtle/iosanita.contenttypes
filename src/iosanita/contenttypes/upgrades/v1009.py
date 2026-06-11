@@ -10,7 +10,9 @@ def upgrade(setup_tool=None):
     logger.info("Running upgrade: Add distretto and city catalog indexes")
     loadMigrationProfile(api.portal.get(), "iosanita.contenttypes.upgrades:1009")
 
-    brains = api.content.find(object_provides="iosanita.contenttypes.behaviors.dove.IDove")
+    brains = api.content.find(
+        object_provides="iosanita.contenttypes.behaviors.dove.IDove"
+    )
     i = 0
     tot = len(brains)
     logger.info(f"Reindexing distretto and city on {tot} objects")
