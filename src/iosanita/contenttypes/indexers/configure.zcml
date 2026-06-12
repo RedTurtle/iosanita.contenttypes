@@ -33,6 +33,10 @@
       name="provincia"
       />
   <adapter
+      factory=".common.distretto"
+      name="distretto"
+      />
+  <adapter
       factory=".common.geolocation"
       name="geolocation"
       />

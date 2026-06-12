@@ -51,6 +51,11 @@ def provincia(context):
 
 
 @indexer(IDexterityContent)
+def distretto(context):
+    return getattr(context.aq_base, "distretto", None)
+
+
+@indexer(IDexterityContent)
 def geolocation(context):
     return get_geolocation_data(context)
 
