@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.12 (unreleased)
+1.0.12 (2026-06-12)
 -------------------
 
 - Aggiunto indice catalogo ``distretto`` e ``city`` per ricerche per luogo.
