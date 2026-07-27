@@ -5,7 +5,8 @@ Changelog
 1.0.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix typos
+  [fedevancin]
 
 
 1.0.12 (2026-06-12)

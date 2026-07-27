@@ -51,11 +51,11 @@ class IEvento(model.Schema):
         ),
     )
     organizzato_da_esterno = BlocksField(
-        title=_("organizzato_da_esterno_label", default="Organizato da: altro"),
+        title=_("organizzato_da_esterno_label", default="Organizzato da: altro"),
         required=False,
         description=_(
             "organizzato_da_esterno_help",
-            default="Indicazione di chi orgnanizza l'evento, se diverso da un'Unità organizzativa.",
+            default="Indicazione di chi organizza l'evento, se diverso da un'Unità organizzativa.",
         ),
     )
 
