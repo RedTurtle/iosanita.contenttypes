@@ -7,6 +7,9 @@ Changelog
 
 - Fix typos
   [fedevancin]
+- Upgrade step 1010: escluse dalla ricerca (e quindi da ``sitemap.xml.gz``) le sottocartelle
+  create automaticamente (bandi, allegati, immagini, ...) già presenti.
+  [fedevancin]
 
 
 1.0.12 (2026-06-12)
