@@ -7,8 +7,8 @@ Changelog
 
 - Fix typos
   [fedevancin]
-- Upgrade step 1010: escluse dalla ricerca (e quindi da ``sitemap.xml.gz``) le sottocartelle
-  create automaticamente (bandi, allegati, immagini, ...) già presenti.
+- CI: sbloccati i test su Plone 6.1 (setuptools non più sbloccato in ``test_plone61.cfg``,
+  aggiunto ``horse-with-no-namespace``) e workflow Bandit su ``ubuntu-24.04``.
   [fedevancin]
 
 
