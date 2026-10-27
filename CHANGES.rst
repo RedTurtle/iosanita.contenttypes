@@ -7,6 +7,9 @@ Changelog
 
 - Fix typos
   [fedevancin]
+- CI: sbloccati i test su Plone 6.1 (setuptools non più sbloccato in ``test_plone61.cfg``,
+  aggiunto ``horse-with-no-namespace``) e workflow Bandit su ``ubuntu-24.04``.
+  [fedevancin]
 
 
 1.0.12 (2026-06-12)
