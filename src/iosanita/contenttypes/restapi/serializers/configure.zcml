@@ -2,7 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:zcml="http://namespaces.zope.org/zcml"
     >
-
+  <adapter factory=".bando.BandoSerializeToJson" />
   <adapter factory=".news.NewsItemSerializeToJson" />
   <adapter factory=".summary.IOSanitaJSONSummarySerializer" />
   <adapter factory=".summary.PuntoDiContattoJSONSummarySerializer" />
